@@ -4,4 +4,4 @@
 - [Azure Bot Framework Emulator](https://github.com/microsoft/BotFramework-Emulator) to test chatbot on local env.
 
 ## more to read
-- [Microsoft Learn: Create conversational AI solutions](https://learn.microsoft.com/en-us/training/paths/create-conversational-ai-solutions/)
+- [Microsofr Learn: Create conversational AI solutions](https://learn.microsoft.com/en-us/training/paths/create-conversational-ai-solutions/)
