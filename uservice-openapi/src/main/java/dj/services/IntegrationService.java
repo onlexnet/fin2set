@@ -1,45 +1,33 @@
 package dj.services;
 
+import java.net.URI;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
 import dj.dto.integration.AgreementData;
 import dj.dto.integration.IntegrationForm;
 import dj.dto.integration.bank.Bank;
 import dj.dto.integration.build_a_link.DataForCreateConnection;
 import dj.dto.integration.build_a_link.ResponseEndingIntegration;
-import dj.dto.integration.secrets.Secrets;
 import dj.dto.integration.secrets.token.Tokens;
+import dj.services.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
-import java.net.URI;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class IntegrationService {
 
-    @Value("${NORDIGEN_SECRET_KEY}")
-    private String secretKey;
-
-    @Value("${NORDIGEN_SECRET_ID}")
-    private String secretId;
-
     private final IntegrationClient integrationClient;
-
-    private Tokens getTokens() {
-        Secrets secrets = new Secrets()
-                .setSecretKey(secretKey)
-                .setSecretId(secretId);
-        return integrationClient.createTokens(secrets);
-    }
+    private final TokenService tokenService;
 
     public List<Bank> getListBanks(String country) {
-        Tokens tokens = getTokens();
+        Tokens tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
         return integrationClient.getBankList(accessToken, country);
     }
@@ -50,7 +38,7 @@ public class IntegrationService {
     // setAccessScope = "balances", "details", "transactions"
     public AgreementData createAgreement(String institutionId) {
 
-        Tokens tokens = getTokens();
+        Tokens tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
 
         IntegrationForm integrationForm = new IntegrationForm()
@@ -66,7 +54,7 @@ public class IntegrationService {
 
     public ResponseEntity<?> createConnection(String institutionId) {
 
-        Tokens tokens = getTokens();
+        Tokens tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
 
         AgreementData agreementData = createAgreement(institutionId);
