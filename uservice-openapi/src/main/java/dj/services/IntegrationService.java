@@ -14,12 +14,10 @@ import dj.dto.integration.build_a_link.DataForCreateConnection;
 import dj.dto.integration.build_a_link.ResponseEndingIntegration;
 import dj.services.token.TokenService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import nordigen.SpectacularJWTObtain;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class IntegrationService {
 
     private final IntegrationClient integrationClient;
