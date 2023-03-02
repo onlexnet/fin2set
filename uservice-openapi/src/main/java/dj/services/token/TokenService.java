@@ -1,5 +1,7 @@
 package dj.services.token;
 
+import org.springframework.stereotype.Service;
+
 import nordigen.SpectacularJWTObtain;
 
 public interface TokenService {

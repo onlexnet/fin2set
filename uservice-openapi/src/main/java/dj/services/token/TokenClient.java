@@ -8,7 +8,7 @@ import feign.Headers;
 import nordigen.JWTObtainPairRequest;
 import nordigen.SpectacularJWTObtain;
 
-@FeignClient(value = "integration", url = "https://ob.nordigen.com")
+@FeignClient(value = "tokens", url = "https://ob.nordigen.com")
 @Headers({
         "accept: application/json",
         "Content-Type: application/json"})

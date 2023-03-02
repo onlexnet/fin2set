@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import dj.dto.integration.AgreementData;
 import dj.dto.integration.IntegrationForm;
-import dj.dto.integration.bank.Bank;
 import dj.dto.integration.build_a_link.DataForCreateConnection;
 import dj.dto.integration.build_a_link.ResponseEndingIntegration;
 import dj.services.token.TokenService;
@@ -25,12 +24,6 @@ public class IntegrationService {
 
     private final IntegrationClient integrationClient;
     private final TokenService tokenService;
-
-    public List<Bank> getListBanks(String country) {
-        SpectacularJWTObtain tokens = tokenService.getTokens();
-        String accessToken = "Bearer " + tokens.getAccess();
-        return integrationClient.getBankList(accessToken, country);
-    }
 
     // We will not use default settings for user agreement and set our own, need only to user give us bank id which have to be connected
     // setMaxHistoricalDays = 90
