@@ -4,7 +4,7 @@ import java.util.List;
 
 import nordigen.Integration;
 
-public interface InstitututionsService {
+public interface InstitutionsService {
 
     List<Integration> getListBanks(String country);
     

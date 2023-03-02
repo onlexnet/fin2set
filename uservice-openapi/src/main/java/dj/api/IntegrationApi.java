@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dj.services.IntegrationService;
-import dj.services.institutions.InstitututionsService;
+import dj.services.institutions.InstitutionsService;
+import dj.services.requistions.RequistionsService;
 import lombok.RequiredArgsConstructor;
 import nordigen.Integration;
 
@@ -19,8 +19,8 @@ import nordigen.Integration;
 @RequestMapping("/api/integration")
 public class IntegrationApi {
 
-    private final IntegrationService integrationService;
-    private final InstitututionsService institututionsService;
+    private final InstitutionsService institututionsService;
+    private final RequistionsService requistionsService;
 
     @GetMapping("/banks")
     public ResponseEntity<List<Integration>> getBankList(@RequestParam String country) {
@@ -29,7 +29,7 @@ public class IntegrationApi {
 
     @PostMapping("/login")
     public ResponseEntity<?> createConnection(@RequestParam String institutionId) {
-        return ResponseEntity.ok(integrationService.createConnection(institutionId));
+        return ResponseEntity.ok(requistionsService.createConnection(institutionId));
     }
 
 }

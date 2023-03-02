@@ -11,15 +11,17 @@ import nordigen.SpectacularJWTObtain;
 
 @RequiredArgsConstructor
 @Service
-public class InstitutionsServiceImpl implements InstitututionsService {
+public class InstitutionsServiceImpl implements InstitutionsService {
 
     private final InstitutionsClient institutionsClient;
     private final TokenService tokenService;
     
+    @Override
     public List<Integration> getListBanks(String country) {
         SpectacularJWTObtain tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
         return institutionsClient.getBankList(accessToken, country);
-    }
+    }        
+    
 
 }
