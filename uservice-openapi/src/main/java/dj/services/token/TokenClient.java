@@ -4,9 +4,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import dj.dto.integration.secrets.Secrets;
-import dj.dto.integration.secrets.token.Tokens;
 import feign.Headers;
+import nordigen.JWTObtainPairRequest;
+import nordigen.SpectacularJWTObtain;
 
 @FeignClient(value = "integration", url = "https://ob.nordigen.com")
 @Headers({
@@ -15,6 +15,6 @@ import feign.Headers;
 public interface TokenClient {
 
     @PostMapping(value = "/api/v2/token/new/")
-    Tokens createTokens(@RequestBody Secrets secrets);
+    SpectacularJWTObtain createTokens(@RequestBody JWTObtainPairRequest jwtObtainPairRequest);
     
 }

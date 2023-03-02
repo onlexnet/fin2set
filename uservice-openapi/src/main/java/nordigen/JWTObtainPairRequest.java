@@ -16,6 +16,7 @@ package nordigen;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.experimental.Accessors;
 
 import java.util.Objects;
 
@@ -23,6 +24,7 @@ import java.util.Objects;
  * Obtain JWT pair.
  */@ApiModel(description = "Obtain JWT pair.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.java.JavaClientCodegen", date = "2023-02-25T17:56:18.166387600+01:00[Europe/Warsaw]")
+@Accessors(chain = true)
 public class JWTObtainPairRequest {
 
   

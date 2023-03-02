@@ -1,12 +1,12 @@
 package dj.services.token;
 
-import dj.dto.integration.secrets.token.Tokens;
+import nordigen.SpectacularJWTObtain;
 
 public interface TokenService {
 
     /**
      * @return Acces token and refresh token
      */
-    Tokens getTokens();
+    SpectacularJWTObtain getTokens();
 
 }

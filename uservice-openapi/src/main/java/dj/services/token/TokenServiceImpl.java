@@ -2,10 +2,10 @@ package dj.services.token;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import dj.dto.integration.secrets.Secrets;
-import dj.dto.integration.secrets.token.Tokens;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import nordigen.JWTObtainPairRequest;
+import nordigen.SpectacularJWTObtain;
 
 @Data
 @AllArgsConstructor
@@ -20,11 +20,11 @@ public class TokenServiceImpl implements TokenService {
     private final TokenClient tokenClient ;
 
     @Override
-    public Tokens getTokens() {
-        Secrets secrets = new Secrets()
-                .setSecretKey(secretKey)
-                .setSecretId(secretId);
-        return tokenClient.createTokens(secrets);
+    public SpectacularJWTObtain getTokens() {
+        JWTObtainPairRequest jwtObtainPairRequest = new JWTObtainPairRequest()
+        .secretId(secretId)
+        .secretKey(secretKey);
+        return tokenClient.createTokens(jwtObtainPairRequest);
     }
 
 

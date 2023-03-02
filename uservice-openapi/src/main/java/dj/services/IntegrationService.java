@@ -13,10 +13,10 @@ import dj.dto.integration.IntegrationForm;
 import dj.dto.integration.bank.Bank;
 import dj.dto.integration.build_a_link.DataForCreateConnection;
 import dj.dto.integration.build_a_link.ResponseEndingIntegration;
-import dj.dto.integration.secrets.token.Tokens;
 import dj.services.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import nordigen.SpectacularJWTObtain;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +27,7 @@ public class IntegrationService {
     private final TokenService tokenService;
 
     public List<Bank> getListBanks(String country) {
-        Tokens tokens = tokenService.getTokens();
+        SpectacularJWTObtain tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
         return integrationClient.getBankList(accessToken, country);
     }
@@ -38,7 +38,7 @@ public class IntegrationService {
     // setAccessScope = "balances", "details", "transactions"
     public AgreementData createAgreement(String institutionId) {
 
-        Tokens tokens = tokenService.getTokens();
+        SpectacularJWTObtain tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
 
         IntegrationForm integrationForm = new IntegrationForm()
@@ -54,7 +54,7 @@ public class IntegrationService {
 
     public ResponseEntity<?> createConnection(String institutionId) {
 
-        Tokens tokens = tokenService.getTokens();
+        SpectacularJWTObtain tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
 
         AgreementData agreementData = createAgreement(institutionId);
