@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import dj.dto.integration.AgreementData;
-import dj.dto.integration.IntegrationForm;
 import dj.services.token.TokenService;
 import lombok.RequiredArgsConstructor;
+import nordigen.EndUserAgreement;
+import nordigen.EndUserAgreementRequest;
 import nordigen.SpectacularJWTObtain;
 
 @Service
@@ -22,17 +22,17 @@ public class AgreementsServiceImpl implements AgreementsService {
     // setAccessValidForDays = 30
     // setAccessScope = "balances", "details", "transactions"
     @Override
-    public AgreementData createAgreement(String institutionId) {
+    public EndUserAgreement createAgreement(String institutionId) {
         SpectacularJWTObtain tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
 
-        IntegrationForm integrationForm = new IntegrationForm()
-                .setInstitutionId(institutionId)
-                .setMaxHistoricalDays(90)
-                .setAccessValidForDays(30)
-                .setAccessScope(List.of("balances", "details", "transactions"));
+        EndUserAgreementRequest endUserAgreementRequest = new EndUserAgreementRequest()
+        .institutionId(institutionId) 
+        .maxHistoricalDays(90)
+        .accessValidForDays(30)
+        .accessScope(List.of("balances", "details", "transactions"));      
 
-        return agreementsClient.createAgreement(accessToken, integrationForm);
+        return agreementsClient.createAgreement(accessToken, endUserAgreementRequest);
     }
 
     

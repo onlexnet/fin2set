@@ -7,13 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import dj.dto.integration.AgreementData;
-import dj.dto.integration.build_a_link.DataForCreateConnection;
-import dj.dto.integration.build_a_link.ResponseEndingIntegration;
 import dj.services.agreements.AgreementsService;
 import dj.services.token.TokenService;
 import lombok.RequiredArgsConstructor;
+import nordigen.EndUserAgreement;
+import nordigen.RequisitionV2Request;
 import nordigen.SpectacularJWTObtain;
+import nordigen.SpectacularRequisitionV2;
 
 @Service
 @RequiredArgsConstructor
@@ -28,18 +28,25 @@ public class RequistionsServiceImpl implements RequistionsService{
         SpectacularJWTObtain tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
 
-        AgreementData agreementData = agreementsService.createAgreement(institutionId);
+        EndUserAgreement endUserAgreement = agreementsService.createAgreement(institutionId);
 
-        DataForCreateConnection dataForCreateConnection = new DataForCreateConnection()
-                .setRedirect("http://localhost:8080/swagger-ui.html#/integration")
-                .setInstitutionId(institutionId)
-                .setReference(UUID.randomUUID().toString())
-                .setAgreement(agreementData.getId())
-                .setUserLanguage("PL");
+        RequisitionV2Request requisitionV2Request = new RequisitionV2Request()
+        .redirect("http://localhost:8080/swagger-ui.html#/integration")
+        .institutionId(institutionId)
+        .reference(UUID.randomUUID().toString())
+        .agreement(endUserAgreement.getId())
+        .userLanguage("PL")
+        
+        
+        // Sławek co z tym zrobić
+        .ssn("1")
+        .accountSelection(false)
+        .redirectImmediate(false);
+        
 
-        ResponseEndingIntegration responseEndingIntegration = requistionsClient.createConnection(accessToken, dataForCreateConnection);
+        SpectacularRequisitionV2 spectacularRequisitionV2 = requistionsClient.createConnection(accessToken, requisitionV2Request);
 
-        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(responseEndingIntegration.getLink())).build();
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(spectacularRequisitionV2.getLink())).build();
     }
     
 }

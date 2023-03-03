@@ -16,6 +16,7 @@ package nordigen;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.experimental.Accessors;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -24,6 +25,7 @@ import java.util.UUID;
  * RequisitionV2Serializer.
  */@ApiModel(description = "RequisitionV2Serializer.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.java.JavaClientCodegen", date = "2023-02-25T17:56:18.166387600+01:00[Europe/Warsaw]")
+@Accessors(chain = true)
 public class RequisitionV2Request {
 
   
@@ -48,7 +50,7 @@ public class RequisitionV2Request {
   
   
   @JsonProperty("ssn")
-  private String ssn = null;
+  private String ssn;
   
   
   @JsonProperty("account_selection")

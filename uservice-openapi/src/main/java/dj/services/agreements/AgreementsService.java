@@ -1,13 +1,9 @@
 package dj.services.agreements;
 
-import dj.dto.integration.AgreementData;
+import nordigen.EndUserAgreement;
 
 public interface AgreementsService {
 
-    /**
-     * @param institutionId
-     * @return 
-     */
-    AgreementData createAgreement(String institutionId);
+    EndUserAgreement createAgreement(String institutionId);
     
 }
