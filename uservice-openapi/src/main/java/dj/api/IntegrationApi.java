@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dj.services.institutions.InstitutionsService;
+import dj.services.requistions.RequisitionsService;
 import dj.services.requistions.RequistionsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,7 @@ import nordigen.Integration;
 public class IntegrationApi {
 
     private final InstitutionsService institututionsService;
-    private final RequistionsService requistionsService;
+    private final RequisitionsService requisitionsService;
 
     @GetMapping("/banks")
     ResponseEntity<List<Integration>> getBankList(@RequestParam String country) {
@@ -32,7 +33,7 @@ public class IntegrationApi {
 
     @GetMapping("/login")
     ResponseEntity<URI> createConnection(@RequestParam String institutionId) {
-        return ResponseEntity.status(HttpStatus.FOUND).location(requistionsService.createConnection(institutionId))
+        return ResponseEntity.status(HttpStatus.FOUND).location(requisitionsService.createConnection(institutionId))
                 .build();
     }
 
