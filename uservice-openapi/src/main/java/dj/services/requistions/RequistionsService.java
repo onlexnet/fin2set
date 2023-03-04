@@ -1,10 +1,10 @@
 package dj.services.requistions;
 
-import org.springframework.http.ResponseEntity;
+import java.net.URI;
 
 public interface RequistionsService {
 
-    ResponseEntity<?> createConnection(String institutionId);
+    URI createConnection(String institutionId);
 
     String getListAccounts(String reference);
 }

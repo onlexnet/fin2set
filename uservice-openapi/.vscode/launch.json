@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Program",
+            "request": "launch",
+            "mainClass": "dj.Program",
+            "projectName": "FinSet"
+        },
+        {
+            "type": "java",
+            "name": "FinSetApplication",
+            "request": "launch",
+            "mainClass": "dj.FinSetApplication",
+            "projectName": "FinSet"
+        },
+        {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",

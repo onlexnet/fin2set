@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 import dj.services.institutions.InstitutionsService;
 import dj.services.requistions.RequistionsService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import nordigen.Integration;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/integration")
+@Slf4j
 public class IntegrationApi {
 
     private final InstitutionsService institututionsService;
@@ -30,15 +32,16 @@ public class IntegrationApi {
         return ResponseEntity.ok(institututionsService.getListBanks(country));
     }
 
-    @PostMapping("/login")
-    ResponseEntity<?> createConnection(@RequestParam String institutionId) {
-        return ResponseEntity.ok(requistionsService.createConnection(institutionId));
+    @GetMapping("/login")
+    ResponseEntity<URI> createConnection(@RequestParam String institutionId) {
+        return ResponseEntity.status(HttpStatus.FOUND).location(requistionsService.createConnection(institutionId))
+                .build();
     }
 
-    @GetMapping("/move/{reference}")
-    ResponseEntity<?> getListAccounts(@PathVariable String reference){
+    @GetMapping("/move")
+    ResponseEntity<String> getListAccounts(@RequestParam(name = "ref") String reference) {
+        log.info("sparta!");
         return ResponseEntity.ok(reference);
     }
-    
 
 }
