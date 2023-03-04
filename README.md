@@ -8,6 +8,5 @@ Projects
 - serverless, stateless, scalable solution
 - use cases:
     - convert csv files to MT940 files - UI, WebApi
-    - convert csv files to ISO 20022 files - UI, WebApi
 
 
