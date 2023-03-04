@@ -17,10 +17,10 @@ import java.util.Collections;
 @SpringBootApplication
 @EnableSwagger2
 @EnableFeignClients
-public class FinSetApplication {
+public class Program {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FinSetApplication.class, args);
+		SpringApplication.run(Program.class, args);
 	}
 
 	@Bean

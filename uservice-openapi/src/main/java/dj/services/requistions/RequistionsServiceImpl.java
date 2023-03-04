@@ -3,8 +3,6 @@ package dj.services.requistions;
 import java.net.URI;
 import java.util.UUID;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import dj.services.agreements.AgreementsService;
@@ -22,7 +20,7 @@ public class RequistionsServiceImpl implements RequistionsService{
     private final AgreementsService agreementsService;
 
     @Override
-    public ResponseEntity<?> createConnection(String institutionId) {
+    public URI createConnection(String institutionId) {
         SpectacularJWTObtain tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
 
@@ -31,20 +29,20 @@ public class RequistionsServiceImpl implements RequistionsService{
         var reference = UUID.randomUUID().toString();
 
         var requisitionV2Request = new RequisitionV2Request()
-        .redirect("http://localhost:8080/api/integration/move/" + reference)
+        .redirect("http://localhost:8080/api/integration/move")
         .institutionId(institutionId)
         .reference(reference)
         .agreement(endUserAgreement.getId())
         .userLanguage("PL")
         
         // Sławek co z tym zrobić
-        .ssn("1")
+        .ssn("")
         .accountSelection(false)
         .redirectImmediate(false);
         
         var spectacularRequisitionV2 = requistionsClient.createConnection(accessToken, requisitionV2Request);
 
-        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(spectacularRequisitionV2.getLink())).build();
+        return URI.create(spectacularRequisitionV2.getLink());
     }
 
     @Override

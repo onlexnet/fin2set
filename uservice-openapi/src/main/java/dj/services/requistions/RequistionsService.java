@@ -1,6 +1,6 @@
 package dj.services.requistions;
 
-import org.springframework.http.ResponseEntity;
+import java.net.URI;
 
 public interface RequistionsService {
 
@@ -8,4 +8,9 @@ public interface RequistionsService {
 
     String getListAccounts(String reference);
     
+
+    URI createConnection(String institutionId);
+
+    String getListAccounts(String reference);
+>>>>>>> 979c102c51f40abd2d6fff37b3cced89c9095325
 }
