@@ -2,7 +2,7 @@
 
 import java.net.URI;
 
-public interface RequistionsService {
+public interface RequisitionsService {
 
     URI createConnection(String institutionId);
 
