@@ -2,11 +2,11 @@
 
 import java.net.URI;
 
-import nordigen.RequisitionV2;
+import dj.models.CustomerDataDTO;
 
 public interface RequisitionsService {
 
     URI createRequisition(String institutionId);
 
-    RequisitionV2 getListAccounts(String reference);
+    CustomerDataDTO getInfoAboutConection(String reference);
 }

@@ -7,9 +7,12 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import dj.models.CustomerDataDTO;
+import dj.models.CustomerDataMapper;
 import dj.services.agreements.AgreementsService;
 import dj.services.token.TokenService;
 import lombok.RequiredArgsConstructor;
+import nordigen.EndUserAgreement;
 import nordigen.RequisitionV2;
 import nordigen.RequisitionV2Request;
 import nordigen.SpectacularJWTObtain;
@@ -21,6 +24,7 @@ public class RequisitionsServiceImpl implements RequisitionsService {
     private final TokenService tokenService;
     private final RequisitionsClient requisitionsClient;
     private final AgreementsService agreementsService;
+    private final CustomerDataMapper customerDataMapper;
 
     private Map<String, String> mapReferenceRequisitionsID = new HashMap<>();
 
@@ -34,7 +38,7 @@ public class RequisitionsServiceImpl implements RequisitionsService {
         var reference = UUID.randomUUID().toString();
 
         var requisitionV2Request = new RequisitionV2Request()
-                .redirect("http://localhost:8080/api/integration/accounts")
+                .redirect("http://localhost:8080/api/integration/info")
                 .institutionId(institutionId)
                 .reference(reference)
                 .agreement(endUserAgreement.getId())
@@ -54,11 +58,14 @@ public class RequisitionsServiceImpl implements RequisitionsService {
     }
 
     @Override
-    public RequisitionV2 getListAccounts(String reference) {
+    public CustomerDataDTO getInfoAboutConection(String reference) {
         SpectacularJWTObtain tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
         String requisitionsID = mapReferenceRequisitionsID.get(reference);
-        return requisitionsClient.getRequisition(accessToken, requisitionsID);
+        RequisitionV2 requisition = requisitionsClient.getRequisition(accessToken, requisitionsID);
+        EndUserAgreement endUserAgreement = agreementsService.getAgreement(requisition.getAgreement().toString());
+    
+        return customerDataMapper.toDto(requisition, endUserAgreement);
     }
 
 }
