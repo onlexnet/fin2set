@@ -17,7 +17,8 @@ public class AgreementsServiceImpl implements AgreementsService {
     private final TokenService tokenService;
     private final AgreementsClient agreementsClient;
 
-    // We will not use default settings for user agreement and set our own, need only to user give us bank id which have to be connected
+    // We will not use default settings for user agreement and set our own, need
+    // only to user give us bank id which have to be connected
     // setMaxHistoricalDays = 90
     // setAccessValidForDays = 30
     // setAccessScope = "balances", "details", "transactions"
@@ -26,14 +27,13 @@ public class AgreementsServiceImpl implements AgreementsService {
         SpectacularJWTObtain tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
 
-        EndUserAgreementRequest endUserAgreementRequest = new EndUserAgreementRequest()
-        .institutionId(institutionId) 
-        .maxHistoricalDays(90)
-        .accessValidForDays(30)
-        .accessScope(List.of("balances", "details", "transactions"));      
+        var endUserAgreementRequest = new EndUserAgreementRequest()
+                .institutionId(institutionId)
+                .maxHistoricalDays(90)
+                .accessValidForDays(30)
+                .accessScope(List.of("balances", "details", "transactions"));
 
         return agreementsClient.createAgreement(accessToken, endUserAgreementRequest);
     }
 
-    
 }

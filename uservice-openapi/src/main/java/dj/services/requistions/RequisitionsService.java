@@ -2,9 +2,11 @@
 
 import java.net.URI;
 
+import nordigen.RequisitionV2;
+
 public interface RequisitionsService {
 
-    URI createConnection(String institutionId);
+    URI createRequisition(String institutionId);
 
-    String getListAccounts(String reference);
+    RequisitionV2 getListAccounts(String reference);
 }

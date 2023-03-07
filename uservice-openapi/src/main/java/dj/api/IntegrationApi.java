@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dj.services.institutions.InstitutionsService;
 import dj.services.requistions.RequisitionsService;
-import dj.services.requistions.RequistionsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nordigen.Integration;
+import nordigen.RequisitionV2;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,15 +32,21 @@ public class IntegrationApi {
     }
 
     @GetMapping("/login")
-    ResponseEntity<URI> createConnection(@RequestParam String institutionId) {
-        return ResponseEntity.status(HttpStatus.FOUND).location(requisitionsService.createConnection(institutionId))
+    ResponseEntity<URI> createRequisition(@RequestParam String institutionId) {
+        return ResponseEntity.status(HttpStatus.FOUND).location(requisitionsService.createRequisition(institutionId))
                 .build();
     }
 
-    @GetMapping("/move")
-    ResponseEntity<String> getListAccounts(@RequestParam(name = "ref") String reference) {
-        log.info("sparta!");
-        return ResponseEntity.ok(reference);
+    /**
+     * Endpoint under which nordigen sends us the client after the authorization on the bank's side has been completed
+     * 
+     * Nordigen adds the ref parameter, which is the UUID reference generated
+     * by us, and we assign it to the received id in order to replace them and
+     * execute a query that will return a complete order document
+     */
+    @GetMapping("/accounts")
+            ResponseEntity<RequisitionV2> getListAccounts(@RequestParam(name = "ref") String reference) {
+        return ResponseEntity.ok(requisitionsService.getListAccounts(reference));
     }
 
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import dj.services.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import nordigen.Integration;
-import nordigen.SpectacularJWTObtain;
 
 @RequiredArgsConstructor
 @Service
@@ -18,8 +17,8 @@ public class InstitutionsServiceImpl implements InstitutionsService {
     
     @Override
     public List<Integration> getListBanks(String country) {
-        SpectacularJWTObtain tokens = tokenService.getTokens();
-        String accessToken = "Bearer " + tokens.getAccess();
+        var tokens = tokenService.getTokens();
+        var accessToken = "Bearer " + tokens.getAccess();
         return institutionsClient.getBankList(accessToken, country);
     }        
     

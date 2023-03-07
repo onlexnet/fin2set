@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import dj.services.agreements.AgreementsService;
 import dj.services.token.TokenService;
 import lombok.RequiredArgsConstructor;
+import nordigen.RequisitionV2;
 import nordigen.RequisitionV2Request;
 import nordigen.SpectacularJWTObtain;
 
@@ -21,10 +22,10 @@ public class RequisitionsServiceImpl implements RequisitionsService {
     private final RequisitionsClient requisitionsClient;
     private final AgreementsService agreementsService;
 
-    Map<String, String> mapReferenceRequisitionsID = new HashMap<>();
+    private Map<String, String> mapReferenceRequisitionsID = new HashMap<>();
 
     @Override
-    public URI createConnection(String institutionId) {
+    public URI createRequisition(String institutionId) {
         SpectacularJWTObtain tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
 
@@ -33,7 +34,7 @@ public class RequisitionsServiceImpl implements RequisitionsService {
         var reference = UUID.randomUUID().toString();
 
         var requisitionV2Request = new RequisitionV2Request()
-                .redirect("http://localhost:8080/api/integration/move")
+                .redirect("http://localhost:8080/api/integration/accounts")
                 .institutionId(institutionId)
                 .reference(reference)
                 .agreement(endUserAgreement.getId())
@@ -44,14 +45,20 @@ public class RequisitionsServiceImpl implements RequisitionsService {
                 .accountSelection(false)
                 .redirectImmediate(false);
 
-        var spectacularRequisitionV2 = requisitionsClient.createConnection(accessToken, requisitionV2Request);
+        var spectacularRequisitionV2 = requisitionsClient.createRequisition(accessToken, requisitionV2Request);
+
+        String requisitionsID = spectacularRequisitionV2.getId().toString();
+        mapReferenceRequisitionsID.put(reference, requisitionsID);
 
         return URI.create(spectacularRequisitionV2.getLink());
     }
 
     @Override
-    public String getListAccounts(String reference) {
-        return "https://ob.nordigen.com/api/v2/requisitions/";
+    public RequisitionV2 getListAccounts(String reference) {
+        SpectacularJWTObtain tokens = tokenService.getTokens();
+        String accessToken = "Bearer " + tokens.getAccess();
+        String requisitionsID = mapReferenceRequisitionsID.get(reference);
+        return requisitionsClient.getRequisition(accessToken, requisitionsID);
     }
 
 }
