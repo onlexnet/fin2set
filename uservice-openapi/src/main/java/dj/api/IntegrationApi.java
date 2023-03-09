@@ -36,14 +36,15 @@ public class IntegrationApi {
     }
 
     /**
-     * Endpoint under which nordigen sends us the client after the authorization on the bank's side has been completed
+     * Endpoint under which nordigen sends us the client after the authorization on
+     * the bank's side has been completed
      * 
      * Nordigen adds the ref parameter, which is the UUID reference generated
      * by us, and we assign it to the received id in order to replace them and
      * execute a query that will return a complete order document
      */
     @GetMapping("/info")
-            ResponseEntity<CustomerDataDTO> getInfoAboutConection(@RequestParam(name = "ref") String reference) {
+    ResponseEntity<CustomerDataDTO> getInfoAboutConection(@RequestParam(name = "ref") String reference) {
         return ResponseEntity.ok(requisitionsService.getInfoAboutConection(reference));
     }
 

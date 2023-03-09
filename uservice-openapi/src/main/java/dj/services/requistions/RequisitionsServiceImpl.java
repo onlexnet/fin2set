@@ -61,6 +61,7 @@ public class RequisitionsServiceImpl implements RequisitionsService {
     public CustomerDataDTO getInfoAboutConection(String reference) {
         SpectacularJWTObtain tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
+        
         String requisitionsID = mapReferenceRequisitionsID.get(reference);
         RequisitionV2 requisition = requisitionsClient.getRequisition(accessToken, requisitionsID);
         EndUserAgreement endUserAgreement = agreementsService.getAgreement(requisition.getAgreement().toString());

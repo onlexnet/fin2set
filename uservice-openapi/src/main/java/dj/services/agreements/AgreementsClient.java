@@ -1,7 +1,5 @@
 package dj.services.agreements;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
