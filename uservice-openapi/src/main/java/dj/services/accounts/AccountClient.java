@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-import dj.models.BankStatemantv2;
+import dj.models.NordigenBankStatemant;
 import feign.Headers;
 import nordigen.AccountV2;
 
@@ -19,6 +19,6 @@ public interface AccountClient {
     AccountV2 getAccount(@RequestHeader("Authorization") String accessToken, @PathVariable String accountID);
 
     @GetMapping(value = "/api/v2/accounts/{accountID}/transactions/")
-    BankStatemantv2 getTransactions(@RequestHeader("Authorization") String accessToken, @PathVariable String accountID);
+    NordigenBankStatemant getTransactions(@RequestHeader("Authorization") String accessToken, @PathVariable String accountID);
     
 }

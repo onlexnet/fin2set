@@ -2,7 +2,7 @@ package dj.services.accounts;
 
 import org.springframework.stereotype.Service;
 
-import dj.models.BankStatemantv2;
+import dj.models.NordigenBankStatemant;
 import dj.services.token.TokenService;
 import lombok.AllArgsConstructor;
 import nordigen.AccountV2;
@@ -24,7 +24,7 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public BankStatemantv2 getTransactions(String accountID) {
+    public NordigenBankStatemant getTransactions(String accountID) {
         SpectacularJWTObtain tokens = tokenService.getTokens();
         String accessToken = "Bearer " + tokens.getAccess();
 

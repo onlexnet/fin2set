@@ -1,16 +1,24 @@
 
 package dj.models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BankStatemantv2 {
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+@Data
+@Accessors(chain = true)
+public class NordigenBankStatemant {
 
     @JsonProperty("transactions")
     public Transactions transactions;
 
+    @Data
+    @Accessors(chain = true)
     public static class Transactions {
 
         @JsonProperty("booked")
@@ -18,13 +26,15 @@ public class BankStatemantv2 {
 
     }
 
+    @Data
+    @Accessors(chain = true)
     public static class Booked {
 
         @JsonProperty("transactionId")
         public String transactionId;
 
         @JsonProperty("bookingDate")
-        public String bookingDate;
+        public LocalDate bookingDate;
 
         @JsonProperty("transactionAmount")
         public TransactionAmount transactionAmount;
@@ -32,13 +42,14 @@ public class BankStatemantv2 {
         @JsonProperty("remittanceInformationUnstructured")
         public String remittanceInformationUnstructured;
 
-        
     }
 
+    @Data
+    @Accessors(chain = true)
     public static class TransactionAmount {
 
         @JsonProperty("amount")
-        public String amount;
+        public double amount;
 
         @JsonProperty("currency")
         public String currency;
