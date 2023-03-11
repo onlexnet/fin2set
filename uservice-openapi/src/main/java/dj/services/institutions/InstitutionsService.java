@@ -6,6 +6,8 @@ import nordigen.Integration;
 
 public interface InstitutionsService {
 
-    List<Integration> getListBanks(String country);
+    List<Integration> getListInstitutions(String country);
+
+    Integration getInstitution(String institutionID);
     
 }

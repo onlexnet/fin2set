@@ -12,12 +12,14 @@ import nordigen.Integration;
 
 @FeignClient(value = "institutions", url = "https://ob.nordigen.com")
 @Headers({
-        "accept: application/json",
-        "Content-Type: application/json"})
+                "accept: application/json",
+                "Content-Type: application/json" })
 public interface InstitutionsClient {
 
-    @GetMapping(value = "/api/v2/institutions/?country={country}")
-    List<Integration> getBankList(@RequestHeader("Authorization") String accessToken,
-                           @PathVariable("country") String country);
-    
+        @GetMapping(value = "/api/v2/institutions/?country={country}")
+        List<Integration> getListInstitutions(@RequestHeader("Authorization") String accessToken, @PathVariable("country") String country);
+
+        @GetMapping(value = "/api/v2/institutions/{institutionID}")
+        Integration getInstitution(@RequestHeader("Authorization") String accessToken, @PathVariable String institutionID);
+
 }

@@ -1,7 +1,6 @@
 package dj.api;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,23 +10,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dj.models.CustomerDataDTO;
-import dj.services.institutions.InstitutionsService;
 import dj.services.requistions.RequisitionsService;
 import lombok.RequiredArgsConstructor;
-import nordigen.Integration;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/integration")
 public class IntegrationApi {
 
-    private final InstitutionsService institututionsService;
     private final RequisitionsService requisitionsService;
-
-    @GetMapping("/banks")
-    ResponseEntity<List<Integration>> getBankList(@RequestParam String country) {
-        return ResponseEntity.ok(institututionsService.getListBanks(country));
-    }
 
     @GetMapping("/connection")
     ResponseEntity<URI> createConection(@RequestParam String institutionId) {

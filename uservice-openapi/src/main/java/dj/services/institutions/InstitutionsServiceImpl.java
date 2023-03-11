@@ -16,10 +16,15 @@ public class InstitutionsServiceImpl implements InstitutionsService {
     private final TokenService tokenService;
     
     @Override
-    public List<Integration> getListBanks(String country) {
-        var tokens = tokenService.getTokens();
-        var accessToken = "Bearer " + tokens.getAccess();
-        return institutionsClient.getBankList(accessToken, country);
+    public List<Integration> getListInstitutions(String country) {
+        var accessToken = "Bearer " + tokenService.getTokens().getAccess();
+        return institutionsClient.getListInstitutions(accessToken, country);
+    }
+
+    @Override
+    public Integration getInstitution(String institutionID) {
+        var accessToken = "Bearer " + tokenService.getTokens().getAccess();
+        return institutionsClient.getInstitution(accessToken, institutionID);
     }        
     
 
