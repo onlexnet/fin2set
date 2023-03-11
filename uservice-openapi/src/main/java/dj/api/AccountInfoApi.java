@@ -14,7 +14,7 @@ import nordigen.AccountV2;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/account")
-public class AccountInfo {
+public class AccountInfoApi {
 
     private final AccountService accountService;
 

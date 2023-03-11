@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import feign.Headers;
+import nordigen.PaginatedRequisitionV2List;
 import nordigen.RequisitionV2;
 import nordigen.RequisitionV2Request;
 import nordigen.SpectacularRequisitionV2;
@@ -17,6 +18,9 @@ import nordigen.SpectacularRequisitionV2;
                 "accept: application/json",
                 "Content-Type: application/json" })
 public interface RequisitionsClient {
+
+        @GetMapping(value = "/api/v2/requisitions/")
+        PaginatedRequisitionV2List getListAllRequisitions(@RequestHeader("Authorization") String accessToken);
 
         @PostMapping(value = "/api/v2/requisitions/")
         SpectacularRequisitionV2 createRequisition(@RequestHeader("Authorization") String accessToken,

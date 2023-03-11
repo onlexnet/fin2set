@@ -17,12 +17,9 @@ public class OnlexBankApi {
 
     private final OnlexService onlexService;
 
-    
     @GetMapping("/bankstatement")
     ResponseEntity<OnlexBankStatement> createConection(@RequestParam String accountID) {
         return ResponseEntity.ok(onlexService.getOnlxBankStatement(accountID));
     }
-    
-    
 
 }

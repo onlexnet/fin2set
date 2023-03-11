@@ -13,9 +13,9 @@ import dj.services.agreements.AgreementsService;
 import dj.services.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import nordigen.EndUserAgreement;
+import nordigen.PaginatedRequisitionV2List;
 import nordigen.RequisitionV2;
 import nordigen.RequisitionV2Request;
-import nordigen.SpectacularJWTObtain;
 
 @Service
 @RequiredArgsConstructor
@@ -30,8 +30,7 @@ public class RequisitionsServiceImpl implements RequisitionsService {
 
     @Override
     public URI createRequisition(String institutionId) {
-        SpectacularJWTObtain tokens = tokenService.getTokens();
-        String accessToken = "Bearer " + tokens.getAccess();
+        String accessToken = "Bearer " + tokenService.getTokens().getAccess();
 
         var endUserAgreement = agreementsService.createAgreement(institutionId);
 
@@ -59,14 +58,19 @@ public class RequisitionsServiceImpl implements RequisitionsService {
 
     @Override
     public CustomerDataDTO getInfoAboutConection(String reference) {
-        SpectacularJWTObtain tokens = tokenService.getTokens();
-        String accessToken = "Bearer " + tokens.getAccess();
-        
+        String accessToken = "Bearer " + tokenService.getTokens().getAccess();
+
         String requisitionsID = mapReferenceRequisitionsID.get(reference);
         RequisitionV2 requisition = requisitionsClient.getRequisition(accessToken, requisitionsID);
         EndUserAgreement endUserAgreement = agreementsService.getAgreement(requisition.getAgreement().toString());
     
         return customerDataMapper.toDto(requisition, endUserAgreement);
+    }
+
+    @Override
+    public PaginatedRequisitionV2List getListAllRequisitions() {
+        String accessToken = "Bearer " + tokenService.getTokens().getAccess();
+        return requisitionsClient.getListAllRequisitions(accessToken);
     }
 
 }

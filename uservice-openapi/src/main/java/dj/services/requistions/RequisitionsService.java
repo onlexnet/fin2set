@@ -3,8 +3,11 @@
 import java.net.URI;
 
 import dj.models.CustomerDataDTO;
+import nordigen.PaginatedRequisitionV2List;
 
 public interface RequisitionsService {
+
+    PaginatedRequisitionV2List getListAllRequisitions();
 
     URI createRequisition(String institutionId);
 
