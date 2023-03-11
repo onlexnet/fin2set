@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import nordigen.JWTObtainPairRequest;
+import nordigen.JWTRefreshRequest;
 import nordigen.SpectacularJWTObtain;
+import nordigen.SpectacularJWTRefresh;
 
 @Service
 public class TokenServiceImpl implements TokenService {
@@ -19,12 +21,23 @@ public class TokenServiceImpl implements TokenService {
     @Autowired
     private TokenClient tokenClient ;
 
+    private String refreshToken;
+
     @Override
     public SpectacularJWTObtain getTokens() {
         JWTObtainPairRequest jwtObtainPairRequest = new JWTObtainPairRequest()
         .secretId(secretId)
         .secretKey(secretKey);
-        return tokenClient.createTokens(jwtObtainPairRequest);
+        SpectacularJWTObtain tokens = tokenClient.createTokens(jwtObtainPairRequest);
+        refreshToken = tokens.getRefresh();
+        return tokens;
+    }
+
+    @Override
+    public SpectacularJWTRefresh refreshAccessToken() {
+        JWTRefreshRequest jwtRefreshRequest = new JWTRefreshRequest();
+        jwtRefreshRequest.setRefresh(refreshToken);
+        return tokenClient.refreshAccessToken(jwtRefreshRequest);
     }
 
 
