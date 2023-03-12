@@ -20,7 +20,7 @@ import nordigen.SpectacularRequisitionV2;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/requisitions")
-public class RequisitionsApi {
+public class IntegrationRequisitionsApi {
 
     private final RequisitionsService requisitionsService;
 

@@ -15,7 +15,7 @@ import nordigen.Integration;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/institutions")
-public class InstitutionsApi {
+public class IntegrationInstitutionsApi {
 
     private final InstitutionsService institutionsService;
     

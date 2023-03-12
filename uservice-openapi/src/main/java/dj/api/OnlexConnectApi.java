@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/integration")
-public class ConnectApi {
+public class OnlexConnectApi {
 
     private final ConnectService connectService;
 
