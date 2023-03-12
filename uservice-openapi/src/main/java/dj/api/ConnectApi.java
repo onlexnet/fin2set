@@ -22,7 +22,7 @@ public class ConnectApi {
 
     @GetMapping("/connection")
     ResponseEntity<URI> createConection(@RequestParam String institutionId) {
-        return ResponseEntity.status(HttpStatus.FOUND).location(connectService.createRequisition(institutionId))
+        return ResponseEntity.status(HttpStatus.FOUND).location(connectService.createLinkToConnect(institutionId))
                 .build();
     }
 
