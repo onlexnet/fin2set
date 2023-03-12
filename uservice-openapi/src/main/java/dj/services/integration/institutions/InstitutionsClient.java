@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import feign.Headers;
 import nordigen.Integration;
 
-@FeignClient(value = "institutions", url = "https://ob.nordigen.com")
+@FeignClient(value = "institutions", url = "https://ob.nordigen.com/api/v2/institutions")
 @Headers({
                 "accept: application/json",
                 "Content-Type: application/json" })
 public interface InstitutionsClient {
 
-        @GetMapping(value = "/api/v2/institutions/?country={country}")
+        @GetMapping(value = "/?country={country}")
         List<Integration> getListInstitutions(@RequestHeader("Authorization") String accessToken, @PathVariable("country") String country);
 
-        @GetMapping(value = "/api/v2/institutions/{institutionID}")
+        @GetMapping(value = "/{institutionID}")
         Integration getInstitution(@RequestHeader("Authorization") String accessToken, @PathVariable String institutionID);
 
 }
