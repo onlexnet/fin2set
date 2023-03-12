@@ -13,6 +13,6 @@ public interface RequisitionsService {
 
     RequisitionV2 getRequisition(String requisitionsID);
 
-    void deleteRequsition();
+    void deleteRequsition(String requisitionsID);
 
 }

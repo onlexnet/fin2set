@@ -35,9 +35,9 @@ public class RequisitionsServiceImpl implements RequisitionsService {
     }
 
     @Override
-    public void deleteRequsition() {
+    public void deleteRequsition(String requisitionsID) {
         String accessToken = tokenService.buildBearerAuthToken();
-        requisitionsClient.deleteRequsition(accessToken, accessToken);
+        requisitionsClient.deleteRequsition(accessToken, requisitionsID);
     }
 
 }
