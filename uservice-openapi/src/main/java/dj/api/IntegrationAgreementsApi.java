@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import dj.services.integration.agreements.AgreementsService;
 import lombok.RequiredArgsConstructor;
 import nordigen.EndUserAgreement;
+import nordigen.EndUserAgreementRequest;
 import nordigen.PaginatedEndUserAgreementList;
-import nordigen.PaginatedRequisitionV2List;
-import nordigen.RequisitionV2;
-import nordigen.RequisitionV2Request;
-import nordigen.SpectacularRequisitionV2;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,23 +24,23 @@ public class IntegrationAgreementsApi {
     private final AgreementsService agreementsService;
 
     @GetMapping("/")
-    ResponseEntity<PaginatedEndUserAgreementList> getListAllRequisitions() {
+    ResponseEntity<PaginatedEndUserAgreementList> getListAllAgreements() {
         return ResponseEntity.ok(agreementsService.getListAllAgreements());
     }
 
     @PostMapping("/")
-    ResponseEntity<SpectacularRequisitionV2> createRequisition(@RequestBody RequisitionV2Request requisitionV2Request) {
-        return ResponseEntity.ok(agreementsService.createAgreement(null));
+    ResponseEntity<EndUserAgreement> createAgreement(@RequestBody EndUserAgreementRequest endUserAgreementRequest) {
+        return ResponseEntity.ok(agreementsService.createAgreement(endUserAgreementRequest));
     }
 
     @GetMapping("/{requisitionsID}")
-    ResponseEntity<EndUserAgreement> getRequisition(@PathVariable String requisitionsID) {
-        return ResponseEntity.ok(agreementsService.getAgreement(requisitionsID));
+    ResponseEntity<EndUserAgreement> getAgreement(@PathVariable String agreementID) {
+        return ResponseEntity.ok(agreementsService.getAgreement(agreementID));
     }
 
     @DeleteMapping("/{requisitionsID}")
-    ResponseEntity<Response> deleteRequisition(@PathVariable String requisitionsID) {
-        agreementsService.deleteAgreement(requisitionsID);
+    ResponseEntity<Response> deleteAgreement(@PathVariable String agreementID) {
+        agreementsService.deleteAgreement(agreementID);
         return ResponseEntity.noContent().build();
     }
     

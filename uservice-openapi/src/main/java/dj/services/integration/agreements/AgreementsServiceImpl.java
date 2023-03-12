@@ -1,7 +1,5 @@
 package dj.services.integration.agreements;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import dj.services.integration.token.TokenService;
