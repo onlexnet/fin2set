@@ -6,7 +6,6 @@ import dj.models.NordigenBankStatemant;
 import dj.services.integration.token.TokenService;
 import lombok.AllArgsConstructor;
 import nordigen.AccountV2;
-import nordigen.SpectacularJWTObtain;
 
 @Service
 @AllArgsConstructor
@@ -17,16 +16,14 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public AccountV2 getAccount(String accountID) {
-        SpectacularJWTObtain tokens = tokenService.getTokens();
-        String accessToken = "Bearer " + tokens.getAccess();    
-        
+        String accessToken = tokenService.buildBearerAuthToken();
+
         return accountClient.getAccount(accessToken, accountID);
     }
 
     @Override
     public NordigenBankStatemant getTransactions(String accountID) {
-        SpectacularJWTObtain tokens = tokenService.getTokens();
-        String accessToken = "Bearer " + tokens.getAccess();
+        String accessToken = tokenService.buildBearerAuthToken();
 
         return accountClient.getTransactions(accessToken, accountID);
     }

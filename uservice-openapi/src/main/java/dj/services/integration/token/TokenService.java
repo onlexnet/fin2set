@@ -15,4 +15,9 @@ public interface TokenService {
      */
     SpectacularJWTRefresh refreshAccessToken();
 
+    /**
+     * Get new token and return Bearer access token
+     */
+    String buildBearerAuthToken();
+
 }

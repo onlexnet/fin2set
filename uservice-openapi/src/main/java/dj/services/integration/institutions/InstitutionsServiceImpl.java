@@ -17,13 +17,13 @@ public class InstitutionsServiceImpl implements InstitutionsService {
     
     @Override
     public List<Integration> getListInstitutions(String country) {
-        var accessToken = "Bearer " + tokenService.getTokens().getAccess();
+        String accessToken = tokenService.buildBearerAuthToken();
         return institutionsClient.getListInstitutions(accessToken, country);
     }
 
     @Override
     public Integration getInstitution(String institutionID) {
-        var accessToken = "Bearer " + tokenService.getTokens().getAccess();
+        String accessToken = tokenService.buildBearerAuthToken();
         return institutionsClient.getInstitution(accessToken, institutionID);
     }        
     

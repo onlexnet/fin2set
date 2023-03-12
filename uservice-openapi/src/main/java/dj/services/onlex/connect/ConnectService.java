@@ -6,7 +6,7 @@ import dj.models.CustomerDataDTO;
 
 public interface ConnectService {
 
-    URI createRequisition(String institutionId);
+    URI createLinkToConnect(String institutionId);
 
     CustomerDataDTO getInfoAboutConection(String reference);
     

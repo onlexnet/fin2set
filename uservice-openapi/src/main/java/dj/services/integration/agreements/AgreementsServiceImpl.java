@@ -8,7 +8,6 @@ import dj.services.integration.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import nordigen.EndUserAgreement;
 import nordigen.EndUserAgreementRequest;
-import nordigen.SpectacularJWTObtain;
 
 @Service
 @RequiredArgsConstructor
@@ -19,8 +18,8 @@ public class AgreementsServiceImpl implements AgreementsService {
 
     @Override
     public EndUserAgreement createAgreement(String institutionId) {
-        SpectacularJWTObtain tokens = tokenService.getTokens();
-        String accessToken = "Bearer " + tokens.getAccess();
+        String accessToken = tokenService.buildBearerAuthToken();
+
 
         var endUserAgreementRequest = new EndUserAgreementRequest()
                 .institutionId(institutionId)
@@ -33,8 +32,7 @@ public class AgreementsServiceImpl implements AgreementsService {
 
     @Override
     public EndUserAgreement getAgreement(String agreementID) {
-        SpectacularJWTObtain tokens = tokenService.getTokens();
-        String accessToken = "Bearer " + tokens.getAccess();
+        String accessToken = tokenService.buildBearerAuthToken();
 
         return agreementsClient.getAgreement(accessToken, agreementID);
     }

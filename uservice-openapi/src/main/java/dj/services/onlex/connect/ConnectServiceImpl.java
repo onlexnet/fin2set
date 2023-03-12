@@ -29,7 +29,7 @@ public class ConnectServiceImpl implements ConnectService {
     private Map<String, String> mapReferenceRequisitionsID = new HashMap<>();
 
     @Override
-    public URI createRequisition(String institutionId) {
+    public URI createLinkToConnect(String institutionId) {
         String accessToken = "Bearer " + tokenService.getTokens().getAccess();
 
         var endUserAgreement = agreementsService.createAgreement(institutionId);

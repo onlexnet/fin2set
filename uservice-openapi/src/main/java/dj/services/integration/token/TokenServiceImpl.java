@@ -28,6 +28,7 @@ public class TokenServiceImpl implements TokenService {
         JWTObtainPairRequest jwtObtainPairRequest = new JWTObtainPairRequest()
         .secretId(secretId)
         .secretKey(secretKey);
+
         SpectacularJWTObtain tokens = tokenClient.createTokens(jwtObtainPairRequest);
         refreshToken = tokens.getRefresh();
         return tokens;
@@ -38,6 +39,16 @@ public class TokenServiceImpl implements TokenService {
         JWTRefreshRequest jwtRefreshRequest = new JWTRefreshRequest();
         jwtRefreshRequest.setRefresh(refreshToken);
         return tokenClient.refreshAccessToken(jwtRefreshRequest);
+    }
+    
+    @Override
+    public String buildBearerAuthToken() {
+        SpectacularJWTObtain spectacularJWTObtain = getTokens();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Bearer ");
+        sb.append(spectacularJWTObtain.getAccess());
+        return sb.toString();
     }
 
 
