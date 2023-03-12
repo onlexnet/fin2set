@@ -2,6 +2,7 @@ package dj.services.onlex.connect;
 
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -14,6 +15,7 @@ import dj.services.integration.requistions.RequisitionsClient;
 import dj.services.integration.token.TokenService;
 import lombok.AllArgsConstructor;
 import nordigen.EndUserAgreement;
+import nordigen.EndUserAgreementRequest;
 import nordigen.RequisitionV2;
 import nordigen.RequisitionV2Request;
 
@@ -32,7 +34,14 @@ public class ConnectServiceImpl implements ConnectService {
     public URI createLinkToConnect(String institutionId) {
         String accessToken = "Bearer " + tokenService.getTokens().getAccess();
 
-        var endUserAgreement = agreementsService.createAgreement(institutionId);
+        var endUserAgreementRequest = new EndUserAgreementRequest()
+                .institutionId(institutionId)
+                .maxHistoricalDays(90)
+                .accessValidForDays(30)
+                .accessScope(List.of("balances", "details", "transactions"))
+                .institutionId(institutionId);
+
+        var endUserAgreement = agreementsService.createAgreement(endUserAgreementRequest);
 
         var reference = UUID.randomUUID().toString();
 
