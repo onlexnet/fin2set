@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dj.services.requistions.RequisitionsService;
+import dj.services.integration.requistions.RequisitionsService;
 import lombok.RequiredArgsConstructor;
 import nordigen.PaginatedRequisitionV2List;
 

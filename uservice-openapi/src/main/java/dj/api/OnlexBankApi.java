@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dj.models.OnlexBankStatement;
-import dj.services.onlex.OnlexService;
+import dj.services.onlex.bankstatement.OnlexBankStatementService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -15,11 +15,11 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/onlex")
 public class OnlexBankApi {
 
-    private final OnlexService onlexService;
+    private final OnlexBankStatementService onlexService;
 
     @GetMapping("/bankstatement")
     ResponseEntity<OnlexBankStatement> createConection(@RequestParam String accountID) {
-        return ResponseEntity.ok(onlexService.getOnlxBankStatement(accountID));
+        return ResponseEntity.ok(onlexService.getOnlexBankStatement(accountID));
     }
 
 }

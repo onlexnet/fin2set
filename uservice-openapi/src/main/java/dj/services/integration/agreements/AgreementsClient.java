@@ -1,4 +1,4 @@
-package dj.services.agreements;
+package dj.services.integration.agreements;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

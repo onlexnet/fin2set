@@ -1,10 +1,10 @@
-package dj.services.agreements;
+package dj.services.integration.agreements;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import dj.services.token.TokenService;
+import dj.services.integration.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import nordigen.EndUserAgreement;
 import nordigen.EndUserAgreementRequest;

@@ -1,4 +1,4 @@
-package dj.services.token;
+package dj.services.integration.token;
 
 import nordigen.SpectacularJWTObtain;
 import nordigen.SpectacularJWTRefresh;

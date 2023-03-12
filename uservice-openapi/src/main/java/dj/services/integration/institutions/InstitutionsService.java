@@ -1,4 +1,4 @@
-package dj.services.institutions;
+package dj.services.integration.institutions;
 
 import java.util.List;
 

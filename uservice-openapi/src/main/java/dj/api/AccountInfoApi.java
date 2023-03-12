@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dj.models.NordigenBankStatemant;
-import dj.services.accounts.AccountService;
+import dj.services.integration.accounts.AccountService;
 import lombok.RequiredArgsConstructor;
 import nordigen.AccountV2;
 

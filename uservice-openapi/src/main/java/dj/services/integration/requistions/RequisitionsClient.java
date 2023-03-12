@@ -1,4 +1,4 @@
-package dj.services.requistions;
+package dj.services.integration.requistions;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +23,7 @@ public interface RequisitionsClient {
         PaginatedRequisitionV2List getListAllRequisitions(@RequestHeader("Authorization") String accessToken);
 
         @PostMapping(value = "/api/v2/requisitions/")
-        SpectacularRequisitionV2 createRequisition(@RequestHeader("Authorization") String accessToken,
-                        @RequestBody RequisitionV2Request requisitionV2Request);
+        SpectacularRequisitionV2 createRequisition(@RequestHeader("Authorization") String accessToken, @RequestBody RequisitionV2Request requisitionV2Request);
 
         @GetMapping(value = "/api/v2/requisitions/{requisitionsID}")
         RequisitionV2 getRequisition(@RequestHeader("Authorization") String accessToken, @PathVariable String requisitionsID);

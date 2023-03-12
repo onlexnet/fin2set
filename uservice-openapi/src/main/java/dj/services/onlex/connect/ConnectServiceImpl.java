@@ -1,4 +1,4 @@
-package dj.services.requistions;
+package dj.services.onlex.connect;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 
 import dj.models.CustomerDataDTO;
 import dj.models.CustomerDataMapper;
-import dj.services.agreements.AgreementsService;
-import dj.services.token.TokenService;
-import lombok.RequiredArgsConstructor;
+import dj.services.integration.agreements.AgreementsService;
+import dj.services.integration.requistions.RequisitionsClient;
+import dj.services.integration.token.TokenService;
+import lombok.AllArgsConstructor;
 import nordigen.EndUserAgreement;
-import nordigen.PaginatedRequisitionV2List;
 import nordigen.RequisitionV2;
 import nordigen.RequisitionV2Request;
 
 @Service
-@RequiredArgsConstructor
-public class RequisitionsServiceImpl implements RequisitionsService {
+@AllArgsConstructor
+public class ConnectServiceImpl implements ConnectService {
 
     private final TokenService tokenService;
     private final RequisitionsClient requisitionsClient;
@@ -66,11 +66,5 @@ public class RequisitionsServiceImpl implements RequisitionsService {
     
         return customerDataMapper.toDto(requisition, endUserAgreement);
     }
-
-    @Override
-    public PaginatedRequisitionV2List getListAllRequisitions() {
-        String accessToken = "Bearer " + tokenService.getTokens().getAccess();
-        return requisitionsClient.getListAllRequisitions(accessToken);
-    }
-
+    
 }

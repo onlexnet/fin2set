@@ -1,9 +1,9 @@
-package dj.services.accounts;
+package dj.services.integration.accounts;
 
 import org.springframework.stereotype.Service;
 
 import dj.models.NordigenBankStatemant;
-import dj.services.token.TokenService;
+import dj.services.integration.token.TokenService;
 import lombok.AllArgsConstructor;
 import nordigen.AccountV2;
 import nordigen.SpectacularJWTObtain;

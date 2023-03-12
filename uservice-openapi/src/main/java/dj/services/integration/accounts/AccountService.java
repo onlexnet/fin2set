@@ -1,4 +1,4 @@
-package dj.services.accounts;
+package dj.services.integration.accounts;
 
 import dj.models.NordigenBankStatemant;
 import nordigen.AccountV2;

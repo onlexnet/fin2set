@@ -1,4 +1,4 @@
-package dj.services.agreements;
+package dj.services.integration.agreements;
 
 import nordigen.EndUserAgreement;
 

@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dj.models.CustomerDataDTO;
-import dj.services.requistions.RequisitionsService;
+import dj.services.onlex.connect.ConnectService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/integration")
-public class IntegrationApi {
+public class ConnectApi {
 
-    private final RequisitionsService requisitionsService;
+    private final ConnectService connectService;
 
     @GetMapping("/connection")
     ResponseEntity<URI> createConection(@RequestParam String institutionId) {
-        return ResponseEntity.status(HttpStatus.FOUND).location(requisitionsService.createRequisition(institutionId))
+        return ResponseEntity.status(HttpStatus.FOUND).location(connectService.createRequisition(institutionId))
                 .build();
     }
 
@@ -36,7 +36,7 @@ public class IntegrationApi {
      */
     @GetMapping("/info")
     ResponseEntity<CustomerDataDTO> getInfoAboutConection(@RequestParam(name = "ref") String reference) {
-        return ResponseEntity.ok(requisitionsService.getInfoAboutConection(reference));
+        return ResponseEntity.ok(connectService.getInfoAboutConection(reference));
     }
 
 }

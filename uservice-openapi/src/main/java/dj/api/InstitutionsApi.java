@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dj.services.institutions.InstitutionsService;
+import dj.services.integration.institutions.InstitutionsService;
 import lombok.RequiredArgsConstructor;
 import nordigen.Integration;
 
