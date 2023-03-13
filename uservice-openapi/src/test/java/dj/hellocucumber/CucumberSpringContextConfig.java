@@ -10,5 +10,4 @@ import io.cucumber.spring.CucumberContextConfiguration;
 @ContextConfiguration(classes = {Program.class})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class CucumberSpringContextConfig {
-
 }
