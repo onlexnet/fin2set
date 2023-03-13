@@ -8,7 +8,7 @@ public interface TokenService {
     /**
      * @return Access token and refresh token
      */
-    SpectacularJWTObtain getTokens(String secretID, String secretKEY);
+    SpectacularJWTObtain getTokens();
 
     /**
      * @return new access token
