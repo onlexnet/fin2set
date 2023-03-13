@@ -24,10 +24,11 @@ public class TokenServiceImpl implements TokenService {
     private String refreshToken;
 
     @Override
-    public SpectacularJWTObtain getTokens() {
+    public SpectacularJWTObtain getTokens(String secretID, String secretKEY) {
+        
         JWTObtainPairRequest jwtObtainPairRequest = new JWTObtainPairRequest()
-        .secretId(secretId)
-        .secretKey(secretKey);
+        .secretId(secretID)
+        .secretKey(secretKEY);
 
         SpectacularJWTObtain tokens = tokenClient.createTokens(jwtObtainPairRequest);
         refreshToken = tokens.getRefresh();
@@ -43,7 +44,7 @@ public class TokenServiceImpl implements TokenService {
     
     @Override
     public String buildBearerAuthToken() {
-        SpectacularJWTObtain spectacularJWTObtain = getTokens();
+        SpectacularJWTObtain spectacularJWTObtain = getTokens(secretId, secretKey);
 
         StringBuilder sb = new StringBuilder();
         sb.append("Bearer ");
