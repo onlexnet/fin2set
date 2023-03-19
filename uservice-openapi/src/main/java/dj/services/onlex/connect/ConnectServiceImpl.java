@@ -38,8 +38,7 @@ public class ConnectServiceImpl implements ConnectService {
                 .institutionId(institutionId)
                 .maxHistoricalDays(90)
                 .accessValidForDays(30)
-                .accessScope(List.of("balances", "details", "transactions"))
-                .institutionId(institutionId);
+                .accessScope(List.of("balances", "details", "transactions"));
 
         var endUserAgreement = agreementsService.createAgreement(endUserAgreementRequest);
 
