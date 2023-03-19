@@ -33,12 +33,12 @@ public class IntegrationAgreementsApi {
         return ResponseEntity.ok(agreementsService.createAgreement(endUserAgreementRequest));
     }
 
-    @GetMapping("/{requisitionsID}")
+    @GetMapping("/{agreementID}")
     ResponseEntity<EndUserAgreement> getAgreement(@PathVariable String agreementID) {
         return ResponseEntity.ok(agreementsService.getAgreement(agreementID));
     }
 
-    @DeleteMapping("/{requisitionsID}")
+    @DeleteMapping("/{agreementID}")
     ResponseEntity<Response> deleteAgreement(@PathVariable String agreementID) {
         agreementsService.deleteAgreement(agreementID);
         return ResponseEntity.noContent().build();

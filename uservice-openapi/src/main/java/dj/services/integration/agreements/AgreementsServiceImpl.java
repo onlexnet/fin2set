@@ -18,14 +18,12 @@ public class AgreementsServiceImpl implements AgreementsService {
     @Override
     public EndUserAgreement createAgreement(EndUserAgreementRequest endUserAgreementRequest) {
         String accessToken = tokenService.buildBearerAuthToken();
-
         return agreementsClient.createAgreement(accessToken, endUserAgreementRequest);
     }
 
     @Override
     public EndUserAgreement getAgreement(String agreementID) {
         String accessToken = tokenService.buildBearerAuthToken();
-
         return agreementsClient.getAgreement(accessToken, agreementID);
     }
 
