@@ -7,27 +7,26 @@ State location: Terraform Cloud
 
 # Start locally
 ```bash
-terraform login # to connecto to terraform cloud
+terraform login # to connect to terraform cloud
 ```
 
 ### Prerequisites
 * We need a single privileged service account to apply changes in Azure for all environments. It is not the best practice for large companies, where prod and non-prod should be separated, but it is very convinient for my local work and small clients. For such reason aad application named **onlex-infra** (single tenant application) has been created with permissions:
   - 'Contributor' role (to be able create resources) on each app subscription
   - 'Application administrator' to create service principals used in environments
+  - with a secret named 'terraform-cli' (used to support CLI tool when required)
 
-
-
-  - with a secret named e.g. 'terraform-cli' (used to support CLI tool)
-* Similar we have account sinnetapp-infra for Azure B2C directory with roles:
-  - 'User administrator' as it is used to add some demo or test accounts to AD
-* We need a storage to keep terraform backend configuration. For such purpose there is created storage ***az storage container create -n tfstate --account-name \<YourAzureStorageAccountName> --account-key \<YourAzureStorageAccountKey>***
-* We need a superuser role in external PostgreSQL server to create databases and schemas. The name of the role os **onlex_infra**, and password for such role is provided as environment variable (described below). **(The account has been created using *CREATE ROLE onlex_infra LOGIN SUPERUSER PASSWORD 'some password';*)**
-If you do not remember the password change it:
-* login to host machine using ssh connection
-* open SQL console *sudo psql -U postgres*
-* change password *ALTER USER onlex_infra WITH PASSWORD 'new exciting password';* 
 
 ### Set prerequisit environment variables for local environment
+All of variables required by developer to have access to remote resources are defined in Azure Value, so that - before using application - should be read using shell script to well-known environment variables, or read directly from Azure Vault
+
+export TF_VAR_azure_subscription_id="........-....-....-....-............."
+
+
+
+LAGACY TO REUSE BELOW:
+
+
 set properly variables (for CI in pipeline, for CLI in local environment).
 We suggest to create local - never commited - bash file in user home directory, where all required environment variables are defined. The file may be named 'onlex-sinnet-init.sh' with values:
 ```bash
@@ -53,14 +52,14 @@ export TF_VAR_onlex_sinnet_azdo_service_url="https://dev.azure.com/onlex"
 
 ### Work locally
 * Assumption: use bash
-* go to folder of the environment where you would like to apply changes (e.g. cd environments/dev01/)
+* go to folder where you would like to apply changes (e.g. cd main/dev01/)
 * **ssh -L 5432:localhost:5432 -L 16443:localhost:16443 <USERNAME>@raport.sin.net.pl** open session to unmanaged resources required by providers 
   * Now you may setup access to remote secured database as it is exposed as localhost:5432 thanks to ssh connection. Also remote microk8s is available at localhost:16443. Do not close thet session, keep it open till the end of your work with database and kubernetes (it means, in practive, terraform as well as it used those two resources)
 * open new shell
 **TODO . ~/onlex-sinnet-init.sh** set env variables 
 * apply changes on selected env manually
   ```bash
-  cd environments/dev01
+  cd main/dev01
   terraform init # init your terraform once 
   terraform apply
   ```
@@ -69,6 +68,7 @@ export TF_VAR_onlex_sinnet_azdo_service_url="https://dev.azure.com/onlex"
 - [How to add Docker registry secret to k8s](https://kubernetes.io/docs/concepts/configuration/secret/)
 - [Az roles and permission matrix](https://www.azadvertizer.net/)
 ### Not used but promising articles
+- https://stackoverflow.com/questions/64758735/terraform-cloud-failing-when-referencing-module-using-relative-local-path
 - https://stackoverflow.com/questions/62137632/create-kubernetes-secret-for-docker-registry-terraform
 - https://medium.com/citihub/a-more-secure-way-to-call-kubectl-from-terraform-1052adf37af8
 - https://docs.microsoft.com/en-us/azure/key-vault/general/key-vault-integrate-kubernetes

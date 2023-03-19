@@ -9,7 +9,7 @@ module "resourcegroup" {
   application_name     = var.application_name
   environment_name     = var.environment_name
   environment_location = var.environment_location
-  subscription_id      = var.env_subscription_id
+  subscription_id      = var.azure_subscription_id
 }
 
 module "appinsights" {
