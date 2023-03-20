@@ -27,4 +27,4 @@ jobs:
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-        working-directory: uservice-openapi/main
+        working-directory: uservice-openapi
