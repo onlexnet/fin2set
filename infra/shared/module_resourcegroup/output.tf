@@ -1,3 +1,3 @@
-output "resourcegroup" {
+output "main" {
   value = azurerm_resource_group.default
 }

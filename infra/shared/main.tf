@@ -56,3 +56,9 @@ module "storage_account" {
   resource_group   = module.resourcegroup.resourcegroup
   application_name = var.application_name
 }
+
+module "b2c" {
+  source = "./module_b2c"
+  application_name = var.application_name
+  resource_group = module.resourcegroup.main
+}
