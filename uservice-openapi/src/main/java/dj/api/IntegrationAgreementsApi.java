@@ -35,7 +35,7 @@ public class IntegrationAgreementsApi {
 
     @GetMapping("/{agreementID}")
     ResponseEntity<EndUserAgreement> getAgreement(@PathVariable String agreementID) {
-        return ResponseEntity.ok(agreementsService.getAgreement(agreementID));
+        return ResponseEntity.ok(agreementsService.getAgreement(agreementID).get());
     }
 
     @DeleteMapping("/{agreementID}")

@@ -70,9 +70,10 @@ public class ConnectServiceImpl implements ConnectService {
 
         String requisitionsID = mapReferenceRequisitionsID.get(reference);
         RequisitionV2 requisition = requisitionsClient.getRequisition(accessToken, requisitionsID);
-        EndUserAgreement endUserAgreement = agreementsService.getAgreement(requisition.getAgreement().toString());
-    
-        return customerDataMapper.toDto(requisition, endUserAgreement);
+        var maybeEndUserAgreement = agreementsService.getAgreement(requisition.getAgreement().toString());
+
+        return maybeEndUserAgreement.map(it -> customerDataMapper.toDto(requisition, it))
+            .orElseThrow();
     }
     
 }
