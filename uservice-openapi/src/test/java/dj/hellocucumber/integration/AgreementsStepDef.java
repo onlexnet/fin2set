@@ -2,8 +2,6 @@ package dj.hellocucumber.integration;
 
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import dj.services.integration.agreements.AgreementsService;
 import io.cucumber.java.en.Given;
@@ -20,7 +18,7 @@ public class AgreementsStepDef {
     private EndUserAgreement createdAgreement;
     private EndUserAgreement getAgreement;
 
-    @Given("create new agreement from example.")
+    @Given("create new agreement.")
     public void create_new_agreement_from_example() {
 
         var endUserAgreementRequest = new EndUserAgreementRequest()
@@ -35,7 +33,7 @@ public class AgreementsStepDef {
 
     @When("get created agreement.")
     public void get_created_agreement() {
-        getAgreement = agreementsService.getAgreement(createdAgreement.getId().toString()).get();
+        getAgreement = agreementsService.getAgreement(createdAgreement.getId()).get();
     }
 
     @Then("check if the agreements is the same.")
@@ -45,9 +43,9 @@ public class AgreementsStepDef {
 
     @Then("delete agreement.")
     public void delete_agreement() {
-        agreementsService.deleteAgreement(createdAgreement.getId().toString());
+        agreementsService.deleteAgreement(createdAgreement.getId());
 
-        var maybeResponse = agreementsService.getAgreement(createdAgreement.getId().toString());
+        var maybeResponse = agreementsService.getAgreement(createdAgreement.getId());
         
         Assertions.assertThat(maybeResponse).isEmpty();
     }

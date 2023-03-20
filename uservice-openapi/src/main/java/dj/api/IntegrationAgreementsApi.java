@@ -1,5 +1,7 @@
 package dj.api;
 
+import java.util.UUID;
+
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,12 +36,12 @@ public class IntegrationAgreementsApi {
     }
 
     @GetMapping("/{agreementID}")
-    ResponseEntity<EndUserAgreement> getAgreement(@PathVariable String agreementID) {
+    ResponseEntity<EndUserAgreement> getAgreement(@PathVariable UUID agreementID) {
         return ResponseEntity.ok(agreementsService.getAgreement(agreementID).get());
     }
 
     @DeleteMapping("/{agreementID}")
-    ResponseEntity<Response> deleteAgreement(@PathVariable String agreementID) {
+    ResponseEntity<Response> deleteAgreement(@PathVariable UUID agreementID) {
         agreementsService.deleteAgreement(agreementID);
         return ResponseEntity.noContent().build();
     }

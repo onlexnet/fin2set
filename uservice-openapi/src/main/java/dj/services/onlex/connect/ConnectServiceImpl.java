@@ -14,9 +14,7 @@ import dj.services.integration.agreements.AgreementsService;
 import dj.services.integration.requistions.RequisitionsClient;
 import dj.services.integration.token.TokenService;
 import lombok.AllArgsConstructor;
-import nordigen.EndUserAgreement;
 import nordigen.EndUserAgreementRequest;
-import nordigen.RequisitionV2;
 import nordigen.RequisitionV2Request;
 
 @Service
@@ -28,7 +26,7 @@ public class ConnectServiceImpl implements ConnectService {
     private final AgreementsService agreementsService;
     private final CustomerDataMapper customerDataMapper;
 
-    private Map<String, String> mapReferenceRequisitionsID = new HashMap<>();
+    private Map<String, UUID> mapReferenceRequisitionsID = new HashMap<>();
 
     @Override
     public URI createLinkToConnect(String institutionId) {
@@ -58,7 +56,7 @@ public class ConnectServiceImpl implements ConnectService {
 
         var spectacularRequisitionV2 = requisitionsClient.createRequisition(accessToken, requisitionV2Request);
 
-        String requisitionsID = spectacularRequisitionV2.getId().toString();
+        var requisitionsID = spectacularRequisitionV2.getId();
         mapReferenceRequisitionsID.put(reference, requisitionsID);
 
         return URI.create(spectacularRequisitionV2.getLink());
@@ -68,9 +66,9 @@ public class ConnectServiceImpl implements ConnectService {
     public CustomerDataDTO getInfoAboutConection(String reference) {
         String accessToken = "Bearer " + tokenService.getTokens().getAccess();
 
-        String requisitionsID = mapReferenceRequisitionsID.get(reference);
-        RequisitionV2 requisition = requisitionsClient.getRequisition(accessToken, requisitionsID);
-        var maybeEndUserAgreement = agreementsService.getAgreement(requisition.getAgreement().toString());
+        var requisitionsID = mapReferenceRequisitionsID.get(reference);
+        var requisition = requisitionsClient.getRequisition(accessToken, requisitionsID);
+        var maybeEndUserAgreement = agreementsService.getAgreement(requisition.getAgreement());
 
         return maybeEndUserAgreement.map(it -> customerDataMapper.toDto(requisition, it))
             .orElseThrow();

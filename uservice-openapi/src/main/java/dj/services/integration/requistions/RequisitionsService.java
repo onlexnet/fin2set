@@ -1,5 +1,8 @@
 package dj.services.integration.requistions;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import nordigen.PaginatedRequisitionV2List;
 import nordigen.RequisitionV2;
 import nordigen.RequisitionV2Request;
@@ -11,8 +14,8 @@ public interface RequisitionsService {
 
     SpectacularRequisitionV2 createRequisition(RequisitionV2Request requisitionV2Request);
 
-    RequisitionV2 getRequisition(String requisitionsID);
+    Optional<RequisitionV2> getRequisition(UUID requisitionsID);
 
-    void deleteRequsition(String requisitionsID);
+    void deleteRequsition(UUID requisitionsID);
 
 }

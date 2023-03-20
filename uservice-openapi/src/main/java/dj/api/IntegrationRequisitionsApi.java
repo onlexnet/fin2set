@@ -1,5 +1,7 @@
 package dj.api;
 
+import java.util.UUID;
+
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,12 +37,12 @@ public class IntegrationRequisitionsApi {
     }
 
     @GetMapping("/{requisitionsID}")
-    ResponseEntity<RequisitionV2> getRequisition(@PathVariable String requisitionsID) {
-        return ResponseEntity.ok(requisitionsService.getRequisition(requisitionsID));
+    ResponseEntity<RequisitionV2> getRequisition(@PathVariable UUID requisitionsID) {
+        return ResponseEntity.ok(requisitionsService.getRequisition(requisitionsID).get());
     }
 
     @DeleteMapping("/{requisitionsID}")
-    ResponseEntity<Response> deleteRequisition(@PathVariable String requisitionsID) {
+    ResponseEntity<Response> deleteRequisition(@PathVariable UUID requisitionsID) {
         requisitionsService.deleteRequsition(requisitionsID);
         return ResponseEntity.noContent().build();
     }

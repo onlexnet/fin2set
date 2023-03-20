@@ -1,7 +1,8 @@
 package dj.services.integration.agreements;
 
+import java.util.UUID;
+
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,9 +28,9 @@ public interface AgreementsClient {
         EndUserAgreement createAgreement(@RequestHeader("Authorization") String accessToken, @RequestBody EndUserAgreementRequest endUserAgreementRequest);
 
         @GetMapping(value = "/{agreementID}")
-        EndUserAgreement getAgreement(@RequestHeader("Authorization") String accessToken, @PathVariable String agreementID);
+        EndUserAgreement getAgreement(@RequestHeader("Authorization") String accessToken, @PathVariable UUID agreementID);
 
         @DeleteMapping(value = "/{agreementID}")
-        void deleteAgreement(@RequestHeader("Authorization") String accessToken, @PathVariable String agreementID);
+        void deleteAgreement(@RequestHeader("Authorization") String accessToken, @PathVariable UUID agreementID);
 
 }

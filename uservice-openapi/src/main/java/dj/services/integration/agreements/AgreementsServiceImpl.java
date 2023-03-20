@@ -1,6 +1,7 @@
 package dj.services.integration.agreements;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class AgreementsServiceImpl implements AgreementsService {
     }
 
     @Override
-    public Optional<EndUserAgreement> getAgreement(String agreementID) {
+    public Optional<EndUserAgreement> getAgreement(UUID agreementID) {
         String accessToken = tokenService.buildBearerAuthToken();
         try {
             var httpResult = agreementsClient.getAgreement(accessToken, agreementID);
@@ -46,7 +47,7 @@ public class AgreementsServiceImpl implements AgreementsService {
     }
 
     @Override
-    public void deleteAgreement(String agreementID) {
+    public void deleteAgreement(UUID agreementID) {
         String accessToken = tokenService.buildBearerAuthToken();
         agreementsClient.deleteAgreement(accessToken, agreementID);
     }
