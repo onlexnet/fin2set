@@ -1,5 +1,7 @@
 package dj.services.onlex.bankstatement;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import dj.models.NordigenBankStatemant;
@@ -17,10 +19,10 @@ public class OnlexBankStatementServiceImpl implements OnlexBankStatementService 
     private final OnlexBankStatemantMapper onlexBankStatemantMapper;
     
     @Override
-    public OnlexBankStatement getOnlexBankStatement(String accountID) {
+    public OnlexBankStatement getOnlexBankStatement(UUID accountID) {
 
-        AccountV2 account = accountService.getAccount(accountID);
-        NordigenBankStatemant nordigenBankStatemant = accountService.getTransactions(accountID);
+        AccountV2 account = accountService.getAccount(accountID).getBody();
+        NordigenBankStatemant nordigenBankStatemant = accountService.getTransactions(accountID).getBody();
 
         return onlexBankStatemantMapper.toOnlexBankStatement(nordigenBankStatemant, account);
     }
