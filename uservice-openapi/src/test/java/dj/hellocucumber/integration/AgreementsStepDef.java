@@ -38,7 +38,7 @@ public class AgreementsStepDef {
 
     @Then("check if the agreements is the same.")
     public void check_if_the_agreements_is_the_same() {
-        Assertions.assertThat(createdAgreement.getId()).isEqualTo(getAgreement.getId());
+        Assertions.assertThat(createdAgreement).isEqualTo(getAgreement);
     }
 
     @Then("delete agreement.")
