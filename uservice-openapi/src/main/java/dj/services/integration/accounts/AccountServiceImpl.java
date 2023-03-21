@@ -22,10 +22,10 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public NordigenBankStatemant getTransactions(String accountID) {
+    public NordigenBankStatemant getTransactions(String accountNumberID) {
         String accessToken = tokenService.buildBearerAuthToken();
 
-        return accountClient.getTransactions(accessToken, accountID);
+        return accountClient.getTransactions(accessToken, accountNumberID);
     }
 
 

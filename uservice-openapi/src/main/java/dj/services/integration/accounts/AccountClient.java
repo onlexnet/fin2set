@@ -19,6 +19,6 @@ public interface AccountClient {
     AccountV2 getAccount(@RequestHeader("Authorization") String accessToken, @PathVariable String accountID);
 
     @GetMapping(value = "/api/v2/accounts/{accountID}/transactions/")
-    NordigenBankStatemant getTransactions(@RequestHeader("Authorization") String accessToken, @PathVariable String accountID);
+    NordigenBankStatemant getTransactions(@RequestHeader("Authorization") String accessToken, @PathVariable String accountNumberID);
     
 }

@@ -7,6 +7,6 @@ public interface AccountService {
 
     AccountV2 getAccount(String accountID);
 
-    NordigenBankStatemant getTransactions(String accountID);
+    NordigenBankStatemant getTransactions(String accountNumberID);
 
 }

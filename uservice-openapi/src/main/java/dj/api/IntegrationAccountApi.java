@@ -19,8 +19,8 @@ public class IntegrationAccountApi {
     private final AccountService accountService;
 
     @GetMapping("/transactions")
-            ResponseEntity<NordigenBankStatemant> getTransactions(@RequestParam String accountID) {
-        return ResponseEntity.ok(accountService.getTransactions(accountID));
+            ResponseEntity<NordigenBankStatemant> getTransactions(@RequestParam String accountNumberID) {
+        return ResponseEntity.ok(accountService.getTransactions(accountNumberID));
     }
 
     @GetMapping("/")
