@@ -1,5 +1,8 @@
 package dj.services.integration.accounts;
 
+import java.util.UUID;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import dj.models.NordigenBankStatemant;
@@ -15,17 +18,15 @@ public class AccountServiceImpl implements AccountService{
     private final AccountClient accountClient;
 
     @Override
-    public AccountV2 getAccount(String accountID) {
+    public ResponseEntity<AccountV2> getAccount(UUID accountNumberID) {
         String accessToken = tokenService.buildBearerAuthToken();
-
-        return accountClient.getAccount(accessToken, accountID);
+        return accountClient.getAccount(accessToken, accountNumberID);
     }
 
     @Override
-    public NordigenBankStatemant getTransactions(String accountID) {
+    public ResponseEntity<NordigenBankStatemant> getTransactions(UUID accountNumberID) {
         String accessToken = tokenService.buildBearerAuthToken();
-
-        return accountClient.getTransactions(accessToken, accountID);
+        return accountClient.getTransactions(accessToken, accountNumberID);
     }
 
 

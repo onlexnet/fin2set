@@ -1,5 +1,7 @@
 package dj.api;
 
+import java.util.UUID;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +20,7 @@ public class OnlexBankApi {
     private final OnlexBankStatementService onlexService;
 
     @GetMapping("/bankstatement")
-    ResponseEntity<OnlexBankStatement> createConection(@RequestParam String accountID) {
+    ResponseEntity<OnlexBankStatement> createConection(@RequestParam UUID accountID) {
         return ResponseEntity.ok(onlexService.getOnlexBankStatement(accountID));
     }
 

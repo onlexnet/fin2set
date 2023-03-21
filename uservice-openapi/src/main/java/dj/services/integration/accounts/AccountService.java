@@ -1,12 +1,16 @@
 package dj.services.integration.accounts;
 
+import java.util.UUID;
+
+import org.springframework.http.ResponseEntity;
+
 import dj.models.NordigenBankStatemant;
 import nordigen.AccountV2;
 
 public interface AccountService {
 
-    AccountV2 getAccount(String accountID);
+    ResponseEntity<AccountV2> getAccount(UUID accountNumberID);
 
-    NordigenBankStatemant getTransactions(String accountID);
+    ResponseEntity<NordigenBankStatemant> getTransactions(UUID accountNumberID);
 
 }
