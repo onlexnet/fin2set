@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.8</version>
+		<version>2.7.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>DJ</groupId>
@@ -76,7 +76,7 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-			<version>2.9.2</version>
+			<version>3.0.0</version>
 		</dependency>
 		<!--
 			Swagger User Interface
@@ -84,7 +84,7 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.9.2</version>
+			<version>3.0.0</version>
 		</dependency>
 
 		<dependency>
@@ -203,63 +203,94 @@
 			<version>2.0.2</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.github.scribejava</groupId>
-			<artifactId>scribejava-core</artifactId>
-			<version>8.3.3</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-okhttp -->
-		<dependency>
-			<groupId>io.github.openfeign</groupId>
-			<artifactId>feign-okhttp</artifactId>
-			<version>11.10</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-jackson -->
-		<dependency>
-			<groupId>io.github.openfeign</groupId>
-			<artifactId>feign-jackson</artifactId>
-			<version>11.10</version>
-		</dependency>
-
-
 	</dependencies>
 
 	<build>
 		<plugins>
 
+
+                <!-- This 2019 version is required for OpenAPI 3 
+
+			<plugin>
+                <groupId>io.swagger.codegen.v3</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>3.0.8</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>https://nordigen.com/docs/ais-schema.json</inputSpec>
+                            <language>java</language>
+                            <packageName>src</packageName>
+                            <configOptions>
+                                <library>resttemplate</library>
+                                <java8>true</java8>
+                                <dateLibrary>java8</dateLibrary>
+                                <licenseName>Apache 2.0</licenseName>
+                                <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+			-->
+			
 			<!--
 				Open api generator plugin used to generate schema nordigen api
 				-->
 			<plugin>
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<version>5.0.0</version>
+				<version>6.1.0</version>
 				<executions>
 					<execution>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>
-								https://nordigen.com/docs/ais-schema.json
-							</inputSpec>
-							<generatorName>java</generatorName>
+							<generatorName>spring</generatorName>
+							<inputSpec>https://nordigen.com/docs/ais-schema.json</inputSpec>
 
+							<withXml>true</withXml>
+
+							<generateApis>false</generateApis>
+							<generateApiTests>false</generateApiTests>
+							<generateApiDocumentation>false</generateApiDocumentation>
+							<generateModels>true</generateModels>
+							<generateModelDocumentation>false</generateModelDocumentation>
+							<generateModelTests>false</generateModelTests>
+							<generateSupportingFiles>false</generateSupportingFiles>
 							<output>${project.build.directory}/generated-sources</output>
 
-							<apiPackage>${default.package}.handler</apiPackage>
 							<modelPackage>${default.package}</modelPackage>
-							<!--
-							<invokerPackage>com.example.commons.myapi.openapi.mock.client</invokerPackage> -->
 
 							<configOptions>
-								<library>feign</library>
-								<dateLibrary>java8</dateLibrary>
+                                <interfaceOnly>true</interfaceOnly>
+                                <dateLibrary>java8</dateLibrary>
+                                <openApiNullable>false</openApiNullable>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                                <useJakartaEe>true</useJakartaEe>
 							</configOptions>
+
+							<typeMapping>
+							</typeMapping>
+
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+
+		
 
 			<plugin>
 				<groupId>org.jacoco</groupId>

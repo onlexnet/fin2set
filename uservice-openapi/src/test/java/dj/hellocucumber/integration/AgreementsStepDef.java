@@ -1,5 +1,7 @@
 package dj.hellocucumber.integration;
 
+import java.util.List;
+
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,8 +27,9 @@ public class AgreementsStepDef {
                 .institutionId("REVOLUT_REVOGB21")
                 .maxHistoricalDays(90)
                 .accessValidForDays(30)
-                .addAccessScopeItem("balances")
-                .addAccessScopeItem("details");
+                .addAccessScopeItem(List.of("balances"))
+                .addAccessScopeItem(List.of("details"))
+                .addAccessScopeItem(List.of("transactions"));
 
         createdAgreement = agreementsService.createAgreement(endUserAgreementRequest);
     }

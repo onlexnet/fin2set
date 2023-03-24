@@ -1,5 +1,7 @@
 package dj.hellocucumber.integration;
 
+import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 import org.assertj.core.api.Assertions;
@@ -33,9 +35,7 @@ public class RequisitionStepDef {
                 .institutionId("REVOLUT_REVOGB21")
                 .maxHistoricalDays(90)
                 .accessValidForDays(30)
-                .addAccessScopeItem("balances")
-                .addAccessScopeItem("details")
-                .addAccessScopeItem("transactions");
+                .addAccessScopeItem(List.of("balances", "details", "transactions"));
                 
         createdAgreementID = agreementsService.createAgreement(endUserAgreementRequest).getId();
     }
@@ -43,7 +43,7 @@ public class RequisitionStepDef {
     public void create_new_requisition() {
 
         var RequisitionRequest = new RequisitionRequest()
-                .redirect("http://localhost:8080/api/integration/info")
+                .redirect(URI.create("http://localhost:8080/api/integration/info"))
                 .institutionId("REVOLUT_REVOGB21")
                 .reference(UUID.randomUUID().toString())
                 .agreement(createdAgreementID)

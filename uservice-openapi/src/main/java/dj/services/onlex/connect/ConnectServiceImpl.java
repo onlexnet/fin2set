@@ -36,14 +36,14 @@ public class ConnectServiceImpl implements ConnectService {
                 .institutionId(institutionId)
                 .maxHistoricalDays(90)
                 .accessValidForDays(30)
-                .accessScope(List.of("balances", "details", "transactions"));
+                .accessScope(List.of(List.of("balances"), List.of("details"), List.of("transactions")));
 
         var endUserAgreement = agreementsService.createAgreement(endUserAgreementRequest);
 
         var reference = UUID.randomUUID().toString();
 
         var RequisitionRequest = new RequisitionRequest()
-                .redirect("http://localhost:8080/api/integration/info")
+                .redirect(URI.create("http://localhost:8080/api/integration/info"))
                 .institutionId(institutionId)
                 .reference(reference)
                 .agreement(endUserAgreement.getId())
@@ -59,7 +59,7 @@ public class ConnectServiceImpl implements ConnectService {
         var requisitionsID = SpectacularRequisition.getId();
         mapReferenceRequisitionsID.put(reference, requisitionsID);
 
-        return URI.create(SpectacularRequisition.getLink());
+        return SpectacularRequisition.getLink();
     }
 
     @Override

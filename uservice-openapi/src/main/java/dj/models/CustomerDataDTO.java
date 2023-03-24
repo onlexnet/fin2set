@@ -1,5 +1,6 @@
 package dj.models;
 
+import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +27,7 @@ public class CustomerDataDTO {
     private List<UUID> accounts;
 
     @JsonProperty("link")
-    private String link = "https://ob.nordigen.com/psd2/start/3fa85f64-5717-4562-b3fc-2c963f66afa6/{$INSTITUTION_ID}";
+    private URI link;
 
     @JsonProperty("end_user_agreement_info")
     private EndUserAgreementInfo endUserAgreementInfo;
@@ -46,7 +47,7 @@ public class CustomerDataDTO {
         private Integer accessValidForDays;
 
         @JsonProperty("access_scope")
-        private List<String> accessScope;
+        private List<List<Object>> accessScope;
 
         @JsonProperty("accepted")
         private OffsetDateTime accepted;
