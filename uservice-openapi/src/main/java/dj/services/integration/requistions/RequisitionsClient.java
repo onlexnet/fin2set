@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import feign.Headers;
-import nordigen.PaginatedRequisitionV2List;
-import nordigen.RequisitionV2;
-import nordigen.RequisitionV2Request;
-import nordigen.SpectacularRequisitionV2;
+import nordigen.PaginatedRequisitionList;
+import nordigen.Requisition;
+import nordigen.RequisitionRequest;
+import nordigen.SpectacularRequisition;
 
 @FeignClient(value = "requistions", url = "https://ob.nordigen.com/api/v2/requisitions")
 @Headers({
@@ -23,13 +23,13 @@ import nordigen.SpectacularRequisitionV2;
 public interface RequisitionsClient {
 
         @GetMapping(value = "/")
-        PaginatedRequisitionV2List getListAllRequisitions(@RequestHeader("Authorization") String accessToken);
+        PaginatedRequisitionList getListAllRequisitions(@RequestHeader("Authorization") String accessToken);
 
         @PostMapping(value = "/")
-        SpectacularRequisitionV2 createRequisition(@RequestHeader("Authorization") String accessToken, @RequestBody RequisitionV2Request requisitionV2Request);
+        SpectacularRequisition createRequisition(@RequestHeader("Authorization") String accessToken, @RequestBody RequisitionRequest RequisitionRequest);
 
         @GetMapping(value = "/{requisitionsID}")
-        RequisitionV2 getRequisition(@RequestHeader("Authorization") String accessToken, @PathVariable UUID requisitionsID);
+        Requisition getRequisition(@RequestHeader("Authorization") String accessToken, @PathVariable UUID requisitionsID);
 
         @DeleteMapping(value = "/{requisitionsID}")
         void deleteRequsition(@RequestHeader("Authorization") String accessToken, @PathVariable UUID requisitionsID);

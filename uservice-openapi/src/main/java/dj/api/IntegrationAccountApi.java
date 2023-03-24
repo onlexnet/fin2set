@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dj.models.NordigenBankStatemant;
 import dj.services.integration.accounts.AccountService;
 import lombok.RequiredArgsConstructor;
-import nordigen.AccountV2;
+import nordigen.Account;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,7 +26,7 @@ public class IntegrationAccountApi {
     }
 
     @GetMapping("/info")
-            ResponseEntity<AccountV2> getAccount(@RequestParam UUID accountNumberID) {
+            ResponseEntity<Account> getAccount(@RequestParam UUID accountNumberID) {
         return accountService.getAccount(accountNumberID);
     }
     

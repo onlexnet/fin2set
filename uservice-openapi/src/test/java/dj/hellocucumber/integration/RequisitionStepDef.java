@@ -11,7 +11,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import nordigen.EndUserAgreementRequest;
-import nordigen.RequisitionV2Request;
+import nordigen.RequisitionRequest;
 
 public class RequisitionStepDef {
 
@@ -42,7 +42,7 @@ public class RequisitionStepDef {
     @Given("create new requisition.")
     public void create_new_requisition() {
 
-        var requisitionV2Request = new RequisitionV2Request()
+        var RequisitionRequest = new RequisitionRequest()
                 .redirect("http://localhost:8080/api/integration/info")
                 .institutionId("REVOLUT_REVOGB21")
                 .reference(UUID.randomUUID().toString())
@@ -54,7 +54,7 @@ public class RequisitionStepDef {
                 .accountSelection(false)
                 .redirectImmediate(false);
 
-        createdRequisitionID = requisitionsService.createRequisition(requisitionV2Request).getId();
+        createdRequisitionID = requisitionsService.createRequisition(RequisitionRequest).getId();
        
     }
     @When("looking created requisition based at id.")

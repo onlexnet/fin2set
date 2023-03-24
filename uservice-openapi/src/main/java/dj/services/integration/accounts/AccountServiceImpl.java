@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import dj.models.NordigenBankStatemant;
 import dj.services.integration.token.TokenService;
 import lombok.AllArgsConstructor;
-import nordigen.AccountV2;
+import nordigen.Account;
 
 @Service
 @AllArgsConstructor
@@ -18,7 +18,7 @@ public class AccountServiceImpl implements AccountService{
     private final AccountClient accountClient;
 
     @Override
-    public ResponseEntity<AccountV2> getAccount(UUID accountNumberID) {
+    public ResponseEntity<Account> getAccount(UUID accountNumberID) {
         String accessToken = tokenService.buildBearerAuthToken();
         return accountClient.getAccount(accessToken, accountNumberID);
     }

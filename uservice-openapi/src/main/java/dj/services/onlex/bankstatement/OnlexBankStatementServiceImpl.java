@@ -9,7 +9,7 @@ import dj.models.OnlexBankStatemantMapper;
 import dj.models.OnlexBankStatement;
 import dj.services.integration.accounts.AccountService;
 import lombok.AllArgsConstructor;
-import nordigen.AccountV2;
+import nordigen.Account;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +21,7 @@ public class OnlexBankStatementServiceImpl implements OnlexBankStatementService 
     @Override
     public OnlexBankStatement getOnlexBankStatement(UUID accountID) {
 
-        AccountV2 account = accountService.getAccount(accountID).getBody();
+        Account account = accountService.getAccount(accountID).getBody();
         NordigenBankStatemant nordigenBankStatemant = accountService.getTransactions(accountID).getBody();
 
         return onlexBankStatemantMapper.toOnlexBankStatement(nordigenBankStatemant, account);

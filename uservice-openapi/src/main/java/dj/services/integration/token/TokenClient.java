@@ -16,6 +16,9 @@ import nordigen.SpectacularJWTRefresh;
         "Content-Type: application/json"})
 public interface TokenClient {
 
+    // Requisition
+
+
     @PostMapping(value = "/api/v2/token/new/")
     SpectacularJWTObtain createTokens(@RequestBody JWTObtainPairRequest jwtObtainPairRequest);
 

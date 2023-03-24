@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import dj.models.NordigenBankStatemant;
 import feign.Headers;
-import nordigen.AccountV2;
+import nordigen.Account;
 
 
 @FeignClient(value = "account", url = "https://ob.nordigen.com", decode404=true)
@@ -20,7 +20,7 @@ import nordigen.AccountV2;
 public interface AccountClient {
 
     @GetMapping(value = "/api/v2/accounts/{accountNumberID}/")
-    ResponseEntity<AccountV2> getAccount(@RequestHeader("Authorization") String accessToken, @PathVariable UUID accountNumberID);
+    ResponseEntity<Account> getAccount(@RequestHeader("Authorization") String accessToken, @PathVariable UUID accountNumberID);
 
     @GetMapping(value = "/api/v2/accounts/{accountNumberID}/transactions/")
     ResponseEntity<NordigenBankStatemant> getTransactions(@RequestHeader("Authorization") String accessToken, @PathVariable UUID accountNumberID);

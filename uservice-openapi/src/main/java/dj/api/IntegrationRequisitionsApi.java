@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dj.services.integration.requistions.RequisitionsService;
 import lombok.RequiredArgsConstructor;
-import nordigen.PaginatedRequisitionV2List;
-import nordigen.RequisitionV2;
-import nordigen.RequisitionV2Request;
-import nordigen.SpectacularRequisitionV2;
+import nordigen.PaginatedRequisitionList;
+import nordigen.Requisition;
+import nordigen.RequisitionRequest;
+import nordigen.SpectacularRequisition;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,17 +27,17 @@ public class IntegrationRequisitionsApi {
     private final RequisitionsService requisitionsService;
 
     @GetMapping("/")
-    ResponseEntity<PaginatedRequisitionV2List> getListAllRequisitions() {
+    ResponseEntity<PaginatedRequisitionList> getListAllRequisitions() {
         return ResponseEntity.ok(requisitionsService.getListAllRequisitions());
     }
 
     @PostMapping("/")
-    ResponseEntity<SpectacularRequisitionV2> createRequisition(@RequestBody RequisitionV2Request requisitionV2Request) {
-        return ResponseEntity.ok(requisitionsService.createRequisition(requisitionV2Request));
+    ResponseEntity<SpectacularRequisition> createRequisition(@RequestBody RequisitionRequest RequisitionRequest) {
+        return ResponseEntity.ok(requisitionsService.createRequisition(RequisitionRequest));
     }
 
     @GetMapping("/{requisitionsID}")
-    ResponseEntity<RequisitionV2> getRequisition(@PathVariable UUID requisitionsID) {
+    ResponseEntity<Requisition> getRequisition(@PathVariable UUID requisitionsID) {
         return ResponseEntity.ok(requisitionsService.getRequisition(requisitionsID).get());
     }
 

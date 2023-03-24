@@ -2,16 +2,16 @@ package dj.models;
 
 import org.springframework.stereotype.Service;
 
-import nordigen.AccountV2;
+import nordigen.Account;
 
 @Service
 public class OnlexBankStatemantMapper {
 
-    public OnlexBankStatement toOnlexBankStatement(NordigenBankStatemant nordigenBankStatemant, AccountV2 accountV2) {
+    public OnlexBankStatement toOnlexBankStatement(NordigenBankStatemant nordigenBankStatemant, Account Account) {
 
         return new OnlexBankStatement()
-        .setOwnerName(accountV2.getOwnerName())
-        .setDepositName(accountV2.getId())
+        .setOwnerName(Account.getOwnerName())
+        .setDepositName(Account.getId())
         .setBookedTransactions(nordigenBankStatemant.getTransactions().getBooked());
     }
     

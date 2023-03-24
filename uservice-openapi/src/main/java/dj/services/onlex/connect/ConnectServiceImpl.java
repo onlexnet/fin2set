@@ -15,7 +15,7 @@ import dj.services.integration.requistions.RequisitionsClient;
 import dj.services.integration.token.TokenService;
 import lombok.AllArgsConstructor;
 import nordigen.EndUserAgreementRequest;
-import nordigen.RequisitionV2Request;
+import nordigen.RequisitionRequest;
 
 @Service
 @AllArgsConstructor
@@ -42,7 +42,7 @@ public class ConnectServiceImpl implements ConnectService {
 
         var reference = UUID.randomUUID().toString();
 
-        var requisitionV2Request = new RequisitionV2Request()
+        var RequisitionRequest = new RequisitionRequest()
                 .redirect("http://localhost:8080/api/integration/info")
                 .institutionId(institutionId)
                 .reference(reference)
@@ -54,12 +54,12 @@ public class ConnectServiceImpl implements ConnectService {
                 .accountSelection(false)
                 .redirectImmediate(false);
 
-        var spectacularRequisitionV2 = requisitionsClient.createRequisition(accessToken, requisitionV2Request);
+        var SpectacularRequisition = requisitionsClient.createRequisition(accessToken, RequisitionRequest);
 
-        var requisitionsID = spectacularRequisitionV2.getId();
+        var requisitionsID = SpectacularRequisition.getId();
         mapReferenceRequisitionsID.put(reference, requisitionsID);
 
-        return URI.create(spectacularRequisitionV2.getLink());
+        return URI.create(SpectacularRequisition.getLink());
     }
 
     @Override

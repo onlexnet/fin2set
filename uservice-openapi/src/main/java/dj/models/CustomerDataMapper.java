@@ -4,12 +4,12 @@ import org.springframework.stereotype.Service;
 
 import dj.models.CustomerDataDTO.EndUserAgreementInfo;
 import nordigen.EndUserAgreement;
-import nordigen.RequisitionV2;
+import nordigen.Requisition;
 
 @Service
 public class CustomerDataMapper {
 
-    public CustomerDataDTO toDto(RequisitionV2 requisition, EndUserAgreement endUserAgreement) {
+    public CustomerDataDTO toDto(Requisition requisition, EndUserAgreement endUserAgreement) {
 
         EndUserAgreementInfo endUserAgreementInfo = new EndUserAgreementInfo()
                 .setCreated(endUserAgreement.getCreated())

@@ -3,18 +3,18 @@ package dj.services.integration.requistions;
 import java.util.Optional;
 import java.util.UUID;
 
-import nordigen.PaginatedRequisitionV2List;
-import nordigen.RequisitionV2;
-import nordigen.RequisitionV2Request;
-import nordigen.SpectacularRequisitionV2;
+import nordigen.PaginatedRequisitionList;
+import nordigen.Requisition;
+import nordigen.RequisitionRequest;
+import nordigen.SpectacularRequisition;
 
 public interface RequisitionsService {
 
-    PaginatedRequisitionV2List getListAllRequisitions();
+    PaginatedRequisitionList getListAllRequisitions();
 
-    SpectacularRequisitionV2 createRequisition(RequisitionV2Request requisitionV2Request);
+    SpectacularRequisition createRequisition(RequisitionRequest RequisitionRequest);
 
-    Optional<RequisitionV2> getRequisition(UUID requisitionsID);
+    Optional<Requisition> getRequisition(UUID requisitionsID);
 
     void deleteRequsition(UUID requisitionsID);
 
