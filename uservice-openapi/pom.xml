@@ -203,13 +203,20 @@
 			<version>2.0.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.tngtech.archunit</groupId>
+			<artifactId>archunit-junit5</artifactId>
+			<version>1.0.1</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
 		<plugins>
 
 
-                <!-- This 2019 version is required for OpenAPI 3 
+			<!-- This 2019 version is required for OpenAPI 3 
 
 			<plugin>
                 <groupId>io.swagger.codegen.v3</groupId>
@@ -244,7 +251,6 @@
                 </configuration>
             </plugin>
 			-->
-			
 			<!--
 				Open api generator plugin used to generate schema nordigen api
 				-->
@@ -275,11 +281,11 @@
 							<modelPackage>${default.package}</modelPackage>
 
 							<configOptions>
-                                <interfaceOnly>true</interfaceOnly>
-                                <dateLibrary>java8</dateLibrary>
-                                <openApiNullable>false</openApiNullable>
-                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                                <useJakartaEe>true</useJakartaEe>
+								<interfaceOnly>true</interfaceOnly>
+								<dateLibrary>java8</dateLibrary>
+								<openApiNullable>false</openApiNullable>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<useJakartaEe>true</useJakartaEe>
 							</configOptions>
 
 							<typeMapping>
@@ -290,7 +296,6 @@
 				</executions>
 			</plugin>
 
-		
 
 			<plugin>
 				<groupId>org.jacoco</groupId>
