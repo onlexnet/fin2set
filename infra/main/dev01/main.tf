@@ -1,8 +1,12 @@
+locals {
+  application_name = "fin2set"
+}
+
 module "shared" {
   source                = "../../shared"
   environment_name      = "dev01"
   azure_subscription_id = var.onlexnet_finset_azure_dev01_subscription_id
-#   application_name      = locals.application_name
+  application_name      = local.application_name
   #   psql_infrauser_name              = var.psql_infrauser_name
   #   psql_infrauser_password          = var.psql_infrauser_password
   #   sinnet_k8s_host                  = var.sinnet_k8s_host
@@ -13,7 +17,4 @@ module "shared" {
   #   support_security_group           = var.support_security_group
 }
 
-locals {
-  application_name = "FinSet"
-}
 

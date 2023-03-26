@@ -11,13 +11,10 @@ terraform login # to connect to terraform cloud
 ```
 
 ### Prerequisites
-* We need a single privileged service account to apply changes in Azure for all environments. It is not the best practice for large companies, where prod and non-prod should be separated, but it is very convinient for my local work and small clients. For such reason aad application named **onlex-infra** (single tenant application) has been created with permissions:
-  - 'Contributor' role (to be able create resources) on each app subscription
-  - 'Application administrator' to create service principals used in environments
-  - with a secret named 'terraform-cli' (used to support CLI tool when required)
-
+The infrastructure is currently designed to be started by manual invocation by a person with proper permissions. It is not designed to be isued in CICD (what may be the next step), even more: AFAIK some of operations can;t be automated today (e.g. creation of B2C), so it is the next reason why I would liek to simplify my startup by just describing terraform resourcesm but invokiong them manualy according to my time and needs.
 
 ### Set prerequisit environment variables for local environment
+For proper work, we need some environment variables to work. All variables are stored in Azure Vault, stored there either automatically or manually.
 All of variables required by developer to have access to remote resources are defined in Azure Value, so that - before using application - should be read using shell script to well-known environment variables, or read directly from Azure Vault
 
 export TF_VAR_azure_subscription_id="........-....-....-....-............."

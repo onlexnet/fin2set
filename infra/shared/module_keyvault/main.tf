@@ -28,6 +28,7 @@ resource "azurerm_key_vault_access_policy" "support" {
     # "Get", "Set", "List", "Delete"
     "Get", "List"
   ]
+  
 }
 
 resource "azurerm_key_vault_access_policy" "infra" {

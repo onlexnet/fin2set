@@ -10,3 +10,8 @@ variable "TFC_RUN_ID" {
 output "remote_execution_determine" {
   value = "Remote run environment? %{if var.TFC_RUN_ID != ""}Yes%{else}No this is local%{endif}!"
 }
+
+output "website_address" {
+  value = module.shared.website_address
+}
+
