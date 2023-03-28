@@ -4,3 +4,6 @@ variable "resource_group" {
     name     = string
   })
 }
+
+variable "custom_domain" {
+}

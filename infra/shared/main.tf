@@ -53,6 +53,8 @@ module "cloudflare" {
 module "static_app" {
   source = "./module_static_app"
   resource_group = module.resourcegroup.main
+  
+  custom_domain = "${var.environment_name}.fin2set.net"
 }
 
 module "github_repo" {
