@@ -1,9 +1,8 @@
 data "azuread_client_config" "current" {}
 
-resource "azuread_application" "chatbot" {
+resource "azuread_application" "chatbot1" {
   display_name     = "chatbot"
-  identifier_uris  = ["api://onlexnet.fin4set"]
-#   logo_image       = filebase64("/path/to/logo.png")
+  identifier_uris  = ["api://chatbot1.onlexnet.fin4set"]
   owners           = [data.azuread_client_config.current.object_id]
   sign_in_audience = "AzureADMultipleOrgs"
 

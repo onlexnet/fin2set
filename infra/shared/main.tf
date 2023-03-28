@@ -48,3 +48,13 @@ module "cloudflare" {
   source = "./module_cloudflare"
   cloudflare_api_token = var.cloudflare_api_token
 }
+
+module "static_app" {
+  source = "./module_static_app"
+  resource_group = module.resourcegroup.main
+}
+
+module "github_repo" {
+  source = "./module_github_repo"
+  static_app_api_key = module.static_app.static_app_api_key
+}
