@@ -44,6 +44,7 @@ module "b2c" {
   resource_group = module.resourcegroup.main
 }
 
-# module "cloudflare" {
-#   source = "./module_cloudflare"
-# }
+module "cloudflare" {
+  source = "./module_cloudflare"
+  cloudflare_api_token = var.cloudflare_api_token
+}

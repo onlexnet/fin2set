@@ -34,3 +34,9 @@ variable "azure_subscription_id" {
   type      = string
   sensitive = true
 }
+
+# Token used to add / update DNZ NS for static website part of the application
+variable "cloudflare_api_token" {
+  type = string
+  sensitive = true
+}

@@ -11,7 +11,16 @@ terraform login # to connect to terraform cloud
 ```
 
 ### Prerequisites
-The infrastructure is currently designed to be started by manual invocation by a person with proper permissions. It is not designed to be isued in CICD (what may be the next step), even more: AFAIK some of operations can;t be automated today (e.g. creation of B2C), so it is the next reason why I would liek to simplify my startup by just describing terraform resourcesm but invokiong them manualy according to my time and needs.
+The infrastructure is currently designed to be started by manual invocation by a person with proper permissions. It is not designed to be isued in CICD (what may be the next step), even more: AFAIK some of operations can;t be automated today (e.g. creation of B2C), so it is the next reason why I would liek to simplify my startup by just describing terraform resources but invoking them manualy according to my time and needs.
+
+Migration to remote execution:
+* We need a single privileged service account to apply changes in all Fin2Set subscriptions
+For such reason aad application named **onlex-infra-fin2set** (single tenant application) has been created with permissions:
+  - 'Contributor' role (to be able create resources) on each app subscription
+  - 'Application administrator' to create service principals used in environments
+  - 'Azure B2C Contributor' custom role with permissions required to manager B2C directories: Microsoft.AzureActiveDirectory/b2cDirectories/* where * is read,write and delete 
+  - with a secret named e.g. 'terraform-cli' (used to support CLI tool)
+
 
 ### Set prerequisit environment variables for local environment
 For proper work, we need some environment variables to work. All variables are stored in Azure Vault, stored there either automatically or manually.

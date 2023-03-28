@@ -29,15 +29,13 @@ provider "azurerm" {
   # (example: API version 2019-01-01 was not found for Microsoft.Foo).
   # skip_provider_registration = true
 
+
   subscription_id = var.azure_subscription_id
+
+  use_cli = false
+  
   features {}
 }
-
-# provider "azurerm" {
-#   alias           = "shared"
-#   subscription_id = var.shared_subscription_id
-#   features {}
-# }
 
 # provider "azuredevops" {
 #   personal_access_token = var.onlex_sinnet_azdo_personal_token
