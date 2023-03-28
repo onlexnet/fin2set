@@ -10,6 +10,14 @@ terraform {
   }
 }
 
-provider "cloudflare" {
-  api_token = var.cloudflare_api_token
+data "cloudflare_zone" "fin2set" {
+  name = "fin2set.net"
+}
+
+resource "cloudflare_record" "example" {
+  zone_id = data.cloudflare_zone.fin2set.zone_id
+  name    = var.host_name
+  value   = var.default_host_name
+  type    = "CNAME"
+  ttl     = 300
 }

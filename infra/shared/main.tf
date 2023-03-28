@@ -46,7 +46,8 @@ module "b2c" {
 
 module "cloudflare" {
   source = "./module_cloudflare"
-  cloudflare_api_token = var.cloudflare_api_token
+  default_host_name = module.static_app.default_host_name
+  host_name = var.environment_name
 }
 
 module "static_app" {

@@ -7,7 +7,6 @@ module "shared" {
   environment_name      = var.environment_name
   azure_subscription_id = var.onlexnet_finset_azure_dev01_subscription_id
   application_name      = local.application_name
-  cloudflare_api_token  = var.cloudflare_api_token
   #   psql_infrauser_name              = var.psql_infrauser_name
   #   psql_infrauser_password          = var.psql_infrauser_password
   #   sinnet_k8s_host                  = var.sinnet_k8s_host
