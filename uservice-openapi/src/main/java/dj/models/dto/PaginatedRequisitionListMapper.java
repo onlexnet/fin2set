@@ -1,7 +1,5 @@
 package dj.models.dto;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;

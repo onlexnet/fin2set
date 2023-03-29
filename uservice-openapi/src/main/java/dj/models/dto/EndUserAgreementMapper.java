@@ -2,8 +2,6 @@ package dj.models.dto;
 
 import org.springframework.stereotype.Service;
 
-import nordigen.EndUserAgreement;
-
 @Service
 public class EndUserAgreementMapper {
 

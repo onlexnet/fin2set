@@ -2,8 +2,6 @@ package dj.services.integration.accounts;
 
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

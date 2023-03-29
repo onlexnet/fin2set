@@ -2,8 +2,6 @@ package dj.models.dto.enum_dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-import nordigen.Status1c5Enum;
-
 public enum Status1c5EnumDTO {
 
     CR("CR"),
