@@ -1,5 +1,6 @@
 package dj.services.integration.token;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -7,13 +8,11 @@ import dj.models.dto.SpectacularJWTObtainDTO;
 import dj.models.dto.SpectacularJWTObtainMapper;
 import dj.models.dto.SpectacularJWTRefreshDTO;
 import dj.models.dto.SpectacularJWTRefreshMapper;
-import lombok.AllArgsConstructor;
 import nordigen.JWTObtainPairRequest;
 import nordigen.JWTRefreshRequest;
 import nordigen.SpectacularJWTObtain;
 
 @Service
-@AllArgsConstructor
 public class TokenServiceImpl implements TokenService {
 
     @Value("${NORDIGEN_SECRET_KEY}")
@@ -22,9 +21,14 @@ public class TokenServiceImpl implements TokenService {
     @Value("${NORDIGEN_SECRET_ID}")
     private String secretId;
 
-    private final TokenClient tokenClient;
-    private final SpectacularJWTObtainMapper spectacularJWTObtainMapper;
-    private final SpectacularJWTRefreshMapper spectacularJWTRefreshMapper;
+    @Autowired
+    private TokenClient tokenClient;
+
+    @Autowired
+    private SpectacularJWTObtainMapper spectacularJWTObtainMapper;
+
+    @Autowired
+    private SpectacularJWTRefreshMapper spectacularJWTRefreshMapper;
 
     private String refreshToken;
 
