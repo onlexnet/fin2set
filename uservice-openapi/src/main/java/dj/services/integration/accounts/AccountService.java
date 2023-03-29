@@ -5,11 +5,11 @@ import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 
 import dj.models.NordigenBankStatemant;
-import nordigen.Account;
+import dj.models.dto.AccountDTO;
 
 public interface AccountService {
 
-    ResponseEntity<Account> getAccount(UUID accountNumberID);
+    AccountDTO getAccount(UUID accountNumberID);
 
     ResponseEntity<NordigenBankStatemant> getTransactions(UUID accountNumberID);
 

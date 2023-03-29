@@ -3,25 +3,24 @@ package dj.services.integration.agreements;
 import java.util.Optional;
 import java.util.UUID;
 
-import nordigen.EndUserAgreement;
+import dj.models.dto.EndUserAgreementDTO;
+import dj.models.dto.PaginatedEndUserAgreementListDTO;
 import nordigen.EndUserAgreementRequest;
-import nordigen.PaginatedEndUserAgreementList;
 
 public interface AgreementsService {
 
-    PaginatedEndUserAgreementList getListAllAgreements();
+    PaginatedEndUserAgreementListDTO getListAllAgreements();
 
-    EndUserAgreement createAgreement(EndUserAgreementRequest endUserAgreementRequest);
+    EndUserAgreementDTO createAgreement(EndUserAgreementRequest endUserAgreementRequest);
 
     /**
      * 
      * @param agreementID
      * @return Some when the result is available
-     *         None when result is not found on OpenBank API 
+     *         None when result is not found on OpenBank API
      */
-    Optional<EndUserAgreement> getAgreement(UUID agreementID);
+    Optional<EndUserAgreementDTO> getAgreement(UUID agreementID);
 
     void deleteAgreement(UUID agreementID);
-    
 
 }

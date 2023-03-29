@@ -4,12 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import dj.models.dto.SpectacularJWTObtainDTO;
+import dj.models.dto.SpectacularJWTObtainMapper;
+import dj.models.dto.SpectacularJWTRefreshDTO;
+import dj.models.dto.SpectacularJWTRefreshMapper;
+import lombok.AllArgsConstructor;
 import nordigen.JWTObtainPairRequest;
 import nordigen.JWTRefreshRequest;
 import nordigen.SpectacularJWTObtain;
-import nordigen.SpectacularJWTRefresh;
 
 @Service
+@AllArgsConstructor
 public class TokenServiceImpl implements TokenService {
 
     @Value("${NORDIGEN_SECRET_KEY}")
@@ -18,32 +23,34 @@ public class TokenServiceImpl implements TokenService {
     @Value("${NORDIGEN_SECRET_ID}")
     private String secretId;
 
-    @Autowired
-    private TokenClient tokenClient ;
+    private final TokenClient tokenClient;
+    private final SpectacularJWTObtainMapper spectacularJWTObtainMapper;
+    private final SpectacularJWTRefreshMapper spectacularJWTRefreshMapper;
 
     private String refreshToken;
 
     @Override
-    public SpectacularJWTObtain getTokens() {
+    public SpectacularJWTObtainDTO getTokens() {
         JWTObtainPairRequest jwtObtainPairRequest = new JWTObtainPairRequest()
         .secretId(secretId)
         .secretKey(secretKey);
 
         SpectacularJWTObtain tokens = tokenClient.createTokens(jwtObtainPairRequest);
         refreshToken = tokens.getRefresh();
-        return tokens;
+        return spectacularJWTObtainMapper.toDTO(tokens);
     }
 
     @Override
-    public SpectacularJWTRefresh refreshAccessToken() {
+    public SpectacularJWTRefreshDTO refreshAccessToken() {
         JWTRefreshRequest jwtRefreshRequest = new JWTRefreshRequest();
         jwtRefreshRequest.setRefresh(refreshToken);
-        return tokenClient.refreshAccessToken(jwtRefreshRequest);
+        var response = tokenClient.refreshAccessToken(jwtRefreshRequest);
+        return spectacularJWTRefreshMapper.toDTO(response);
     }
     
     @Override
     public String buildBearerAuthToken() {
-        SpectacularJWTObtain spectacularJWTObtain = getTokens();
+        SpectacularJWTObtainDTO spectacularJWTObtain = getTokens();
 
         StringBuilder sb = new StringBuilder();
         sb.append("Bearer ");

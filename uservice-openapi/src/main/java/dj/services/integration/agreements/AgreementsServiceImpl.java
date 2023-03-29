@@ -6,12 +6,12 @@ import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import dj.models.dto.EndUserAgreementDTO;
+import dj.models.dto.PaginatedEndUserAgreementListDTO;
 import dj.services.integration.token.TokenService;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
-import nordigen.EndUserAgreement;
 import nordigen.EndUserAgreementRequest;
-import nordigen.PaginatedEndUserAgreementList;
 
 @Service
 @RequiredArgsConstructor
@@ -21,13 +21,13 @@ public class AgreementsServiceImpl implements AgreementsService {
     private final AgreementsClient agreementsClient;
 
     @Override
-    public EndUserAgreement createAgreement(EndUserAgreementRequest endUserAgreementRequest) {
+    public EndUserAgreementDTO createAgreement(EndUserAgreementRequest endUserAgreementRequest) {
         String accessToken = tokenService.buildBearerAuthToken();
         return agreementsClient.createAgreement(accessToken, endUserAgreementRequest);
     }
 
     @Override
-    public Optional<EndUserAgreement> getAgreement(UUID agreementID) {
+    public Optional<EndUserAgreementDTO> getAgreement(UUID agreementID) {
         String accessToken = tokenService.buildBearerAuthToken();
         try {
             var httpResult = agreementsClient.getAgreement(accessToken, agreementID);
@@ -41,7 +41,7 @@ public class AgreementsServiceImpl implements AgreementsService {
     }
 
     @Override
-    public PaginatedEndUserAgreementList getListAllAgreements() {
+    public PaginatedEndUserAgreementListDTO getListAllAgreements() {
         String accessToken = tokenService.buildBearerAuthToken();
         return agreementsClient.getListAllAgreements(accessToken);
     }

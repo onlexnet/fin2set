@@ -11,8 +11,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import nordigen.Status1c5Enum;
+import dj.models.dto.enum_dto.CountryEnumDTO;
+import dj.models.dto.enum_dto.Status1c5EnumDTO;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
+@Data
+@Accessors(chain = true)
 public class SpectacularRequisitionDTO {
 
     @JsonProperty("id")
@@ -26,7 +31,7 @@ public class SpectacularRequisitionDTO {
     private URI redirect = null;
 
     @JsonProperty("status")
-    private Status1c5Enum status;
+    private Status1c5EnumDTO status;
 
     @JsonProperty("institution_id")
     private String institutionId;
@@ -42,7 +47,7 @@ public class SpectacularRequisitionDTO {
     private List<Object> accounts = null;
 
     @JsonProperty("user_language")
-    private String userLanguage;
+    private CountryEnumDTO userLanguage;
 
     @JsonProperty("link")
     private URI link = URI

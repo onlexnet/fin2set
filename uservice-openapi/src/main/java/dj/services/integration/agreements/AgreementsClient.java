@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+import dj.models.dto.EndUserAgreementDTO;
+import dj.models.dto.PaginatedEndUserAgreementListDTO;
 import feign.Headers;
-import nordigen.EndUserAgreement;
 import nordigen.EndUserAgreementRequest;
-import nordigen.PaginatedEndUserAgreementList;
 
 @FeignClient(value = "agreement", url = "https://ob.nordigen.com/api/v2/agreements/enduser")
 @Headers({
@@ -21,14 +21,31 @@ import nordigen.PaginatedEndUserAgreementList;
                 "Content-Type: application/json" })
 public interface AgreementsClient {
 
+        /**
+         * 
+         * Method return our DTO becouse actually schema nordigen is broken and we are waiting
+         * for fix
+         */
         @GetMapping(value = "/")
-        PaginatedEndUserAgreementList getListAllAgreements(@RequestHeader("Authorization") String accessToken);
+        PaginatedEndUserAgreementListDTO getListAllAgreements(@RequestHeader("Authorization") String accessToken);
 
+        /**
+         * 
+         * Method return our DTO becouse actually schema nordigen is broken and we are waiting
+         * for fix
+         */
         @PostMapping(value = "/")
-        EndUserAgreement createAgreement(@RequestHeader("Authorization") String accessToken, @RequestBody EndUserAgreementRequest endUserAgreementRequest);
+        EndUserAgreementDTO createAgreement(@RequestHeader("Authorization") String accessToken,
+                        @RequestBody EndUserAgreementRequest endUserAgreementRequest);
 
+        /**
+         * 
+         * Method return our DTO becouse actually schema nordigen is broken and we are waiting
+         * for fix
+         */
         @GetMapping(value = "/{agreementID}")
-        EndUserAgreement getAgreement(@RequestHeader("Authorization") String accessToken, @PathVariable UUID agreementID);
+        EndUserAgreementDTO getAgreement(@RequestHeader("Authorization") String accessToken,
+                        @PathVariable UUID agreementID);
 
         @DeleteMapping(value = "/{agreementID}")
         void deleteAgreement(@RequestHeader("Authorization") String accessToken, @PathVariable UUID agreementID);

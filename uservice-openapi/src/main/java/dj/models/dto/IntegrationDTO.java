@@ -8,7 +8,11 @@ import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import dj.models.dto.enum_dto.CountryEnumDTO;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
+@Data
+@Accessors(chain = true)
 public class IntegrationDTO {
 
     @JsonProperty("id")

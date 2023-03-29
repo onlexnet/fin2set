@@ -2,6 +2,11 @@ package dj.models.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+@Data
+@Accessors(chain = true)
 public class SpectacularJWTRefreshDTO {
 
     @JsonProperty("access")

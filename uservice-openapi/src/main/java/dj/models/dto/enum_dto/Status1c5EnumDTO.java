@@ -1,5 +1,9 @@
 package dj.models.dto.enum_dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+import nordigen.Status1c5Enum;
+
 public enum Status1c5EnumDTO {
 
     CR("CR"),
@@ -28,5 +32,15 @@ public enum Status1c5EnumDTO {
 
     Status1c5EnumDTO(String value) {
         this.value = value;
+    }
+
+    @JsonCreator
+    public static Status1c5EnumDTO fromValue(String value) {
+        for (Status1c5EnumDTO b : Status1c5EnumDTO.values()) {
+            if (b.value.equals(value)) {
+                return b;
+            }
+        }
+        throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 }

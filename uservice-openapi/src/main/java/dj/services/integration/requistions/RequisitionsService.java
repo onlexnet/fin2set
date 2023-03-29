@@ -3,18 +3,18 @@ package dj.services.integration.requistions;
 import java.util.Optional;
 import java.util.UUID;
 
-import nordigen.PaginatedRequisitionList;
-import nordigen.Requisition;
+import dj.models.dto.PaginatedRequisitionListDTO;
+import dj.models.dto.RequisitionDTO;
+import dj.models.dto.SpectacularRequisitionDTO;
 import nordigen.RequisitionRequest;
-import nordigen.SpectacularRequisition;
 
 public interface RequisitionsService {
 
-    PaginatedRequisitionList getListAllRequisitions();
+    PaginatedRequisitionListDTO getListAllRequisitions();
 
-    SpectacularRequisition createRequisition(RequisitionRequest RequisitionRequest);
+    SpectacularRequisitionDTO createRequisition(RequisitionRequest RequisitionRequest);
 
-    Optional<Requisition> getRequisition(UUID requisitionsID);
+    Optional<RequisitionDTO> getRequisition(UUID requisitionsID);
 
     void deleteRequsition(UUID requisitionsID);
 

@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import dj.models.dto.IntegrationDTO;
+import dj.models.dto.IntegrationMapper;
 import dj.services.integration.token.TokenService;
 import lombok.RequiredArgsConstructor;
-import nordigen.Integration;
 
 @RequiredArgsConstructor
 @Service
@@ -14,17 +15,20 @@ public class InstitutionsServiceImpl implements InstitutionsService {
 
     private final InstitutionsClient institutionsClient;
     private final TokenService tokenService;
+    private final IntegrationMapper integrationMapper;
     
     @Override
-    public List<Integration> getListInstitutions(String country) {
+    public List<IntegrationDTO> getListInstitutions(String country) {
         String accessToken = tokenService.buildBearerAuthToken();
-        return institutionsClient.getListInstitutions(accessToken, country);
+        var response = institutionsClient.getListInstitutions(accessToken, country);
+        return integrationMapper.toDTO(response);
     }
 
     @Override
-    public Integration getInstitution(String institutionID) {
+    public IntegrationDTO getInstitution(String institutionID) {
         String accessToken = tokenService.buildBearerAuthToken();
-        return institutionsClient.getInstitution(accessToken, institutionID);
+        var response = institutionsClient.getInstitution(accessToken, institutionID);
+        return integrationMapper.toDTO(response);
     }        
     
 

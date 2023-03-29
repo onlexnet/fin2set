@@ -2,12 +2,12 @@ package dj.services.integration.institutions;
 
 import java.util.List;
 
-import nordigen.Integration;
+import dj.models.dto.IntegrationDTO;
 
 public interface InstitutionsService {
 
-    List<Integration> getListInstitutions(String country);
+    List<IntegrationDTO> getListInstitutions(String country);
 
-    Integration getInstitution(String institutionID);
+    IntegrationDTO getInstitution(String institutionID);
     
 }

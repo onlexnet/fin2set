@@ -8,7 +8,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import dj.models.dto.enum_dto.AccountStatusEnumDTO;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
+@Data
+@Accessors(chain = true)
 public class AccountDTO {
 
     @JsonProperty("id")
