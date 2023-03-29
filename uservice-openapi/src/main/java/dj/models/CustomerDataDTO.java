@@ -47,7 +47,7 @@ public class CustomerDataDTO {
         private Integer accessValidForDays;
 
         @JsonProperty("access_scope")
-        private List<List<Object>> accessScope;
+        private List<String> accessScope;
 
         @JsonProperty("accepted")
         private OffsetDateTime accepted;
