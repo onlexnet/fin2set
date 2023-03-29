@@ -1,19 +1,19 @@
 package dj.services.integration.token;
 
-import nordigen.SpectacularJWTObtain;
-import nordigen.SpectacularJWTRefresh;
+import dj.models.dto.SpectacularJWTObtainDTO;
+import dj.models.dto.SpectacularJWTRefreshDTO;
 
 public interface TokenService {
 
     /**
      * @return Access token and refresh token
      */
-    SpectacularJWTObtain getTokens();
+    SpectacularJWTObtainDTO getTokens();
 
     /**
      * @return new access token
      */
-    SpectacularJWTRefresh refreshAccessToken();
+    SpectacularJWTRefreshDTO refreshAccessToken();
 
     /**
      * Get new token and return Bearer access token
