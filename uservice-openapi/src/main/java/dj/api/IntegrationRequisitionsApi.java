@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dj.models.dto.PaginatedRequisitionListDTO;
+import dj.models.dto.RequisitionDTO;
+import dj.models.dto.SpectacularRequisitionDTO;
 import dj.services.integration.requistions.RequisitionsService;
 import lombok.RequiredArgsConstructor;
-import nordigen.PaginatedRequisitionList;
-import nordigen.Requisition;
 import nordigen.RequisitionRequest;
-import nordigen.SpectacularRequisition;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,18 +27,20 @@ public class IntegrationRequisitionsApi {
     private final RequisitionsService requisitionsService;
 
     @GetMapping("/")
-    ResponseEntity<PaginatedRequisitionList> getListAllRequisitions() {
+    ResponseEntity<PaginatedRequisitionListDTO> getListAllRequisitions() {
         return ResponseEntity.ok(requisitionsService.getListAllRequisitions());
     }
 
     @PostMapping("/")
-    ResponseEntity<SpectacularRequisition> createRequisition(@RequestBody RequisitionRequest RequisitionRequest) {
+    ResponseEntity<SpectacularRequisitionDTO> createRequisition(@RequestBody RequisitionRequest RequisitionRequest) {
         return ResponseEntity.ok(requisitionsService.createRequisition(RequisitionRequest));
     }
 
     @GetMapping("/{requisitionsID}")
-    ResponseEntity<Requisition> getRequisition(@PathVariable UUID requisitionsID) {
-        return ResponseEntity.ok(requisitionsService.getRequisition(requisitionsID).get());
+    ResponseEntity<RequisitionDTO> getRequisition(@PathVariable UUID requisitionsID) {
+        return requisitionsService.getRequisition(requisitionsID)
+        .map(ResponseEntity::ok)
+        .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{requisitionsID}")

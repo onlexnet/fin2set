@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dj.models.NordigenBankStatemant;
+import dj.models.dto.AccountDTO;
 import dj.services.integration.accounts.AccountService;
 import lombok.RequiredArgsConstructor;
-import nordigen.Account;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,8 +26,8 @@ public class IntegrationAccountApi {
     }
 
     @GetMapping("/info")
-            ResponseEntity<Account> getAccount(@RequestParam UUID accountNumberID) {
-        return accountService.getAccount(accountNumberID);
+            ResponseEntity<AccountDTO> getAccount(@RequestParam UUID accountNumberID) {
+        return ResponseEntity.ok(accountService.getAccount(accountNumberID));
     }
     
 }

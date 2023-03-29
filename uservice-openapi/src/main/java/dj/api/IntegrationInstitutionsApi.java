@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import dj.models.dto.IntegrationDTO;
 import dj.services.integration.institutions.InstitutionsService;
 import lombok.RequiredArgsConstructor;
-import nordigen.Integration;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,12 +20,12 @@ public class IntegrationInstitutionsApi {
     private final InstitutionsService institutionsService;
     
     @GetMapping("/banks")
-    ResponseEntity<List<Integration>> getListInstitutions(@RequestParam String country) {
+    ResponseEntity<List<IntegrationDTO>> getListInstitutions(@RequestParam String country) {
         return ResponseEntity.ok(institutionsService.getListInstitutions(country));
     }
 
     @GetMapping("/bank")
-    ResponseEntity<Integration> getInstitution(@RequestParam String institutionID) {
+    ResponseEntity<IntegrationDTO> getInstitution(@RequestParam String institutionID) {
         return ResponseEntity.ok(institutionsService.getInstitution(institutionID));
     }
 }

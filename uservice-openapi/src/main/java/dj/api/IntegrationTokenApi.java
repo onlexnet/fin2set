@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dj.models.dto.SpectacularJWTObtainDTO;
+import dj.models.dto.SpectacularJWTRefreshDTO;
 import dj.services.integration.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import nordigen.JWTObtainPairRequest;
 import nordigen.JWTRefreshRequest;
-import nordigen.SpectacularJWTObtain;
-import nordigen.SpectacularJWTRefresh;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,12 +21,12 @@ public class IntegrationTokenApi {
     private final TokenService tokenService;
 
     @PostMapping(value = "/api/v2/token/new/")
-    ResponseEntity<SpectacularJWTObtain> createTokens(@RequestBody JWTObtainPairRequest jwtObtainPairRequest) {
+    ResponseEntity<SpectacularJWTObtainDTO> createTokens(@RequestBody JWTObtainPairRequest jwtObtainPairRequest) {
         return ResponseEntity.ok(tokenService.getTokens());
     }
 
     @PostMapping(value = "/api/v2/token/refresh/")
-    ResponseEntity<SpectacularJWTRefresh> refreshAccessToken(@RequestBody JWTRefreshRequest jwtRefreshRequest) {
+    ResponseEntity<SpectacularJWTRefreshDTO> refreshAccessToken(@RequestBody JWTRefreshRequest jwtRefreshRequest) {
         return ResponseEntity.ok(tokenService.refreshAccessToken());
     }
     
