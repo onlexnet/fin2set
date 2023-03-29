@@ -5,11 +5,11 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import dj.models.dto.EndUserAgreementDTO;
 import dj.services.integration.agreements.AgreementsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import nordigen.EndUserAgreement;
 import nordigen.EndUserAgreementRequest;
 
 public class AgreementsStepDef {
@@ -17,8 +17,8 @@ public class AgreementsStepDef {
     @Autowired
     private AgreementsService agreementsService;
 
-    private EndUserAgreement createdAgreement;
-    private EndUserAgreement getAgreement;
+    private EndUserAgreementDTO createdAgreement;
+    private EndUserAgreementDTO getAgreement;
 
     @Given("create new agreement.")
     public void create_new_agreement_from_example() {
@@ -27,9 +27,7 @@ public class AgreementsStepDef {
                 .institutionId("REVOLUT_REVOGB21")
                 .maxHistoricalDays(90)
                 .accessValidForDays(30)
-                .addAccessScopeItem(List.of("balances"))
-                .addAccessScopeItem(List.of("details"))
-                .addAccessScopeItem(List.of("transactions"));
+                .addAccessScopeItem(List.of("balances", "details", "transactions"));  
 
         createdAgreement = agreementsService.createAgreement(endUserAgreementRequest);
     }

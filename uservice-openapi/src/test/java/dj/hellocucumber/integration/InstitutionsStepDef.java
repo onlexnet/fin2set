@@ -5,19 +5,19 @@ import java.util.Random;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import dj.models.dto.IntegrationDTO;
 import dj.services.integration.institutions.InstitutionsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import nordigen.Integration;
 
 public class InstitutionsStepDef {
 
     @Autowired
     private InstitutionsService institutionsService;
 
-    private Integration randomInstitution;
-    private Integration findedInstitution;
+    private IntegrationDTO randomInstitution;
+    private IntegrationDTO findedInstitution;
 
     @Given("get list all institutions from poland and save random institution.")
     public void get_list_all_institutions_from_poland_and_save_random_institution() {
