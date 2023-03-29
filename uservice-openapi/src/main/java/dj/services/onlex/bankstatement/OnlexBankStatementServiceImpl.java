@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import dj.models.NordigenBankStatemant;
 import dj.models.OnlexBankStatemantMapper;
 import dj.models.OnlexBankStatement;
+import dj.models.dto.AccountDTO;
 import dj.services.integration.accounts.AccountService;
 import lombok.AllArgsConstructor;
-import nordigen.Account;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +21,7 @@ public class OnlexBankStatementServiceImpl implements OnlexBankStatementService 
     @Override
     public OnlexBankStatement getOnlexBankStatement(UUID accountID) {
 
-        Account account = accountService.getAccount(accountID).getBody();
+        AccountDTO account = accountService.getAccount(accountID);
         NordigenBankStatemant nordigenBankStatemant = accountService.getTransactions(accountID).getBody();
 
         return onlexBankStatemantMapper.toOnlexBankStatement(nordigenBankStatemant, account);
