@@ -7,11 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import dj.models.dto.EndUserAgreementDTO;
+import dj.models.dto.EndUserAgreementRequestTemporary;
 import dj.models.dto.PaginatedEndUserAgreementListDTO;
 import dj.services.integration.token.TokenService;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
-import nordigen.EndUserAgreementRequest;
 
 @Service
 @RequiredArgsConstructor
@@ -20,8 +20,13 @@ public class AgreementsServiceImpl implements AgreementsService {
     private final TokenService tokenService;
     private final AgreementsClient agreementsClient;
 
+    /**
+         * 
+         * Used temporary model becouse actually schema nordigen is broken and we are waiting
+         * for fix
+         */
     @Override
-    public EndUserAgreementDTO createAgreement(EndUserAgreementRequest endUserAgreementRequest) {
+    public EndUserAgreementDTO createAgreement(EndUserAgreementRequestTemporary endUserAgreementRequest) {
         String accessToken = tokenService.buildBearerAuthToken();
         return agreementsClient.createAgreement(accessToken, endUserAgreementRequest);
     }

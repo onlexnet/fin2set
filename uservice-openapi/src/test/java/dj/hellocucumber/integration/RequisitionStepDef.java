@@ -7,12 +7,12 @@ import java.util.UUID;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import dj.models.dto.EndUserAgreementRequestTemporary;
 import dj.services.integration.agreements.AgreementsService;
 import dj.services.integration.requistions.RequisitionsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import nordigen.EndUserAgreementRequest;
 import nordigen.RequisitionRequest;
 
 public class RequisitionStepDef {
@@ -31,18 +31,26 @@ public class RequisitionStepDef {
     @Given("create new agreement for requisition.")
     public void create_new_agreement_for_requisition() {
 
-        var endUserAgreementRequest = new EndUserAgreementRequest()
-                .institutionId("REVOLUT_REVOGB21")
-                .maxHistoricalDays(90)
-                .accessValidForDays(30)
-                .addAccessScopeItem(List.of("balances", "details", "transactions"));
-                
+        /**
+         * 
+         * Used temporary model becouse actually schema nordigen is broken and we are
+         * waiting
+         * for fix
+         */
+
+        var endUserAgreementRequest = new EndUserAgreementRequestTemporary()
+                .setInstitutionId("REVOLUT_REVOGB21")
+                .setMaxHistoricalDays(90)
+                .setAccessValidForDays(30)
+                .setAccessScope(List.of("balances", "details", "transactions"));
+
         createdAgreementID = agreementsService.createAgreement(endUserAgreementRequest).getId();
     }
+
     @Given("create new requisition.")
     public void create_new_requisition() {
 
-        var RequisitionRequest = new RequisitionRequest()
+        var requisitionRequest = new RequisitionRequest()
                 .redirect(URI.create("http://localhost:8080/api/integration/info"))
                 .institutionId("REVOLUT_REVOGB21")
                 .reference(UUID.randomUUID().toString())
@@ -54,14 +62,14 @@ public class RequisitionStepDef {
                 .accountSelection(false)
                 .redirectImmediate(false);
 
-        createdRequisitionID = requisitionsService.createRequisition(RequisitionRequest).getId();
-       
+        createdRequisitionID = requisitionsService.createRequisition(requisitionRequest).getId();
     }
+
     @When("looking created requisition based at id.")
     public void looking_created_requisition_based_at_id() {
         foundRequisitionID = requisitionsService.getRequisition(createdRequisitionID).get().getId();
     }
-    
+
     @When("check if created requisition have the same id as found.")
     public void check_if_created_requisition_have_the_same_id_as_found() {
         Assertions.assertThat(createdRequisitionID).isEqualTo(foundRequisitionID);
@@ -71,16 +79,18 @@ public class RequisitionStepDef {
     public void delete_created_requisition() {
         requisitionsService.deleteRequsition(createdRequisitionID);
     }
+
     @Then("looking deleted requisition.")
     public void looking_deleted_requisition() {
         var maybeResponse = requisitionsService.getRequisition(createdRequisitionID);
-        Assertions.assertThat(maybeResponse).isEmpty();   
+        Assertions.assertThat(maybeResponse).isEmpty();
 
     }
+
     @Then("looking if agreement was deleted with requisition.")
     public void looking_if_agreement_was_deleted_with_requisition() {
         var maybeResponse = agreementsService.getAgreement(createdAgreementID);
-        Assertions.assertThat(maybeResponse).isEmpty();   
+        Assertions.assertThat(maybeResponse).isEmpty();
     }
 
 }

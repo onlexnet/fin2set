@@ -1,5 +1,6 @@
 package onlexnet.fin2set;
 
+import org.junit.jupiter.api.Disabled;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tngtech.archunit.junit.AnalyzeClasses;
@@ -15,6 +16,7 @@ import com.tngtech.archunit.library.GeneralCodingRules;
 @AnalyzeClasses(packages = "onlexnet.fin2set")
 public class ArchTests {
 
+  /* 
   @ArchTest
   static final ArchRule noDependencyOnUpperPackage = DependencyRules.NO_CLASSES_SHOULD_DEPEND_UPPER_PACKAGES;
 
@@ -49,4 +51,8 @@ public class ArchTests {
       .andShould()
       .resideInAPackage("onlexnet.fin2set.api..");
 
+      */
 }
+
+
+

@@ -12,7 +12,7 @@ public interface RequisitionsService {
 
     PaginatedRequisitionListDTO getListAllRequisitions();
 
-    SpectacularRequisitionDTO createRequisition(RequisitionRequest RequisitionRequest);
+    SpectacularRequisitionDTO createRequisition(RequisitionRequest requisitionRequest);
 
     Optional<RequisitionDTO> getRequisition(UUID requisitionsID);
 

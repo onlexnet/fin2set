@@ -26,7 +26,7 @@ public interface RequisitionsClient {
         PaginatedRequisitionList getListAllRequisitions(@RequestHeader("Authorization") String accessToken);
 
         @PostMapping(value = "/")
-        SpectacularRequisition createRequisition(@RequestHeader("Authorization") String accessToken, @RequestBody RequisitionRequest RequisitionRequest);
+        SpectacularRequisition createRequisition(@RequestHeader("Authorization") String accessToken, @RequestBody RequisitionRequest requisitionRequest);
 
         @GetMapping(value = "/{requisitionsID}")
         Requisition getRequisition(@RequestHeader("Authorization") String accessToken, @PathVariable UUID requisitionsID);

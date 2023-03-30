@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import dj.models.dto.EndUserAgreementDTO;
+import dj.models.dto.EndUserAgreementRequestTemporary;
 import dj.models.dto.PaginatedEndUserAgreementListDTO;
 import feign.Headers;
-import nordigen.EndUserAgreementRequest;
 
 @FeignClient(value = "agreement", url = "https://ob.nordigen.com/api/v2/agreements/enduser")
 @Headers({
@@ -33,10 +33,12 @@ public interface AgreementsClient {
          * 
          * Method return our DTO becouse actually schema nordigen is broken and we are waiting
          * for fix
+         * 
+         * Used temporary model becouse actually schema nordigen is broken and we are waiting
+         * for fix
          */
         @PostMapping(value = "/")
-        EndUserAgreementDTO createAgreement(@RequestHeader("Authorization") String accessToken,
-                        @RequestBody EndUserAgreementRequest endUserAgreementRequest);
+        EndUserAgreementDTO createAgreement(@RequestHeader("Authorization") String accessToken, @RequestBody EndUserAgreementRequestTemporary endUserAgreementRequest);
 
         /**
          * 

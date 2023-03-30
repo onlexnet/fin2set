@@ -35,9 +35,9 @@ public class RequisitionsServiceImpl implements RequisitionsService {
     }
 
     @Override
-    public SpectacularRequisitionDTO createRequisition(RequisitionRequest RequisitionRequest) {
+    public SpectacularRequisitionDTO createRequisition(RequisitionRequest requisitionRequest) {
         String accessToken = tokenService.buildBearerAuthToken();
-        var response = requisitionsClient.createRequisition(accessToken, RequisitionRequest);
+        var response = requisitionsClient.createRequisition(accessToken, requisitionRequest);
         return spectacularRequisitionMapper.toDTO(response);
     }
 
