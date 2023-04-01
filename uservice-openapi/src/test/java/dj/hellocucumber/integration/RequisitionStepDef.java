@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import dj.models.dto.EndUserAgreementRequestTemporary;
 import dj.services.integration.agreements.AgreementsService;
 import dj.services.integration.requistions.RequisitionsService;
 import io.cucumber.java.en.Given;

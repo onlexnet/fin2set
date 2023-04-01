@@ -6,7 +6,6 @@ import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dj.models.dto.EndUserAgreementDTO;
-import dj.models.dto.EndUserAgreementRequestTemporary;
 import dj.services.integration.agreements.AgreementsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

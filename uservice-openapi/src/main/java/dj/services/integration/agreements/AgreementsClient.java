@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-import dj.models.dto.EndUserAgreementDTO;
 import feign.Headers;
 import nordigen.EndUserAgreement;
 import nordigen.EndUserAgreementRequest;

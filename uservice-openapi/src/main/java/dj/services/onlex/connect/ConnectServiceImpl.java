@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import dj.models.CustomerDataDTO;
 import dj.models.CustomerDataMapper;
-import dj.models.dto.EndUserAgreementRequestTemporary;
 import dj.services.integration.agreements.AgreementsService;
 import dj.services.integration.requistions.RequisitionsClient;
 import dj.services.integration.token.TokenService;
