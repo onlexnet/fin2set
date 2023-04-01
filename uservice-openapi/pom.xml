@@ -280,6 +280,7 @@
 								<openApiNullable>false</openApiNullable>
 								<hideGenerationTimestamp>true</hideGenerationTimestamp>
 								<useJakartaEe>true</useJakartaEe>
+							
 							</configOptions>
 
 							<typeMapping>
