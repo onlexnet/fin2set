@@ -18,12 +18,12 @@ public class PaginatedRequisitionListDTO {
     private Integer count;
 
     @JsonProperty("next")
-    private URI next = null;
+    private URI next;
 
     @JsonProperty("previous")
-    private URI previous = null;
+    private URI previous;
 
     @JsonProperty("results")
     @Valid
-    private List<RequisitionDTO> results = null;
+    private List<RequisitionDTO> results;
 }

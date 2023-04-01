@@ -25,10 +25,10 @@ public class RequisitionDTO {
 
     @JsonProperty("created")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private OffsetDateTime created = null;
+    private OffsetDateTime created;
 
     @JsonProperty("redirect")
-    private URI redirect = null;
+    private URI redirect;
 
     @JsonProperty("status")
     private Status1c5EnumDTO status;
@@ -44,7 +44,7 @@ public class RequisitionDTO {
 
     @JsonProperty("accounts")
     @Valid
-    private List<UUID> accounts = null;
+    private List<UUID> accounts;
 
     @JsonProperty("user_language")
     private CountryEnumDTO userLanguage;
@@ -56,8 +56,8 @@ public class RequisitionDTO {
     private String ssn;
 
     @JsonProperty("account_selection")
-    private Boolean accountSelection = false;
+    private Boolean accountSelection;
 
     @JsonProperty("redirect_immediate")
-    private Boolean redirectImmediate = false;
+    private Boolean redirectImmediate;
 }

@@ -13,6 +13,6 @@ public class SpectacularJWTRefreshDTO {
     private String access;
 
     @JsonProperty("access_expires")
-    private Integer accessExpires = 86400;
+    private Integer accessExpires;
 
 }

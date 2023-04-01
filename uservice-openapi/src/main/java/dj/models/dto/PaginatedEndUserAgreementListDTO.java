@@ -18,12 +18,12 @@ public class PaginatedEndUserAgreementListDTO {
     private Integer count;
 
     @JsonProperty("next")
-    private URI next = null;
+    private URI next;
 
     @JsonProperty("previous")
-    private URI previous = null;
+    private URI previous;
 
     @JsonProperty("results")
     @Valid
-    private List<EndUserAgreementDTO> results = null;
+    private List<EndUserAgreementDTO> results;
 }

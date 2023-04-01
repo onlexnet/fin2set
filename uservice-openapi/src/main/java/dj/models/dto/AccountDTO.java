@@ -24,8 +24,7 @@ public class AccountDTO {
 
     @JsonProperty("last_accessed")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private OffsetDateTime lastAccessed = null;
-
+    private OffsetDateTime lastAccessed;
     @JsonProperty("iban")
     private String iban;
 

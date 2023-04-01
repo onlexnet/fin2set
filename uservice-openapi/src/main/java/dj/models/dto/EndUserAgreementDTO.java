@@ -28,16 +28,16 @@ public class EndUserAgreementDTO {
     private String institutionId;
 
     @JsonProperty("max_historical_days")
-    private Integer maxHistoricalDays = 90;
+    private Integer maxHistoricalDays;
 
     @JsonProperty("access_valid_for_days")
-    private Integer accessValidForDays = 90;
+    private Integer accessValidForDays;
 
     @JsonProperty("access_scope")
     @Valid
-    private List<String> accessScope = null;
+    private List<String> accessScope;
 
     @JsonProperty("accepted")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private OffsetDateTime accepted = null;
+    private OffsetDateTime accepted;
 }

@@ -13,12 +13,12 @@ public class SpectacularJWTObtainDTO {
     private String access;
 
     @JsonProperty("access_expires")
-    private Integer accessExpires = 86400;
+    private Integer accessExpires;
 
     @JsonProperty("refresh")
     private String refresh;
 
     @JsonProperty("refresh_expires")
-    private Integer refreshExpires = 2592000;
+    private Integer refreshExpires;
 
 }
