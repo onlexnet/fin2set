@@ -13,6 +13,7 @@ import dj.services.integration.requistions.RequisitionsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import nordigen.EndUserAgreementRequest;
 import nordigen.RequisitionRequest;
 
 public class RequisitionStepDef {
@@ -31,18 +32,11 @@ public class RequisitionStepDef {
     @Given("create new agreement for requisition.")
     public void create_new_agreement_for_requisition() {
 
-        /**
-         * 
-         * Used temporary model becouse actually schema nordigen is broken and we are
-         * waiting
-         * for fix
-         */
-
-        var endUserAgreementRequest = new EndUserAgreementRequestTemporary()
-                .setInstitutionId("REVOLUT_REVOGB21")
-                .setMaxHistoricalDays(90)
-                .setAccessValidForDays(30)
-                .setAccessScope(List.of("balances", "details", "transactions"));
+        var endUserAgreementRequest = new EndUserAgreementRequest()
+                .institutionId("REVOLUT_REVOGB21")
+                .maxHistoricalDays(90)
+                .accessValidForDays(30)
+                .accessScope(List.of("balances", "details", "transactions"));
 
         createdAgreementID = agreementsService.createAgreement(endUserAgreementRequest).getId();
     }

@@ -11,6 +11,7 @@ import dj.services.integration.agreements.AgreementsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import nordigen.EndUserAgreementRequest;
 
 public class AgreementsStepDef {
 
@@ -23,17 +24,11 @@ public class AgreementsStepDef {
     @Given("create new agreement.")
     public void create_new_agreement_from_example() {
 
-        /**
-         * 
-         * Used temporary model becouse actually schema nordigen is broken and we are waiting
-         * for fix
-         */
-
-        var endUserAgreementRequest = new EndUserAgreementRequestTemporary()
-                .setInstitutionId("REVOLUT_REVOGB21")
-                .setMaxHistoricalDays(90)
-                .setAccessValidForDays(30)
-                .setAccessScope(List.of("balances", "details", "transactions"));  
+        var endUserAgreementRequest = new EndUserAgreementRequest()
+                .institutionId("REVOLUT_REVOGB21")
+                .maxHistoricalDays(90)
+                .accessValidForDays(30)
+                .accessScope(List.of("balances", "details", "transactions"));  
 
         createdAgreement = agreementsService.createAgreement(endUserAgreementRequest);
     }

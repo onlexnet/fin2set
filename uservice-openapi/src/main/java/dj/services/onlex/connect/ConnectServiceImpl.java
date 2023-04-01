@@ -15,6 +15,7 @@ import dj.services.integration.agreements.AgreementsService;
 import dj.services.integration.requistions.RequisitionsClient;
 import dj.services.integration.token.TokenService;
 import lombok.AllArgsConstructor;
+import nordigen.EndUserAgreementRequest;
 import nordigen.RequisitionRequest;
 
 @Service
@@ -32,17 +33,11 @@ public class ConnectServiceImpl implements ConnectService {
     public URI createLinkToConnect(String institutionId) {
         String accessToken = "Bearer " + tokenService.getTokens().getAccess();
 
-        /**
-         * 
-         * Used temporary model becouse actually schema nordigen is broken and we are waiting
-         * for fix
-         */
-
-        var endUserAgreementRequest = new EndUserAgreementRequestTemporary()
-                .setInstitutionId("REVOLUT_REVOGB21")
-                .setMaxHistoricalDays(90)
-                .setAccessValidForDays(30)
-                .setAccessScope(List.of("balances", "details", "transactions"));  
+        var endUserAgreementRequest = new EndUserAgreementRequest()
+                .institutionId(institutionId)
+                .maxHistoricalDays(90)
+                .accessValidForDays(30)
+                .accessScope(List.of("balances", "details", "transactions"));  
 
         var endUserAgreement = agreementsService.createAgreement(endUserAgreementRequest);
 
