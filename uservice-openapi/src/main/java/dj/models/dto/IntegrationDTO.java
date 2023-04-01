@@ -25,7 +25,7 @@ public class IntegrationDTO {
     private String bic;
 
     @JsonProperty("transaction_total_days")
-    private String transactionTotalDays = "90";
+    private String transactionTotalDays;
 
     @JsonProperty("countries")
     @Valid

@@ -25,10 +25,10 @@ public class SpectacularRequisitionDTO {
 
     @JsonProperty("created")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private OffsetDateTime created = null;
+    private OffsetDateTime created;
 
     @JsonProperty("redirect")
-    private URI redirect = null;
+    private URI redirect;
 
     @JsonProperty("status")
     private Status1c5EnumDTO status;
@@ -44,21 +44,20 @@ public class SpectacularRequisitionDTO {
 
     @JsonProperty("accounts")
     @Valid
-    private List<Object> accounts = null;
+    private List<Object> accounts;
 
     @JsonProperty("user_language")
     private CountryEnumDTO userLanguage;
 
     @JsonProperty("link")
-    private URI link = URI
-            .create("https://ob.nordigen.com/psd2/start/3fa85f64-5717-4562-b3fc-2c963f66afa6/{$INSTITUTION_ID}");
+    private URI link;
 
     @JsonProperty("ssn")
     private String ssn;
 
     @JsonProperty("account_selection")
-    private Boolean accountSelection = false;
+    private Boolean accountSelection;
 
     @JsonProperty("redirect_immediate")
-    private Boolean redirectImmediate = false;
+    private Boolean redirectImmediate;
 }

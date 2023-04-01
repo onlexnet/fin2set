@@ -32,7 +32,6 @@ public class CustomerDataDTO {
     @JsonProperty("end_user_agreement_info")
     private EndUserAgreementInfo endUserAgreementInfo;
 
-
     @Data
     @Accessors(chain = true)
     public static class EndUserAgreementInfo {
