@@ -50,8 +50,7 @@ public class RequisitionDTO {
     private CountryEnumDTO userLanguage;
 
     @JsonProperty("link")
-    private URI link = URI
-            .create("https://ob.nordigen.com/psd2/start/3fa85f64-5717-4562-b3fc-2c963f66afa6/{$INSTITUTION_ID}");
+    private URI link;
 
     @JsonProperty("ssn")
     private String ssn;
