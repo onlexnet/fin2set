@@ -21,13 +21,13 @@ public class IntegrationAccountApi {
     private final AccountService accountService;
 
     @GetMapping("/transactions")
-            ResponseEntity<NordigenBankStatemant> getTransactions(@RequestParam UUID accountNumberID) {
+    ResponseEntity<NordigenBankStatemant> getTransactions(@RequestParam UUID accountNumberID) {
         return accountService.getTransactions(accountNumberID);
     }
 
     @GetMapping("/info")
-            ResponseEntity<AccountDTO> getAccount(@RequestParam UUID accountNumberID) {
+    ResponseEntity<AccountDTO> getAccount(@RequestParam UUID accountNumberID) {
         return ResponseEntity.ok(accountService.getAccount(accountNumberID));
     }
-    
+
 }

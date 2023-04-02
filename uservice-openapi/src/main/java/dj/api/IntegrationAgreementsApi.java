@@ -45,5 +45,5 @@ public class IntegrationAgreementsApi {
         agreementsService.deleteAgreement(agreementID);
         return ResponseEntity.noContent().build();
     }
-    
+
 }
