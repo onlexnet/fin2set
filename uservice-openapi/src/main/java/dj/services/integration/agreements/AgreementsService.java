@@ -4,21 +4,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 import dj.models.dto.EndUserAgreementDTO;
-import dj.models.dto.EndUserAgreementRequestTemporary;
 import dj.models.dto.PaginatedEndUserAgreementListDTO;
+import nordigen.EndUserAgreementRequest;
 
 public interface AgreementsService {
 
     PaginatedEndUserAgreementListDTO getListAllAgreements();
 
-
-    /**
-         * 
-         * Used temporary model becouse actually schema nordigen is broken and we are waiting
-         * for fix
-         */
-
-    EndUserAgreementDTO createAgreement(EndUserAgreementRequestTemporary endUserAgreementRequest);
+    EndUserAgreementDTO createAgreement(EndUserAgreementRequest endUserAgreementRequest);
 
     /**
      * 

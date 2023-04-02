@@ -17,6 +17,8 @@
     <java.version>17</java.version>
     <default.package>nordigen</default.package>
     <docker.image.prefix>pocfin2set.azurecr.io</docker.image.prefix>
+    
+    <sonarlint.exclusions>target/**/*</sonarlint.exclusions>
   </properties>
 
   <dependencyManagement>

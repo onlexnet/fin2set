@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dj.models.dto.EndUserAgreementDTO;
-import dj.models.dto.EndUserAgreementRequestTemporary;
 import dj.models.dto.PaginatedEndUserAgreementListDTO;
 import dj.services.integration.agreements.AgreementsService;
 import lombok.RequiredArgsConstructor;
+import nordigen.EndUserAgreementRequest;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,14 +30,8 @@ public class IntegrationAgreementsApi {
         return ResponseEntity.ok(agreementsService.getListAllAgreements());
     }
 
-    /**
-         * 
-         * Used temporary model becouse actually schema nordigen is broken and we are waiting
-         * for fix
-         */
-
     @PostMapping("/")
-    ResponseEntity<EndUserAgreementDTO> createAgreement(@RequestBody EndUserAgreementRequestTemporary endUserAgreementRequest) {
+    ResponseEntity<EndUserAgreementDTO> createAgreement(@RequestBody EndUserAgreementRequest endUserAgreementRequest) {
         return ResponseEntity.ok(agreementsService.createAgreement(endUserAgreementRequest));
     }
 
@@ -51,5 +45,5 @@ public class IntegrationAgreementsApi {
         agreementsService.deleteAgreement(agreementID);
         return ResponseEntity.noContent().build();
     }
-    
+
 }

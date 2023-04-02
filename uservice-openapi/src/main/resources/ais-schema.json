@@ -5653,15 +5653,8 @@
                     "access_scope": {
                         "type": "array",
                         "items": {
-                            "type": "array",
-                            "title": "Level of information to access (by default all)",
-                            "items": {
-                                "default": [
-                                    "balances",
-                                    "details",
-                                    "transactions"
-                                ]
-                            }
+                            "type": "string",
+                            "title": "Level of information to access (by default all)"
                         },
                         "default": [
                             "balances",
@@ -5711,15 +5704,8 @@
                     "access_scope": {
                         "type": "array",
                         "items": {
-                            "type": "array",
-                            "title": "Level of information to access (by default all)",
-                            "items": {
-                                "default": [
-                                    "balances",
-                                    "details",
-                                    "transactions"
-                                ]
-                            }
+                            "type": "string",
+                            "title": "Level of information to access (by default all)"
                         },
                         "default": [
                             "balances",
