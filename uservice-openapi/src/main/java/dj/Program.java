@@ -19,7 +19,6 @@ import java.util.Collections;
 @SpringBootApplication
 @EnableSwagger2
 @EnableFeignClients
-@Slf4j
 public class Program {
 
 	public static void main(String[] args) {
@@ -28,7 +27,7 @@ public class Program {
 
 	@Bean
 	public Docket get() {
-		return new Docket(DocumentationType.SWAGGER_2)
+		return new Docket(DocumentationType.OAS_30)
 				.select()
 				.paths(PathSelectors.ant("/api/**")) // Provides endpoints that meet the condition
 				.apis((RequestHandlerSelectors.basePackage("dj"))) // Looking and share endpoints in folder "dj"
