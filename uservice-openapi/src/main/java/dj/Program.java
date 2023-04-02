@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+
+import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -17,6 +19,7 @@ import java.util.Collections;
 @SpringBootApplication
 @EnableSwagger2
 @EnableFeignClients
+@Slf4j
 public class Program {
 
 	public static void main(String[] args) {
@@ -35,7 +38,7 @@ public class Program {
 
 	// Sets up api information, leaves a business card
 	private ApiInfo createApiInfo() {
-		return new ApiInfo("FinSet",
+		return new ApiInfo("Fin2Set",
 				"Description",
 				"1.00",
 				"localhost:8080",
