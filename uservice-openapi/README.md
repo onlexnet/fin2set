@@ -1,11 +1,15 @@
 Link to schema api [nordigen](https://nordigen.com/docs/ais-schema.json)
 
-write sth
 
-az config set defaults.acr=pocfin2set.azurecr.io
-az acr login
-mvnd clean install jib:dockerBuild -Dimage=sinnet.azurecr.io/uservice-webapi-host:latest -DskipTests
+## Cheat sheet for devs
+(inspired by [Microsoft Learn](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-java-quickstart#push-your-app-to-the-container-registry-via-jib))
 
+```bash
+az acr login --name pocfin2set
+mvnd clean install -DskipTests # to build binaries
+mvnd compile jib:dockerBuild # to push image to local repository - should push to remote, but I don't know why it is in local
+docker push pocfin2set.azurecr.io/fin2set:latest # push image to remove registry
+```
 
 ## Useful links:
 - https://openapi-generator.tech/docs/generators/java/

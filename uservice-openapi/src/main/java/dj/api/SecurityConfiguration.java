@@ -14,6 +14,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .cors()
+                .and()
                 .authorizeHttpRequests(it -> it.anyRequest().permitAll())
                 .build();
     }
