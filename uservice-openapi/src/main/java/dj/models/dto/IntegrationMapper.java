@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import dj.models.dto.enum_dto.CountryEnumDTO;
-import nordigen.Integration;
+import onlexnet.fin2set.nordigen.generated.Integration;
 
 @Service
 public class IntegrationMapper {

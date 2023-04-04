@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import feign.Headers;
-import nordigen.Integration;
+import onlexnet.fin2set.nordigen.generated.Integration;
 
 @FeignClient(value = "institutions", url = "https://ob.nordigen.com/api/v2/institutions")
 @Headers({

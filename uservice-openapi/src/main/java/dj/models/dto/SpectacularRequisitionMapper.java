@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import dj.models.dto.enum_dto.CountryEnumDTO;
 import dj.models.dto.enum_dto.Status1c5EnumDTO;
-import nordigen.SpectacularRequisition;
+import onlexnet.fin2set.nordigen.generated.SpectacularRequisition;
 
 @Service
 public class SpectacularRequisitionMapper {

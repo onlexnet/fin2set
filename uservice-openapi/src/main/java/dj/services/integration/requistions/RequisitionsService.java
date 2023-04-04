@@ -6,7 +6,7 @@ import java.util.UUID;
 import dj.models.dto.PaginatedRequisitionListDTO;
 import dj.models.dto.RequisitionDTO;
 import dj.models.dto.SpectacularRequisitionDTO;
-import nordigen.RequisitionRequest;
+import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
 
 public interface RequisitionsService {
 

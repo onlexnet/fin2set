@@ -2,7 +2,7 @@ package dj.models.dto;
 
 import org.springframework.stereotype.Service;
 
-import nordigen.SpectacularJWTRefresh;
+import onlexnet.fin2set.nordigen.generated.SpectacularJWTRefresh;
 
 @Service
 public class SpectacularJWTRefreshMapper {

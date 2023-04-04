@@ -2,7 +2,8 @@ package dj.models.dto;
 
 import org.springframework.stereotype.Service;
 
-import nordigen.SpectacularJWTObtain;
+import onlexnet.fin2set.nordigen.generated.SpectacularJWTObtain;
+
 
 @Service
 public class SpectacularJWTObtainMapper {

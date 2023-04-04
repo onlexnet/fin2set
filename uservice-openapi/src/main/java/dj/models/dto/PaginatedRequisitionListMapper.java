@@ -3,7 +3,7 @@ package dj.models.dto;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import nordigen.PaginatedRequisitionList;
+import onlexnet.fin2set.nordigen.generated.PaginatedRequisitionList;
 
 @Service
 @AllArgsConstructor

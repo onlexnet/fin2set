@@ -10,7 +10,7 @@ import dj.services.integration.agreements.AgreementsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import nordigen.EndUserAgreementRequest;
+import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
 
 public class AgreementsStepDef {
 

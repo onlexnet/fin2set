@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import dj.models.CustomerDataDTO.EndUserAgreementInfo;
 import dj.models.dto.EndUserAgreementDTO;
-import nordigen.Requisition;
+import onlexnet.fin2set.nordigen.generated.Requisition;
 
 @Service
 public class CustomerDataMapper {

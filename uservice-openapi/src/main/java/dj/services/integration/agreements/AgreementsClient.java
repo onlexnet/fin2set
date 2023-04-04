@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import feign.Headers;
-import nordigen.EndUserAgreement;
-import nordigen.EndUserAgreementRequest;
-import nordigen.PaginatedEndUserAgreementList;
+import onlexnet.fin2set.nordigen.generated.EndUserAgreement;
+import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
+import onlexnet.fin2set.nordigen.generated.PaginatedEndUserAgreementList;
 
 @FeignClient(value = "agreement", url = "https://ob.nordigen.com/api/v2/agreements/enduser")
 @Headers({

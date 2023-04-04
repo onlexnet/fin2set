@@ -14,8 +14,8 @@ import dj.services.integration.agreements.AgreementsService;
 import dj.services.integration.requistions.RequisitionsClient;
 import dj.services.integration.token.TokenService;
 import lombok.AllArgsConstructor;
-import nordigen.EndUserAgreementRequest;
-import nordigen.RequisitionRequest;
+import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
+import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
 
 @Service
 @AllArgsConstructor

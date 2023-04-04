@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import dj.models.dto.enum_dto.CountryEnumDTO;
 import dj.models.dto.enum_dto.Status1c5EnumDTO;
-import nordigen.Requisition;
+import onlexnet.fin2set.nordigen.generated.Requisition;
 
 @Service
 public class RequisitionMapper {

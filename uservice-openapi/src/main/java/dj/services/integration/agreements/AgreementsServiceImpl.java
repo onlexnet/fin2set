@@ -13,7 +13,7 @@ import dj.models.dto.PaginatedEndUserAgreementsListMapper;
 import dj.services.integration.token.TokenService;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
-import nordigen.EndUserAgreementRequest;
+import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
 
 @Service
 @RequiredArgsConstructor

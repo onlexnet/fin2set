@@ -15,7 +15,7 @@ import dj.models.dto.SpectacularRequisitionMapper;
 import dj.services.integration.token.TokenService;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
-import nordigen.RequisitionRequest;
+import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
 
 @Service
 @RequiredArgsConstructor

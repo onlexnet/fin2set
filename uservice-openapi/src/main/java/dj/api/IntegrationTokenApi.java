@@ -10,8 +10,8 @@ import dj.models.dto.SpectacularJWTObtainDTO;
 import dj.models.dto.SpectacularJWTRefreshDTO;
 import dj.services.integration.token.TokenService;
 import lombok.RequiredArgsConstructor;
-import nordigen.JWTObtainPairRequest;
-import nordigen.JWTRefreshRequest;
+import onlexnet.fin2set.nordigen.generated.JWTObtainPairRequest;
+import onlexnet.fin2set.nordigen.generated.JWTRefreshRequest;
 
 @RestController
 @RequiredArgsConstructor

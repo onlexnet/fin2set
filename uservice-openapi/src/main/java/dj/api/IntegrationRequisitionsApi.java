@@ -17,7 +17,7 @@ import dj.models.dto.RequisitionDTO;
 import dj.models.dto.SpectacularRequisitionDTO;
 import dj.services.integration.requistions.RequisitionsService;
 import lombok.RequiredArgsConstructor;
-import nordigen.RequisitionRequest;
+import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
 
 @RestController
 @RequiredArgsConstructor

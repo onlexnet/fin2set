@@ -15,7 +15,7 @@
   <description>Demo project for Spring Boot</description>
   <properties>
     <java.version>17</java.version>
-    <default.package>nordigen</default.package>
+    <default.package>onlexnet.fin2set.nordigen.generated</default.package>
     <docker.image.prefix>pocfin2set.azurecr.io</docker.image.prefix>
     <sonarlint.exclusions>target/**/*</sonarlint.exclusions>
   </properties>
@@ -216,42 +216,6 @@
   <build>
     <plugins>
 
-
-      <!-- This 2019 version is required for OpenAPI 3
-
-			<plugin>
-                <groupId>io.swagger.codegen.v3</groupId>
-                <artifactId>swagger-codegen-maven-plugin</artifactId>
-                <version>3.0.8</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>https://nordigen.com/docs/ais-schema.json</inputSpec>
-                            <language>java</language>
-                            <packageName>src</packageName>
-                            <configOptions>
-                                <library>resttemplate</library>
-                                <java8>true</java8>
-                                <dateLibrary>java8</dateLibrary>
-                                <licenseName>Apache 2.0</licenseName>
-                                <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-                            </configOptions>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-			-->
       <!--
 				Open api generator plugin used to generate schema nordigen api
 				-->

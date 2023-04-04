@@ -1,7 +1,5 @@
 package dj.services.integration.token;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +8,9 @@ import dj.models.dto.SpectacularJWTObtainMapper;
 import dj.models.dto.SpectacularJWTRefreshDTO;
 import dj.models.dto.SpectacularJWTRefreshMapper;
 import lombok.RequiredArgsConstructor;
-import nordigen.JWTObtainPairRequest;
-import nordigen.JWTRefreshRequest;
-import nordigen.SpectacularJWTObtain;
+import onlexnet.fin2set.nordigen.generated.JWTObtainPairRequest;
+import onlexnet.fin2set.nordigen.generated.JWTRefreshRequest;
+import onlexnet.fin2set.nordigen.generated.SpectacularJWTObtain;
 
 @Service
 @RequiredArgsConstructor

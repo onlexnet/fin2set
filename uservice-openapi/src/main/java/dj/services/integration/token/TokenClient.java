@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import feign.Headers;
-import nordigen.JWTObtainPairRequest;
-import nordigen.JWTRefreshRequest;
-import nordigen.SpectacularJWTObtain;
-import nordigen.SpectacularJWTRefresh;
+import onlexnet.fin2set.nordigen.generated.JWTObtainPairRequest;
+import onlexnet.fin2set.nordigen.generated.JWTRefreshRequest;
+import onlexnet.fin2set.nordigen.generated.SpectacularJWTObtain;
+import onlexnet.fin2set.nordigen.generated.SpectacularJWTRefresh;
 
 @FeignClient(value = "tokens", url = "https://ob.nordigen.com")
 @Headers({

@@ -12,8 +12,9 @@ import dj.services.integration.requistions.RequisitionsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import nordigen.EndUserAgreementRequest;
-import nordigen.RequisitionRequest;
+import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
+import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
+
 
 public class RequisitionStepDef {
 

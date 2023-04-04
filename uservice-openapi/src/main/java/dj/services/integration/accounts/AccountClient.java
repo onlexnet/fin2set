@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import dj.models.NordigenBankStatemant;
 import feign.Headers;
-import nordigen.Account;
+import onlexnet.fin2set.nordigen.generated.Account;
 
 
 @FeignClient(value = "account", url = "https://ob.nordigen.com", decode404=true)

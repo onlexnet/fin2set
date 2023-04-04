@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import nordigen.EndUserAgreement;
+import onlexnet.fin2set.nordigen.generated.EndUserAgreement;
 
 @Service
 public class EndUserAgreementMapper {

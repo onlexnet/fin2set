@@ -3,7 +3,7 @@ package dj.models.dto;
 import org.springframework.stereotype.Service;
 
 import dj.models.dto.enum_dto.AccountStatusEnumDTO;
-import nordigen.Account;
+import onlexnet.fin2set.nordigen.generated.Account;
 
 @Service
 public class AccountMapper {

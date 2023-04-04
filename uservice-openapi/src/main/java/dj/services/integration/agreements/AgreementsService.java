@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import dj.models.dto.EndUserAgreementDTO;
 import dj.models.dto.PaginatedEndUserAgreementListDTO;
-import nordigen.EndUserAgreementRequest;
+import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
 
 public interface AgreementsService {
 

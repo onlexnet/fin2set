@@ -16,7 +16,7 @@ import dj.models.dto.EndUserAgreementDTO;
 import dj.models.dto.PaginatedEndUserAgreementListDTO;
 import dj.services.integration.agreements.AgreementsService;
 import lombok.RequiredArgsConstructor;
-import nordigen.EndUserAgreementRequest;
+import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
 
 @RestController
 @RequiredArgsConstructor

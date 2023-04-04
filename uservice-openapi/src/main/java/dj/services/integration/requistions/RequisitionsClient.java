@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import feign.Headers;
-import nordigen.PaginatedRequisitionList;
-import nordigen.Requisition;
-import nordigen.RequisitionRequest;
-import nordigen.SpectacularRequisition;
+import onlexnet.fin2set.nordigen.generated.PaginatedRequisitionList;
+import onlexnet.fin2set.nordigen.generated.Requisition;
+import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
+import onlexnet.fin2set.nordigen.generated.SpectacularRequisition;
 
 @FeignClient(value = "requistions", url = "https://ob.nordigen.com/api/v2/requisitions")
 @Headers({
