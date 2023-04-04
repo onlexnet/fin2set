@@ -91,4 +91,14 @@
     </plugins>
   </build>
 
+  <distributionManagement>
+    <!-- more:
+      - https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#publishing-a-package
+    -->
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/https://github.com/onlexnet/fin2set</url>
+    </repository>
+  </distributionManagement>
 </project>
