@@ -17,5 +17,6 @@ jobs:
           cache: maven
       - name: Publish package
         run: mvn --batch-mode deploy
+        working-directory: openapi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
