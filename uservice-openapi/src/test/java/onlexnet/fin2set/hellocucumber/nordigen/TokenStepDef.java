@@ -1,4 +1,4 @@
-package dj.hellocucumber.integration;
+package onlexnet.fin2set.hellocucumber.nordigen;
 
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;

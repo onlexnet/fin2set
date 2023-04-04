@@ -1,4 +1,4 @@
-package onlexnet.fin2set.domain.services.onlex.connect;
+package onlexnet.fin2set.domain.connect;
 
 import java.net.URI;
 import java.util.HashMap;

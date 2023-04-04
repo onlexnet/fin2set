@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import onlexnet.fin2set.domain.connect.ConnectService;
 import onlexnet.fin2set.domain.models.CustomerDataDTO;
-import onlexnet.fin2set.domain.services.onlex.connect.ConnectService;
 
 @RestController
 @RequiredArgsConstructor

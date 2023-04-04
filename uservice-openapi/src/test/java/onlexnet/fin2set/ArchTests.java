@@ -35,7 +35,7 @@ public class ArchTests {
   @ArchTest
   static final ArchRule layered_archutecture = Architectures.layeredArchitecture()
     .consideringAllDependencies()
-    .layer("webapi").definedBy("onlexnet.fin2set.api;..")
+    .layer("webapi").definedBy("onlexnet.fin2set.api..")
     .layer("nordigen-generated").definedBy("onlexnet.fin2set.nordigen.generated")
     .layer("nordigen-port").definedBy("onlexnet.fin2set.nordigen..")
     // Add constraints
@@ -48,7 +48,7 @@ public class ArchTests {
       .should()
       .bePackagePrivate()
       .andShould()
-      .resideInAPackage("onlexnet.fin2set.api;..");
+      .resideInAPackage("onlexnet.fin2set.api..");
 
   
 }

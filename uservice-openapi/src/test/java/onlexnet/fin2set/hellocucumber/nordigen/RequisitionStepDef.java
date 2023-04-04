@@ -1,4 +1,4 @@
-package dj.hellocucumber.integration;
+package onlexnet.fin2set.hellocucumber.nordigen;
 
 import java.net.URI;
 import java.util.List;

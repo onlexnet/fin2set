@@ -1,4 +1,4 @@
-package dj.hellocucumber;
+package onlexnet.fin2set.hellocucumber;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
