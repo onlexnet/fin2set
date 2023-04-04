@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
-import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -27,7 +26,9 @@ public class Program {
 
 	@Bean
 	public Docket get() {
-		return new Docket(DocumentationType.OAS_30)
+    // we have to be compatible with Swagge2 as Logic Apps are not compatible with OpenAPI 3
+    // more: https://learn.microsoft.com/en-us/connectors/custom-connectors/define-openapi-definition#import-the-openapi-definition
+		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.paths(PathSelectors.ant("/api/**")) // Provides endpoints that meet the condition
 				.apis((RequestHandlerSelectors.basePackage("dj"))) // Looking and share endpoints in folder "dj"
