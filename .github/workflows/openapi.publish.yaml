@@ -16,7 +16,7 @@ jobs:
           distribution: temurin
           cache: maven
       - name: Publish package
-        run: mvn --batch-mode --no-transfer-progress package deploy
+        run: mvn --batch-mode --no-transfer-progress install deploy
         working-directory: openapi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
