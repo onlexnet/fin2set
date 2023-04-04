@@ -1,0 +1,1603 @@
+---
+swagger: '2.0'
+info:
+  description: Description
+  version: '1.00'
+  title: Fin2Set
+  termsOfService: localhost:8080
+  contact:
+    name: Damian Jarzębowski
+    url: https://www.linkedin.com/in/damian-jarz%C4%99bowski-05aa32220/
+    email: damian.r.jarzebowski@gmail.com
+  license:
+    name: My own licence
+    url: https://www.linkedin.com/in/damian-jarz%C4%99bowski-05aa32220/
+host: poc-fin2set.bluesmoke-f4bd2314.westeurope.azurecontainerapps.io
+basePath: "/"
+tags:
+- name: integration-account-api
+  description: Integration Account Api
+- name: integration-agreements-api
+  description: Integration Agreements Api
+- name: integration-institutions-api
+  description: Integration Institutions Api
+- name: integration-requisitions-api
+  description: Integration Requisitions Api
+- name: integration-token-api
+  description: Integration Token Api
+- name: onlex-bank-api
+  description: Onlex Bank Api
+- name: onlex-connect-api
+  description: Onlex Connect Api
+paths:
+  "/api/account/info":
+    get:
+      tags:
+      - integration-account-api
+      summary: getAccount
+      operationId: getAccountUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: accountNumberID
+        in: query
+        description: accountNumberID
+        required: true
+        type: string
+        format: uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/AccountDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/account/transactions":
+    get:
+      tags:
+      - integration-account-api
+      summary: getTransactions
+      operationId: getTransactionsUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: accountNumberID
+        in: query
+        description: accountNumberID
+        required: true
+        type: string
+        format: uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/NordigenBankStatemant"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/agreements/":
+    get:
+      tags:
+      - integration-agreements-api
+      summary: getListAllAgreements
+      operationId: getListAllAgreementsUsingGET
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/PaginatedEndUserAgreementListDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+      - integration-agreements-api
+      summary: createAgreement
+      operationId: createAgreementUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: endUserAgreementRequest
+        description: endUserAgreementRequest
+        required: true
+        schema:
+          "$ref": "#/definitions/EndUserAgreementRequest"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/EndUserAgreementDTO"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/agreements/{agreementID}":
+    get:
+      tags:
+      - integration-agreements-api
+      summary: getAgreement
+      operationId: getAgreementUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: agreementID
+        in: path
+        description: agreementID
+        required: true
+        type: string
+        format: uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/EndUserAgreementDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+      - integration-agreements-api
+      summary: deleteAgreement
+      operationId: deleteAgreementUsingDELETE
+      produces:
+      - "*/*"
+      parameters:
+      - name: agreementID
+        in: path
+        description: agreementID
+        required: true
+        type: string
+        format: uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Response"
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  "/api/institutions/bank":
+    get:
+      tags:
+      - integration-institutions-api
+      summary: getInstitution
+      operationId: getInstitutionUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: institutionID
+        in: query
+        description: institutionID
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/IntegrationDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/institutions/banks":
+    get:
+      tags:
+      - integration-institutions-api
+      summary: getListInstitutions
+      operationId: getListInstitutionsUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: country
+        in: query
+        description: country
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/IntegrationDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/integration/connection":
+    get:
+      tags:
+      - onlex-connect-api
+      summary: createConection
+      operationId: createConectionUsingGET_1
+      produces:
+      - "*/*"
+      parameters:
+      - name: institutionId
+        in: query
+        description: institutionId
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+            format: uri
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/integration/info":
+    get:
+      tags:
+      - onlex-connect-api
+      summary: getInfoAboutConection
+      operationId: getInfoAboutConectionUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: ref
+        in: query
+        description: ref
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/CustomerDataDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/onlex/bankstatement":
+    get:
+      tags:
+      - onlex-bank-api
+      summary: createConection
+      operationId: createConectionUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: accountID
+        in: query
+        description: accountID
+        required: true
+        type: string
+        format: uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/OnlexBankStatement"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/requisitions/":
+    get:
+      tags:
+      - integration-requisitions-api
+      summary: getListAllRequisitions
+      operationId: getListAllRequisitionsUsingGET
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/PaginatedRequisitionListDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+      - integration-requisitions-api
+      summary: createRequisition
+      operationId: createRequisitionUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: RequisitionRequest
+        description: RequisitionRequest
+        required: true
+        schema:
+          "$ref": "#/definitions/RequisitionRequest"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/SpectacularRequisitionDTO"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/requisitions/{requisitionsID}":
+    get:
+      tags:
+      - integration-requisitions-api
+      summary: getRequisition
+      operationId: getRequisitionUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: requisitionsID
+        in: path
+        description: requisitionsID
+        required: true
+        type: string
+        format: uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/RequisitionDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+      - integration-requisitions-api
+      summary: deleteRequisition
+      operationId: deleteRequisitionUsingDELETE
+      produces:
+      - "*/*"
+      parameters:
+      - name: requisitionsID
+        in: path
+        description: requisitionsID
+        required: true
+        type: string
+        format: uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Response"
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  "/api/token/api/v2/token/new/":
+    post:
+      tags:
+      - integration-token-api
+      summary: createTokens
+      operationId: createTokensUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: jwtObtainPairRequest
+        description: jwtObtainPairRequest
+        required: true
+        schema:
+          "$ref": "#/definitions/JWTObtainPairRequest"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/SpectacularJWTObtainDTO"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/token/api/v2/token/refresh/":
+    post:
+      tags:
+      - integration-token-api
+      summary: refreshAccessToken
+      operationId: refreshAccessTokenUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: jwtRefreshRequest
+        description: jwtRefreshRequest
+        required: true
+        schema:
+          "$ref": "#/definitions/JWTRefreshRequest"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/SpectacularJWTRefreshDTO"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+definitions:
+  AccountDTO:
+    type: object
+    properties:
+      created:
+        type: string
+        format: date-time
+      iban:
+        type: string
+      id:
+        type: string
+        format: uuid
+      institution_id:
+        type: string
+      last_accessed:
+        type: string
+        format: date-time
+      owner_name:
+        type: string
+      status:
+        type: string
+        enum:
+        - DISCOVERED
+        - ERROR
+        - PROCESSING
+        - READY
+        - SUSPENDED
+    title: AccountDTO
+  Booked:
+    type: object
+    properties:
+      bookingDate:
+        type: string
+        format: date
+      remittanceInformationUnstructured:
+        type: string
+      transactionAmount:
+        "$ref": "#/definitions/TransactionAmount"
+      transactionId:
+        type: string
+    title: Booked
+  ByteChunk:
+    type: object
+    properties:
+      buffer:
+        type: string
+        format: byte
+      bytes:
+        type: string
+        format: byte
+      charset:
+        "$ref": "#/definitions/Charset"
+      end:
+        type: integer
+        format: int32
+      length:
+        type: integer
+        format: int32
+      limit:
+        type: integer
+        format: int32
+      long:
+        type: integer
+        format: int64
+      'null':
+        type: boolean
+      offset:
+        type: integer
+        format: int32
+      start:
+        type: integer
+        format: int32
+    title: ByteChunk
+  CharChunk:
+    type: object
+    properties:
+      buffer:
+        type: array
+        items:
+          type: string
+      chars:
+        type: array
+        items:
+          type: string
+      empty:
+        type: boolean
+      end:
+        type: integer
+        format: int32
+      length:
+        type: integer
+        format: int32
+      limit:
+        type: integer
+        format: int32
+      'null':
+        type: boolean
+      offset:
+        type: integer
+        format: int32
+      start:
+        type: integer
+        format: int32
+    title: CharChunk
+  Charset:
+    type: object
+    properties:
+      registered:
+        type: boolean
+    title: Charset
+  CustomerDataDTO:
+    type: object
+    properties:
+      accounts:
+        type: array
+        items:
+          type: string
+          format: uuid
+      end_user_agreement_info:
+        "$ref": "#/definitions/EndUserAgreementInfo"
+      id:
+        type: string
+        format: uuid
+      institution_id:
+        type: string
+      link:
+        type: string
+        format: uri
+      status:
+        type: object
+    title: CustomerDataDTO
+  Descriptor:
+    type: object
+    properties:
+      fieldNames:
+        type: array
+        items:
+          type: string
+      fields:
+        type: array
+        items:
+          type: string
+      valid:
+        type: boolean
+    title: Descriptor
+  EndUserAgreementDTO:
+    type: object
+    properties:
+      accepted:
+        type: string
+        format: date-time
+      access_scope:
+        type: array
+        items:
+          type: string
+      access_valid_for_days:
+        type: integer
+        format: int32
+      created:
+        type: string
+        format: date-time
+      id:
+        type: string
+        format: uuid
+      institution_id:
+        type: string
+      max_historical_days:
+        type: integer
+        format: int32
+    title: EndUserAgreementDTO
+  EndUserAgreementInfo:
+    type: object
+    properties:
+      accepted:
+        type: string
+        format: date-time
+      access_scope:
+        type: array
+        items:
+          type: string
+      access_valid_for_days:
+        type: integer
+        format: int32
+      created:
+        type: string
+        format: date-time
+      max_historical_days:
+        type: integer
+        format: int32
+    title: EndUserAgreementInfo
+  EndUserAgreementRequest:
+    type: object
+    required:
+    - institution_id
+    properties:
+      access_scope:
+        type: array
+        description: Array containing one or several values of ['balances', 'details',
+          'transactions']
+        items:
+          type: string
+      access_valid_for_days:
+        type: integer
+        format: int32
+        description: Number of days from acceptance that the access can be used.
+        minimum: 1
+        maximum: 90
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+      institution_id:
+        type: string
+        description: an Institution ID for this EUA
+      max_historical_days:
+        type: integer
+        format: int32
+        description: Maximum number of days of transaction data to retrieve.
+        minimum: 1
+        maximum: 730
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+    title: EndUserAgreementRequest
+  Enumeration«string»:
+    type: object
+    title: Enumeration«string»
+  Exception:
+    type: object
+    properties:
+      cause:
+        "$ref": "#/definitions/Throwable"
+      localizedMessage:
+        type: string
+      message:
+        type: string
+      stackTrace:
+        type: array
+        items:
+          "$ref": "#/definitions/StackTraceElement"
+      suppressed:
+        type: array
+        items:
+          "$ref": "#/definitions/Throwable"
+    title: Exception
+  InputBuffer:
+    type: object
+    title: InputBuffer
+  IntegrationDTO:
+    type: object
+    properties:
+      bic:
+        type: string
+      countries:
+        type: array
+        items:
+          type: string
+          enum:
+          - AT
+          - BE
+          - BG
+          - CY
+          - CZ
+          - DE
+          - DK
+          - EE
+          - ES
+          - FI
+          - FR
+          - GB
+          - GR
+          - HR
+          - HU
+          - IE
+          - IS
+          - IT
+          - LI
+          - LT
+          - LU
+          - LV
+          - MT
+          - NL
+          - 'NO'
+          - PL
+          - PT
+          - RO
+          - SE
+          - SI
+          - SK
+      id:
+        type: string
+      logo:
+        type: string
+      name:
+        type: string
+      transaction_total_days:
+        type: string
+    title: IntegrationDTO
+  JWTObtainPairRequest:
+    type: object
+    required:
+    - secret_id
+    - secret_key
+    properties:
+      secret_id:
+        type: string
+        description: Secret id from /user-secrets/
+      secret_key:
+        type: string
+        description: Secret key from /user-secrets/
+    title: JWTObtainPairRequest
+  JWTRefreshRequest:
+    type: object
+    required:
+    - refresh
+    properties:
+      refresh:
+        type: string
+    title: JWTRefreshRequest
+  Locale:
+    type: object
+    properties:
+      country:
+        type: string
+      displayCountry:
+        type: string
+      displayLanguage:
+        type: string
+      displayName:
+        type: string
+      displayScript:
+        type: string
+      displayVariant:
+        type: string
+      extensionKeys:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+      iso3Country:
+        type: string
+      iso3Language:
+        type: string
+      language:
+        type: string
+      script:
+        type: string
+      unicodeLocaleAttributes:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+      unicodeLocaleKeys:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+      variant:
+        type: string
+    title: Locale
+  MBeanAttributeInfo:
+    type: object
+    properties:
+      description:
+        type: string
+      descriptor:
+        "$ref": "#/definitions/Descriptor"
+      is:
+        type: boolean
+      name:
+        type: string
+      readable:
+        type: boolean
+      type:
+        type: string
+      writable:
+        type: boolean
+    title: MBeanAttributeInfo
+  MBeanConstructorInfo:
+    type: object
+    properties:
+      description:
+        type: string
+      descriptor:
+        "$ref": "#/definitions/Descriptor"
+      name:
+        type: string
+      signature:
+        type: array
+        items:
+          "$ref": "#/definitions/MBeanParameterInfo"
+    title: MBeanConstructorInfo
+  MBeanInfo:
+    type: object
+    properties:
+      attributes:
+        type: array
+        items:
+          "$ref": "#/definitions/MBeanAttributeInfo"
+      className:
+        type: string
+      constructors:
+        type: array
+        items:
+          "$ref": "#/definitions/MBeanConstructorInfo"
+      description:
+        type: string
+      descriptor:
+        "$ref": "#/definitions/Descriptor"
+      notifications:
+        type: array
+        items:
+          "$ref": "#/definitions/MBeanNotificationInfo"
+      operations:
+        type: array
+        items:
+          "$ref": "#/definitions/MBeanOperationInfo"
+    title: MBeanInfo
+  MBeanNotificationInfo:
+    type: object
+    properties:
+      description:
+        type: string
+      descriptor:
+        "$ref": "#/definitions/Descriptor"
+      name:
+        type: string
+      notifTypes:
+        type: array
+        items:
+          type: string
+    title: MBeanNotificationInfo
+  MBeanOperationInfo:
+    type: object
+    properties:
+      description:
+        type: string
+      descriptor:
+        "$ref": "#/definitions/Descriptor"
+      impact:
+        type: integer
+        format: int32
+      name:
+        type: string
+      returnType:
+        type: string
+      signature:
+        type: array
+        items:
+          "$ref": "#/definitions/MBeanParameterInfo"
+    title: MBeanOperationInfo
+  MBeanParameterInfo:
+    type: object
+    properties:
+      description:
+        type: string
+      descriptor:
+        "$ref": "#/definitions/Descriptor"
+      name:
+        type: string
+      type:
+        type: string
+    title: MBeanParameterInfo
+  MessageBytes:
+    type: object
+    properties:
+      byteChunk:
+        "$ref": "#/definitions/ByteChunk"
+      charChunk:
+        "$ref": "#/definitions/CharChunk"
+      charset:
+        "$ref": "#/definitions/Charset"
+      length:
+        type: integer
+        format: int32
+      long:
+        type: integer
+        format: int64
+      'null':
+        type: boolean
+      string:
+        type: string
+      type:
+        type: integer
+        format: int32
+    title: MessageBytes
+  MimeHeaders:
+    type: object
+    title: MimeHeaders
+  NordigenBankStatemant:
+    type: object
+    properties:
+      transactions:
+        "$ref": "#/definitions/Transactions"
+    title: NordigenBankStatemant
+  ObjectName:
+    type: object
+    properties:
+      canonicalKeyPropertyListString:
+        type: string
+      canonicalName:
+        type: string
+      domain:
+        type: string
+      domainPattern:
+        type: boolean
+      keyPropertyList:
+        type: object
+        additionalProperties:
+          type: string
+      keyPropertyListString:
+        type: string
+      pattern:
+        type: boolean
+      propertyListPattern:
+        type: boolean
+      propertyPattern:
+        type: boolean
+      propertyValuePattern:
+        type: boolean
+    title: ObjectName
+  OnlexBankStatement:
+    type: object
+    properties:
+      bookedTransactions:
+        type: array
+        items:
+          "$ref": "#/definitions/Booked"
+      depositName:
+        type: string
+        format: uuid
+      ownerName:
+        type: string
+    title: OnlexBankStatement
+  PaginatedEndUserAgreementListDTO:
+    type: object
+    properties:
+      count:
+        type: integer
+        format: int32
+      next:
+        type: string
+        format: uri
+      previous:
+        type: string
+        format: uri
+      results:
+        type: array
+        items:
+          "$ref": "#/definitions/EndUserAgreementDTO"
+    title: PaginatedEndUserAgreementListDTO
+  PaginatedRequisitionListDTO:
+    type: object
+    properties:
+      count:
+        type: integer
+        format: int32
+      next:
+        type: string
+        format: uri
+      previous:
+        type: string
+        format: uri
+      results:
+        type: array
+        items:
+          "$ref": "#/definitions/RequisitionDTO"
+    title: PaginatedRequisitionListDTO
+  Parameters:
+    type: object
+    properties:
+      charset:
+        "$ref": "#/definitions/Charset"
+      parameterNames:
+        "$ref": "#/definitions/Enumeration«string»"
+      parseFailed:
+        type: boolean
+      parseFailedReason:
+        type: string
+        enum:
+        - CLIENT_DISCONNECT
+        - INVALID_CONTENT_TYPE
+        - IO_ERROR
+        - MULTIPART_CONFIG_INVALID
+        - NO_NAME
+        - POST_TOO_LARGE
+        - REQUEST_BODY_INCOMPLETE
+        - TOO_MANY_PARAMETERS
+        - UNKNOWN
+        - URL_DECODING
+    title: Parameters
+  ReadListener:
+    type: object
+    title: ReadListener
+  Request:
+    type: object
+    properties:
+      attributes:
+        type: object
+        additionalProperties:
+          type: object
+      authType:
+        "$ref": "#/definitions/MessageBytes"
+      available:
+        type: integer
+        format: int32
+      bytesRead:
+        type: integer
+        format: int64
+      characterEncoding:
+        type: string
+      charset:
+        "$ref": "#/definitions/Charset"
+      contentLength:
+        type: integer
+        format: int32
+      contentLengthLong:
+        type: integer
+        format: int64
+      contentType:
+        type: string
+      cookies:
+        "$ref": "#/definitions/ServerCookies"
+      errorException:
+        "$ref": "#/definitions/Exception"
+      exceptionPresent:
+        type: boolean
+      finished:
+        type: boolean
+      inputBuffer:
+        "$ref": "#/definitions/InputBuffer"
+      localPort:
+        type: integer
+        format: int32
+      mimeHeaders:
+        "$ref": "#/definitions/MimeHeaders"
+      parameters:
+        "$ref": "#/definitions/Parameters"
+      processing:
+        type: boolean
+      readListener:
+        "$ref": "#/definitions/ReadListener"
+      ready:
+        type: boolean
+      remotePort:
+        type: integer
+        format: int32
+      remoteUser:
+        "$ref": "#/definitions/MessageBytes"
+      remoteUserNeedsAuthorization:
+        type: boolean
+      requestProcessor:
+        "$ref": "#/definitions/RequestInfo"
+      requestThread:
+        type: boolean
+      response:
+        "$ref": "#/definitions/Response"
+      sendfile:
+        type: boolean
+      serverPort:
+        type: integer
+        format: int32
+      startTime:
+        type: integer
+        format: int64
+      supportsRelativeRedirects:
+        type: boolean
+      threadId:
+        type: integer
+        format: int64
+      trailerFields:
+        type: object
+        additionalProperties:
+          type: string
+      trailerFieldsReady:
+        type: boolean
+      urldecoder:
+        "$ref": "#/definitions/UDecoder"
+    title: Request
+  RequestGroupInfo:
+    type: object
+    properties:
+      bytesReceived:
+        type: integer
+        format: int64
+      bytesSent:
+        type: integer
+        format: int64
+      className:
+        type: string
+      errorCount:
+        type: integer
+        format: int32
+      jmxName:
+        "$ref": "#/definitions/ObjectName"
+      managedResource:
+        type: object
+      maxTime:
+        type: integer
+        format: int64
+      mbeanInfo:
+        "$ref": "#/definitions/MBeanInfo"
+      modelerType:
+        type: string
+      notificationInfo:
+        type: array
+        items:
+          "$ref": "#/definitions/MBeanNotificationInfo"
+      objectName:
+        type: string
+      processingTime:
+        type: integer
+        format: int64
+      requestCount:
+        type: integer
+        format: int32
+    title: RequestGroupInfo
+  RequestInfo:
+    type: object
+    properties:
+      bytesReceived:
+        type: integer
+        format: int64
+      bytesSent:
+        type: integer
+        format: int64
+      contentLength:
+        type: integer
+        format: int32
+      currentQueryString:
+        type: string
+      currentUri:
+        type: string
+      errorCount:
+        type: integer
+        format: int32
+      globalProcessor:
+        "$ref": "#/definitions/RequestGroupInfo"
+      lastRequestProcessingTime:
+        type: integer
+        format: int64
+      maxRequestUri:
+        type: string
+      maxTime:
+        type: integer
+        format: int64
+      method:
+        type: string
+      peerAddr:
+        type: string
+      processingTime:
+        type: integer
+        format: int64
+      protocol:
+        type: string
+      remoteAddr:
+        type: string
+      remoteAddrForwarded:
+        type: string
+      requestBytesReceived:
+        type: integer
+        format: int64
+      requestBytesSent:
+        type: integer
+        format: int64
+      requestCount:
+        type: integer
+        format: int32
+      requestProcessingTime:
+        type: integer
+        format: int64
+      rpName:
+        "$ref": "#/definitions/ObjectName"
+      serverPort:
+        type: integer
+        format: int32
+      stage:
+        type: integer
+        format: int32
+      virtualHost:
+        type: string
+      workerThreadName:
+        type: string
+    title: RequestInfo
+  RequisitionDTO:
+    type: object
+    properties:
+      account_selection:
+        type: boolean
+      accounts:
+        type: array
+        items:
+          type: string
+          format: uuid
+      agreement:
+        type: string
+        format: uuid
+      created:
+        type: string
+        format: date-time
+      id:
+        type: string
+        format: uuid
+      institution_id:
+        type: string
+      link:
+        type: string
+        format: uri
+      redirect:
+        type: string
+        format: uri
+      redirect_immediate:
+        type: boolean
+      reference:
+        type: string
+      ssn:
+        type: string
+      status:
+        type: string
+        enum:
+        - CR
+        - ER
+        - EX
+        - GA
+        - GC
+        - ID
+        - LN
+        - RJ
+        - SA
+        - SU
+        - UA
+      user_language:
+        type: string
+        enum:
+        - AT
+        - BE
+        - BG
+        - CY
+        - CZ
+        - DE
+        - DK
+        - EE
+        - ES
+        - FI
+        - FR
+        - GB
+        - GR
+        - HR
+        - HU
+        - IE
+        - IS
+        - IT
+        - LI
+        - LT
+        - LU
+        - LV
+        - MT
+        - NL
+        - 'NO'
+        - PL
+        - PT
+        - RO
+        - SE
+        - SI
+        - SK
+    title: RequisitionDTO
+  RequisitionRequest:
+    type: object
+    required:
+    - institution_id
+    - redirect
+    properties:
+      account_selection:
+        type: boolean
+        description: option to enable account selection view for the end user
+      agreement:
+        type: string
+        format: uuid
+        description: EUA associated with this requisition
+      institution_id:
+        type: string
+        description: an Institution ID for this Requisition
+      redirect:
+        type: string
+        format: uri
+        description: redirect URL to your application after end-user authorization
+          with ASPSP
+        minLength: 0
+        maxLength: 1024
+      redirect_immediate:
+        type: boolean
+        description: enable redirect back to the client after account list received
+      reference:
+        type: string
+        description: additional ID to identify the end user
+        minLength: 0
+        maxLength: 256
+      ssn:
+        type: string
+        description: optional SSN field to verify ownership of the account
+        minLength: 0
+        maxLength: 64
+      user_language:
+        type: string
+        description: A two-letter country code (ISO 639-1)
+        minLength: 0
+        maxLength: 5
+    title: RequisitionRequest
+  Response:
+    type: object
+    properties:
+      characterEncoding:
+        type: string
+      charset:
+        "$ref": "#/definitions/Charset"
+      commitTime:
+        type: integer
+        format: int64
+      committed:
+        type: boolean
+      contentLanguage:
+        type: string
+      contentLength:
+        type: integer
+        format: int32
+      contentLengthLong:
+        type: integer
+        format: int64
+      contentType:
+        type: string
+      contentWritten:
+        type: integer
+        format: int64
+      error:
+        type: boolean
+      errorException:
+        "$ref": "#/definitions/Exception"
+      errorReportRequired:
+        type: boolean
+      exceptionPresent:
+        type: boolean
+      locale:
+        "$ref": "#/definitions/Locale"
+      message:
+        type: string
+      mimeHeaders:
+        "$ref": "#/definitions/MimeHeaders"
+      ready:
+        type: boolean
+      request:
+        "$ref": "#/definitions/Request"
+      status:
+        type: integer
+        format: int32
+      trailerFields:
+        "$ref": "#/definitions/Supplier«Map«string,string»»"
+      writeListener:
+        "$ref": "#/definitions/WriteListener"
+    title: Response
+  ServerCookies:
+    type: object
+    properties:
+      cookieCount:
+        type: integer
+        format: int32
+    title: ServerCookies
+  SpectacularJWTObtainDTO:
+    type: object
+    properties:
+      access:
+        type: string
+      access_expires:
+        type: integer
+        format: int32
+      refresh:
+        type: string
+      refresh_expires:
+        type: integer
+        format: int32
+    title: SpectacularJWTObtainDTO
+  SpectacularJWTRefreshDTO:
+    type: object
+    properties:
+      access:
+        type: string
+      access_expires:
+        type: integer
+        format: int32
+    title: SpectacularJWTRefreshDTO
+  SpectacularRequisitionDTO:
+    type: object
+    properties:
+      account_selection:
+        type: boolean
+      accounts:
+        type: array
+        items:
+          type: object
+      agreement:
+        type: string
+        format: uuid
+      created:
+        type: string
+        format: date-time
+      id:
+        type: string
+        format: uuid
+      institution_id:
+        type: string
+      link:
+        type: string
+        format: uri
+      redirect:
+        type: string
+        format: uri
+      redirect_immediate:
+        type: boolean
+      reference:
+        type: string
+      ssn:
+        type: string
+      status:
+        type: string
+        enum:
+        - CR
+        - ER
+        - EX
+        - GA
+        - GC
+        - ID
+        - LN
+        - RJ
+        - SA
+        - SU
+        - UA
+      user_language:
+        type: string
+        enum:
+        - AT
+        - BE
+        - BG
+        - CY
+        - CZ
+        - DE
+        - DK
+        - EE
+        - ES
+        - FI
+        - FR
+        - GB
+        - GR
+        - HR
+        - HU
+        - IE
+        - IS
+        - IT
+        - LI
+        - LT
+        - LU
+        - LV
+        - MT
+        - NL
+        - 'NO'
+        - PL
+        - PT
+        - RO
+        - SE
+        - SI
+        - SK
+    title: SpectacularRequisitionDTO
+  StackTraceElement:
+    type: object
+    properties:
+      classLoaderName:
+        type: string
+      className:
+        type: string
+      fileName:
+        type: string
+      lineNumber:
+        type: integer
+        format: int32
+      methodName:
+        type: string
+      moduleName:
+        type: string
+      moduleVersion:
+        type: string
+      nativeMethod:
+        type: boolean
+    title: StackTraceElement
+  Supplier«Map«string,string»»:
+    type: object
+    title: Supplier«Map«string,string»»
+  Throwable:
+    type: object
+    properties:
+      cause:
+        "$ref": "#/definitions/Throwable"
+      localizedMessage:
+        type: string
+      message:
+        type: string
+      stackTrace:
+        type: array
+        items:
+          "$ref": "#/definitions/StackTraceElement"
+      suppressed:
+        type: array
+        items:
+          "$ref": "#/definitions/Throwable"
+    title: Throwable
+  TransactionAmount:
+    type: object
+    properties:
+      amount:
+        type: number
+        format: double
+      currency:
+        type: string
+    title: TransactionAmount
+  Transactions:
+    type: object
+    properties:
+      booked:
+        type: array
+        items:
+          "$ref": "#/definitions/Booked"
+    title: Transactions
+  UDecoder:
+    type: object
+    title: UDecoder
+  WriteListener:
+    type: object
+    title: WriteListener
