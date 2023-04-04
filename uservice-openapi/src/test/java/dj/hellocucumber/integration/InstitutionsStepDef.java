@@ -5,8 +5,8 @@ import java.util.Random;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import dj.models.dto.IntegrationDTO;
-import dj.services.integration.institutions.InstitutionsService;
+import onlexnet.fin2set.api.dto.IntegrationDTO;
+import onlexnet.fin2set.nordigen.institutions.InstitutionsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

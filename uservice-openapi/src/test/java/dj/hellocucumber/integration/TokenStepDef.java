@@ -3,7 +3,7 @@ package dj.hellocucumber.integration;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import dj.services.integration.token.TokenService;
+import onlexnet.fin2set.nordigen.token.TokenService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

@@ -6,7 +6,7 @@ import org.apache.http.HttpStatus;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import dj.services.integration.accounts.AccountService;
+import onlexnet.fin2set.nordigen.accounts.AccountService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
