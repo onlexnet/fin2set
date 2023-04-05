@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import feign.Headers;
-import onlexnet.fin2set.domain.models.NordigenBankStatemant;
+import onlexnet.fin2set.api.dto.NordigenBankStatemant;
 import onlexnet.fin2set.nordigen.generated.Account;
 
 

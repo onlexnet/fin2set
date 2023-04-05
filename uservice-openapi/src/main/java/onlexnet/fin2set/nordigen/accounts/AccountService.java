@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 
 import onlexnet.fin2set.api.dto.AccountDTO;
-import onlexnet.fin2set.domain.models.NordigenBankStatemant;
+import onlexnet.fin2set.api.dto.NordigenBankStatemant;
 
 public interface AccountService {
 

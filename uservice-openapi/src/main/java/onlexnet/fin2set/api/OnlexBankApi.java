@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import onlexnet.fin2set.domain.OnlexBankStatement;
 import onlexnet.fin2set.domain.bankstatement.OnlexBankStatementService;
+import onlexnet.fin2set.domain.models.OnlexBankStatement;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/onlex")
-public class OnlexBankApi {
+class OnlexBankApi {
 
     private final OnlexBankStatementService onlexService;
 
     @GetMapping("/bankstatement")
-    ResponseEntity<OnlexBankStatement> createConection(@RequestParam UUID accountID) {
+    ResponseEntity<OnlexBankStatement> getTransactions(@RequestParam UUID accountID) {
         return ResponseEntity.ok(onlexService.getOnlexBankStatement(accountID));
     }
 
