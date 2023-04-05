@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import onlexnet.fin2set.domain.models.Bank;
-import onlexnet.fin2set.nordigen.models.mapers.BankMapper;
+import onlexnet.fin2set.nordigen.mappers.BankMapper;
 import onlexnet.fin2set.nordigen.token.TokenService;
 import lombok.RequiredArgsConstructor;
 

@@ -2,7 +2,6 @@ package onlexnet.fin2set.domain.connect;
 
 import java.net.URI;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -12,8 +11,6 @@ import lombok.AllArgsConstructor;
 import onlexnet.fin2set.domain.models.CustomerData;
 import onlexnet.fin2set.domain.models.CustomerDataMapper;
 import onlexnet.fin2set.nordigen.agreements.AgreementsService;
-import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
-import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
 import onlexnet.fin2set.nordigen.requistions.RequisitionsService;
 
 @Service
@@ -23,39 +20,28 @@ public class ConnectServiceImpl implements ConnectService {
     private final RequisitionsService requisitionsService;
     private final AgreementsService agreementsService;
 
+    // TODO 1 - create concurrent map
+    // TODO 2 - move to distributed cache
+    // TODO 3 - support configurable timeout
     private Map<String, UUID> mapReferenceRequisitionsID = new HashMap<>();
 
     @Override
     public URI createLinkToConnect(String bankID) {
 
-        var endUserAgreementRequest = new EndUserAgreementRequest()
-                .institutionId(bankID)
-                .maxHistoricalDays(90)
-                .accessValidForDays(30)
-                .accessScope(List.of("balances", "details", "transactions"));  
+        final var maxHistoricalDays = 90;
+        final var accessValidForDays = 30;
 
-        var endUserAgreement = agreementsService.createAgreement(endUserAgreementRequest);
+        var agreementId = agreementsService.createAgreement(bankID, maxHistoricalDays, accessValidForDays);
 
-        var reference = UUID.randomUUID().toString();
+        var myReference = UUID.randomUUID().toString();
 
-        var requisitionRequest = new RequisitionRequest()
-                .redirect(URI.create("http://localhost:8080/api/integration/info"))
-                .institutionId(bankID)
-                .reference(reference)
-                .agreement(endUserAgreement.getId())
-                .userLanguage("PL")
+        // TODO - address should be configured as hosted protocol, address and port will be different per environment
+        var webhookAddress = URI.create("http://localhost:8080/api/integration/info");
 
-                // Optional parameters
-                .ssn("")
-                .accountSelection(false)
-                .redirectImmediate(false);
+        var requisitionsResult = requisitionsService.createRequisition(webhookAddress, bankID, myReference, agreementId);
+        mapReferenceRequisitionsID.put(myReference, requisitionsResult.getId());
 
-        var spectacularRequisition = requisitionsService.createRequisition(requisitionRequest);
-
-        var requisitionsID = spectacularRequisition.getId();
-        mapReferenceRequisitionsID.put(reference, requisitionsID);
-
-        return spectacularRequisition.getLink();
+        return requisitionsResult.getContinuationLink();
     }
 
     @Override

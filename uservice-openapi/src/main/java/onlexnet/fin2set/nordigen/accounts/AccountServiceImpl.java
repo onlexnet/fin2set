@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import onlexnet.fin2set.domain.models.Account;
 import onlexnet.fin2set.domain.models.BankStatement;
-import onlexnet.fin2set.nordigen.models.mapers.AccountMapper;
-import onlexnet.fin2set.nordigen.models.mapers.BankStatemantMapper;
+import onlexnet.fin2set.nordigen.mappers.AccountMapper;
+import onlexnet.fin2set.nordigen.mappers.BankStatemantMapper;
 import onlexnet.fin2set.nordigen.token.TokenService;
 
 @Service

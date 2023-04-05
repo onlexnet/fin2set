@@ -23,4 +23,8 @@ public interface AgreementsService {
 
     void deleteAgreement(UUID agreementID);
 
+    UUID createAgreement(String bankID, int maxHistoricalDays, int accessValidForDays);
+
+
+
 }

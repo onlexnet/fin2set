@@ -1,10 +1,9 @@
-package onlexnet.fin2set.hellocucumber;
+package onlexnet.fin2set;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
 import io.cucumber.spring.CucumberContextConfiguration;
-import onlexnet.fin2set.Program;
 
 @CucumberContextConfiguration
 @ContextConfiguration(classes = {Program.class})

@@ -1,5 +1,6 @@
 package onlexnet.fin2set.nordigen.agreements;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -12,8 +13,8 @@ import lombok.RequiredArgsConstructor;
 import onlexnet.fin2set.domain.models.EndUserAgreement;
 import onlexnet.fin2set.domain.models.PaginatedEndUserAgreementList;
 import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
-import onlexnet.fin2set.nordigen.models.mapers.EndUserAgreementMapper;
-import onlexnet.fin2set.nordigen.models.mapers.PaginatedEndUserAgreementsListMapper;
+import onlexnet.fin2set.nordigen.mappers.EndUserAgreementMapper;
+import onlexnet.fin2set.nordigen.mappers.PaginatedEndUserAgreementsListMapper;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +28,18 @@ public class AgreementsServiceImpl implements AgreementsService {
         var accessToken = tokenService.buildBearerAuthToken();
         var response = agreementsClient.createAgreement(accessToken, endUserAgreementRequest);
         return EndUserAgreementMapper.fromDTO(response.getBody());
+    }
+
+    @Override
+    public UUID createAgreement(String bankID, int maxHistoricalDays, int accessValidForDays) {
+        var request = new EndUserAgreementRequest()
+            .institutionId(bankID)
+            .maxHistoricalDays(maxHistoricalDays)
+            .accessValidForDays(accessValidForDays)
+            .accessScope(List.of("balances", "details", "transactions"));  
+        var accessToken = tokenService.buildBearerAuthToken();
+        var response = agreementsClient.createAgreement(accessToken, request);
+        return EndUserAgreementMapper.fromDTO(response.getBody()).getId();
     }
 
     @Override

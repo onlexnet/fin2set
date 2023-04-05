@@ -2,6 +2,7 @@ package onlexnet.fin2set;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
@@ -12,6 +13,7 @@ import com.tngtech.archunit.library.DependencyRules;
 import com.tngtech.archunit.library.GeneralCodingRules;
 
 /** Architectural tests. */
+// @AnalyzeClasses(packages = "onlexnet.fin2set", importOptions = ImportOption.DoNotIncludeTests.class)
 @AnalyzeClasses(packages = "onlexnet.fin2set")
 public class ArchTests {
 
@@ -37,10 +39,11 @@ public class ArchTests {
     .consideringAllDependencies()
     .layer("webapi").definedBy("onlexnet.fin2set.api..")
     .layer("nordigen-generated").definedBy("onlexnet.fin2set.nordigen.generated")
+    .layer("nordigen-tests").definedBy("onlexnet.fin2set.hellocucumber.nordigen..")
     .layer("nordigen-port").definedBy("onlexnet.fin2set.nordigen..")
     // Add constraints
     .whereLayer("webapi").mayNotBeAccessedByAnyLayer()
-    .whereLayer("nordigen-generated").mayOnlyBeAccessedByLayers("nordigen-port");
+    .whereLayer("nordigen-generated").mayOnlyBeAccessedByLayers("nordigen-port", "nordigen-tests");
 
   @ArchTest
   static final ArchRule noPublicControllers = ArchRuleDefinition.classes().that()

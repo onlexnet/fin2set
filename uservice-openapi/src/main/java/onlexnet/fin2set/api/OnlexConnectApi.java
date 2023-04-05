@@ -22,7 +22,7 @@ import onlexnet.fin2set.nordigen.integration.IntegrationService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/integration")
-public class OnlexConnectApi {
+class OnlexConnectApi {
 
     private final ConnectService connectService;
     private final BankStatementService onlexService;
