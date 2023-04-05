@@ -61,7 +61,7 @@
               <generatorName>spring</generatorName>
               <inputSpec>${project.basedir}/schema.yaml</inputSpec>
               <apiPackage>onlexnet.fin2set.generated.api</apiPackage>
-              <apiPackage>onlexnet.fin2set.generated.dto</apiPackage>
+              <modelPackage>onlexnet.fin2set.generated.dto</modelPackage>
               <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
               <configOptions>
                 <delegatePattern>true</delegatePattern>
