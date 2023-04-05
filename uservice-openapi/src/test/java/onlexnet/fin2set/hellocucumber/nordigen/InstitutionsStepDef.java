@@ -5,7 +5,7 @@ import java.util.Random;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import onlexnet.fin2set.api.dto.IntegrationDTO;
+import onlexnet.fin2set.domain.models.Bank;
 import onlexnet.fin2set.nordigen.institutions.InstitutionsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,8 +16,8 @@ public class InstitutionsStepDef {
     @Autowired
     private InstitutionsService institutionsService;
 
-    private IntegrationDTO randomInstitution;
-    private IntegrationDTO findedInstitution;
+    private Bank randomInstitution;
+    private Bank findedInstitution;
 
     @Given("get list all institutions from poland and save random institution.")
     public void get_list_all_institutions_from_poland_and_save_random_institution() {

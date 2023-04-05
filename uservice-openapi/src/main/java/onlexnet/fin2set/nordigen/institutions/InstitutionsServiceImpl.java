@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import onlexnet.fin2set.api.dto.IntegrationDTO;
-import onlexnet.fin2set.api.dto.IntegrationMapper;
+import onlexnet.fin2set.domain.models.Bank;
+import onlexnet.fin2set.domain.models.BankMapper;
 import onlexnet.fin2set.nordigen.token.TokenService;
 import lombok.RequiredArgsConstructor;
 
@@ -15,20 +15,20 @@ public class InstitutionsServiceImpl implements InstitutionsService {
 
     private final InstitutionsClient institutionsClient;
     private final TokenService tokenService;
-    private final IntegrationMapper integrationMapper;
+    private final BankMapper BankMapper;
     
     @Override
-    public List<IntegrationDTO> getListInstitutions(String country) {
+    public List<Bank> getListInstitutions(String country) {
         String accessToken = tokenService.buildBearerAuthToken();
         var response = institutionsClient.getListInstitutions(accessToken, country);
-        return integrationMapper.toDTO(response);
+        return BankMapper.toDTO(response);
     }
 
     @Override
-    public IntegrationDTO getInstitution(String institutionID) {
+    public Bank getInstitution(String institutionID) {
         String accessToken = tokenService.buildBearerAuthToken();
         var response = institutionsClient.getInstitution(accessToken, institutionID);
-        return integrationMapper.toDTO(response);
+        return BankMapper.toDTO(response);
     }        
     
 

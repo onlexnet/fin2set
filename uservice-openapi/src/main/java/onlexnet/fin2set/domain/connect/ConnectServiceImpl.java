@@ -8,7 +8,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import onlexnet.fin2set.domain.models.CustomerDataDTO;
+import onlexnet.fin2set.domain.models.CustomerData;
 import onlexnet.fin2set.domain.models.CustomerDataMapper;
 import onlexnet.fin2set.nordigen.agreements.AgreementsService;
 import onlexnet.fin2set.nordigen.requistions.RequisitionsClient;
@@ -29,11 +29,11 @@ public class ConnectServiceImpl implements ConnectService {
     private Map<String, UUID> mapReferenceRequisitionsID = new HashMap<>();
 
     @Override
-    public URI createLinkToConnect(String institutionId) {
+    public URI createLinkToConnect(String bankID) {
         String accessToken = "Bearer " + tokenService.getTokens().getAccess();
 
         var endUserAgreementRequest = new EndUserAgreementRequest()
-                .institutionId(institutionId)
+                .institutionId(bankID)
                 .maxHistoricalDays(90)
                 .accessValidForDays(30)
                 .accessScope(List.of("balances", "details", "transactions"));  
@@ -44,7 +44,7 @@ public class ConnectServiceImpl implements ConnectService {
 
         var RequisitionRequest = new RequisitionRequest()
                 .redirect(URI.create("http://localhost:8080/api/integration/info"))
-                .institutionId(institutionId)
+                .institutionId(bankID)
                 .reference(reference)
                 .agreement(endUserAgreement.getId())
                 .userLanguage("PL")
@@ -63,7 +63,7 @@ public class ConnectServiceImpl implements ConnectService {
     }
 
     @Override
-    public CustomerDataDTO getInfoAboutConection(String reference) {
+    public CustomerData getInfoAboutConection(String reference) {
         String accessToken = "Bearer " + tokenService.getTokens().getAccess();
 
         var requisitionsID = mapReferenceRequisitionsID.get(reference);

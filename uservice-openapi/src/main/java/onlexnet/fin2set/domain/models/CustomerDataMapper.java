@@ -3,13 +3,13 @@ package onlexnet.fin2set.domain.models;
 import org.springframework.stereotype.Service;
 
 import onlexnet.fin2set.api.dto.EndUserAgreementDTO;
-import onlexnet.fin2set.domain.models.CustomerDataDTO.EndUserAgreementInfo;
+import onlexnet.fin2set.domain.models.CustomerData.EndUserAgreementInfo;
 import onlexnet.fin2set.nordigen.generated.Requisition;
 
 @Service
 public class CustomerDataMapper {
 
-    public CustomerDataDTO toDto(Requisition requisition, EndUserAgreementDTO endUserAgreement) {
+    public CustomerData toDto(Requisition requisition, EndUserAgreementDTO endUserAgreement) {
 
         EndUserAgreementInfo endUserAgreementInfo = new EndUserAgreementInfo()
                 .setCreated(endUserAgreement.getCreated())
@@ -18,7 +18,7 @@ public class CustomerDataMapper {
                 .setAccessScope(endUserAgreement.getAccessScope())
                 .setAccepted(endUserAgreement.getAccepted());
 
-        return new CustomerDataDTO()
+        return new CustomerData()
                 .setId(requisition.getId())
                 .setStatus(requisition.getStatus())
                 .setInstitutionId(requisition.getInstitutionId())

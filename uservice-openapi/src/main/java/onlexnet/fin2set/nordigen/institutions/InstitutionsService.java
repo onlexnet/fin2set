@@ -2,12 +2,12 @@ package onlexnet.fin2set.nordigen.institutions;
 
 import java.util.List;
 
-import onlexnet.fin2set.api.dto.IntegrationDTO;
+import onlexnet.fin2set.domain.models.Bank;
 
 public interface InstitutionsService {
 
-    List<IntegrationDTO> getListInstitutions(String country);
+    List<Bank> getListInstitutions(String country);
 
-    IntegrationDTO getInstitution(String institutionID);
+    Bank getInstitution(String institutionID);
     
 }

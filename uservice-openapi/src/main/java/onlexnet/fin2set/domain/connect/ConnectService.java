@@ -2,12 +2,12 @@ package onlexnet.fin2set.domain.connect;
 
 import java.net.URI;
 
-import onlexnet.fin2set.domain.models.CustomerDataDTO;
+import onlexnet.fin2set.domain.models.CustomerData;
 
 public interface ConnectService {
 
-    URI createLinkToConnect(String institutionId);
+    URI createLinkToConnect(String bankID);
 
-    CustomerDataDTO getInfoAboutConection(String reference);
+    CustomerData getInfoAboutConection(String reference);
     
 }

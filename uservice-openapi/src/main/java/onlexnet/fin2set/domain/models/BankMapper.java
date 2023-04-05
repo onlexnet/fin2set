@@ -1,4 +1,4 @@
-package onlexnet.fin2set.api.dto;
+package onlexnet.fin2set.domain.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +9,10 @@ import onlexnet.fin2set.api.dto.enum_dto.CountryEnumDTO;
 import onlexnet.fin2set.nordigen.generated.Integration;
 
 @Service
-public class IntegrationMapper {
+public class BankMapper {
     
-    public IntegrationDTO toDTO(Integration integration) {
-        return new IntegrationDTO()
+    public Bank toDTO(Integration integration) {
+        return new Bank()
         .setId(integration.getId())
         .setName(integration.getName())
         .setBic(integration.getBic())
@@ -21,8 +21,8 @@ public class IntegrationMapper {
         .setLogo(integration.getLogo());
     }
 
-    public List<IntegrationDTO> toDTO(List<Integration> listIntegration) {
-        var list = new ArrayList<IntegrationDTO>();
+    public List<Bank> toDTO(List<Integration> listIntegration) {
+        var list = new ArrayList<Bank>();
         for (Integration integration : listIntegration) {
             list.add(toDTO(integration));
         }

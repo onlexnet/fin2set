@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import onlexnet.fin2set.domain.connect.ConnectService;
-import onlexnet.fin2set.domain.models.CustomerDataDTO;
+import onlexnet.fin2set.domain.models.CustomerData;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,7 +35,7 @@ public class OnlexConnectApi {
      * execute a query that will return a complete order document
      */
     @GetMapping("/info")
-    ResponseEntity<CustomerDataDTO> getInfoAboutConection(@RequestParam(name = "ref") String reference) {
+    ResponseEntity<CustomerData> getInfoAboutConection(@RequestParam(name = "ref") String reference) {
         return ResponseEntity.ok(connectService.getInfoAboutConection(reference));
     }
 

@@ -1,4 +1,4 @@
-package onlexnet.fin2set.api.dto;
+package onlexnet.fin2set.domain.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import onlexnet.fin2set.api.dto.enum_dto.CountryEnumDTO;
 
 @Data
 @Accessors(chain = true)
-public class IntegrationDTO {
+public class Bank {
 
     @JsonProperty("id")
     private String id;

@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class CustomerDataDTO {
+public class CustomerData {
 
     @JsonProperty("id")
     private UUID id;
