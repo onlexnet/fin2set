@@ -21,6 +21,13 @@ public class AccountStepDef {
     private UUID accountFoundID;
     private Optional<BankStatement> bankStatemant;
 
+    /***
+     * 7e944232-bda9-40bc-b784-660c7ab5fe78 
+     * It is a hardcoded account number from sanbox nordigen, using it requires a standard 
+     * connection procedure. You need to use the jwt token generated from our secret id and 
+     * secret key, perform a post requisition, go to the page with the link and click the 
+     * release of consents to be able to use it.
+     */
     @Given("set accountNumberID from manually created requisition at sandbox.")
     public void set_account_number_id_from_manually_created_requisition_at_sandbox() {
         accountNumberID = UUID.fromString("7e944232-bda9-40bc-b784-660c7ab5fe78");
