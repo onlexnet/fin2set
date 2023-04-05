@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class OnlexBankStatemantMapper {
 
-    public OnlexBankStatement toOnlexBankStatement(NordigenBankStatemant nordigenBankStatemant, AccountDTO account) {
+    public BankStatement toBankStatement(NordigenBankStatemant nordigenBankStatemant, AccountDTO account) {
 
-        return new OnlexBankStatement()
+        return new BankStatement()
         .setOwnerName(account.getOwnerName())
         .setDepositName(account.getId())
         .setBookedTransactions(nordigenBankStatemant.getTransactions().getBooked());

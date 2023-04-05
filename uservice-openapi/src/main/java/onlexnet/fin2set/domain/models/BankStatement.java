@@ -9,7 +9,7 @@ import onlexnet.fin2set.domain.models.NordigenBankStatemant.Booked;
 
 @Data
 @Accessors(chain = true)
-public class OnlexBankStatement {
+public class BankStatement {
 
     private String ownerName;
     private UUID depositName;
