@@ -61,7 +61,7 @@
             <configuration>
               <!-- https://openapi-generator.tech/docs/generators/spring -->
               <generatorName>spring</generatorName>
-              <inputSpec>${project.basedir}/schema.yaml</inputSpec>
+              <inputSpec>${project.basedir}/schema.json</inputSpec>
               <apiPackage>onlexnet.fin2set.generated.api</apiPackage>
               <modelPackage>onlexnet.fin2set.generated.dto</modelPackage>
               <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
