@@ -22,7 +22,7 @@ public interface IntegrationClient {
                         @RequestHeader("Authorization") String accessToken,
                         @PathVariable("country") String country);
 
-        @GetMapping(value = "/{BankID}")
+        @GetMapping(value = "/{bankID}")
         ResponseEntity<Integration> getIntegration(
                         @RequestHeader("Authorization") String accessToken,
                         @PathVariable String bankID);
