@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import onlexnet.fin2set.nordigen.token.TokenService;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
-import onlexnet.fin2set.api.dto.PaginatedRequisitionListDTO;
-import onlexnet.fin2set.api.dto.PaginatedRequisitionListMapper;
-import onlexnet.fin2set.api.dto.RequisitionDTO;
-import onlexnet.fin2set.api.dto.RequisitionMapper;
-import onlexnet.fin2set.api.dto.SpectacularRequisitionDTO;
-import onlexnet.fin2set.api.dto.SpectacularRequisitionMapper;
+import onlexnet.fin2set.domain.models.PaginatedRequisitionListDTO;
+import onlexnet.fin2set.domain.models.PaginatedRequisitionListMapper;
+import onlexnet.fin2set.domain.models.RequisitionDTO;
+import onlexnet.fin2set.domain.models.RequisitionMapper;
+import onlexnet.fin2set.domain.models.SpectacularRequisitionDTO;
+import onlexnet.fin2set.domain.models.SpectacularRequisitionMapper;
 import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
 
 @Service

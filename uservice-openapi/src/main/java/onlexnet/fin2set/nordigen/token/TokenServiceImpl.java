@@ -4,13 +4,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import onlexnet.fin2set.api.dto.SpectacularJWTObtainDTO;
-import onlexnet.fin2set.api.dto.SpectacularJWTObtainMapper;
-import onlexnet.fin2set.api.dto.SpectacularJWTRefreshDTO;
-import onlexnet.fin2set.api.dto.SpectacularJWTRefreshMapper;
 import onlexnet.fin2set.nordigen.generated.JWTObtainPairRequest;
 import onlexnet.fin2set.nordigen.generated.JWTRefreshRequest;
 import onlexnet.fin2set.nordigen.generated.SpectacularJWTObtain;
+import onlexnet.fin2set.nordigen.generated.SpectacularJWTRefresh;
 
 @Service
 @RequiredArgsConstructor
@@ -23,33 +20,30 @@ public class TokenServiceImpl implements TokenService {
     private String secretId;
 
     private final TokenClient tokenClient;
-    private final SpectacularJWTObtainMapper spectacularJWTObtainMapper;
-    private final SpectacularJWTRefreshMapper spectacularJWTRefreshMapper;
 
     private String refreshToken;
 
     @Override
-    public SpectacularJWTObtainDTO getTokens() {
+    public SpectacularJWTObtain getTokens() {
         JWTObtainPairRequest jwtObtainPairRequest = new JWTObtainPairRequest()
                 .secretId(secretId)
                 .secretKey(secretKey);
 
-        SpectacularJWTObtain tokens = tokenClient.createTokens(jwtObtainPairRequest);
+        var tokens = tokenClient.createTokens(jwtObtainPairRequest);
         refreshToken = tokens.getRefresh();
-        return spectacularJWTObtainMapper.toDTO(tokens);
+        return tokens;
     }
 
     @Override
-    public SpectacularJWTRefreshDTO refreshAccessToken() {
+    public SpectacularJWTRefresh refreshAccessToken() {
         JWTRefreshRequest jwtRefreshRequest = new JWTRefreshRequest();
         jwtRefreshRequest.setRefresh(refreshToken);
-        var response = tokenClient.refreshAccessToken(jwtRefreshRequest);
-        return spectacularJWTRefreshMapper.toDTO(response);
+        return tokenClient.refreshAccessToken(jwtRefreshRequest);
     }
 
     @Override
     public String buildBearerAuthToken() {
-        SpectacularJWTObtainDTO spectacularJWTObtain = getTokens();
+        SpectacularJWTObtain spectacularJWTObtain = getTokens();
 
         StringBuilder sb = new StringBuilder();
         sb.append("Bearer ");

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import onlexnet.fin2set.api.dto.enum_dto.CountryEnumDTO;
+import onlexnet.fin2set.domain.models.enum_dto.CountryEnumDTO;
 import onlexnet.fin2set.nordigen.generated.Integration;
 
 @Service

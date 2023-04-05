@@ -2,7 +2,6 @@ package onlexnet.fin2set.domain.models;
 
 import org.springframework.stereotype.Service;
 
-import onlexnet.fin2set.api.dto.EndUserAgreementDTO;
 import onlexnet.fin2set.domain.models.CustomerData.EndUserAgreementInfo;
 import onlexnet.fin2set.nordigen.generated.Requisition;
 

@@ -1,4 +1,4 @@
-package onlexnet.fin2set.api.dto;
+package onlexnet.fin2set.domain.models;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
@@ -13,12 +13,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import onlexnet.fin2set.api.dto.enum_dto.CountryEnumDTO;
-import onlexnet.fin2set.api.dto.enum_dto.Status1c5EnumDTO;
+import onlexnet.fin2set.domain.models.enum_dto.CountryEnumDTO;
+import onlexnet.fin2set.domain.models.enum_dto.Status1c5EnumDTO;
 
 @Data
 @Accessors(chain = true)
-public class SpectacularRequisitionDTO {
+public class RequisitionDTO {
 
     @JsonProperty("id")
     private UUID id;
@@ -44,7 +44,7 @@ public class SpectacularRequisitionDTO {
 
     @JsonProperty("accounts")
     @Valid
-    private List<Object> accounts;
+    private List<UUID> accounts;
 
     @JsonProperty("user_language")
     private CountryEnumDTO userLanguage;

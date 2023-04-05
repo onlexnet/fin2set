@@ -1,19 +1,19 @@
 package onlexnet.fin2set.nordigen.token;
 
-import onlexnet.fin2set.api.dto.SpectacularJWTObtainDTO;
-import onlexnet.fin2set.api.dto.SpectacularJWTRefreshDTO;
+import onlexnet.fin2set.nordigen.generated.SpectacularJWTObtain;
+import onlexnet.fin2set.nordigen.generated.SpectacularJWTRefresh;
 
 public interface TokenService {
 
     /**
      * @return Access token and refresh token
      */
-    SpectacularJWTObtainDTO getTokens();
+    SpectacularJWTObtain getTokens();
 
     /**
      * @return new access token
      */
-    SpectacularJWTRefreshDTO refreshAccessToken();
+    SpectacularJWTRefresh refreshAccessToken();
 
     /**
      * Get new token and return Bearer access token

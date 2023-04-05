@@ -1,4 +1,4 @@
-package onlexnet.fin2set.api.dto;
+package onlexnet.fin2set.domain.models;
 
 import java.util.ArrayList;
 import java.util.List;

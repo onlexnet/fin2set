@@ -1,10 +1,7 @@
-package onlexnet.fin2set.api.dto;
+package onlexnet.fin2set.domain.models;
 
 import java.time.OffsetDateTime;
-import java.util.List;
 import java.util.UUID;
-
-import javax.validation.Valid;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,10 +9,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import onlexnet.fin2set.domain.models.enum_dto.AccountStatusEnumDTO;
 
 @Data
 @Accessors(chain = true)
-public class EndUserAgreementDTO {
+public class AccountDTO {
 
     @JsonProperty("id")
     private UUID id;
@@ -24,20 +22,19 @@ public class EndUserAgreementDTO {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private OffsetDateTime created;
 
+    @JsonProperty("last_accessed")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private OffsetDateTime lastAccessed;
+    @JsonProperty("iban")
+    private String iban;
+
     @JsonProperty("institution_id")
     private String institutionId;
 
-    @JsonProperty("max_historical_days")
-    private Integer maxHistoricalDays;
+    @JsonProperty("status")
+    private AccountStatusEnumDTO status;
 
-    @JsonProperty("access_valid_for_days")
-    private Integer accessValidForDays;
+    @JsonProperty("owner_name")
+    private String ownerName;
 
-    @JsonProperty("access_scope")
-    @Valid
-    private List<String> accessScope;
-
-    @JsonProperty("accepted")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private OffsetDateTime accepted;
 }

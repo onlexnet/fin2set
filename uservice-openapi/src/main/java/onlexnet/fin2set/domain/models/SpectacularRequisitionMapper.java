@@ -1,9 +1,9 @@
-package onlexnet.fin2set.api.dto;
+package onlexnet.fin2set.domain.models;
 
 import org.springframework.stereotype.Service;
 
-import onlexnet.fin2set.api.dto.enum_dto.CountryEnumDTO;
-import onlexnet.fin2set.api.dto.enum_dto.Status1c5EnumDTO;
+import onlexnet.fin2set.domain.models.enum_dto.CountryEnumDTO;
+import onlexnet.fin2set.domain.models.enum_dto.Status1c5EnumDTO;
 import onlexnet.fin2set.nordigen.generated.SpectacularRequisition;
 
 @Service

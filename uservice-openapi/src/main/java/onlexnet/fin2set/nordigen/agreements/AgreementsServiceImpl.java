@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import onlexnet.fin2set.nordigen.token.TokenService;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
-import onlexnet.fin2set.api.dto.EndUserAgreementDTO;
-import onlexnet.fin2set.api.dto.EndUserAgreementMapper;
-import onlexnet.fin2set.api.dto.PaginatedEndUserAgreementListDTO;
-import onlexnet.fin2set.api.dto.PaginatedEndUserAgreementsListMapper;
+import onlexnet.fin2set.domain.models.EndUserAgreementDTO;
+import onlexnet.fin2set.domain.models.EndUserAgreementMapper;
+import onlexnet.fin2set.domain.models.PaginatedEndUserAgreementListDTO;
+import onlexnet.fin2set.domain.models.PaginatedEndUserAgreementsListMapper;
 import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
 
 @Service

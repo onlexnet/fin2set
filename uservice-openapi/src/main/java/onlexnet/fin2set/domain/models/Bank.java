@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import onlexnet.fin2set.api.dto.enum_dto.CountryEnumDTO;
+import onlexnet.fin2set.domain.models.enum_dto.CountryEnumDTO;
 
 @Data
 @Accessors(chain = true)

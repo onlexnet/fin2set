@@ -1,8 +1,8 @@
-package onlexnet.fin2set.api.dto;
+package onlexnet.fin2set.domain.models;
 
 import org.springframework.stereotype.Service;
 
-import onlexnet.fin2set.api.dto.enum_dto.AccountStatusEnumDTO;
+import onlexnet.fin2set.domain.models.enum_dto.AccountStatusEnumDTO;
 import onlexnet.fin2set.nordigen.generated.Account;
 
 @Service

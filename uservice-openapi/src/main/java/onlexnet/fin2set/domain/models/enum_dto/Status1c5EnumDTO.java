@@ -1,4 +1,4 @@
-package onlexnet.fin2set.api.dto.enum_dto;
+package onlexnet.fin2set.domain.models.enum_dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

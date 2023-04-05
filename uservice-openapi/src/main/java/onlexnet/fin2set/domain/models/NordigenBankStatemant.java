@@ -1,5 +1,5 @@
 
-package onlexnet.fin2set.api.dto;
+package onlexnet.fin2set.domain.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

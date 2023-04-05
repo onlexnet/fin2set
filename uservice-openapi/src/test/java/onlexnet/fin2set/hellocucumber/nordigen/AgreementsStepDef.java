@@ -5,7 +5,7 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import onlexnet.fin2set.api.dto.EndUserAgreementDTO;
+import onlexnet.fin2set.domain.models.EndUserAgreementDTO;
 import onlexnet.fin2set.nordigen.agreements.AgreementsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

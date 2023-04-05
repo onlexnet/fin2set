@@ -3,8 +3,8 @@ package onlexnet.fin2set.nordigen.agreements;
 import java.util.Optional;
 import java.util.UUID;
 
-import onlexnet.fin2set.api.dto.EndUserAgreementDTO;
-import onlexnet.fin2set.api.dto.PaginatedEndUserAgreementListDTO;
+import onlexnet.fin2set.domain.models.EndUserAgreementDTO;
+import onlexnet.fin2set.domain.models.PaginatedEndUserAgreementListDTO;
 import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
 
 public interface AgreementsService {
