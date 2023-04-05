@@ -1,11 +1,11 @@
-package onlexnet.fin2set.domain.models.enum_dto;
+package onlexnet.fin2set.domain.models;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-public enum CountryEnumDTO {
+public enum CountryEnum {
 
   AT("AT"),
 
@@ -71,7 +71,7 @@ public enum CountryEnumDTO {
 
   private String value;
 
-  CountryEnumDTO(String value) {
+  CountryEnum(String value) {
     this.value = value;
   }
 
@@ -81,8 +81,8 @@ public enum CountryEnumDTO {
   }
 
   @JsonCreator
-  public static CountryEnumDTO fromValue(String value) {
-    for (CountryEnumDTO b : CountryEnumDTO.values()) {
+  public static CountryEnum fromValue(String value) {
+    for (CountryEnum b : CountryEnum.values()) {
       if (b.value.equals(value)) {
         return b;
       }
@@ -90,8 +90,8 @@ public enum CountryEnumDTO {
     throw new IllegalArgumentException("Unexpected value '" + value + "'");
   }
 
-  public static List<CountryEnumDTO> fromValue(List<String> listOfValue) {
-    var list = new ArrayList<CountryEnumDTO>();
+  public static List<CountryEnum> fromValue(List<String> listOfValue) {
+    var list = new ArrayList<CountryEnum>();
     for (String value : listOfValue) {
         list.add(fromValue(value));
     }

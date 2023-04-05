@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import onlexnet.fin2set.domain.models.enum_dto.CountryEnumDTO;
 
 @Data
 @Accessors(chain = true)
@@ -29,7 +28,7 @@ public class Bank {
 
     @JsonProperty("countries")
     @Valid
-    private List<CountryEnumDTO> countries = new ArrayList<>();
+    private List<CountryEnum> countries = new ArrayList<>();
 
     @JsonProperty("logo")
     private String logo;

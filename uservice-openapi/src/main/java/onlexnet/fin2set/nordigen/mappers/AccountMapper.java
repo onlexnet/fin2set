@@ -2,7 +2,7 @@ package onlexnet.fin2set.nordigen.mappers;
 
 import lombok.experimental.UtilityClass;
 import onlexnet.fin2set.domain.models.Account;
-import onlexnet.fin2set.domain.models.enum_dto.AccountStatusEnumDTO;
+import onlexnet.fin2set.domain.models.AccountStatusEnum;
 
 @UtilityClass
 public class AccountMapper {
@@ -14,7 +14,7 @@ public class AccountMapper {
         .setLastAccessed(account.getLastAccessed())
         .setIban(account.getIban())
         .setBankId(account.getInstitutionId())
-        .setStatus(AccountStatusEnumDTO.fromValue(account.getStatus().getValue()))
+        .setStatus(AccountStatusEnum.fromValue(account.getStatus().getValue()))
         .setOwnerName(account.getOwnerName());
     }
     

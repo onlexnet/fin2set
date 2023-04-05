@@ -1,9 +1,9 @@
-package onlexnet.fin2set.domain.models.enum_dto;
+package onlexnet.fin2set.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum AccountStatusEnumDTO {
+public enum AccountStatusEnum {
 
     DISCOVERED("DISCOVERED"),
 
@@ -17,7 +17,7 @@ public enum AccountStatusEnumDTO {
 
     private String value;
 
-    AccountStatusEnumDTO(String value) {
+    AccountStatusEnum(String value) {
         this.value = value;
     }
 
@@ -32,8 +32,8 @@ public enum AccountStatusEnumDTO {
     }
 
     @JsonCreator
-    public static AccountStatusEnumDTO fromValue(String value) {
-        for (AccountStatusEnumDTO b : AccountStatusEnumDTO.values()) {
+    public static AccountStatusEnum fromValue(String value) {
+        for (AccountStatusEnum b : AccountStatusEnum.values()) {
             if (b.value.equals(value)) {
                 return b;
             }

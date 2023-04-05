@@ -5,7 +5,7 @@ import java.util.List;
 
 import lombok.experimental.UtilityClass;
 import onlexnet.fin2set.domain.models.Bank;
-import onlexnet.fin2set.domain.models.enum_dto.CountryEnumDTO;
+import onlexnet.fin2set.domain.models.CountryEnum;
 import onlexnet.fin2set.nordigen.generated.Integration;
 
 @UtilityClass
@@ -17,7 +17,7 @@ public class BankMapper {
         .setName(integration.getName())
         .setBic(integration.getBic())
         .setTransactionTotalDays(integration.getTransactionTotalDays())
-        .setCountries(CountryEnumDTO.fromValue(integration.getCountries()))
+        .setCountries(CountryEnum.fromValue(integration.getCountries()))
         .setLogo(integration.getLogo());
     }
 

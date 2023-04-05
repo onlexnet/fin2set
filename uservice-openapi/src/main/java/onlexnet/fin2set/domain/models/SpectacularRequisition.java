@@ -13,8 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import onlexnet.fin2set.domain.models.enum_dto.CountryEnumDTO;
-import onlexnet.fin2set.domain.models.enum_dto.Status1c5EnumDTO;
 
 @Data
 @Accessors(chain = true)
@@ -31,7 +29,7 @@ public class SpectacularRequisition {
     private URI redirect;
 
     @JsonProperty("status")
-    private Status1c5EnumDTO status;
+    private Status1c5Enum status;
 
     @JsonProperty("Bank_id")
     private String BankId;
@@ -47,7 +45,7 @@ public class SpectacularRequisition {
     private List<Object> accounts;
 
     @JsonProperty("user_language")
-    private CountryEnumDTO userLanguage;
+    private CountryEnum userLanguage;
 
     @JsonProperty("link")
     private URI link;

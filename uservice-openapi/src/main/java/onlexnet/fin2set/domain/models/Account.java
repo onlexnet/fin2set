@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import onlexnet.fin2set.domain.models.enum_dto.AccountStatusEnumDTO;
 
 @Data
 @Accessors(chain = true)
@@ -32,7 +31,7 @@ public class Account {
     private String BankId;
 
     @JsonProperty("status")
-    private AccountStatusEnumDTO status;
+    private AccountStatusEnum status;
 
     @JsonProperty("owner_name")
     private String ownerName;

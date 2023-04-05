@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.experimental.UtilityClass;
+import onlexnet.fin2set.domain.models.CountryEnum;
 import onlexnet.fin2set.domain.models.Requisition;
-import onlexnet.fin2set.domain.models.enum_dto.CountryEnumDTO;
-import onlexnet.fin2set.domain.models.enum_dto.Status1c5EnumDTO;
+import onlexnet.fin2set.domain.models.Status1c5Enum;
 
 @UtilityClass
 public class RequisitionMapper {
@@ -16,12 +16,12 @@ public class RequisitionMapper {
         .setId(requisition.getId())
         .setCreated(requisition.getCreated())
         .setRedirect(requisition.getRedirect())
-        .setStatus(Status1c5EnumDTO.fromValue(requisition.getStatus().getValue()))
+        .setStatus(Status1c5Enum.fromValue(requisition.getStatus().getValue()))
         .setBankId(requisition.getInstitutionId())
         .setAgreement(requisition.getAgreement())
         .setReference(requisition.getReference())
         .setAccounts(requisition.getAccounts())
-        .setUserLanguage(CountryEnumDTO.fromValue(requisition.getUserLanguage()))
+        .setUserLanguage(CountryEnum.fromValue(requisition.getUserLanguage()))
         .setLink(requisition.getLink())
         .setSsn(requisition.getSsn())
         .setAccountSelection(requisition.getAccountSelection())
