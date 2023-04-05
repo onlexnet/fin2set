@@ -4,3 +4,5 @@ spring:
     pathmatch:
       matching-strategy: ant-path-matcher
 
+  main:
+    banner-mode: "off"
