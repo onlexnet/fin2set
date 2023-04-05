@@ -6,11 +6,10 @@
     <version>3.0.5</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
-  <groupId>onlexnet</groupId>
-  <artifactId>fin2set</artifactId>
+  <groupId>onlexnet.fin2set</groupId>
+  <artifactId>openapi-server</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>fin2set</name>
-  <description>OpenAPI for Fin2Set</description>
+  <description>OpenAPI for Fin2Set - Server</description>
   <properties>
     <java.version>17</java.version>
   </properties>
