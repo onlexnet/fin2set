@@ -24,7 +24,7 @@ public class AgreementsStepDef {
     public void create_new_agreement_from_example() {
 
         var endUserAgreementRequest = new EndUserAgreementRequest()
-                .BankId("REVOLUT_REVOGB21")
+                .institutionId("REVOLUT_REVOGB21")
                 .maxHistoricalDays(90)
                 .accessValidForDays(30)
                 .accessScope(List.of("balances", "details", "transactions"));  

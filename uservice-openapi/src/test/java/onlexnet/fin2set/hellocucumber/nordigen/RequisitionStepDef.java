@@ -33,7 +33,7 @@ public class RequisitionStepDef {
     public void create_new_agreement_for_requisition() {
 
         var endUserAgreementRequest = new EndUserAgreementRequest()
-                .BankId("REVOLUT_REVOGB21")
+                .institutionId("REVOLUT_REVOGB21")
                 .maxHistoricalDays(90)
                 .accessValidForDays(30)
                 .accessScope(List.of("balances", "details", "transactions"));
@@ -46,7 +46,7 @@ public class RequisitionStepDef {
 
         var requisitionRequest = new RequisitionRequest()
                 .redirect(URI.create("http://localhost:8080/api/integration/info"))
-                .BankId("REVOLUT_REVOGB21")
+                .institutionId("REVOLUT_REVOGB21")
                 .reference(UUID.randomUUID().toString())
                 .agreement(createdAgreementID)
                 .userLanguage("PL")

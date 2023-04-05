@@ -6,22 +6,22 @@ import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import onlexnet.fin2set.domain.models.Bank;
-import onlexnet.fin2set.nordigen.Banks.BanksService;
+import onlexnet.fin2set.nordigen.integration.IntegrationService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class BanksStepDef {
+public class IntegrationStepDef {
 
     @Autowired
-    private BanksService BanksService;
+    private IntegrationService integrationService;
 
     private Bank randomBank;
     private Bank findedBank;
 
     @Given("get list all Banks from poland and save random Bank.")
     public void get_list_all_Banks_from_poland_and_save_random_Bank() {
-        var Banks = BanksService.getListBanks("pl");
+        var Banks = integrationService.getListBanks("pl");
         
         var rand = new Random();
         randomBank = Banks.get(rand.nextInt(Banks.size()));
@@ -30,7 +30,7 @@ public class BanksStepDef {
     @When("go find saved object.")
     public void go_find_saved_object() {
 
-        findedBank = BanksService.getBank(randomBank.getId());
+        findedBank = integrationService.getBank(randomBank.getId());
     }
 
     @Then("check if the objects is the same.")

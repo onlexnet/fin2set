@@ -31,7 +31,7 @@ public class Program {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.paths(PathSelectors.ant("/api/**")) // Provides endpoints that meet the condition
-				.apis((RequestHandlerSelectors.basePackage("dj"))) // Looking and share endpoints in folder "dj"
+				.apis((RequestHandlerSelectors.basePackage("onlexnet.fin2set"))) // Looking and share endpoints in folder "dj"
 				.build()
 				.apiInfo(createApiInfo());
 	}

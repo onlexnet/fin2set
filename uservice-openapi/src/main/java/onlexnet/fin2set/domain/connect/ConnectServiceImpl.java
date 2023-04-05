@@ -8,21 +8,18 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
 import onlexnet.fin2set.domain.models.CustomerData;
 import onlexnet.fin2set.domain.models.CustomerDataMapper;
 import onlexnet.fin2set.nordigen.agreements.AgreementsService;
-import onlexnet.fin2set.nordigen.requistions.RequisitionsClient;
-import onlexnet.fin2set.nordigen.requistions.RequisitionsService;
-import onlexnet.fin2set.nordigen.token.TokenService;
-import lombok.AllArgsConstructor;
 import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
 import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
+import onlexnet.fin2set.nordigen.requistions.RequisitionsService;
 
 @Service
 @AllArgsConstructor
 public class ConnectServiceImpl implements ConnectService {
 
-    private final TokenService tokenService;
     private final RequisitionsService requisitionsService;
     private final AgreementsService agreementsService;
 
@@ -32,7 +29,7 @@ public class ConnectServiceImpl implements ConnectService {
     public URI createLinkToConnect(String bankID) {
 
         var endUserAgreementRequest = new EndUserAgreementRequest()
-                .bankId(bankID)
+                .institutionId(bankID)
                 .maxHistoricalDays(90)
                 .accessValidForDays(30)
                 .accessScope(List.of("balances", "details", "transactions"));  
@@ -43,7 +40,7 @@ public class ConnectServiceImpl implements ConnectService {
 
         var requisitionRequest = new RequisitionRequest()
                 .redirect(URI.create("http://localhost:8080/api/integration/info"))
-                .bankId(bankID)
+                .institutionId(bankID)
                 .reference(reference)
                 .agreement(endUserAgreement.getId())
                 .userLanguage("PL")

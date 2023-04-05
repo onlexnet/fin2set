@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import feign.Headers;
 import onlexnet.fin2set.nordigen.generated.Integration;
 
-@FeignClient(value = "Banks", url = "https://ob.nordigen.com/api/v2/Banks")
+@FeignClient(value = "Banks", url = "https://ob.nordigen.com/api/v2/institutions")
 @Headers({
                 "accept: application/json",
                 "Content-Type: application/json" })

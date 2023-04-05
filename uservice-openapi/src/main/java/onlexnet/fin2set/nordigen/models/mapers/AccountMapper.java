@@ -13,7 +13,7 @@ public class AccountMapper {
         .setCreated(account.getCreated())
         .setLastAccessed(account.getLastAccessed())
         .setIban(account.getIban())
-        .setBankId(account.getBankId())
+        .setBankId(account.getInstitutionId())
         .setStatus(AccountStatusEnumDTO.fromValue(account.getStatus().getValue()))
         .setOwnerName(account.getOwnerName());
     }

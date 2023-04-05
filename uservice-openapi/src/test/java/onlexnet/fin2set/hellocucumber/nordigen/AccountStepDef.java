@@ -1,15 +1,16 @@
 package onlexnet.fin2set.hellocucumber.nordigen;
 
+import java.util.Optional;
 import java.util.UUID;
 
-import org.apache.http.HttpStatus;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import onlexnet.fin2set.nordigen.accounts.AccountService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import onlexnet.fin2set.domain.models.BankStatement;
+import onlexnet.fin2set.nordigen.accounts.AccountService;
 
 public class AccountStepDef {
 
@@ -18,7 +19,7 @@ public class AccountStepDef {
 
     private UUID accountNumberID;
     private UUID accountFoundID;
-    private int statusCode;
+    private Optional<BankStatement> bankStatemant;
 
     @Given("set accountNumberID from manually created requisition at sandbox.")
     public void set_account_number_id_from_manually_created_requisition_at_sandbox() {
@@ -32,7 +33,7 @@ public class AccountStepDef {
 
     @When("use endpoint transaction.")
     public void use_endpoint_transaction() {
-        statusCode = accountService.getTransactions(accountNumberID).getStatusCodeValue();
+        bankStatemant = Optional.of(accountService.getTransactions(accountNumberID));
     }
 
     @Then("the ID of the found object should match the set one.")
@@ -42,8 +43,7 @@ public class AccountStepDef {
 
     @Then("status code should be OK.")
     public void status_code_should_be_ok() {
-        Assertions.assertThat(statusCode).isEqualTo(HttpStatus.SC_OK);
-        statusCode = 0;
+        Assertions.assertThat(bankStatemant).isNotEmpty();
     }
 
 }

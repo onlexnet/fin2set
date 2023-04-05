@@ -212,7 +212,7 @@
                                     "RateLimitError": {
                                         "value": {
                                             "summary": "Couldn't update account balances",
-                                            "detail": "Daily request limit set by the Bank has been exceeded.",
+                                            "detail": "Daily request limit set by the Institution has been exceeded.",
                                             "type": "RateLimitError",
                                             "status_code": 429
                                         },
@@ -382,7 +382,7 @@
                                     "UnknownRequestError": {
                                         "value": {
                                             "summary": "Couldn't update account balances",
-                                            "detail": "Request to Bank returned an error",
+                                            "detail": "Request to Institution returned an error",
                                             "type": "UnknownRequestError",
                                             "status_code": 500
                                         },
@@ -441,7 +441,7 @@
                                     "ServiceError": {
                                         "value": {
                                             "summary": "Couldn't update account balances",
-                                            "detail": "Bank service unavailable",
+                                            "detail": "Institution service unavailable",
                                             "type": "ServiceError",
                                             "status_code": 503
                                         },
@@ -451,7 +451,7 @@
                                     "ConnectionError": {
                                         "value": {
                                             "summary": "Couldn't update account balances",
-                                            "detail": "Couldn't connect to Bank",
+                                            "detail": "Couldn't connect to Institution",
                                             "type": "ConnectionError",
                                             "status_code": 503
                                         },
@@ -577,7 +577,7 @@
                                     "RateLimitError": {
                                         "value": {
                                             "summary": "Couldn't update account details",
-                                            "detail": "Daily request limit set by the Bank has been exceeded.",
+                                            "detail": "Daily request limit set by the Institution has been exceeded.",
                                             "type": "RateLimitError",
                                             "status_code": 429
                                         },
@@ -747,7 +747,7 @@
                                     "UnknownRequestError": {
                                         "value": {
                                             "summary": "Couldn't update account details",
-                                            "detail": "Request to Bank returned an error",
+                                            "detail": "Request to Institution returned an error",
                                             "type": "UnknownRequestError",
                                             "status_code": 500
                                         },
@@ -806,7 +806,7 @@
                                     "ServiceError": {
                                         "value": {
                                             "summary": "Couldn't update account details",
-                                            "detail": "Bank service unavailable",
+                                            "detail": "Institution service unavailable",
                                             "type": "ServiceError",
                                             "status_code": 503
                                         },
@@ -816,7 +816,7 @@
                                     "ConnectionError": {
                                         "value": {
                                             "summary": "Couldn't update account details",
-                                            "detail": "Couldn't connect to Bank",
+                                            "detail": "Couldn't connect to Institution",
                                             "type": "ConnectionError",
                                             "status_code": 503
                                         },
@@ -963,7 +963,7 @@
                                     "RateLimitError": {
                                         "value": {
                                             "summary": "Couldn't update account transactions",
-                                            "detail": "Daily request limit set by the Bank has been exceeded.",
+                                            "detail": "Daily request limit set by the Institution has been exceeded.",
                                             "type": "RateLimitError",
                                             "status_code": 429
                                         },
@@ -1133,7 +1133,7 @@
                                     "UnknownRequestError": {
                                         "value": {
                                             "summary": "Couldn't update account transactions",
-                                            "detail": "Request to Bank returned an error",
+                                            "detail": "Request to Institution returned an error",
                                             "type": "UnknownRequestError",
                                             "status_code": 500
                                         },
@@ -1192,7 +1192,7 @@
                                     "ServiceError": {
                                         "value": {
                                             "summary": "Couldn't update account transactions",
-                                            "detail": "Bank service unavailable",
+                                            "detail": "Institution service unavailable",
                                             "type": "ServiceError",
                                             "status_code": 503
                                         },
@@ -1202,7 +1202,7 @@
                                     "ConnectionError": {
                                         "value": {
                                             "summary": "Couldn't update account transactions",
-                                            "detail": "Couldn't connect to Bank",
+                                            "detail": "Couldn't connect to Institution",
                                             "type": "ConnectionError",
                                             "status_code": 503
                                         },
@@ -1545,7 +1545,7 @@
                                     "RateLimitError": {
                                         "value": {
                                             "summary": "Couldn't update account transactions",
-                                            "detail": "Daily request limit set by the Bank has been exceeded.",
+                                            "detail": "Daily request limit set by the Institution has been exceeded.",
                                             "type": "RateLimitError",
                                             "status_code": 429
                                         },
@@ -1715,7 +1715,7 @@
                                     "UnknownRequestError": {
                                         "value": {
                                             "summary": "Couldn't update account transactions",
-                                            "detail": "Request to Bank returned an error",
+                                            "detail": "Request to Institution returned an error",
                                             "type": "UnknownRequestError",
                                             "status_code": 500
                                         },
@@ -1774,7 +1774,7 @@
                                     "ServiceError": {
                                         "value": {
                                             "summary": "Couldn't update account transactions",
-                                            "detail": "Bank service unavailable",
+                                            "detail": "Institution service unavailable",
                                             "type": "ServiceError",
                                             "status_code": 503
                                         },
@@ -1784,7 +1784,7 @@
                                     "ConnectionError": {
                                         "value": {
                                             "summary": "Couldn't update account transactions",
-                                            "detail": "Couldn't connect to Bank",
+                                            "detail": "Couldn't connect to Institution",
                                             "type": "ConnectionError",
                                             "status_code": 503
                                         },
@@ -2041,16 +2041,16 @@
                                     "description": "Unspecified response body"
                                 },
                                 "examples": {
-                                    "BankFieldErrors": {
+                                    "InstitutionFieldErrors": {
                                         "value": {
-                                            "Bank_id": {
-                                                "summary": "Unknown Bank ID $Bank_ID",
-                                                "detail": "Get Bank IDs from /Banks/?country={$COUNTRY_CODE}"
+                                            "institution_id": {
+                                                "summary": "Unknown Institution ID $INSTITUTION_ID",
+                                                "detail": "Get Institution IDs from /institutions/?country={$COUNTRY_CODE}"
                                             },
                                             "status_code": 400
                                         },
-                                        "summary": "Bank field errors",
-                                        "description": "Errors related to 'Bank' field."
+                                        "summary": "Institution field errors",
+                                        "description": "Errors related to 'institution' field."
                                     },
                                     "AccessScopeFieldErrors": {
                                         "value": {
@@ -2060,12 +2060,12 @@
                                                     "detail": "Choose one or several from ['balances', 'details', 'transactions']"
                                                 },
                                                 {
-                                                    "summary": "Bank access scope dependencies error",
-                                                    "detail": "For this Bank the following scopes are required together: ['balances', 'details']"
+                                                    "summary": "Institution access scope dependencies error",
+                                                    "detail": "For this institution the following scopes are required together: ['balances', 'details']"
                                                 },
                                                 {
-                                                    "summary": "Bank access scope dependencies error",
-                                                    "detail": "The following scopes are mandatory for this Bank: ['transactions']"
+                                                    "summary": "Institution access scope dependencies error",
+                                                    "detail": "The following scopes are mandatory for this institution: ['transactions']"
                                                 }
                                             ],
                                             "status_code": 400
@@ -2102,8 +2102,8 @@
                                     "AgreementFieldErrors": {
                                         "value": {
                                             "agreement": {
-                                                "summary": "Incorrect Bank ID $Bank_ID",
-                                                "detail": "Provided Bank ID: '$Bank_ID' for requisition does not match EUA Bank ID '$EUA_Bank_ID'. Please provide correct Bank ID: '$EUA_Bank_ID'"
+                                                "summary": "Incorrect Institution ID $INSTITUTION_ID",
+                                                "detail": "Provided Institution ID: '$INSTITUTION_ID' for requisition does not match EUA institution ID '$EUA_INSTITUTION_ID'. Please provide correct institution ID: '$EUA_INSTITUTION_ID'"
                                             },
                                             "status_code": 400
                                         },
@@ -2680,10 +2680,10 @@
                 }
             }
         },
-        "/api/v2/Banks/": {
+        "/api/v2/institutions/": {
             "get": {
-                "operationId": "retrieve all supported Banks in a given country",
-                "description": "List all available Banks",
+                "operationId": "retrieve all supported Institutions in a given country",
+                "description": "List all available institutions",
                 "parameters": [
                     {
                         "in": "query",
@@ -2867,7 +2867,7 @@
                     }
                 ],
                 "tags": [
-                    "Banks"
+                    "institutions"
                 ],
                 "responses": {
                     "200": {
@@ -2880,7 +2880,7 @@
                                     }
                                 },
                                 "examples": {
-                                    "SupportedBanks": {
+                                    "SupportedInstitutions": {
                                         "value": [
                                             {
                                                 "id": "N26_NTSBDEB1",
@@ -2958,13 +2958,13 @@
                                                 ]
                                             }
                                         ],
-                                        "summary": "Supported Banks",
-                                        "description": "some of supported Banks"
+                                        "summary": "Supported Institutions",
+                                        "description": "some of supported Institutions"
                                     }
                                 }
                             }
                         },
-                        "description": "list of supported Banks in the country"
+                        "description": "list of supported Institutions in the country"
                     },
                     "400": {
                         "content": {
@@ -3095,10 +3095,10 @@
                 }
             }
         },
-        "/api/v2/Banks/{id}/": {
+        "/api/v2/institutions/{id}/": {
             "get": {
-                "operationId": "retrieve Bank",
-                "description": "Get details about a specific Bank",
+                "operationId": "retrieve institution",
+                "description": "Get details about a specific Institution",
                 "parameters": [
                     {
                         "in": "path",
@@ -3111,13 +3111,13 @@
                             "N26": {
                                 "value": "N26_NTSBDEB1",
                                 "summary": "N26",
-                                "description": "Nordigen's Bank ID for N26"
+                                "description": "Nordigen's Institution ID for N26"
                             }
                         }
                     }
                 ],
                 "tags": [
-                    "Banks"
+                    "institutions"
                 ],
                 "responses": {
                     "200": {
@@ -3213,7 +3213,7 @@
                                 }
                             }
                         },
-                        "description": "Retrieve Bank by id"
+                        "description": "Retrieve institution by id"
                     },
                     "404": {
                         "content": {
@@ -4144,14 +4144,14 @@
                 }
             }
         },
-        "/api/v2/payments/fields/{Bank_id}/": {
+        "/api/v2/payments/fields/{institution_id}/": {
             "get": {
-                "operationId": "list minimum required fields for Bank",
-                "description": "List minimum required fields for Bank",
+                "operationId": "list minimum required fields for institution",
+                "description": "List minimum required fields for institution",
                 "parameters": [
                     {
                         "in": "path",
-                        "name": "Bank_id",
+                        "name": "institution_id",
                         "schema": {
                             "type": "string"
                         },
@@ -4175,7 +4175,7 @@
                                         "value": {
                                             "single-payment": {
                                                 "SCT": {
-                                                    "Bank_id": "<Bank_id>",
+                                                    "institution_id": "<institution_id>",
                                                     "payment_product": "SCT",
                                                     "creditor_account": "<creditor_account_id>",
                                                     "instructed_amount": {
@@ -4189,7 +4189,7 @@
                                             }
                                         },
                                         "summary": "Minimum required fields",
-                                        "description": "Fields to be used in API request for specific Bank"
+                                        "description": "Fields to be used in API request for specific Institution"
                                     }
                                 }
                             }
@@ -4499,8 +4499,8 @@
                                         "value": {
                                             "agreement": [
                                                 {
-                                                    "summary": "Unknown Bank ID $ASPSP_ID",
-                                                    "detail": "Get Bank IDs from /Banks/?country={$COUNTRY_CODE}"
+                                                    "summary": "Unknown Institution ID $ASPSP_ID",
+                                                    "detail": "Get Institution IDs from /institutions/?country={$COUNTRY_CODE}"
                                                 },
                                                 {
                                                     "summary": "Invalid EndUserAgreement ID",
@@ -4533,7 +4533,7 @@
                                         "value": {
                                             "ssn": {
                                                 "summary": "SSN verification not supported",
-                                                "detail": "SSN verification not supported for $Bank_ID"
+                                                "detail": "SSN verification not supported for $INSTITUTION_ID"
                                             },
                                             "status_code": 400
                                         },
@@ -4544,23 +4544,23 @@
                                         "value": {
                                             "account_selection": {
                                                 "summary": "Account selection not supported",
-                                                "detail": "Account selection not supported for $Bank_ID"
+                                                "detail": "Account selection not supported for $INSTITUTION_ID"
                                             },
                                             "status_code": 400
                                         },
                                         "summary": "Account selection field errors",
                                         "description": "Errors related to 'account_selection' field."
                                     },
-                                    "BankFieldErrors": {
+                                    "InstitutionFieldErrors": {
                                         "value": {
-                                            "Bank_id": {
-                                                "summary": "Unknown Bank ID $Bank_ID",
-                                                "detail": "Get Bank IDs from /Banks/?country={$COUNTRY_CODE}"
+                                            "institution_id": {
+                                                "summary": "Unknown Institution ID $INSTITUTION_ID",
+                                                "detail": "Get Institution IDs from /institutions/?country={$COUNTRY_CODE}"
                                             },
                                             "status_code": 400
                                         },
-                                        "summary": "Bank field errors",
-                                        "description": "Errors related to 'Bank' field."
+                                        "summary": "Institution field errors",
+                                        "description": "Errors related to 'institution' field."
                                     },
                                     "UnknownFields": {
                                         "value": {
@@ -4576,7 +4576,7 @@
                                             "redirect": [
                                                 "This field is required."
                                             ],
-                                            "Bank_id": [
+                                            "institution_id": [
                                                 "This field is required."
                                             ],
                                             "status_code": 400
@@ -5224,7 +5224,7 @@
                         "readOnly": true,
                         "description": "The Account IBAN"
                     },
-                    "Bank_id": {
+                    "institution_id": {
                         "type": "string",
                         "readOnly": true,
                         "title": "ASPSP ID",
@@ -5413,9 +5413,9 @@
                     "address_country": {
                         "$ref": "#/components/schemas/AddressCountryEnum"
                     },
-                    "Bank_id": {
+                    "institution_id": {
                         "type": "string",
-                        "description": "an Bank ID for this CreditorAccount"
+                        "description": "an Institution ID for this CreditorAccount"
                     },
                     "agent": {
                         "type": "string",
@@ -5475,9 +5475,9 @@
                     "address_country": {
                         "$ref": "#/components/schemas/AddressCountryEnum"
                     },
-                    "Bank_id": {
+                    "institution_id": {
                         "type": "string",
-                        "description": "an Bank ID for this CreditorAccount"
+                        "description": "an Institution ID for this CreditorAccount"
                     },
                     "agent": {
                         "type": "string",
@@ -5630,9 +5630,9 @@
                         "title": "Created Date",
                         "description": "The date & time at which the end user agreement was created."
                     },
-                    "Bank_id": {
+                    "institution_id": {
                         "type": "string",
-                        "description": "an Bank ID for this EUA"
+                        "description": "an Institution ID for this EUA"
                     },
                     "max_historical_days": {
                         "type": "integer",
@@ -5674,16 +5674,16 @@
                     }
                 },
                 "required": [
-                    "Bank_id"
+                    "institution_id"
                 ]
             },
             "EndUserAgreementRequest": {
                 "type": "object",
                 "description": "Represents an end-user agreement.",
                 "properties": {
-                    "Bank_id": {
+                    "institution_id": {
                         "type": "string",
-                        "description": "an Bank ID for this EUA"
+                        "description": "an Institution ID for this EUA"
                     },
                     "max_historical_days": {
                         "type": "integer",
@@ -5717,7 +5717,7 @@
                     }
                 },
                 "required": [
-                    "Bank_id"
+                    "institution_id"
                 ]
             },
             "EnduserAcceptanceDetailsRequest": {
@@ -6123,11 +6123,11 @@
                 "type": "object",
                 "description": "PaymentReadSerializer.",
                 "properties": {
-                    "Bank_id": {
+                    "institution_id": {
                         "type": "string",
                         "writeOnly": true,
                         "default": "SWEDBANK_SANDBOX_SANDLV22",
-                        "description": "Bank ID for Payment"
+                        "description": "Institution ID for Payment"
                     },
                     "payment_product": {
                         "allOf": [
@@ -6225,7 +6225,7 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true,
-                        "description": "Link to initiate authorization with Bank"
+                        "description": "Link to initiate authorization with Institution"
                     },
                     "payment_id": {
                         "type": "string",
@@ -6321,11 +6321,11 @@
                 "type": "object",
                 "description": "PaymentWriteSerializer.",
                 "properties": {
-                    "Bank_id": {
+                    "institution_id": {
                         "type": "string",
                         "writeOnly": true,
                         "default": "SWEDBANK_SANDBOX_SANDLV22",
-                        "description": "Bank ID for Payment"
+                        "description": "Institution ID for Payment"
                     },
                     "payment_product": {
                         "allOf": [
@@ -6528,9 +6528,9 @@
                         "readOnly": true,
                         "description": "status of this requisition"
                     },
-                    "Bank_id": {
+                    "institution_id": {
                         "type": "string",
-                        "description": "an Bank ID for this Requisition"
+                        "description": "an Institution ID for this Requisition"
                     },
                     "agreement": {
                         "type": "string",
@@ -6561,7 +6561,7 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true,
-                        "description": "link to initiate authorization with Bank"
+                        "description": "link to initiate authorization with Institution"
                     },
                     "ssn": {
                         "type": "string",
@@ -6580,7 +6580,7 @@
                     }
                 },
                 "required": [
-                    "Bank_id",
+                    "institution_id",
                     "redirect"
                 ]
             },
@@ -6595,9 +6595,9 @@
                         "description": "redirect URL to your application after end-user authorization with ASPSP",
                         "maxLength": 1024
                     },
-                    "Bank_id": {
+                    "institution_id": {
                         "type": "string",
-                        "description": "an Bank ID for this Requisition"
+                        "description": "an Institution ID for this Requisition"
                     },
                     "agreement": {
                         "type": "string",
@@ -6631,7 +6631,7 @@
                     }
                 },
                 "required": [
-                    "Bank_id",
+                    "institution_id",
                     "redirect"
                 ]
             },
@@ -6714,9 +6714,9 @@
                         "readOnly": true,
                         "description": "status of this requisition"
                     },
-                    "Bank_id": {
+                    "institution_id": {
                         "type": "string",
-                        "description": "an Bank ID for this Requisition"
+                        "description": "an Institution ID for this Requisition"
                     },
                     "agreement": {
                         "type": "string",
@@ -6744,7 +6744,7 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true,
-                        "description": "link to initiate authorization with Bank"
+                        "description": "link to initiate authorization with Institution"
                     },
                     "ssn": {
                         "type": "string",
@@ -6763,7 +6763,7 @@
                     }
                 },
                 "required": [
-                    "Bank_id",
+                    "institution_id",
                     "redirect"
                 ]
             },

@@ -17,7 +17,7 @@ public class RequisitionMapper {
         .setCreated(requisition.getCreated())
         .setRedirect(requisition.getRedirect())
         .setStatus(Status1c5EnumDTO.fromValue(requisition.getStatus().getValue()))
-        .setBankId(requisition.getBankId())
+        .setBankId(requisition.getInstitutionId())
         .setAgreement(requisition.getAgreement())
         .setReference(requisition.getReference())
         .setAccounts(requisition.getAccounts())

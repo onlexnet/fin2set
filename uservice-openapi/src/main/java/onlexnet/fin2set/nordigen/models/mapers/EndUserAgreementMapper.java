@@ -13,7 +13,7 @@ public class EndUserAgreementMapper {
         return new EndUserAgreement()
         .setId(endUserAgreement.getId())
         .setCreated(endUserAgreement.getCreated())
-        .setBankId(endUserAgreement.getBankId())
+        .setBankId(endUserAgreement.getInstitutionId())
         .setMaxHistoricalDays(endUserAgreement.getMaxHistoricalDays())
         .setAccessValidForDays(endUserAgreement.getAccessValidForDays())
         .setAccepted(endUserAgreement.getAccepted())

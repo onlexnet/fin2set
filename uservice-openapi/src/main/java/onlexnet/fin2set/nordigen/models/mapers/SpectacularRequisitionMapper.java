@@ -14,7 +14,7 @@ public class SpectacularRequisitionMapper {
         .setCreated(spectacularRequisition.getCreated())
         .setRedirect(spectacularRequisition.getRedirect())
         .setStatus(Status1c5EnumDTO.fromValue(spectacularRequisition.getStatus().getValue()))
-        .setBankId(spectacularRequisition.getBankId())
+        .setBankId(spectacularRequisition.getInstitutionId())
         .setAgreement(spectacularRequisition.getAgreement())
         .setReference(spectacularRequisition.getReference())
         .setAccounts(spectacularRequisition.getAccounts())
