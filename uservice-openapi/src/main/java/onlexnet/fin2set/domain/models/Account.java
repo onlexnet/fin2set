@@ -28,7 +28,7 @@ public class Account {
     private String iban;
 
     @JsonProperty("Bank_id")
-    private String BankId;
+    private String bankId;
 
     @JsonProperty("status")
     private AccountStatusEnum status;
