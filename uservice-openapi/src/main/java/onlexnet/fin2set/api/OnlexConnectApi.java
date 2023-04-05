@@ -44,8 +44,8 @@ class OnlexConnectApi {
     }
 
     @GetMapping("/connection")
-    ResponseEntity<URI> createConection(@RequestParam String BankId) {
-        return ResponseEntity.status(HttpStatus.FOUND).location(connectService.createLinkToConnect(BankId))
+    ResponseEntity<URI> createConection(@RequestParam String bankId) {
+        return ResponseEntity.status(HttpStatus.FOUND).location(connectService.createLinkToConnect(bankId))
                 .build();
     }
 

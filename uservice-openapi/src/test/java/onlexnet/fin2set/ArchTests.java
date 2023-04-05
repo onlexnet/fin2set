@@ -2,7 +2,6 @@ package onlexnet.fin2set;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;

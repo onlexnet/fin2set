@@ -25,6 +25,6 @@ public interface IntegrationClient {
         @GetMapping(value = "/{BankID}")
         ResponseEntity<Integration> getIntegration(
                         @RequestHeader("Authorization") String accessToken,
-                        @PathVariable String BankID);
+                        @PathVariable String bankID);
 
 }

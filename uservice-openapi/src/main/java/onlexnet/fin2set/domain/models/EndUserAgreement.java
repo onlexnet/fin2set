@@ -25,7 +25,7 @@ public class EndUserAgreement {
     private OffsetDateTime created;
 
     @JsonProperty("Bank_id")
-    private String BankId;
+    private String bankId;
 
     @JsonProperty("max_historical_days")
     private Integer maxHistoricalDays;
