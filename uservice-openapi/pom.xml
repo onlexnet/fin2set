@@ -398,4 +398,10 @@
     </profile>
   </profiles>
 
+  <repositories>
+    <repository>
+      <id>onlexnet.fin2set</id>
+      <url>https://maven.pkg.github.com/onlexnet/fin2set</url>
+    </repository>
+  </repositories>
 </project>
