@@ -18,7 +18,7 @@ import onlexnet.fin2set.domain.models.enum_dto.Status1c5EnumDTO;
 
 @Data
 @Accessors(chain = true)
-public class RequisitionDTO {
+public class Requisition {
 
     @JsonProperty("id")
     private UUID id;
@@ -33,8 +33,8 @@ public class RequisitionDTO {
     @JsonProperty("status")
     private Status1c5EnumDTO status;
 
-    @JsonProperty("institution_id")
-    private String institutionId;
+    @JsonProperty("Bank_id")
+    private String BankId;
 
     @JsonProperty("agreement")
     private UUID agreement;

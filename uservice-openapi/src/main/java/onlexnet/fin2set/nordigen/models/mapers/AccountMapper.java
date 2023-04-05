@@ -1,20 +1,19 @@
-package onlexnet.fin2set.domain.models;
+package onlexnet.fin2set.nordigen.models.mapers;
 
-import org.springframework.stereotype.Service;
-
+import lombok.experimental.UtilityClass;
+import onlexnet.fin2set.domain.models.Account;
 import onlexnet.fin2set.domain.models.enum_dto.AccountStatusEnumDTO;
-import onlexnet.fin2set.nordigen.generated.Account;
 
-@Service
+@UtilityClass
 public class AccountMapper {
 
-    public AccountDTO toDTO(Account account) {
-        return new AccountDTO()
+    public static Account fromDTO(onlexnet.fin2set.nordigen.generated.Account account) {
+        return new Account()  
         .setId(account.getId())
         .setCreated(account.getCreated())
         .setLastAccessed(account.getLastAccessed())
         .setIban(account.getIban())
-        .setInstitutionId(account.getInstitutionId())
+        .setBankId(account.getBankId())
         .setStatus(AccountStatusEnumDTO.fromValue(account.getStatus().getValue()))
         .setOwnerName(account.getOwnerName());
     }

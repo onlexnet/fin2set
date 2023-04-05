@@ -2,15 +2,13 @@ package onlexnet.fin2set.nordigen.accounts;
 
 import java.util.UUID;
 
-import org.springframework.http.ResponseEntity;
-
-import onlexnet.fin2set.domain.models.AccountDTO;
-import onlexnet.fin2set.domain.models.NordigenBankStatemant;
+import onlexnet.fin2set.domain.models.Account;
+import onlexnet.fin2set.domain.models.BankStatement;
 
 public interface AccountService {
 
-    AccountDTO getAccount(UUID accountNumberID);
+    Account getAccount(UUID accountNumberID);
 
-    ResponseEntity<NordigenBankStatemant> getTransactions(UUID accountNumberID);
+    BankStatement getTransactions(UUID accountNumberID);
 
 }

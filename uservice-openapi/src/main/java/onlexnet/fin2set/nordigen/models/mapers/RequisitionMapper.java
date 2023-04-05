@@ -1,24 +1,23 @@
-package onlexnet.fin2set.domain.models;
+package onlexnet.fin2set.nordigen.models.mapers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
+import lombok.experimental.UtilityClass;
+import onlexnet.fin2set.domain.models.Requisition;
 import onlexnet.fin2set.domain.models.enum_dto.CountryEnumDTO;
 import onlexnet.fin2set.domain.models.enum_dto.Status1c5EnumDTO;
-import onlexnet.fin2set.nordigen.generated.Requisition;
 
-@Service
+@UtilityClass
 public class RequisitionMapper {
 
-    public RequisitionDTO toDTO(Requisition requisition) {
-        return new RequisitionDTO()
+    public static Requisition fromDTO(onlexnet.fin2set.nordigen.generated.Requisition requisition) {
+        return new Requisition()
         .setId(requisition.getId())
         .setCreated(requisition.getCreated())
         .setRedirect(requisition.getRedirect())
         .setStatus(Status1c5EnumDTO.fromValue(requisition.getStatus().getValue()))
-        .setInstitutionId(requisition.getInstitutionId())
+        .setBankId(requisition.getBankId())
         .setAgreement(requisition.getAgreement())
         .setReference(requisition.getReference())
         .setAccounts(requisition.getAccounts())
@@ -29,10 +28,10 @@ public class RequisitionMapper {
         .setRedirectImmediate(requisition.getRedirectImmediate());
     }
 
-    public List<RequisitionDTO> toDTO(List<Requisition> listRequisitions) {
-        var list = new ArrayList<RequisitionDTO>();
-        for (Requisition requisition : listRequisitions) {
-            list.add(toDTO(requisition));
+    public static List<Requisition> fromDTO(List<onlexnet.fin2set.nordigen.generated.Requisition> listRequisitions) {
+        var list = new ArrayList<Requisition>();
+        for (onlexnet.fin2set.nordigen.generated.Requisition requisition : listRequisitions) {
+            list.add(fromDTO(requisition));
         }
         return list;
     }

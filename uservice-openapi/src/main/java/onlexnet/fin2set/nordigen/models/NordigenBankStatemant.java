@@ -1,5 +1,5 @@
 
-package onlexnet.fin2set.domain.models;
+package onlexnet.fin2set.nordigen.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

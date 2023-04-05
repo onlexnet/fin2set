@@ -3,18 +3,18 @@ package onlexnet.fin2set.nordigen.requistions;
 import java.util.Optional;
 import java.util.UUID;
 
-import onlexnet.fin2set.domain.models.PaginatedRequisitionListDTO;
-import onlexnet.fin2set.domain.models.RequisitionDTO;
-import onlexnet.fin2set.domain.models.SpectacularRequisitionDTO;
+import onlexnet.fin2set.domain.models.PaginatedRequisitionList;
+import onlexnet.fin2set.domain.models.Requisition;
+import onlexnet.fin2set.domain.models.SpectacularRequisition;
 import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
 
 public interface RequisitionsService {
 
-    PaginatedRequisitionListDTO getListAllRequisitions();
+    PaginatedRequisitionList getListAllRequisitions();
 
-    SpectacularRequisitionDTO createRequisition(RequisitionRequest requisitionRequest);
+    SpectacularRequisition createRequisition(RequisitionRequest requisitionRequest);
 
-    Optional<RequisitionDTO> getRequisition(UUID requisitionsID);
+    Optional<Requisition> getRequisition(UUID requisitionsID);
 
     void deleteRequsition(UUID requisitionsID);
 

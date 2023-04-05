@@ -1,21 +1,20 @@
-package onlexnet.fin2set.domain.models;
+package onlexnet.fin2set.nordigen.models.mapers;
 
-import org.springframework.stereotype.Service;
-
+import lombok.experimental.UtilityClass;
+import onlexnet.fin2set.domain.models.SpectacularRequisition;
 import onlexnet.fin2set.domain.models.enum_dto.CountryEnumDTO;
 import onlexnet.fin2set.domain.models.enum_dto.Status1c5EnumDTO;
-import onlexnet.fin2set.nordigen.generated.SpectacularRequisition;
 
-@Service
+@UtilityClass
 public class SpectacularRequisitionMapper {
 
-    public SpectacularRequisitionDTO toDTO(SpectacularRequisition spectacularRequisition) {
-        return new SpectacularRequisitionDTO()
+    public static SpectacularRequisition fromDTO(onlexnet.fin2set.nordigen.generated.SpectacularRequisition spectacularRequisition) {
+        return new SpectacularRequisition()
         .setId(spectacularRequisition.getId())
         .setCreated(spectacularRequisition.getCreated())
         .setRedirect(spectacularRequisition.getRedirect())
         .setStatus(Status1c5EnumDTO.fromValue(spectacularRequisition.getStatus().getValue()))
-        .setInstitutionId(spectacularRequisition.getInstitutionId())
+        .setBankId(spectacularRequisition.getBankId())
         .setAgreement(spectacularRequisition.getAgreement())
         .setReference(spectacularRequisition.getReference())
         .setAccounts(spectacularRequisition.getAccounts())

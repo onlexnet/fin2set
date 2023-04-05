@@ -1,6 +1,7 @@
 package onlexnet.fin2set.nordigen.token;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -13,13 +14,15 @@ import onlexnet.fin2set.nordigen.generated.SpectacularJWTRefresh;
 @FeignClient(value = "tokens", url = "https://ob.nordigen.com")
 @Headers({
         "accept: application/json",
-        "Content-Type: application/json"})
+        "Content-Type: application/json" })
 public interface TokenClient {
 
     @PostMapping(value = "/api/v2/token/new/")
-    SpectacularJWTObtain createTokens(@RequestBody JWTObtainPairRequest jwtObtainPairRequest);
+    ResponseEntity<SpectacularJWTObtain> createTokens(
+            @RequestBody JWTObtainPairRequest jwtObtainPairRequest);
 
     @PostMapping(value = "/api/v2/token/refresh/")
-    SpectacularJWTRefresh refreshAccessToken(@RequestBody JWTRefreshRequest jwtRefreshRequest);
-    
+    ResponseEntity<SpectacularJWTRefresh> refreshAccessToken(
+            @RequestBody JWTRefreshRequest jwtRefreshRequest);
+
 }

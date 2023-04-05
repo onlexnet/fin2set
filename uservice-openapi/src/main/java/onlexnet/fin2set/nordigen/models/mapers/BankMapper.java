@@ -1,17 +1,17 @@
-package onlexnet.fin2set.domain.models;
+package onlexnet.fin2set.nordigen.models.mapers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
+import lombok.experimental.UtilityClass;
+import onlexnet.fin2set.domain.models.Bank;
 import onlexnet.fin2set.domain.models.enum_dto.CountryEnumDTO;
 import onlexnet.fin2set.nordigen.generated.Integration;
 
-@Service
+@UtilityClass
 public class BankMapper {
     
-    public Bank toDTO(Integration integration) {
+    public static Bank fromDTO(Integration integration) {
         return new Bank()
         .setId(integration.getId())
         .setName(integration.getName())
@@ -21,10 +21,10 @@ public class BankMapper {
         .setLogo(integration.getLogo());
     }
 
-    public List<Bank> toDTO(List<Integration> listIntegration) {
+    public static List<Bank> fromDTO(List<Integration> listIntegration) {
         var list = new ArrayList<Bank>();
         for (Integration integration : listIntegration) {
-            list.add(toDTO(integration));
+            list.add(fromDTO(integration));
         }
         return list;
     }

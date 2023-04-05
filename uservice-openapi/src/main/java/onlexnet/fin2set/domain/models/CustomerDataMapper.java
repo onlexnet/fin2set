@@ -1,14 +1,12 @@
 package onlexnet.fin2set.domain.models;
 
-import org.springframework.stereotype.Service;
-
+import lombok.experimental.UtilityClass;
 import onlexnet.fin2set.domain.models.CustomerData.EndUserAgreementInfo;
-import onlexnet.fin2set.nordigen.generated.Requisition;
 
-@Service
+@UtilityClass
 public class CustomerDataMapper {
 
-    public CustomerData toDto(Requisition requisition, EndUserAgreementDTO endUserAgreement) {
+    public static CustomerData fromDTO(Requisition requisition, EndUserAgreement endUserAgreement) {
 
         EndUserAgreementInfo endUserAgreementInfo = new EndUserAgreementInfo()
                 .setCreated(endUserAgreement.getCreated())
@@ -20,7 +18,7 @@ public class CustomerDataMapper {
         return new CustomerData()
                 .setId(requisition.getId())
                 .setStatus(requisition.getStatus())
-                .setInstitutionId(requisition.getInstitutionId())
+                .setBankId(requisition.getBankId())
                 .setAccounts(requisition.getAccounts())
                 .setLink(requisition.getLink())
                 .setEndUserAgreementInfo(endUserAgreementInfo);

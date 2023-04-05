@@ -3,6 +3,7 @@ package onlexnet.fin2set.nordigen.requistions;
 import java.util.UUID;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,14 +24,21 @@ import onlexnet.fin2set.nordigen.generated.SpectacularRequisition;
 public interface RequisitionsClient {
 
         @GetMapping(value = "/")
-        PaginatedRequisitionList getListAllRequisitions(@RequestHeader("Authorization") String accessToken);
+        ResponseEntity<PaginatedRequisitionList> getListAllRequisitions(
+                        @RequestHeader("Authorization") String accessToken);
 
         @PostMapping(value = "/")
-        SpectacularRequisition createRequisition(@RequestHeader("Authorization") String accessToken, @RequestBody RequisitionRequest requisitionRequest);
+        ResponseEntity<SpectacularRequisition> createRequisition(
+                        @RequestHeader("Authorization") String accessToken,
+                        @RequestBody RequisitionRequest requisitionRequest);
 
         @GetMapping(value = "/{requisitionsID}")
-        Requisition getRequisition(@RequestHeader("Authorization") String accessToken, @PathVariable UUID requisitionsID);
+        ResponseEntity<Requisition> getRequisition(
+                        @RequestHeader("Authorization") String accessToken,
+                        @PathVariable UUID requisitionsID);
 
         @DeleteMapping(value = "/{requisitionsID}")
-        void deleteRequsition(@RequestHeader("Authorization") String accessToken, @PathVariable UUID requisitionsID);
+        ResponseEntity<Object> deleteRequsition(
+                        @RequestHeader("Authorization") String accessToken,
+                        @PathVariable UUID requisitionsID);
 }

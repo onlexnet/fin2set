@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class EndUserAgreementDTO {
+public class EndUserAgreement {
 
     @JsonProperty("id")
     private UUID id;
@@ -24,8 +24,8 @@ public class EndUserAgreementDTO {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private OffsetDateTime created;
 
-    @JsonProperty("institution_id")
-    private String institutionId;
+    @JsonProperty("Bank_id")
+    private String BankId;
 
     @JsonProperty("max_historical_days")
     private Integer maxHistoricalDays;

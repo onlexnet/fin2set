@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import onlexnet.fin2set.nordigen.token.TokenService;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
-import onlexnet.fin2set.domain.models.PaginatedRequisitionListDTO;
-import onlexnet.fin2set.domain.models.PaginatedRequisitionListMapper;
-import onlexnet.fin2set.domain.models.RequisitionDTO;
-import onlexnet.fin2set.domain.models.RequisitionMapper;
-import onlexnet.fin2set.domain.models.SpectacularRequisitionDTO;
-import onlexnet.fin2set.domain.models.SpectacularRequisitionMapper;
+import onlexnet.fin2set.domain.models.PaginatedRequisitionList;
+import onlexnet.fin2set.domain.models.Requisition;
+import onlexnet.fin2set.domain.models.SpectacularRequisition;
 import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
+import onlexnet.fin2set.nordigen.models.mapers.PaginatedRequisitionListMapper;
+import onlexnet.fin2set.nordigen.models.mapers.RequisitionMapper;
+import onlexnet.fin2set.nordigen.models.mapers.SpectacularRequisitionMapper;
 
 @Service
 @RequiredArgsConstructor
@@ -23,30 +23,27 @@ public class RequisitionsServiceImpl implements RequisitionsService {
 
     private final TokenService tokenService;
     private final RequisitionsClient requisitionsClient;
-    private final PaginatedRequisitionListMapper paginatedRequisitionListMapper;
-    private final RequisitionMapper requisitionMapper;
-    private final SpectacularRequisitionMapper spectacularRequisitionMapper;
 
     @Override
-    public PaginatedRequisitionListDTO getListAllRequisitions() {
+    public PaginatedRequisitionList getListAllRequisitions() {
         String accessToken = tokenService.buildBearerAuthToken();
         var response = requisitionsClient.getListAllRequisitions(accessToken);
-        return paginatedRequisitionListMapper.toDTO(response);
+        return PaginatedRequisitionListMapper.fromDTO(response.getBody());
     }
 
     @Override
-    public SpectacularRequisitionDTO createRequisition(RequisitionRequest requisitionRequest) {
+    public SpectacularRequisition createRequisition(RequisitionRequest requisitionRequest) {
         String accessToken = tokenService.buildBearerAuthToken();
         var response = requisitionsClient.createRequisition(accessToken, requisitionRequest);
-        return spectacularRequisitionMapper.toDTO(response);
+        return SpectacularRequisitionMapper.fromDTO(response.getBody());
     }
 
     @Override
-    public Optional<RequisitionDTO> getRequisition(UUID requisitionsID) {
+    public Optional<Requisition> getRequisition(UUID requisitionsID) {
         String accessToken = tokenService.buildBearerAuthToken();
         try {
             var response = requisitionsClient.getRequisition(accessToken, requisitionsID);
-            return Optional.of(requisitionMapper.toDTO(response));
+            return Optional.of(RequisitionMapper.fromDTO(response.getBody()));
         } catch (FeignException ex) {
             if (ex.status() == HttpStatus.NOT_FOUND.value()) {
                 return Optional.empty();

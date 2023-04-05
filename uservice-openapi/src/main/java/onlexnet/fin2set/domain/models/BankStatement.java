@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import onlexnet.fin2set.domain.models.NordigenBankStatemant.Booked;
+import onlexnet.fin2set.nordigen.models.NordigenBankStatemant.Booked;
 
 @Data
 @Accessors(chain = true)

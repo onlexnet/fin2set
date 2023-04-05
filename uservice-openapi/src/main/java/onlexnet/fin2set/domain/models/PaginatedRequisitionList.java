@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class PaginatedRequisitionListDTO {
+public class PaginatedRequisitionList {
 
     @JsonProperty("count")
     private Integer count;
@@ -25,5 +25,5 @@ public class PaginatedRequisitionListDTO {
 
     @JsonProperty("results")
     @Valid
-    private List<RequisitionDTO> results;
+    private List<Requisition> results;
 }

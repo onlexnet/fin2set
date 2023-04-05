@@ -12,6 +12,7 @@ import onlexnet.fin2set.domain.models.CustomerData;
 import onlexnet.fin2set.domain.models.CustomerDataMapper;
 import onlexnet.fin2set.nordigen.agreements.AgreementsService;
 import onlexnet.fin2set.nordigen.requistions.RequisitionsClient;
+import onlexnet.fin2set.nordigen.requistions.RequisitionsService;
 import onlexnet.fin2set.nordigen.token.TokenService;
 import lombok.AllArgsConstructor;
 import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
@@ -22,18 +23,16 @@ import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
 public class ConnectServiceImpl implements ConnectService {
 
     private final TokenService tokenService;
-    private final RequisitionsClient requisitionsClient;
+    private final RequisitionsService requisitionsService;
     private final AgreementsService agreementsService;
-    private final CustomerDataMapper customerDataMapper;
 
     private Map<String, UUID> mapReferenceRequisitionsID = new HashMap<>();
 
     @Override
     public URI createLinkToConnect(String bankID) {
-        String accessToken = "Bearer " + tokenService.getTokens().getAccess();
 
         var endUserAgreementRequest = new EndUserAgreementRequest()
-                .institutionId(bankID)
+                .bankId(bankID)
                 .maxHistoricalDays(90)
                 .accessValidForDays(30)
                 .accessScope(List.of("balances", "details", "transactions"));  
@@ -42,9 +41,9 @@ public class ConnectServiceImpl implements ConnectService {
 
         var reference = UUID.randomUUID().toString();
 
-        var RequisitionRequest = new RequisitionRequest()
+        var requisitionRequest = new RequisitionRequest()
                 .redirect(URI.create("http://localhost:8080/api/integration/info"))
-                .institutionId(bankID)
+                .bankId(bankID)
                 .reference(reference)
                 .agreement(endUserAgreement.getId())
                 .userLanguage("PL")
@@ -54,24 +53,22 @@ public class ConnectServiceImpl implements ConnectService {
                 .accountSelection(false)
                 .redirectImmediate(false);
 
-        var SpectacularRequisition = requisitionsClient.createRequisition(accessToken, RequisitionRequest);
+        var spectacularRequisition = requisitionsService.createRequisition(requisitionRequest);
 
-        var requisitionsID = SpectacularRequisition.getId();
+        var requisitionsID = spectacularRequisition.getId();
         mapReferenceRequisitionsID.put(reference, requisitionsID);
 
-        return SpectacularRequisition.getLink();
+        return spectacularRequisition.getLink();
     }
 
     @Override
     public CustomerData getInfoAboutConection(String reference) {
-        String accessToken = "Bearer " + tokenService.getTokens().getAccess();
 
         var requisitionsID = mapReferenceRequisitionsID.get(reference);
-        var requisition = requisitionsClient.getRequisition(accessToken, requisitionsID);
-        var maybeEndUserAgreement = agreementsService.getAgreement(requisition.getAgreement());
+        var requisition = requisitionsService.getRequisition(requisitionsID).orElseThrow();
+        var endUserAgreement = agreementsService.getAgreement(requisition.getAgreement()).orElseThrow();
 
-        return maybeEndUserAgreement.map(it -> customerDataMapper.toDto(requisition, it))
-            .orElseThrow();
+        return CustomerDataMapper.fromDTO(requisition, endUserAgreement);    
     }
     
 }

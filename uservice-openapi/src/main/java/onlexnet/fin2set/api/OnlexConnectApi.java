@@ -17,7 +17,7 @@ import onlexnet.fin2set.domain.connect.ConnectService;
 import onlexnet.fin2set.domain.models.Bank;
 import onlexnet.fin2set.domain.models.CustomerData;
 import onlexnet.fin2set.domain.models.BankStatement;
-import onlexnet.fin2set.nordigen.institutions.InstitutionsService;
+import onlexnet.fin2set.nordigen.integration.IntegrationService;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,16 +26,16 @@ public class OnlexConnectApi {
 
     private final ConnectService connectService;
     private final BankStatementService onlexService;
-    private final InstitutionsService institutionsService;
+    private final IntegrationService integrationService;
     
     @GetMapping("/banks")
     ResponseEntity<List<Bank>> getListBanks(@RequestParam String country) {
-        return ResponseEntity.ok(institutionsService.getListInstitutions(country));
+        return ResponseEntity.ok(integrationService.getListBanks(country));
     }
 
     @GetMapping("/bank")
     ResponseEntity<Bank> getBank(@RequestParam String bankID) {
-        return ResponseEntity.ok(institutionsService.getInstitution(bankID));
+        return ResponseEntity.ok(integrationService.getBank(bankID));
     }
 
     @GetMapping("/bankstatement")
@@ -44,8 +44,8 @@ public class OnlexConnectApi {
     }
 
     @GetMapping("/connection")
-    ResponseEntity<URI> createConection(@RequestParam String institutionId) {
-        return ResponseEntity.status(HttpStatus.FOUND).location(connectService.createLinkToConnect(institutionId))
+    ResponseEntity<URI> createConection(@RequestParam String BankId) {
+        return ResponseEntity.status(HttpStatus.FOUND).location(connectService.createLinkToConnect(BankId))
                 .build();
     }
 

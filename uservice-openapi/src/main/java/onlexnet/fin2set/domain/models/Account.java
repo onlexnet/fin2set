@@ -13,7 +13,7 @@ import onlexnet.fin2set.domain.models.enum_dto.AccountStatusEnumDTO;
 
 @Data
 @Accessors(chain = true)
-public class AccountDTO {
+public class Account {
 
     @JsonProperty("id")
     private UUID id;
@@ -28,8 +28,8 @@ public class AccountDTO {
     @JsonProperty("iban")
     private String iban;
 
-    @JsonProperty("institution_id")
-    private String institutionId;
+    @JsonProperty("Bank_id")
+    private String BankId;
 
     @JsonProperty("status")
     private AccountStatusEnumDTO status;

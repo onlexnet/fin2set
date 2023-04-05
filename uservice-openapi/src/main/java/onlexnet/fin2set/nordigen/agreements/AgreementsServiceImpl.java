@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import onlexnet.fin2set.nordigen.token.TokenService;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
-import onlexnet.fin2set.domain.models.EndUserAgreementDTO;
-import onlexnet.fin2set.domain.models.EndUserAgreementMapper;
-import onlexnet.fin2set.domain.models.PaginatedEndUserAgreementListDTO;
-import onlexnet.fin2set.domain.models.PaginatedEndUserAgreementsListMapper;
+import onlexnet.fin2set.domain.models.EndUserAgreement;
+import onlexnet.fin2set.domain.models.PaginatedEndUserAgreementList;
 import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
+import onlexnet.fin2set.nordigen.models.mapers.EndUserAgreementMapper;
+import onlexnet.fin2set.nordigen.models.mapers.PaginatedEndUserAgreementsListMapper;
 
 @Service
 @RequiredArgsConstructor
@@ -21,23 +21,21 @@ public class AgreementsServiceImpl implements AgreementsService {
 
     private final TokenService tokenService;
     private final AgreementsClient agreementsClient;
-    private final EndUserAgreementMapper endUserAgreementMapper;
-    private final PaginatedEndUserAgreementsListMapper paginatedEndUserAgreementsListMapper;
 
     @Override
-    public EndUserAgreementDTO createAgreement(EndUserAgreementRequest endUserAgreementRequest) {
+    public EndUserAgreement createAgreement(EndUserAgreementRequest endUserAgreementRequest) {
         var accessToken = tokenService.buildBearerAuthToken();
         var response = agreementsClient.createAgreement(accessToken, endUserAgreementRequest);
-        return endUserAgreementMapper.toDTO(response);
+        return EndUserAgreementMapper.fromDTO(response.getBody());
     }
 
     @Override
-    public Optional<EndUserAgreementDTO> getAgreement(UUID agreementID) {
-        String accessToken = tokenService.buildBearerAuthToken();
+    public Optional<EndUserAgreement> getAgreement(UUID agreementID) {
+        var accessToken = tokenService.buildBearerAuthToken();
         try {
             var response = agreementsClient.getAgreement(accessToken, agreementID);
-            var responseDTO = endUserAgreementMapper.toDTO(response);
-            return Optional.of(responseDTO);
+            var domain = EndUserAgreementMapper.fromDTO(response.getBody());
+            return Optional.of(domain);
         } catch (FeignException ex) {
             if (ex.status() == HttpStatus.NOT_FOUND.value()) {
                 return Optional.empty();
@@ -47,10 +45,10 @@ public class AgreementsServiceImpl implements AgreementsService {
     }
 
     @Override
-    public PaginatedEndUserAgreementListDTO getListAllAgreements() {
+    public PaginatedEndUserAgreementList getListAllAgreements() {
         String accessToken = tokenService.buildBearerAuthToken();
         var response = agreementsClient.getListAllAgreements(accessToken);
-        return paginatedEndUserAgreementsListMapper.toDTO(response);
+        return PaginatedEndUserAgreementsListMapper.fromDTO(response.getBody());
     }
 
     @Override

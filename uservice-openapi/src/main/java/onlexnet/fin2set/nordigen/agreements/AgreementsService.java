@@ -3,15 +3,15 @@ package onlexnet.fin2set.nordigen.agreements;
 import java.util.Optional;
 import java.util.UUID;
 
-import onlexnet.fin2set.domain.models.EndUserAgreementDTO;
-import onlexnet.fin2set.domain.models.PaginatedEndUserAgreementListDTO;
+import onlexnet.fin2set.domain.models.EndUserAgreement;
+import onlexnet.fin2set.domain.models.PaginatedEndUserAgreementList;
 import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
 
 public interface AgreementsService {
 
-    PaginatedEndUserAgreementListDTO getListAllAgreements();
+    PaginatedEndUserAgreementList getListAllAgreements();
 
-    EndUserAgreementDTO createAgreement(EndUserAgreementRequest endUserAgreementRequest);
+    EndUserAgreement createAgreement(EndUserAgreementRequest endUserAgreementRequest);
 
     /**
      * 
@@ -19,7 +19,7 @@ public interface AgreementsService {
      * @return Some when the result is available
      *         None when result is not found on OpenBank API
      */
-    Optional<EndUserAgreementDTO> getAgreement(UUID agreementID);
+    Optional<EndUserAgreement> getAgreement(UUID agreementID);
 
     void deleteAgreement(UUID agreementID);
 

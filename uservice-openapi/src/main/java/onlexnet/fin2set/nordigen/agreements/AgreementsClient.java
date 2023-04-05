@@ -3,6 +3,7 @@ package onlexnet.fin2set.nordigen.agreements;
 import java.util.UUID;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,16 +23,22 @@ import onlexnet.fin2set.nordigen.generated.PaginatedEndUserAgreementList;
 public interface AgreementsClient {
 
         @GetMapping(value = "/")
-        PaginatedEndUserAgreementList getListAllAgreements(@RequestHeader("Authorization") String accessToken);
+        ResponseEntity<PaginatedEndUserAgreementList> getListAllAgreements(
+                        @RequestHeader("Authorization") String accessToken);
 
         @PostMapping(value = "/")
-        EndUserAgreement createAgreement(@RequestHeader("Authorization") String accessToken, @RequestBody EndUserAgreementRequest endUserAgreementRequest);
+        ResponseEntity<EndUserAgreement> createAgreement(
+                        @RequestHeader("Authorization") String accessToken,
+                        @RequestBody EndUserAgreementRequest endUserAgreementRequest);
 
         @GetMapping(value = "/{agreementID}")
-        EndUserAgreement getAgreement(@RequestHeader("Authorization") String accessToken,
+        ResponseEntity<EndUserAgreement> getAgreement(
+                        @RequestHeader("Authorization") String accessToken,
                         @PathVariable UUID agreementID);
 
         @DeleteMapping(value = "/{agreementID}")
-        void deleteAgreement(@RequestHeader("Authorization") String accessToken, @PathVariable UUID agreementID);
+        ResponseEntity<Object> deleteAgreement(
+                        @RequestHeader("Authorization") String accessToken,
+                        @PathVariable UUID agreementID);
 
 }

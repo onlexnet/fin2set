@@ -29,7 +29,7 @@ public class TokenServiceImpl implements TokenService {
                 .secretId(secretId)
                 .secretKey(secretKey);
 
-        var tokens = tokenClient.createTokens(jwtObtainPairRequest);
+        var tokens = tokenClient.createTokens(jwtObtainPairRequest).getBody();
         refreshToken = tokens.getRefresh();
         return tokens;
     }
@@ -38,7 +38,7 @@ public class TokenServiceImpl implements TokenService {
     public SpectacularJWTRefresh refreshAccessToken() {
         JWTRefreshRequest jwtRefreshRequest = new JWTRefreshRequest();
         jwtRefreshRequest.setRefresh(refreshToken);
-        return tokenClient.refreshAccessToken(jwtRefreshRequest);
+        return tokenClient.refreshAccessToken(jwtRefreshRequest).getBody();
     }
 
     @Override
