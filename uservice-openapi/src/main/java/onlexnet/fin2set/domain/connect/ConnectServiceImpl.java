@@ -36,7 +36,7 @@ public class ConnectServiceImpl implements ConnectService {
         var myReference = UUID.randomUUID().toString();
 
         // TODO - address should be configured as hosted protocol, address and port will be different per environment
-        var webhookAddress = URI.create("http://localhost:8080/api/integration/info");
+        var webhookAddress = URI.create("http://192.168.0.100:8080/api/integration/info");
 
         var requisitionsResult = requisitionsService.createRequisition(webhookAddress, bankID, myReference, agreementId);
         mapReferenceRequisitionsID.put(myReference, requisitionsResult.getId());

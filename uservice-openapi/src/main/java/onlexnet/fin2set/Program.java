@@ -31,7 +31,7 @@ public class Program {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.paths(PathSelectors.ant("/api/**")) // Provides endpoints that meet the condition
-				.apis((RequestHandlerSelectors.basePackage("onlexnet.fin2set"))) // Looking and share endpoints in folder "dj"
+				.apis((RequestHandlerSelectors.basePackage("onlexnet.fin2set"))) // Looking and share endpoints in folder
 				.build()
 				.apiInfo(createApiInfo());
 	}
@@ -39,12 +39,15 @@ public class Program {
 	// Sets up api information, leaves a business card
 	private ApiInfo createApiInfo() {
 		return new ApiInfo("Fin2Set",
-				"Description",
-				"1.00",
-				"localhost:8080",
+				"Description: \n " +
+				"Sandbox accountID: 7e944232-bda9-40bc-b784-660c7ab5fe78, 99a0bfe2-0bef-46df-bff2-e9ae0c6c5838 \n " +
+				"Sandbox bankID: SANDBOXFINANCE_SFIN0000 \n " +
+				"Example created requisition id: a69b3c58-4412-4865-954b-70a4d20a08d6",
+				"",
+				"",
 				new Contact("Damian Jarzębowski", "https://www.linkedin.com/in/damian-jarz%C4%99bowski-05aa32220/", "damian.r.jarzebowski@gmail.com"),
-				"My own licence",
-				"https://www.linkedin.com/in/damian-jarz%C4%99bowski-05aa32220/",
+				"",
+				"",
 				Collections.emptyList()
 		);
 	}

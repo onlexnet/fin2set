@@ -21,7 +21,7 @@ public class CustomerData {
     private Object status;
 
     @JsonProperty("Bank_id")
-    private String BankId;
+    private String bankId;
 
     @JsonProperty("accounts")
     private List<UUID> accounts;
