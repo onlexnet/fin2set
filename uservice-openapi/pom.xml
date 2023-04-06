@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.4</version>
+    <version>3.0.5</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
   <groupId>onlexnet</groupId>
@@ -182,21 +182,6 @@
       <scope>test</scope>
     </dependency>
 
-    <!--
-			Open api generator need openapitools
-			AND
-			jakarta.validation
-		-->
-    <dependency>
-      <groupId>org.openapitools</groupId>
-      <artifactId>jackson-databind-nullable</artifactId>
-      <version>0.2.1</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.validation</groupId>
-      <artifactId>jakarta.validation-api</artifactId>
-      <version>2.0.2</version>
-    </dependency>
     <!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-core -->
     <dependency>
       <groupId>io.swagger.core.v3</groupId>
@@ -222,7 +207,7 @@
       <plugin>
         <groupId>org.openapitools</groupId>
         <artifactId>openapi-generator-maven-plugin</artifactId>
-        <version>6.1.0</version>
+        <version>6.3.0</version>
         <executions>
           <execution>
             <goals>
@@ -246,6 +231,15 @@
               <modelPackage>${default.package}</modelPackage>
 
               <configOptions>
+                <openApiNullable>false</openApiNullable>
+                <useTags>true</useTags>
+                <useSpringBoot3>true</useSpringBoot3>
+                <delegatePattern>true</delegatePattern>
+
+                <enumUnknownDefaultCase>true</enumUnknownDefaultCase>
+
+                <ignoreAnyOfInEnum>true</ignoreAnyOfInEnum>
+
                 <interfaceOnly>true</interfaceOnly>
                 <dateLibrary>java8</dateLibrary>
                 <openApiNullable>false</openApiNullable>
