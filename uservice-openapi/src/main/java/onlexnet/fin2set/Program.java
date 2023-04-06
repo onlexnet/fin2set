@@ -19,8 +19,6 @@ public class Program {
 		SpringApplication.run(Program.class, args);
 	}
 
-
-
 	@Bean
 	public GroupedOpenApi publicApi() {
 		return GroupedOpenApi.builder()
