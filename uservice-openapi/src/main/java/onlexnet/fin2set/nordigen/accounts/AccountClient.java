@@ -12,7 +12,7 @@ import feign.Headers;
 import onlexnet.fin2set.nordigen.generated.Account;
 import onlexnet.fin2set.nordigen.models.NordigenBankStatemant;
 
-@FeignClient(value = "account", url = "https://ob.nordigen.com", decode404 = true)
+@FeignClient(value = "account", url = "https://ob.nordigen.com")
 @Headers({
         "accept: application/json",
         "Content-Type: application/json" })
