@@ -3,8 +3,6 @@ package onlexnet.fin2set.domain.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -27,7 +25,6 @@ public class Bank {
     private String transactionTotalDays;
 
     @JsonProperty("countries")
-    @Valid
     private List<CountryEnum> countries = new ArrayList<>();
 
     @JsonProperty("logo")
