@@ -22,6 +22,7 @@ For such reason aad application named **onlex-infra-fin2set** (single tenant app
   - with a secret named e.g. 'terraform-cli' (used to support CLI tool)
 
 
+
 ### Set prerequisit environment variables for local environment
 For proper work, we need some environment variables to work. All variables are stored in Azure Vault, stored there either automatically or manually.
 All of variables required by developer to have access to remote resources are defined in Azure Value, so that - before using application - should be read using shell script to well-known environment variables, or read directly from Azure Vault
@@ -70,6 +71,11 @@ export TF_VAR_onlex_sinnet_azdo_service_url="https://dev.azure.com/onlex"
   terraform apply
   ```
 
+### Refresh providers
+```bash
+rm -fr .terraform
+terraform init --upgrade
+```
 ### Used articles
 - [How to add Docker registry secret to k8s](https://kubernetes.io/docs/concepts/configuration/secret/)
 - [Az roles and permission matrix](https://www.azadvertizer.net/)
@@ -79,3 +85,4 @@ export TF_VAR_onlex_sinnet_azdo_service_url="https://dev.azure.com/onlex"
 - https://medium.com/citihub/a-more-secure-way-to-call-kubectl-from-terraform-1052adf37af8
 - https://docs.microsoft.com/en-us/azure/key-vault/general/key-vault-integrate-kubernetes
 - https://mrdevops.io/introducing-azure-key-vault-to-kubernetes-931f82364354
+

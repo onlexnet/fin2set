@@ -61,3 +61,14 @@ module "github_repo" {
   source = "./module_github_repo"
   static_app_api_key = module.static_app.static_app_api_key
 }
+
+module "container_apps" {
+  source = "./module_container_apps"
+  resource_group = module.resourcegroup.main
+  log_analytics_workspace = module.log_analytics_workspace.main
+}
+
+module "log_analytics_workspace" {
+  source = "./module_log_analytics_workspace"
+  resource_group = module.resourcegroup.main
+}
