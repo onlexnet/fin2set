@@ -47,14 +47,15 @@ resource "azurerm_container_app" "default" {
     identity = azurerm_user_assigned_identity.containerapp.id
   }
 
-  # ingress {
-  #   external_enabled = true
-  #   target_port      = 8080
-  #   traffic_weight {
-  #     latest_revision = true
-  #     percentage      = 100
-  #   }
-  # }
+  # step 2
+  ingress {
+    external_enabled = true
+    target_port      = 8080
+    traffic_weight {
+      latest_revision = true
+      percentage      = 100
+    }
+  }
 
   template {
     container {
@@ -85,90 +86,90 @@ resource "azurerm_container_app" "default" {
   }
 }
 
-resource "azapi_resource" "containerapp" {
-  type      = "Microsoft.App/containerapps@2022-03-01"
-  name      = "uservice-openapi-native"
-  parent_id = var.resource_group.id
-  location  = var.resource_group.location
+# resource "azapi_resource" "containerapp" {
+#   type      = "Microsoft.App/containerapps@2022-03-01"
+#   name      = "uservice-openapi-native"
+#   parent_id = var.resource_group.id
+#   location  = var.resource_group.location
  
  
-  identity {
-    type         = "UserAssigned"
-    identity_ids = [azurerm_user_assigned_identity.containerapp.id]
-  }
+#   identity {
+#     type         = "UserAssigned"
+#     identity_ids = [azurerm_user_assigned_identity.containerapp.id]
+#   }
 
-  body = jsonencode({
-    properties = {
-      # managedEnvironmentId = azapi_resource.containerapp_environment.id
-      managedEnvironmentId = azurerm_container_app_environment.default.id
-      configuration = {
-        ingress = {
-          external : true,
-          targetPort : 8080
-        },
-        registries : [
-          {
-            "server" : data.azurerm_container_registry.alldev.login_server
-            "identity" : azurerm_user_assigned_identity.containerapp.id
-          }
-        ]
-      }
-      template = {
-        containers = [
-          {
-            # step1 - use any publicitry available image
-            # image = "busybox:latest"
-            # step2 - use target image
-            image = "${data.azurerm_container_registry.alldev.login_server}/fin2set-native:latest",
-            name  = "firstcontainerappacracr"
-            resources = {
-              cpu    = 0.25
-              memory = "0.5Gi"
-            },
-            env = [
-            ]
-            # "probes" : [
-            #   {
-            #     "type" : "Liveness",
-            #     "httpGet" : {
-            #       "path" : "/",
-            #       "port" : 80,
-            #       "scheme" : "HTTP"
-            #     },
-            #     "periodSeconds" : 10
-            #   },
-            #   {
-            #     "type" : "Readiness",
-            #     "httpGet" : {
-            #       "path" : "/",
-            #       "port" : 80,
-            #       "scheme" : "HTTP"
-            #     },
-            #     "periodSeconds" : 10
-            #   },
-            #   {
-            #     "type" : "Startup",
-            #     "httpGet" : {
-            #       "path" : "/",
-            #       "port" : 80,
-            #       "scheme" : "HTTP"
-            #     },
-            #     "periodSeconds" : 10
-            #   }
-            # ]
-          }
-        ]
-        scale = {
-          minReplicas = 0,
-          maxReplicas = 2
-        }
-      }
-    }
+#   body = jsonencode({
+#     properties = {
+#       # managedEnvironmentId = azapi_resource.containerapp_environment.id
+#       managedEnvironmentId = azurerm_container_app_environment.default.id
+#       configuration = {
+#         ingress = {
+#           external : true,
+#           targetPort : 8080
+#         },
+#         registries : [
+#           {
+#             "server" : data.azurerm_container_registry.alldev.login_server
+#             "identity" : azurerm_user_assigned_identity.containerapp.id
+#           }
+#         ]
+#       }
+#       template = {
+#         containers = [
+#           {
+#             # step1 - use any publicitry available image
+#             # image = "busybox:latest"
+#             # step2 - use target image
+#             image = "${data.azurerm_container_registry.alldev.login_server}/fin2set-native:latest",
+#             name  = "firstcontainerappacracr"
+#             resources = {
+#               cpu    = 0.25
+#               memory = "0.5Gi"
+#             },
+#             env = [
+#             ]
+#             # "probes" : [
+#             #   {
+#             #     "type" : "Liveness",
+#             #     "httpGet" : {
+#             #       "path" : "/",
+#             #       "port" : 80,
+#             #       "scheme" : "HTTP"
+#             #     },
+#             #     "periodSeconds" : 10
+#             #   },
+#             #   {
+#             #     "type" : "Readiness",
+#             #     "httpGet" : {
+#             #       "path" : "/",
+#             #       "port" : 80,
+#             #       "scheme" : "HTTP"
+#             #     },
+#             #     "periodSeconds" : 10
+#             #   },
+#             #   {
+#             #     "type" : "Startup",
+#             #     "httpGet" : {
+#             #       "path" : "/",
+#             #       "port" : 80,
+#             #       "scheme" : "HTTP"
+#             #     },
+#             #     "periodSeconds" : 10
+#             #   }
+#             # ]
+#           }
+#         ]
+#         scale = {
+#           minReplicas = 0,
+#           maxReplicas = 2
+#         }
+#       }
+#     }
  
-  })
-  ignore_missing_property = true
-  depends_on = [
-    # azapi_resource.containerapp_environment
-    azurerm_container_app_environment.default
-  ]
-}
+#   })
+#   ignore_missing_property = true
+#   depends_on = [
+#     # azapi_resource.containerapp_environment
+#     azurerm_container_app_environment.default
+#   ]
+# }
