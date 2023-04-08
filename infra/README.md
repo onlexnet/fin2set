@@ -74,7 +74,7 @@ export TF_VAR_onlex_sinnet_azdo_service_url="https://dev.azure.com/onlex"
 ### Refresh providers
 ```bash
 rm -fr .terraform
-terraform init --upgrade
+terraform init -upgrade
 ```
 ### Used articles
 - [How to add Docker registry secret to k8s](https://kubernetes.io/docs/concepts/configuration/secret/)

@@ -36,9 +36,6 @@ resource "azurerm_container_app_environment" "default" {
 #   container_app_environment_id = azurerm_container_app_environment.default.id
 #   resource_group_name          = var.resource_group.name
 
-#   // as per https://github.com/hashicorp/terraform-provider-azurerm/issues/20435#issuecomment-1437061107
-#   revision_mode = "Multiple"
-
 #   identity {
 #     type         = "UserAssigned"
 #     identity_ids = [azurerm_user_assigned_identity.containerapp.id]
@@ -87,15 +84,16 @@ resource "azurerm_container_app_environment" "default" {
 
 resource "azapi_resource" "containerapp" {
   type      = "Microsoft.App/containerapps@2022-03-01"
-  name      = "uservice-openapi"
+  name      = "uservice-openapi-native"
   parent_id = var.resource_group.id
   location  = var.resource_group.location
  
  
   identity {
-    type         = "SystemAssigned, UserAssigned"
+    type         = "UserAssigned"
     identity_ids = [azurerm_user_assigned_identity.containerapp.id]
   }
+
   body = jsonencode({
     properties = {
       # managedEnvironmentId = azapi_resource.containerapp_environment.id
@@ -103,11 +101,10 @@ resource "azapi_resource" "containerapp" {
       configuration = {
         ingress = {
           external : true,
-          targetPort : 80
+          targetPort : 8080
         },
-        "registries" : [
+        registries : [
           {
-            # "server" : data.azurerm_container_registry.acr.login_server,
             "server" : data.azurerm_container_registry.alldev.login_server
             "identity" : azurerm_user_assigned_identity.containerapp.id
           }
@@ -116,41 +113,47 @@ resource "azapi_resource" "containerapp" {
       template = {
         containers = [
           {
-            image = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest",
+            # step1 - use any publicitry available image
+            # image = "busybox:latest"
+            # step2 - use target image
+            image = "${data.azurerm_container_registry.alldev.login_server}/fin2set-native:latest",
             name  = "firstcontainerappacracr"
             resources = {
               cpu    = 0.25
               memory = "0.5Gi"
             },
-            "probes" : [
-              {
-                "type" : "Liveness",
-                "httpGet" : {
-                  "path" : "/",
-                  "port" : 80,
-                  "scheme" : "HTTP"
-                },
-                "periodSeconds" : 10
-              },
-              {
-                "type" : "Readiness",
-                "httpGet" : {
-                  "path" : "/",
-                  "port" : 80,
-                  "scheme" : "HTTP"
-                },
-                "periodSeconds" : 10
-              },
-              {
-                "type" : "Startup",
-                "httpGet" : {
-                  "path" : "/",
-                  "port" : 80,
-                  "scheme" : "HTTP"
-                },
-                "periodSeconds" : 10
-              }
+            env = [
+              "aaa" = "bbb"
             ]
+            # "probes" : [
+            #   {
+            #     "type" : "Liveness",
+            #     "httpGet" : {
+            #       "path" : "/",
+            #       "port" : 80,
+            #       "scheme" : "HTTP"
+            #     },
+            #     "periodSeconds" : 10
+            #   },
+            #   {
+            #     "type" : "Readiness",
+            #     "httpGet" : {
+            #       "path" : "/",
+            #       "port" : 80,
+            #       "scheme" : "HTTP"
+            #     },
+            #     "periodSeconds" : 10
+            #   },
+            #   {
+            #     "type" : "Startup",
+            #     "httpGet" : {
+            #       "path" : "/",
+            #       "port" : 80,
+            #       "scheme" : "HTTP"
+            #     },
+            #     "periodSeconds" : 10
+            #   }
+            # ]
           }
         ]
         scale = {

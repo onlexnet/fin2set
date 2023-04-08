@@ -63,7 +63,7 @@
 
 		<!--
 			Swagger + Swagger User Interface
-			-->
+		-->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>

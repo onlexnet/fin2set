@@ -28,9 +28,3 @@ variable "environment_location" {
 variable "application_name" {
   type    = string
 }
-
-# Target subscription used to create all resources defined by the Terraform scripts
-variable "azure_subscription_id" {
-  type      = string
-  sensitive = true
-}
