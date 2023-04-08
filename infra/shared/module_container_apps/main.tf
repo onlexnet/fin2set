@@ -31,56 +31,59 @@ resource "azurerm_container_app_environment" "default" {
 # Unfortunatelly azurerm definition does not work
 # https://github.com/hashicorp/terraform-provider-azurerm/issues/20435
 # So please use definition in azapi
-# resource "azurerm_container_app" "default" {
-#   name                         = "dev01e"
-#   container_app_environment_id = azurerm_container_app_environment.default.id
-#   resource_group_name          = var.resource_group.name
+resource "azurerm_container_app" "default" {
+  name                         = "uservice-openapi"
+  container_app_environment_id = azurerm_container_app_environment.default.id
+  resource_group_name          = var.resource_group.name
+  revision_mode = "Single"
 
-#   identity {
-#     type         = "UserAssigned"
-#     identity_ids = [azurerm_user_assigned_identity.containerapp.id]
-#   }
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.containerapp.id]
+  }
 
-#   registry {
-#     server   = data.azurerm_container_registry.alldev.login_server
-#     identity = azurerm_user_assigned_identity.containerapp.id
-#   }
+  registry {
+    server   = data.azurerm_container_registry.alldev.login_server
+    identity = azurerm_user_assigned_identity.containerapp.id
+  }
 
-#   ingress {
-#     external_enabled = true
-#     target_port      = 8080
-#     traffic_weight {
-#       latest_revision = true
-#       percentage      = 100
-#     }
-#   }
+  # ingress {
+  #   external_enabled = true
+  #   target_port      = 8080
+  #   traffic_weight {
+  #     latest_revision = true
+  #     percentage      = 100
+  #   }
+  # }
 
-#   template {
-#     container {
-#       name = "examplecontainerapp"
-#       # image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
-#       image  = "busybox:latest"
-#       cpu    = 0.25
-#       memory = "0.5Gi"
+  template {
+    container {
+      name = "examplecontainerapp"
+      # step 1
+      # image = "busybox:latest"
+      # step 2
+      image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
+      cpu    = 0.25
+      memory = "0.5Gi"
 
-#       # readiness_probe {
-#       #   transport = "HTTP"
-#       #   port      = 80
-#       # }
+      # readiness_probe {
+      #   transport = "HTTP"
+      #   port      = 80
+      # }
 
-#       # liveness_probe {
-#       #   transport = "HTTP"
-#       #   port      = 80
-#       # }
+      # liveness_probe {
+      #   transport = "HTTP"
+      #   port      = 80
+      # }
 
-#       # startup_probe {
-#       #   transport = "HTTP"
-#       #   port      = 80
-#       # }
+      # startup_probe {
+      #   transport = "HTTP"
+      #   port      = 80
+      # }
 
-#     }
-#   }
-# }
+    }
+  }
+}
 
 resource "azapi_resource" "containerapp" {
   type      = "Microsoft.App/containerapps@2022-03-01"
@@ -123,7 +126,6 @@ resource "azapi_resource" "containerapp" {
               memory = "0.5Gi"
             },
             env = [
-              "aaa" = "bbb"
             ]
             # "probes" : [
             #   {
