@@ -43,5 +43,8 @@ jobs:
       - name: Create docker image with Jib
         run: mvn jib:dockerBuild
         working-directory: uservice-openapi
+
+      - name: Docker push
+        run: docker push fin2setalldev.azurecr.io/fin2set:latest
  
   
