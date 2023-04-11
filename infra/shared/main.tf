@@ -1,5 +1,16 @@
 data "azurerm_client_config" "current" {}
 
+data "azurerm_resource_group" "alldev" {
+  name = "fin2set-env-alldev"
+}
+
+data "azurerm_container_registry" "alldev" {
+  # provider            = azurerm.shared
+  name                = "fin2setalldev"
+  resource_group_name = data.azurerm_resource_group.alldev.name
+}
+
+
 module "resourcegroup" {
   source               = "./module_resourcegroup"
   application_name     = var.application_name
@@ -15,12 +26,6 @@ module applications {
 # module "appinsights" {
 #   source        = "./module_appinsights"
 #   resourcegroup = module.resourcegroup.main
-# }
-
-# data "azurerm_container_registry" "sinnet" {
-#   provider            = azurerm.shared
-#   name                = "sinnet"
-#   resource_group_name = "sinnet-default-manual"
 # }
 
 module "keyvault" {
@@ -64,6 +69,9 @@ module "static_app" {
 module "github_repo" {
   source = "./module_github_repo"
   static_app_api_key = module.static_app.static_app_api_key
+  acr_admin_name = data.azurerm_container_registry.alldev.admin_username
+  acr_admin_secret = data.azurerm_container_registry.alldev.admin_password
+  acr_registry_url = data.azurerm_container_registry.alldev.login_server
 }
 
 module "container_apps" {

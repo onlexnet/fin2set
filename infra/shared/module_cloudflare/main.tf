@@ -19,7 +19,8 @@ resource "cloudflare_record" "webapi" {
   name    = var.webapi_prefix
   value   = var.webapi_fqdn
   type    = "CNAME"
-  ttl     = 300
+  proxied = true
+  ttl     = 1
 }
 
 resource "cloudflare_record" "webapp" {
