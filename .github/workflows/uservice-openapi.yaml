@@ -30,7 +30,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn -B --no-transfer-progress package --file pom.xml
+        run: mvn -B --no-transfer-progress package
         working-directory: uservice-openapi
 
       - name: Login to Docker Hub
@@ -41,7 +41,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           
       - name: Create docker image with Jib
-        run: mvn -B --no-transfer-progress package --file pom.xml
+        run: mvn jib:dockerBuild
         working-directory: uservice-openapi
  
   
