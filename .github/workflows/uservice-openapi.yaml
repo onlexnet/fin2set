@@ -45,7 +45,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           
       - name: Create docker image with Jib
-        run: mvn jib:dockerBuild
+        run: mvn jib:dockerBuild -Djib.to.tags=$SEMVERSION,latest
         working-directory: uservice-openapi
 
       - name: Docker push
