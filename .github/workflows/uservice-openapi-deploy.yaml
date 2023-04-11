@@ -45,4 +45,11 @@ jobs:
       - name: Docker push
         run: docker push ${{ vars.DOCKER_REGISTRY_URL }}/fin2set:$SEMVERSION
  
+      - name: Build and deploy Container App
+        uses: azure/container-apps-deploy-action@v0
+        with:
+          acrName: ${{ vars.DOCKER_REGISTRY_URL }}
+          containerAppName: uservice-openapi
+          resourceGroup: fin2set-env-dev01
+          imageToDeploy: ${{ vars.DOCKER_REGISTRY_URL }}/fin2set:$SEMVERSION
   
