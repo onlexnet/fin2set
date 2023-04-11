@@ -54,8 +54,10 @@ jobs:
         uses: azure/CLI@v1
         with:
           azcliversion: 2.30.0
-          inlineScript: az containerapp update \
-            --name uservice-openapi \
-            --resource-group fin2set-env-dev01 \
-            --image ${{ vars.DOCKER_REGISTRY_URL }}/fin2set:$SEMVERSION
+          inlineScript: |
+            az config set extension.use_dynamic_install=yes_without_prompt
+            az containerapp update \
+              --name uservice-openapi \
+              --resource-group fin2set-env-dev01 \
+              --image ${{ vars.DOCKER_REGISTRY_URL }}/fin2set:$SEMVERSION
   
