@@ -5,7 +5,7 @@ Link to schema api [nordigen](https://nordigen.com/docs/ais-schema.json)
 (inspired by [Microsoft Learn](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-java-quickstart#push-your-app-to-the-container-registry-via-jib))
 
 ### Address of OpenAPI
-http://localhost:8080/swagger-ui/#
+http://localhost:8080/swagger-ui/index.html
 
 
 ### To publish to Docker:
