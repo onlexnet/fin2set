@@ -48,8 +48,10 @@ module "b2c" {
 
 module "cloudflare" {
   source = "./module_cloudflare"
-  default_host_name = module.static_app.default_host_name
-  host_name = var.environment_name
+  webapp_prefix = var.environment_name
+  webapp_fqdn = module.static_app.webapp_fqdn
+  webapi_prefix = "api-${var.environment_name}"
+  webapi_fqdn = module.container_apps.webapi_fqdn
 }
 
 module "static_app" {
@@ -68,6 +70,7 @@ module "container_apps" {
   source = "./module_container_apps"
   resource_group = module.resourcegroup.main
   log_analytics_workspace = module.log_analytics_workspace.main
+  env = module.keyvault.env
 }
 
 module "log_analytics_workspace" {

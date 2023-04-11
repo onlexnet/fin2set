@@ -11,3 +11,10 @@ variable "log_analytics_workspace" {
     id = string
   })
 }
+
+variable env {
+  type = object({
+    NORDIGEN_SECRET_ID = string
+    NORDIGEN_SECRET_KEY = string
+  })
+}

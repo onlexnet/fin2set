@@ -21,22 +21,20 @@ resource "azurerm_role_assignment" "containerapp" {
 }
 
 resource "azurerm_container_app_environment" "default" {
-  name                       = "Example-Environment"
+  name                       = "dev01-env"
   location                   = var.resource_group.location
   resource_group_name        = var.resource_group.name
   log_analytics_workspace_id = var.log_analytics_workspace.id
 }
 
-
-# Unfortunatelly azurerm definition does not work
+# Known issues:f
 # https://github.com/hashicorp/terraform-provider-azurerm/issues/20435
-# So please use definition in azapi
 resource "azurerm_container_app" "default" {
   name                         = "uservice-openapi"
   container_app_environment_id = azurerm_container_app_environment.default.id
   resource_group_name          = var.resource_group.name
   revision_mode = "Single"
-
+  
   identity {
     type         = "UserAssigned"
     identity_ids = [azurerm_user_assigned_identity.containerapp.id]
@@ -57,15 +55,45 @@ resource "azurerm_container_app" "default" {
     }
   }
 
+  secret {
+    name = "nordigen-secret-id"
+    value = var.env.NORDIGEN_SECRET_ID
+  }
+  secret {
+    name = "nordigen-secret-key"
+    value = var.env.NORDIGEN_SECRET_KEY
+  }
+
+  dapr {
+    app_id = "uservice-openapi"
+    app_port = "8080"
+    app_protocol = "http"
+  }
+
   template {
+    
     container {
       name = "examplecontainerapp"
       # step 1
       # image = "busybox:latest"
       # step 2
+      // image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
       image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
       cpu    = 0.25
       memory = "0.5Gi"
+
+      # scale - currently not supported
+      # https://github.com/hashicorp/terraform-provider-azurerm/issues/20629
+      # please manage manually using portal or az tools
+
+      env {
+        name = "NORDIGEN_SECRET_ID"
+        secret_name = "nordigen-secret-id"
+      }
+      env {
+        name = "NORDIGEN_SECRET_KEY"
+        secret_name = "nordigen-secret-key"
+      }
 
       # readiness_probe {
       #   transport = "HTTP"
