@@ -6,3 +6,11 @@ spring:
 
   main:
     banner-mode: "off"
+
+# enable /actuator/info with build info
+# source: https://stackoverflow.com/questions/67893857/actuator-info-endpoint-not-working-with-spring-boot-2-5-0
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info

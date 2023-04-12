@@ -62,6 +62,11 @@
   <dependencies>
 
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
       <version>3.0.2</version>
@@ -172,7 +177,7 @@
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
       <version>2.1.0</version>
-   </dependency>
+    </dependency>
 
     <dependency>
       <groupId>com.tngtech.archunit</groupId>
@@ -180,7 +185,6 @@
       <version>1.0.1</version>
       <scope>test</scope>
     </dependency>
-
 
 
   </dependencies>
@@ -293,6 +297,18 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <!--
+              Used to generate build info, required to get artifact id from java code
+              more: https://stackoverflow.com/questions/44786871/getting-artifactid-and-version-in-spring-boot-starter
+            -->
+            <id>build-info</id>
+            <goals>
+              <goal>build-info</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
           <excludes>
             <exclude>
@@ -300,7 +316,8 @@
               <artifactId>lombok</artifactId>
             </exclude>
           </excludes>
-          <!-- https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/htmlsingle/#build-image.customization -->
+          <!--
+          https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/htmlsingle/#build-image.customization -->
           <image>
             <name>${docker.image.prefix}/${project.artifactId}-native</name>
           </image>
