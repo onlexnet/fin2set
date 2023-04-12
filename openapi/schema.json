@@ -1,5 +1,6 @@
 {
   "swagger": "2.0",
+  "host": "uservice-openapi.yellowfield-297bf088.westeurope.azurecontainerapps.io",
   "info": {
     "description": "Description",
     "version": "1.00",
