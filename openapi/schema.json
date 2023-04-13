@@ -3,7 +3,7 @@
   "host": "uservice-openapi.yellowfield-297bf088.westeurope.azurecontainerapps.io",
   "info": {
     "description": "Description",
-    "version": "1.00",
+    "version": "0.2.0",
     "title": "Fin2Set",
     "termsOfService": "localhost:8080",
     "contact": {
@@ -298,7 +298,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IntegrationDTO"
+              "$ref": "#/definitions/BankDTO"
             }
           },
           "401": {
@@ -319,15 +319,15 @@
           "integration-institutions-api"
         ],
         "summary": "getListInstitutions",
-        "operationId": "getListInstitutionsUsingGET",
+        "operationId": "getBanks",
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "parameters": [
           {
             "name": "country",
             "in": "query",
-            "description": "country",
+            "description": "Name of the country where the banks are located",
             "required": true,
             "type": "string"
           }
@@ -1053,61 +1053,13 @@
       "type": "object",
       "title": "InputBuffer"
     },
-    "IntegrationDTO": {
+    "BankDTO": {
       "type": "object",
       "properties": {
-        "bic": {
-          "type": "string"
-        },
-        "countries": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "AT",
-              "BE",
-              "BG",
-              "CY",
-              "CZ",
-              "DE",
-              "DK",
-              "EE",
-              "ES",
-              "FI",
-              "FR",
-              "GB",
-              "GR",
-              "HR",
-              "HU",
-              "IE",
-              "IS",
-              "IT",
-              "LI",
-              "LT",
-              "LU",
-              "LV",
-              "MT",
-              "NL",
-              "NO",
-              "PL",
-              "PT",
-              "RO",
-              "SE",
-              "SI",
-              "SK"
-            ]
-          }
-        },
-        "id": {
-          "type": "string"
-        },
         "logo": {
           "type": "string"
         },
         "name": {
-          "type": "string"
-        },
-        "transaction_total_days": {
           "type": "string"
         }
       },

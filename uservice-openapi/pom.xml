@@ -62,6 +62,12 @@
   <dependencies>
 
     <dependency>
+      <groupId>onlexnet.fin2set</groupId>
+      <artifactId>openapi-server</artifactId>
+      <version>0.2.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
@@ -301,7 +307,8 @@
           <execution>
             <!--
               Used to generate build info, required to get artifact id from java code
-              more: https://stackoverflow.com/questions/44786871/getting-artifactid-and-version-in-spring-boot-starter
+              more:
+            https://stackoverflow.com/questions/44786871/getting-artifactid-and-version-in-spring-boot-starter
             -->
             <id>build-info</id>
             <goals>
