@@ -85,3 +85,11 @@ module "log_analytics_workspace" {
   source = "./module_log_analytics_workspace"
   resource_group = module.resourcegroup.main
 }
+
+
+module "database" {
+  source = "./module_database"
+  resource_group = module.resourcegroup.main
+  admin_password = module.keyvault.env.SQL_ADMIN_PASSWORD
+  environment_name = var.environment_name
+}

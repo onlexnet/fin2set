@@ -67,3 +67,10 @@ data "external" "env" {
   #program = ["${path.module}/env.ps1"]
 }
 
+resource "random_string" "password" {
+  length  = 32
+  special = true
+}
+
+
+

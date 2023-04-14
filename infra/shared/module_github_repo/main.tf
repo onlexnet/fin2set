@@ -4,11 +4,6 @@ data "github_repository" "current" {
   full_name = "onlexnet/fin2set"
 }
 
-# resource "random_string" "password" {
-#   length  = 32
-#   special = true
-# }
-
 # Currently we use the same principal for deployment as for terraform
 resource "azuread_service_principal_password" "current" {
   end_date             = "2299-12-30T23:00:00Z"                        # Forever
