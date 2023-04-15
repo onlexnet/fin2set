@@ -57,6 +57,12 @@ resource "azurerm_key_vault_secret" "NORDIGEN-SECRET-KEY" {
   key_vault_id = azurerm_key_vault.example.id
 }
 
+resource "azurerm_key_vault_secret" "SQL-ADMIN-PASSWORD" {
+  name         = "SQL-ADMIN-PASSWORD"
+  value        = random_string.password.result
+  key_vault_id = azurerm_key_vault.example.id
+}
+
 # Run the script to get the environment variables of interest.
 # This is a data source, so it will run at plan time.
 data "external" "env" {

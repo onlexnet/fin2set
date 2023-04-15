@@ -64,6 +64,31 @@ resource "azurerm_container_app" "default" {
     value = var.env.NORDIGEN_SECRET_KEY
   }
 
+  secret {
+    name = "database-host"
+    value = var.env.DATABASE_HOST
+  }
+
+  secret {
+    name = "database-port"
+    value = var.env.DATABASE_PORT
+  }
+
+  secret {
+    name = "database-name"
+    value = var.env.DATABASE_NAME
+  }
+
+  secret {
+    name = "database-password"
+    value = var.env.DATABASE_PASSWORD
+  }
+
+  secret {
+    name = "database-username"
+    value = var.env.DATABASE_USERNAME
+  }
+
   dapr {
     app_id = "uservice-openapi"
     app_port = "8080"
@@ -73,7 +98,7 @@ resource "azurerm_container_app" "default" {
   template {
     
     container {
-      name = "examplecontainerapp"
+      name = "uservice-openapi"
       # step 1
       # image = "busybox:latest"
       # step 2
@@ -93,6 +118,31 @@ resource "azurerm_container_app" "default" {
       env {
         name = "NORDIGEN_SECRET_KEY"
         secret_name = "nordigen-secret-key"
+      }
+
+      env {
+        name = "DATABASE_HOST"
+        secret_name = "database-host"
+      }
+
+      env {
+        name = "DATABASE_PORT"
+        secret_name = "database-port"
+      }
+
+      env {
+        name = "DATABASE_NAME"
+        secret_name = "database-name"
+      }
+
+      env {
+        name = "DATABASE_USERNAME"
+        secret_name = "database-username"
+      }
+
+      env {
+        name = "DATABASE_PASSWORD"
+        secret_name = "database-password"
       }
 
       # readiness_probe {
