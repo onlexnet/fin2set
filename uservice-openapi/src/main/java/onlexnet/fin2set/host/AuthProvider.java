@@ -10,7 +10,7 @@ public interface AuthProvider {
 
   sealed interface AuthenticationResult {}
 
-  record Authenticated(String name, String id) implements AuthenticationResult {
+  record Authenticated(String id, String name) implements AuthenticationResult {
   }
 
   enum Anonymous implements AuthenticationResult {
