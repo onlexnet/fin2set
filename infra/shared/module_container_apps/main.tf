@@ -147,7 +147,7 @@ resource "azurerm_container_app" "default" {
 
       env {
         name = "SPRING_PROFILES_ACTIVE"
-        secret_name = "prod"
+        value = "prod"
       }
 
       # readiness_probe {
