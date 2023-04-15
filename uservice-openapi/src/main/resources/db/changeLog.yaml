@@ -1,0 +1,9 @@
+databaseChangeLog:
+
+  # uppercase on all objects in database
+  # more:
+  #   - https://docs.liquibase.com/concepts/changelogs/attributes/objectquotingstrategy.html
+  - objectQuotingStrategy: QUOTE_ALL_OBJECTS 
+
+  - includeAll:
+      path: db/changeLog

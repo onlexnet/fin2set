@@ -2,10 +2,25 @@ spring:
 
   mvc:
     pathmatch:
+      # required to discover OpenAPI endpoints and show them on Swagger-UI view
       matching-strategy: ant-path-matcher
 
   main:
     banner-mode: "off"
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changeLog.yaml
+
+  datasource:
+    url: ${DATABASE_JDBC}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+  jpa:
+    # Default: true
+    # Register OpenEntityManagerInViewInterceptor. Binds a JPA EntityManager to the thread for the entire processing of the request.
+    open-in-view: false
 
 # enable /actuator/info with build info
 # source: https://stackoverflow.com/questions/67893857/actuator-info-endpoint-not-working-with-spring-boot-2-5-0
