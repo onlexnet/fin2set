@@ -145,6 +145,11 @@ resource "azurerm_container_app" "default" {
         secret_name = "database-password"
       }
 
+      env {
+        name = "SPRING_PROFILES_ACTIVE"
+        secret_name = "prod"
+      }
+
       # readiness_probe {
       #   transport = "HTTP"
       #   port      = 80
