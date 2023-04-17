@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import onlexnet.fin2set.domain.bankstatement.BankStatementService;
-import onlexnet.fin2set.domain.connect.ConnectService;
 import onlexnet.fin2set.domain.models.Bank;
-import onlexnet.fin2set.domain.models.CustomerData;
+import onlexnet.fin2set.domain.models.BankUserDetailsConnection;
+import onlexnet.fin2set.nordigen.integration.institutions.InstitutionsService;
+import onlexnet.fin2set.nordigen.service.connect.ConnectService;
+import onlexnet.fin2set.nordigen.service.functionality.BankStatementService;
 import onlexnet.fin2set.domain.models.BankStatement;
-import onlexnet.fin2set.nordigen.integration.IntegrationService;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,7 +26,7 @@ class OnlexConnectApi {
 
     private final ConnectService connectService;
     private final BankStatementService onlexService;
-    private final IntegrationService integrationService;
+    private final InstitutionsService integrationService;
     
     @GetMapping("/banks")
     ResponseEntity<List<Bank>> getListBanks(@RequestParam String country) {
@@ -58,7 +58,7 @@ class OnlexConnectApi {
      * execute a query that will return a complete order document
      */
     @GetMapping("/info")
-    ResponseEntity<CustomerData> getInfoAboutConection(@RequestParam(name = "ref") String reference) {
+    ResponseEntity<BankUserDetailsConnection> getInfoAboutConection(@RequestParam(name = "ref") String reference) {
         return ResponseEntity.ok(connectService.getInfoAboutConection(reference));
     }
 

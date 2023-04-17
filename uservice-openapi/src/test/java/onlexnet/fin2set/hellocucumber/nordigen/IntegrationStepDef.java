@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import onlexnet.fin2set.domain.models.Bank;
-import onlexnet.fin2set.nordigen.integration.IntegrationService;
+import onlexnet.fin2set.nordigen.integration.institutions.InstitutionsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,7 +14,7 @@ import io.cucumber.java.en.When;
 public class IntegrationStepDef {
 
     @Autowired
-    private IntegrationService integrationService;
+    private InstitutionsService integrationService;
 
     private Bank randomBank;
     private Bank findedBank;
