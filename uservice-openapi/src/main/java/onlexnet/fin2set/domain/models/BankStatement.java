@@ -5,14 +5,15 @@ import java.util.UUID;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import onlexnet.fin2set.nordigen.models.NordigenBankStatemant.Booked;
 
 @Data
 @Accessors(chain = true)
 public class BankStatement {
 
     private String ownerName;
+
     private UUID depositName;
-    private List<Booked> bookedTransactions;
+
+    private List<Transaction> bookedTransactions;
 
 }
