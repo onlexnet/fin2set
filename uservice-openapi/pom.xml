@@ -16,6 +16,9 @@
     <docker.image.prefix>fin2setalldev.azurecr.io</docker.image.prefix>
     <sonarlint.exclusions>target/**/*</sonarlint.exclusions>
 
+    <sonar.organization>onlexnet</sonar.organization>
+     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
   </properties>
 
   <dependencyManagement>
