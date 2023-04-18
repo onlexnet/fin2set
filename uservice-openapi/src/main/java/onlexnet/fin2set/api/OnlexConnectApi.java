@@ -13,39 +13,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import onlexnet.fin2set.domain.models.Bank;
-import onlexnet.fin2set.domain.models.BankUserDetailsConnection;
-import onlexnet.fin2set.nordigen.integration.institutions.InstitutionsService;
-import onlexnet.fin2set.nordigen.service.connect.ConnectService;
-import onlexnet.fin2set.nordigen.service.functionality.BankStatementService;
 import onlexnet.fin2set.domain.models.BankStatement;
+import onlexnet.fin2set.domain.models.BankUserDetailsConnection;
+import onlexnet.fin2set.nordigen.NordigenPort;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/integration")
 class OnlexConnectApi {
 
-    private final ConnectService connectService;
-    private final BankStatementService onlexService;
-    private final InstitutionsService integrationService;
+    private final NordigenPort nordigenPort;
+    
     
     @GetMapping("/banks")
     ResponseEntity<List<Bank>> getListBanks(@RequestParam String country) {
-        return ResponseEntity.ok(integrationService.getListBanks(country));
+        return ResponseEntity.ok(nordigenPort.getListBanks(country));
     }
 
     @GetMapping("/bank")
     ResponseEntity<Bank> getBank(@RequestParam String bankID) {
-        return ResponseEntity.ok(integrationService.getBank(bankID));
+        return ResponseEntity.ok(nordigenPort.getBank(bankID));
     }
 
     @GetMapping("/bankstatement")
     ResponseEntity<BankStatement> getTransactions(@RequestParam UUID accountID) {
-        return ResponseEntity.ok(onlexService.getBankStatement(accountID));
+        return ResponseEntity.ok(nordigenPort.getBankStatement(accountID));
     }
 
     @GetMapping("/connection")
     ResponseEntity<URI> createConection(@RequestParam String bankId) {
-        return ResponseEntity.status(HttpStatus.FOUND).location(connectService.createLinkToConnect(bankId))
+        return ResponseEntity.status(HttpStatus.FOUND).location(nordigenPort.createLinkToConnect(bankId))
                 .build();
     }
 
@@ -59,7 +56,7 @@ class OnlexConnectApi {
      */
     @GetMapping("/info")
     ResponseEntity<BankUserDetailsConnection> getInfoAboutConection(@RequestParam(name = "ref") String reference) {
-        return ResponseEntity.ok(connectService.getInfoAboutConection(reference));
+        return ResponseEntity.ok(nordigenPort.getInfoAboutConection(reference));
     }
 
 }
