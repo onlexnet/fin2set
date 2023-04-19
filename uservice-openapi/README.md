@@ -1,4 +1,7 @@
-Link to schema api [nordigen](https://nordigen.com/docs/ais-schema.json)
+# Dev notes
+
+- Link to schema api [nordigen](https://nordigen.com/docs/ais-schema.json)
+- [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=onlexnet_fin2set&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=onlexnet_fin2set)
 
 
 ## Cheat sheet for devs
