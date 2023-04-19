@@ -11,6 +11,9 @@ jobs:
   build:
     name: Build and analyze
     runs-on: ubuntu-latest
+    env:
+      NORDIGEN_SECRET_ID: ${{ secrets.NORDIGEN_SECRET_ID }}
+      NORDIGEN_SECRET_KEY: ${{ secrets.NORDIGEN_SECRET_KEY }}
     steps:
       - uses: actions/checkout@v3
         with:
