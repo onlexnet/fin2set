@@ -16,6 +16,13 @@
     <docker.image.prefix>fin2setalldev.azurecr.io</docker.image.prefix>
     <sonarlint.exclusions>target/**/*</sonarlint.exclusions>
 
+    <sonar.organization>onlexnet</sonar.organization>
+    <sonar.projectKey>onlexnet_fin2set_openapi</sonar.projectKey>
+    <sonar.projectName>Fin2Set OpenAPI</sonar.projectName>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <!-- Environment variable is already defined in CICD as SONAR_TOKEN -->
+    <sonar.login>${env.SONAR_TOKEN}</sonar.login>
+
   </properties>
 
   <dependencyManagement>
