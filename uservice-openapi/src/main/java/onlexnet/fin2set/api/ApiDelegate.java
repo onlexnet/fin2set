@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
+import onlexnet.fin2set.api.mappers.BankMapper;
+import onlexnet.fin2set.api.mappers.BankStatementMapper;
 import onlexnet.fin2set.domain.models.Bank;
 import onlexnet.fin2set.domain.models.BankStatement;
 import onlexnet.fin2set.domain.models.BankUserDetailsConnection;
@@ -28,13 +30,13 @@ final class ApiDelegate implements ApiApiDelegate {
   }
 
   @Override
-  public ResponseEntity<List<Bank>> getListBanks(String country) {
-    return ResponseEntity.ok(nordigenFacade.getListBanks(country));
+  public ResponseEntity<List<onlexnet.fin2set.generated.dto.Bank>> getListBanks(String country) {
+    return ResponseEntity.ok(BankMapper.toDTO(nordigenFacade.getListBanks(country)));
   }
 
   @Override
-  public ResponseEntity<Bank> getBank(String bankID) {
-    return ResponseEntity.ok(nordigenFacade.getBank(bankID));
+  public ResponseEntity<onlexnet.fin2set.generated.dto.Bank> getBank(String bankID) {
+    return ResponseEntity.ok(BankMapper.toDTO(nordigenFacade.getBank(bankID)));
   }
 
   @Override
@@ -53,8 +55,8 @@ final class ApiDelegate implements ApiApiDelegate {
   }
 
   @Override
-  public ResponseEntity<BankStatement> getBankstatement(UUID accountID) {
-    return ResponseEntity.ok(nordigenFacade.getBankStatement(accountID));
+  public ResponseEntity<onlexnet.fin2set.generated.dto.BankStatement> getBankstatement(UUID accountID) {
+    return ResponseEntity.ok(BankStatementMapper.toDTO(nordigenFacade.getBankStatement(accountID)));
   }
 
 }
