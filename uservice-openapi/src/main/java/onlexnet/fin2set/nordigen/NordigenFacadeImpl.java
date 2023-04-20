@@ -22,7 +22,7 @@ import onlexnet.fin2set.nordigen.models.mappers.BankUserDetailsConnectionMapper;
 
 @Service
 @RequiredArgsConstructor
-public class NordigenPortImpl implements NordigenPort {
+public class NordigenFacadeImpl implements NordigenFacade {
 
   private final RequisitionsService requisitionsService;
   private final AgreementsService agreementsService;
@@ -46,7 +46,7 @@ public class NordigenPortImpl implements NordigenPort {
 
     // TODO - address should be configured as hosted protocol, address and port will
     // be different per environment
-    var webhookAddress = URI.create("http://192.168.0.100:8080/api/integration/info");
+    var webhookAddress = URI.create("http://192.168.1.100:8080/api/account/catchUser");
 
     var requisitionsResult = requisitionsService.createRequisition(webhookAddress, bankID, myReference, agreementId);
     mapReferenceRequisitionsID.put(myReference, requisitionsResult.getId());
@@ -55,7 +55,7 @@ public class NordigenPortImpl implements NordigenPort {
   }
 
   @Override
-  public BankUserDetailsConnection getInfoAboutConection(String reference) {
+  public BankUserDetailsConnection catchUserAndGetInfoAboutConection(String reference) {
 
     var requisitionsID = mapReferenceRequisitionsID.get(reference);
     var requisition = requisitionsService.getRequisition(requisitionsID).orElseThrow();

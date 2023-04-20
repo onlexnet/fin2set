@@ -15,34 +15,34 @@ import lombok.RequiredArgsConstructor;
 import onlexnet.fin2set.domain.models.Bank;
 import onlexnet.fin2set.domain.models.BankStatement;
 import onlexnet.fin2set.domain.models.BankUserDetailsConnection;
-import onlexnet.fin2set.nordigen.NordigenPort;
+import onlexnet.fin2set.nordigen.NordigenFacade;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/integration")
 class OnlexConnectApi {
 
-    private final NordigenPort nordigenPort;
+    private final NordigenFacade nordigenFacade;
     
     
     @GetMapping("/banks")
     ResponseEntity<List<Bank>> getListBanks(@RequestParam String country) {
-        return ResponseEntity.ok(nordigenPort.getListBanks(country));
+        return ResponseEntity.ok(nordigenFacade.getListBanks(country));
     }
 
     @GetMapping("/bank")
     ResponseEntity<Bank> getBank(@RequestParam String bankID) {
-        return ResponseEntity.ok(nordigenPort.getBank(bankID));
+        return ResponseEntity.ok(nordigenFacade.getBank(bankID));
     }
 
     @GetMapping("/bankstatement")
     ResponseEntity<BankStatement> getTransactions(@RequestParam UUID accountID) {
-        return ResponseEntity.ok(nordigenPort.getBankStatement(accountID));
+        return ResponseEntity.ok(nordigenFacade.getBankStatement(accountID));
     }
 
     @GetMapping("/connection")
     ResponseEntity<URI> createConection(@RequestParam String bankId) {
-        return ResponseEntity.status(HttpStatus.FOUND).location(nordigenPort.createLinkToConnect(bankId))
+        return ResponseEntity.status(HttpStatus.FOUND).location(nordigenFacade.createLinkToConnect(bankId))
                 .build();
     }
 
@@ -56,7 +56,7 @@ class OnlexConnectApi {
      */
     @GetMapping("/info")
     ResponseEntity<BankUserDetailsConnection> getInfoAboutConection(@RequestParam(name = "ref") String reference) {
-        return ResponseEntity.ok(nordigenPort.getInfoAboutConection(reference));
+        return ResponseEntity.ok(nordigenFacade.getInfoAboutConection(reference));
     }
 
 }

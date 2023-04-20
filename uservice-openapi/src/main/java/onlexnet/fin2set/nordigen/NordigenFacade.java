@@ -8,7 +8,7 @@ import onlexnet.fin2set.domain.models.Bank;
 import onlexnet.fin2set.domain.models.BankStatement;
 import onlexnet.fin2set.domain.models.BankUserDetailsConnection;
 
-public interface NordigenPort {
+public interface NordigenFacade {
 
   /**
    * @param bankID
@@ -24,7 +24,7 @@ public interface NordigenPort {
    * the user when he successfully logs in and gives us the necessary consent. Nordigen will add a reference
    * value to our address, after which we will identify the user and send him his connection details.
    */
-  BankUserDetailsConnection getInfoAboutConection(String reference);
+  BankUserDetailsConnection catchUserAndGetInfoAboutConection(String reference);
 
   /**
    * 
