@@ -10,9 +10,7 @@ import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
 import onlexnet.fin2set.api.mappers.BankMapper;
 import onlexnet.fin2set.api.mappers.BankStatementMapper;
-import onlexnet.fin2set.domain.models.Bank;
-import onlexnet.fin2set.domain.models.BankStatement;
-import onlexnet.fin2set.domain.models.BankUserDetailsConnection;
+import onlexnet.fin2set.api.mappers.BankUserDetailsConnectionMapper;
 import onlexnet.fin2set.generated.api.ApiApiDelegate;
 import onlexnet.fin2set.host.AuthProvider;
 import onlexnet.fin2set.nordigen.NordigenFacade;
@@ -44,14 +42,25 @@ final class ApiDelegate implements ApiApiDelegate {
     return ResponseEntity.ok(nordigenFacade.createLinkToConnect(bankID));
   }
 
+  /**
+   * Endpoint under which nordigen sends us the client after the authorization on
+   * the bank's side has been completed
+   * 
+   * Nordigen adds the ref parameter, which is the UUID reference generated
+   * by us, and we assign it to the received id in order to replace them and
+   * execute a query that will return a complete order document
+   */
   @Override
-  public ResponseEntity<BankUserDetailsConnection> catchUser(String reference) {
-    return ResponseEntity.ok(nordigenFacade.catchUserAndGetInfoAboutConection(reference));
+  public ResponseEntity<onlexnet.fin2set.generated.dto.BankUserDetailsConnection> catchUser(String reference) {
+    return ResponseEntity
+        .ok(BankUserDetailsConnectionMapper.toDTO(nordigenFacade.catchUserAndGetInfoAboutConection(reference)));
   }
 
   @Override
-  public ResponseEntity<BankUserDetailsConnection> getInfoAboutUserConnection(String connectionID) {
-    return ResponseEntity.ok(nordigenFacade.catchUserAndGetInfoAboutConection(connectionID));
+  public ResponseEntity<onlexnet.fin2set.generated.dto.BankUserDetailsConnection> getInfoAboutUserConnection(
+      String connectionID) {
+    return ResponseEntity
+        .ok(BankUserDetailsConnectionMapper.toDTO(nordigenFacade.catchUserAndGetInfoAboutConection(connectionID)));
   }
 
   @Override
