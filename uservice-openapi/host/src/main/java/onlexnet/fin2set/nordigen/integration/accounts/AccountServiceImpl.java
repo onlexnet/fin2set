@@ -11,7 +11,7 @@ import onlexnet.fin2set.nordigen.models.NordigenBankStatemant;
 
 @Service
 @AllArgsConstructor
-public class AccountServiceImpl implements AccountService{
+class AccountServiceImpl implements AccountService{
 
     private final TokenService tokenService;
     private final AccountClient accountClient;

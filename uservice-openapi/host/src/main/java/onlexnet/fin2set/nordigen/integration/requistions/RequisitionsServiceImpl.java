@@ -17,7 +17,7 @@ import onlexnet.fin2set.nordigen.integration.token.TokenService;
 
 @Service
 @RequiredArgsConstructor
-public class RequisitionsServiceImpl implements RequisitionsService {
+class RequisitionsServiceImpl implements RequisitionsService {
 
     private final TokenService tokenService;
     private final RequisitionsClient requisitionsClient;

@@ -10,7 +10,7 @@ import onlexnet.fin2set.nordigen.integration.token.TokenService;
 
 @RequiredArgsConstructor
 @Service
-public class InstitutionsServiceImpl implements InstitutionsService {
+class InstitutionsServiceImpl implements InstitutionsService {
 
     private final InstitutionsClient integrationClient ;
     private final TokenService tokenService;
