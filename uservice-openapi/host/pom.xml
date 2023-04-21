@@ -10,6 +10,7 @@
     <java.version>17</java.version>
     <default.package>onlexnet.fin2set.nordigen.generated</default.package>
     <docker.image.prefix>fin2setalldev.azurecr.io</docker.image.prefix>
+    <sonar.skip>true</sonar.skip>
   </properties>
 
   <dependencies>

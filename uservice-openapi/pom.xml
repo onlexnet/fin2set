@@ -26,6 +26,8 @@
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <!-- Environment variable is already defined in CICD as SONAR_TOKEN -->
     <sonar.login>${env.SONAR_TOKEN}</sonar.login>
+    <!-- As some modules are just to autogenerate code, lets disable everywhere and enable where needed. -->
+    <sonar.skip>true</sonar.skip>
 
   </properties>
 
