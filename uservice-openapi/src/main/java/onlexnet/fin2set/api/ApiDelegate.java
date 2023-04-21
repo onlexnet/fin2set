@@ -51,9 +51,9 @@ final class ApiDelegate implements ApiApiDelegate {
    * execute a query that will return a complete order document
    */
   @Override
-  public ResponseEntity<onlexnet.fin2set.generated.dto.BankUserDetailsConnection> catchUser(String reference) {
+  public ResponseEntity<onlexnet.fin2set.generated.dto.BankUserDetailsConnection> catchUser(String ref) {
     return ResponseEntity
-        .ok(BankUserDetailsConnectionMapper.toDTO(nordigenFacade.catchUserAndGetInfoAboutConection(reference)));
+        .ok(BankUserDetailsConnectionMapper.toDTO(nordigenFacade.catchUserAndGetInfoAboutConection(ref)));
   }
 
   @Override

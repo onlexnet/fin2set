@@ -37,7 +37,7 @@
         "summary": "return list banks",
         "operationId": "getListBanks",
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "parameters": [
           {
@@ -75,6 +75,9 @@
       "get": {
         "summary": "return bank from his id",
         "operationId": "getBank",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "bankID",
@@ -107,6 +110,9 @@
       "get": {
         "summary": "generate uri where user have to go to create connection at his bank site and give uss acces to his transactions and account data",
         "operationId": "generateUriToConnectionWithBankAccount",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "bankId",
@@ -139,9 +145,12 @@
       "get": {
         "summary": "nordigen after succesfull connected throw usser at this https",
         "operationId": "catchUser",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "reference",
+            "name": "ref",
             "in": "query",
             "required": true,
             "type": "string"
@@ -170,6 +179,9 @@
       "get": {
         "summary": "returns basic information about the connection to the bank account and about the bank account",
         "operationId": "getInfoAboutUserConnection",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "connectionID",
@@ -201,6 +213,9 @@
       "get": {
         "summary": "fetches transactions from the specified bank account",
         "operationId": "getBankstatement",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "accountID",
