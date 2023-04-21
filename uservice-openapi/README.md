@@ -21,6 +21,8 @@ docker push fin2setalldev.azurecr.io/fin2set:latest # push just created java ima
 docker push fin2setalldev.azurecr.io/fin2set-native:latest # push just created native image to remove registry
 ```
 
+### To run Sonar from CLI
+
 ## Useful links:
 - https://openapi-generator.tech/docs/generators/java/
 - Native java
