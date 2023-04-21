@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import onlexnet.fin2set.domain.models.BankStatement;
-import onlexnet.fin2set.nordigen.accounts.AccountService;
+import onlexnet.fin2set.nordigen.integration.accounts.AccountService;
+import onlexnet.fin2set.nordigen.models.NordigenBankStatemant;
 
 public class AccountStepDef {
 
@@ -19,7 +19,7 @@ public class AccountStepDef {
 
     private UUID accountNumberID;
     private UUID accountFoundID;
-    private Optional<BankStatement> bankStatemant;
+    private Optional<NordigenBankStatemant> bankStatemant;
 
     /***
      * 7e944232-bda9-40bc-b784-660c7ab5fe78 

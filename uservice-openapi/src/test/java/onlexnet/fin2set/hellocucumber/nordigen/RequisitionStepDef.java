@@ -7,13 +7,13 @@ import java.util.UUID;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import onlexnet.fin2set.nordigen.agreements.AgreementsService;
-import onlexnet.fin2set.nordigen.requistions.RequisitionsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
 import onlexnet.fin2set.nordigen.generated.RequisitionRequest;
+import onlexnet.fin2set.nordigen.integration.agreements.AgreementsService;
+import onlexnet.fin2set.nordigen.integration.requistions.RequisitionsService;
 
 
 public class RequisitionStepDef {
@@ -32,8 +32,7 @@ public class RequisitionStepDef {
     @Given("create new agreement for requisition.")
     public void create_new_agreement_for_requisition() {
 
-        var endUserAgreementRequest = new EndUserAgreementRequest()
-                .institutionId("REVOLUT_REVOGB21")
+        var endUserAgreementRequest = new EndUserAgreementRequest("REVOLUT_REVOGB21")
                 .maxHistoricalDays(90)
                 .accessValidForDays(30)
                 .accessScope(List.of("balances", "details", "transactions"));
@@ -44,9 +43,9 @@ public class RequisitionStepDef {
     @Given("create new requisition.")
     public void create_new_requisition() {
 
-        var requisitionRequest = new RequisitionRequest()
-                .redirect(URI.create("http://localhost:8080/api/integration/info"))
-                .institutionId("REVOLUT_REVOGB21")
+      var redirect = URI.create("http://localhost:8080/api/integration/info");
+
+        var requisitionRequest = new RequisitionRequest(redirect, "REVOLUT_REVOGB21")
                 .reference(UUID.randomUUID().toString())
                 .agreement(createdAgreementID)
                 .userLanguage("PL")

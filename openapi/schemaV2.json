@@ -1,0 +1,368 @@
+{
+  "swagger": "2.0",
+  "host": "uservice-openapi.yellowfield-297bf088.westeurope.azurecontainerapps.io",
+  "info": {
+    "description": "Description",
+    "version": "1.00",
+    "title": "Fin2Set",
+    "termsOfService": "localhost:8080",
+    "contact": {
+      "name": "Damian Jarzębowski",
+      "url": "https://www.linkedin.com/in/damian-jarz%C4%99bowski-05aa32220/",
+      "email": "damian.r.jarzebowski@gmail.com"
+    }
+  },
+  "basePath": "/",
+  "paths": {
+    "/api/debug": {
+      "get": {
+        "summary": "return actualy user name and id as string",
+        "operationId": "whoAmI",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/banks": {
+      "get": {
+        "summary": "return list banks",
+        "operationId": "getListBanks",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "countryCode",
+            "in": "query",
+            "description": "code according to ISO 3166-1",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Bank"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/bank": {
+      "get": {
+        "summary": "return bank from his id",
+        "operationId": "getBank",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "bankID",
+            "in": "query",
+            "description": "bankID from nordigen",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Bank"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/connection": {
+      "get": {
+        "summary": "generate uri where user have to go to create connection at his bank site and give uss acces to his transactions and account data",
+        "operationId": "generateUriToConnectionWithBankAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "bankId",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/account/catchUser": {
+      "get": {
+        "summary": "nordigen after succesfull connected throw usser at this https",
+        "operationId": "catchUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ref",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BankUserDetailsConnection"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/account/info": {
+      "get": {
+        "summary": "returns basic information about the connection to the bank account and about the bank account",
+        "operationId": "getInfoAboutUserConnection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "connectionID",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BankUserDetailsConnection"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/account/bankstatement": {
+      "get": {
+        "summary": "fetches transactions from the specified bank account",
+        "operationId": "getBankstatement",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountID",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BankStatement"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }        
+      }
+    }
+  },
+  "definitions": {
+    "BankUserDetailsConnection": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "status": {
+          "type": "object"
+        },
+        "bankId": {
+          "type": "string"
+        },
+        "accounts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "link": {
+          "type": "string",
+          "format": "uri"
+        },
+        "endUserAgreementInfo": {
+          "$ref": "#/definitions/EndUserAgreementInfo"
+        }
+      }
+    },
+    "EndUserAgreementInfo": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "maxHistoricalDays": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "accessValidForDays": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "accessScope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accepted": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "BankStatement": {
+      "type": "object",
+      "properties": {
+        "ownerName": {
+          "type": "string"
+        },
+        "depositName": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "bookedTransactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Transaction"
+          }
+        }
+      }
+    },
+    "Transaction": {
+      "type": "object",
+      "properties": {
+        "transactionId": {
+          "type": "string"
+        },
+        "bookingDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "transactionAmount": {
+          "$ref": "#/definitions/TransactionAmount"
+        },
+        "remittanceInformationUnstructured": {
+          "type": "string"
+        }
+      }
+    },
+    "TransactionAmount": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    },
+    "Bank": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

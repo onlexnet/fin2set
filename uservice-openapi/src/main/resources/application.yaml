@@ -13,6 +13,7 @@ spring:
     change-log: classpath:db/changeLog.yaml
 
   datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: ${DATABASE_JDBC}
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}

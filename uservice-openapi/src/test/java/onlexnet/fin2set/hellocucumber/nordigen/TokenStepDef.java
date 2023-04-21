@@ -3,10 +3,10 @@ package onlexnet.fin2set.hellocucumber.nordigen;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import onlexnet.fin2set.nordigen.token.TokenService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import onlexnet.fin2set.nordigen.integration.token.TokenService;
 
 public class TokenStepDef {
 

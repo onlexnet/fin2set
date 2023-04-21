@@ -5,12 +5,12 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import onlexnet.fin2set.domain.models.EndUserAgreement;
-import onlexnet.fin2set.nordigen.agreements.AgreementsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import onlexnet.fin2set.nordigen.generated.EndUserAgreement;
 import onlexnet.fin2set.nordigen.generated.EndUserAgreementRequest;
+import onlexnet.fin2set.nordigen.integration.agreements.AgreementsService;
 
 public class AgreementsStepDef {
 
@@ -23,8 +23,7 @@ public class AgreementsStepDef {
     @Given("create new agreement.")
     public void create_new_agreement_from_example() {
 
-        var endUserAgreementRequest = new EndUserAgreementRequest()
-                .institutionId("REVOLUT_REVOGB21")
+        var endUserAgreementRequest = new EndUserAgreementRequest("REVOLUT_REVOGB21")
                 .maxHistoricalDays(90)
                 .accessValidForDays(30)
                 .accessScope(List.of("balances", "details", "transactions"));  

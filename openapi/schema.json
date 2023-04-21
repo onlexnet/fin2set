@@ -10,79 +10,51 @@
       "name": "Damian Jarzębowski",
       "url": "https://www.linkedin.com/in/damian-jarz%C4%99bowski-05aa32220/",
       "email": "damian.r.jarzebowski@gmail.com"
-    },
-    "license": {
-      "name": "My own licence",
-      "url": "https://www.linkedin.com/in/damian-jarz%C4%99bowski-05aa32220/"
     }
   },
   "basePath": "/",
-  "tags": [
-    {
-      "name": "integration-account-api",
-      "description": "Integration Account Api"
-    },
-    {
-      "name": "integration-agreements-api",
-      "description": "Integration Agreements Api"
-    },
-    {
-      "name": "integration-institutions-api",
-      "description": "Integration Institutions Api"
-    },
-    {
-      "name": "integration-requisitions-api",
-      "description": "Integration Requisitions Api"
-    },
-    {
-      "name": "integration-token-api",
-      "description": "Integration Token Api"
-    },
-    {
-      "name": "onlex-bank-api",
-      "description": "Onlex Bank Api"
-    },
-    {
-      "name": "onlex-connect-api",
-      "description": "Onlex Connect Api"
-    }
-  ],
   "paths": {
-    "/api/account/info": {
+    "/api/debug": {
       "get": {
-        "tags": [
-          "integration-account-api"
+        "summary": "return actualy user name and id as string",
+        "operationId": "whoAmI",
+        "produces": [
+          "*/*"
         ],
-        "summary": "getAccount",
-        "operationId": "getAccountUsingGET",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/banks": {
+      "get": {
+        "summary": "return list banks",
+        "operationId": "getListBanks",
         "produces": [
           "*/*"
         ],
         "parameters": [
           {
-            "name": "accountNumberID",
+            "name": "countryCode",
             "in": "query",
-            "description": "accountNumberID",
+            "description": "code according to ISO 3166-1",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AccountDTO"
+              "$ref": "#/definitions/NordigenBankStatemant"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
           }
         }
       }

@@ -5,8 +5,8 @@ import java.util.Random;
 import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import onlexnet.fin2set.domain.models.Bank;
-import onlexnet.fin2set.nordigen.integration.IntegrationService;
+import onlexnet.fin2set.nordigen.generated.Integration;
+import onlexnet.fin2set.nordigen.integration.institutions.InstitutionsService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,17 +14,17 @@ import io.cucumber.java.en.When;
 public class IntegrationStepDef {
 
     @Autowired
-    private IntegrationService integrationService;
+    private InstitutionsService integrationService;
 
-    private Bank randomBank;
-    private Bank findedBank;
+    private Integration randomBank;
+    private Integration findedBank;
 
     @Given("get list all Banks from poland and save random Bank.")
     public void get_list_all_Banks_from_poland_and_save_random_Bank() {
-        var Banks = integrationService.getListBanks("pl");
+        var banks = integrationService.getListBanks("pl");
         
         var rand = new Random();
-        randomBank = Banks.get(rand.nextInt(Banks.size()));
+        randomBank = banks.get(rand.nextInt(banks.size()));
     }
 
     @When("go find saved object.")
