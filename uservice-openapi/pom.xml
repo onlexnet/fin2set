@@ -13,6 +13,7 @@
 
   <modules>
     <module>host</module>
+    <module>openapi-server</module>
   </modules>
 
   <properties>
