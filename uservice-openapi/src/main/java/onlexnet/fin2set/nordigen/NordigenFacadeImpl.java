@@ -16,9 +16,9 @@ import onlexnet.fin2set.nordigen.integration.accounts.AccountService;
 import onlexnet.fin2set.nordigen.integration.agreements.AgreementsService;
 import onlexnet.fin2set.nordigen.integration.institutions.InstitutionsService;
 import onlexnet.fin2set.nordigen.integration.requistions.RequisitionsService;
-import onlexnet.fin2set.nordigen.models.mappers.BankMapper;
-import onlexnet.fin2set.nordigen.models.mappers.BankStatemantMapper;
-import onlexnet.fin2set.nordigen.models.mappers.BankUserDetailsConnectionMapper;
+import onlexnet.fin2set.nordigen.mappers.BankMapper;
+import onlexnet.fin2set.nordigen.mappers.BankStatemantMapper;
+import onlexnet.fin2set.nordigen.mappers.BankUserDetailsConnectionMapper;
 
 @Service
 @RequiredArgsConstructor

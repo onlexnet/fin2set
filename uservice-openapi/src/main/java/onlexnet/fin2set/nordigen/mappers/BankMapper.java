@@ -1,4 +1,4 @@
-package onlexnet.fin2set.nordigen.models.mappers;
+package onlexnet.fin2set.nordigen.mappers;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package onlexnet.fin2set.nordigen.models.mappers;
+package onlexnet.fin2set.nordigen.mappers;
 
 import lombok.experimental.UtilityClass;
 import onlexnet.fin2set.domain.models.BankStatement;
