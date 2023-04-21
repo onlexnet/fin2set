@@ -56,7 +56,7 @@ class OnlexConnectApi {
      */
     @GetMapping("/info")
     ResponseEntity<BankUserDetailsConnection> getInfoAboutConection(@RequestParam(name = "ref") String reference) {
-        return ResponseEntity.ok(nordigenFacade.getInfoAboutConection(reference));
+        return ResponseEntity.ok(nordigenFacade.catchUserAndGetInfoAboutConection(reference));
     }
 
 }
