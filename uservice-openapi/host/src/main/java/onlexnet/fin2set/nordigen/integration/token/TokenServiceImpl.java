@@ -11,7 +11,7 @@ import onlexnet.fin2set.nordigen.generated.SpectacularJWTRefresh;
 
 @Service
 @RequiredArgsConstructor
-public class TokenServiceImpl implements TokenService {
+class TokenServiceImpl implements TokenService {
 
     @Value("${NORDIGEN_SECRET_KEY}")
     private String secretKey;

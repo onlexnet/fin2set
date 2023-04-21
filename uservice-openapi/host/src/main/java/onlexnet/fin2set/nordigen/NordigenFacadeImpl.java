@@ -22,7 +22,7 @@ import onlexnet.fin2set.nordigen.mappers.BankUserDetailsConnectionMapper;
 
 @Service
 @RequiredArgsConstructor
-public class NordigenFacadeImpl implements NordigenFacade {
+class NordigenFacadeImpl implements NordigenFacade {
 
   private final RequisitionsService requisitionsService;
   private final AgreementsService agreementsService;
