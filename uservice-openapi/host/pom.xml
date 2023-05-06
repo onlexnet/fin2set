@@ -15,6 +15,16 @@
 
   <dependencies>
 
+  <!--
+    dependency for simulate browser
+   -->
+  <dependency>
+      <groupId>com.microsoft.playwright</groupId>
+      <artifactId>playwright</artifactId>
+      <version>1.32.0</version>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
       <groupId>onlexnet.fin2set</groupId>
       <artifactId>openapi-server</artifactId>
