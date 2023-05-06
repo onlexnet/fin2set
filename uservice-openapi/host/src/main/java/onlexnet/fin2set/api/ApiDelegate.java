@@ -57,10 +57,9 @@ final class ApiDelegate implements ApiApiDelegate {
   }
 
   @Override
-  public ResponseEntity<onlexnet.fin2set.generated.dto.BankUserDetailsConnection> getInfoAboutUserConnection(
-      String connectionID) {
+  public ResponseEntity<onlexnet.fin2set.generated.dto.BankUserDetailsConnection> getInfoAboutUserConnection(UUID connectionID) {
     return ResponseEntity
-        .ok(BankUserDetailsConnectionMapper.toDTO(nordigenFacade.catchUserAndGetInfoAboutConection(connectionID)));
+        .ok(BankUserDetailsConnectionMapper.toDTO(nordigenFacade.getBankUserDetailsConnection(connectionID)));
   }
 
   @Override
