@@ -62,10 +62,6 @@ public class NordigenFacadeTest {
       page.click("text=approve");
 
       page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("Step-4 Our page.png")));
-      
-      
-
-
 
     }
 
