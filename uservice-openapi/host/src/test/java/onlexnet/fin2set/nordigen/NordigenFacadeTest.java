@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.options.LoadState;
 
 import onlexnet.fin2set.db.DbExtension;
 
@@ -41,17 +43,30 @@ public class NordigenFacadeTest {
       // ║ sudo apt-get install libgbm1 ║
       // ║ ║
       // ║ [3 Playwright Team
-      var browser = playwright.chromium().launch();
+      
+      var browserType = playwright.chromium();
+      var browserSettings = new BrowserType.LaunchOptions().setHeadless(true).setSlowMo(2000);
+      var browser = browserType.launch(browserSettings);
       var page = browser.newPage();
-      page.navigate(link.toASCIIString());
-      page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("example.png")));
-      //page.click("text=Zgadzam się");
-      var a = page.locator("INPUT[type='submit']");
-      var items = a.all();
-      var i = items.get(0);
-      i.click();
-      //Thread.sleep(5000);
-      page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("example2.png")));
+
+      page.navigate(link.toString());
+      page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("Step-1 Agreement and information for user.png")));
+      page.click("INPUT[type='submit']");
+      
+      page.waitForSelector("INPUT[type='submit']");
+      page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("Step-2 Bank login site.png")));
+      page.click("INPUT[type='submit']");
+
+      page.waitForSelector("text=approve");
+      page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("Step-3 Accept agreement on bank site.png")));
+      page.click("text=approve");
+
+      page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("Step-4 Our page.png")));
+      
+      
+
+
+
     }
 
   }
