@@ -25,12 +25,7 @@ public class NordigenFacadeTest {
 
   @Test
   void loadData() {
-    var banks = nordigen.getListBanks("PL");
-    // var mBank = banks.stream().filter(it -> it.getName().equals("mBank
-    // Retail")).findFirst().get();
-    // var link = nordigen.createLinkToConnect(mBank.getId());
     var link = nordigen.createLinkToConnect("SANDBOXFINANCE_SFIN0000");
-
     try (Playwright playwright = Playwright.create()) {
 
       // Host system is missing dependencies to run browsers. ║
