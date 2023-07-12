@@ -26,7 +26,8 @@ public class NordigenFacadeTest extends ScriptBase {
   // Read logs to install missing dependencies.
   @Test
   void loadData() {
-    var link = nordigen.createLinkToConnect("SANDBOXFINANCE_SFIN0000");
+    var bankId = "SANDBOXFINANCE_SFIN0000";
+    var link = nordigen.createLinkToConnect(bankId);
 
     page.navigate(link.toString(), new Page.NavigateOptions()
     .setTimeout(5000)
