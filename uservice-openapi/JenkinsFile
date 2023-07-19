@@ -1,0 +1,111 @@
+pipeline {
+  agent none
+  environment {
+    test = 'totalnie environments'
+    // Tworząc workspace używana jest data i czas w celu utworzenia oryginalnego środowiska
+    CUUSTOM_WS = "/home/jenkins/workspace/qa23-damian-${new Date().format('yyyyMMdd')}-${System.currentTimeMillis()}"
+  }
+  stages {
+    stage('1') {
+      // Agent to utworzenie nowego dockera
+      agent {
+        node {
+          label "jdk11 && ${getLowLoadBuilder()}"
+          //Dopisuje 1, żeby w wypadku wystartowania kilku stagy na raz na 1 maszynie nie miały tego samego workspaca
+          customWorkspace CUUSTOM_WS + ' 1'
+        }
+      }
+      // Wyplucie na ekran "test"
+      steps {
+          sh "echo 'test'"
+      }
+      // wyczyszczenie środowiska
+      post {
+        cleanup {
+          cleanWs disableDeferredWipeout: true, notFailBuild: true, deleteDirs: true
+        }
+      }
+    }
+    stage('Parallel In Sequential') {
+      parallel {
+        stage('In Parallel 1') {
+          agent {
+            node {
+              label "jdk11 && ${getLowLoadBuilder()}"
+              customWorkspace CUUSTOM_WS + ' 1'
+            }
+          }
+          steps {
+            // tworze w moim workspace plik file-1 i wsadzam do jego wnętrza napis tekst-1
+            sh "echo 'tekst-1' >> file-1"
+            // wsadzam plik do stasha, żeby móc wykorzystać go później ps. pomiedzy stepami, nie moge wykorzystać tego samego stasha
+            stash includes: 'file-1', name: 'stashName-1'
+          }
+          post {
+            cleanup {
+              cleanWs disableDeferredWipeout: true, notFailBuild: true, deleteDirs: true
+            }
+          }
+        }
+        stage('In Parallel 2') {
+          agent {
+            node {
+              label "jdk11 && ${getLowLoadBuilder()}"
+              customWorkspace CUUSTOM_WS + ' 2'
+            }
+          }
+          steps {
+            sh "echo 'tekst-2' >> file-2"
+          }
+          post {
+            cleanup {
+              cleanWs disableDeferredWipeout: true, notFailBuild: true, deleteDirs: true
+            }
+          }
+        }
+        stage('In Parallel 3') {
+          agent {
+            node {
+              label "jdk11 && ${getLowLoadBuilder()}"
+              customWorkspace CUUSTOM_WS + ' 3'
+            }
+          }
+          steps {
+            sh "echo 'tekst-3' >> file-3"
+            stash includes: 'file-3', name: 'stashName-2'
+          }
+          post {
+            cleanup {
+              cleanWs disableDeferredWipeout: true, notFailBuild: true, deleteDirs: true
+            }
+          }
+        }
+      }
+    }
+    stage('2') {
+      agent {
+        node {
+          label "jdk11 && ${getLowLoadBuilder()}"
+          customWorkspace CUUSTOM_WS + ' 1'
+        }
+      }
+      steps {
+        // Wypakowanie plików ze stashy do workspace z obecnego stage
+        unstash 'stashName-1'
+        unstash 'stashName-2'
+        sh 'cat file-1'
+        sh 'cat file-3'
+      }
+      post {
+        // zdefiniowanie kiedy ma się wykonać dana akcja
+        always {
+          // Stworzenie artefaktu do pobrania
+          archiveArtifacts artifacts: 'file-1, file-3', followSymlinks: false
+        }
+        cleanup {
+          cleanWs disableDeferredWipeout: true, notFailBuild: true, deleteDirs: true
+        }
+      }
+    }
+  }
+}

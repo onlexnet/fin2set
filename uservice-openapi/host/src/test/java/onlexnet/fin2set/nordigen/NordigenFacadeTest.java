@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.ElementHandle.ClickOptions;
 import com.microsoft.playwright.options.WaitUntilState;
 
 import onlexnet.fin2set.db.DbExtension;
