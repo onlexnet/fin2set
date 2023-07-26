@@ -21,7 +21,7 @@ public class NordigenFacadeTest extends ScriptBase {
   @Autowired
   NordigenFacade nordigen;
 
-  // Host system is missing dependencies to run browsers. 
+  // Host system is missing dependencies to run browsers.
   // Read logs to install missing dependencies.
   @Test
   void loadData() {
@@ -29,8 +29,8 @@ public class NordigenFacadeTest extends ScriptBase {
     var link = nordigen.createLinkToConnect(bankId);
 
     page.navigate(link.toString(), new Page.NavigateOptions()
-    .setTimeout(5000)
-    .setWaitUntil(WaitUntilState.NETWORKIDLE));
+        .setTimeout(5000)
+        .setWaitUntil(WaitUntilState.NETWORKIDLE));
     page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("Step-1 Agreement and information for user.png")));
     page.click("INPUT[type='submit']");
 

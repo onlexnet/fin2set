@@ -46,7 +46,10 @@ class NordigenFacadeImpl implements NordigenFacade {
 
     // TODO - address should be configured as hosted protocol, address and port will
     // be different per environment
-    var webhookAddress = URI.create("http://192.168.1.100:8080/api/account/catchUser");
+    final var mainUri = "http://localhost:8080";
+    final var vmMainUri = "http://192.168.1.100:8080";
+    final var pathParam = "/api/account/catchUser";
+    var webhookAddress = URI.create(mainUri + pathParam);
 
     var requisitionsResult = requisitionsService.createRequisition(webhookAddress, bankID, myReference, agreementId);
     mapReferenceRequisitionsID.put(myReference, requisitionsResult.getId());
