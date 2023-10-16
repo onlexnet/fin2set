@@ -1,7 +1,7 @@
-data "azurerm_container_registry" "alldev" {
-  name                = "fin2setalldev"
-  resource_group_name = "fin2set-env-alldev"
-}
+# data "azurerm_container_registry" "alldev" {
+#   name                = "fin2setalldev"
+#   resource_group_name = "fin2set-env-alldev"
+# }
 
 
 # Create user assigned identity and associated IAM role assignment
@@ -11,14 +11,14 @@ resource "azurerm_user_assigned_identity" "containerapp" {
   resource_group_name = var.resource_group.name
 }
 
-resource "azurerm_role_assignment" "containerapp" {
-  scope                = data.azurerm_container_registry.alldev.id
-  role_definition_name = "acrpull"
-  principal_id         = azurerm_user_assigned_identity.containerapp.principal_id
-  depends_on = [
-    azurerm_user_assigned_identity.containerapp
-  ]
-}
+# resource "azurerm_role_assignment" "containerapp" {
+#   scope                = data.azurerm_container_registry.alldev.id
+#   role_definition_name = "acrpull"
+#   principal_id         = azurerm_user_assigned_identity.containerapp.principal_id
+#   depends_on = [
+#     azurerm_user_assigned_identity.containerapp
+#   ]
+# }
 
 resource "azurerm_container_app_environment" "default" {
   name                       = "dev01-env"
@@ -40,10 +40,11 @@ resource "azurerm_container_app" "default" {
     identity_ids = [azurerm_user_assigned_identity.containerapp.id]
   }
 
-  registry {
-    server   = data.azurerm_container_registry.alldev.login_server
-    identity = azurerm_user_assigned_identity.containerapp.id
-  }
+  # registry {
+  #   server               = "ghcr.io"
+  #   username             = var.env.GITHUB_USERNAME
+  #   password_secret_name = "cr-pat"
+  # }
 
   # step 2
   ingress {
@@ -102,8 +103,8 @@ resource "azurerm_container_app" "default" {
       # step 1
       # image = "busybox:latest"
       # step 2
-      // image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
-      image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
+      # image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
+      image = "busybox"
       cpu    = 0.25
       memory = "0.5Gi"
 

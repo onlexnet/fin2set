@@ -1,0 +1,7 @@
+type Query {
+  view: [ViewEdge!]!
+}
+
+type ViewEdge {
+    name: String!
+}

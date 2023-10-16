@@ -7,7 +7,9 @@ State location: Terraform Cloud
 
 # Start locally
 ```bash
-terraform login # to connect to terraform cloud
+terraform login # to connect to terraform cloud. Use once, is valid for longer period (e.g. 30 days)
+cd main/dev01
+terraform plan # ot see working example without side effects
 ```
 
 ### Prerequisites

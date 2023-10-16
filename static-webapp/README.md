@@ -3,7 +3,7 @@
 ## Architecture decision record
 
 ### ADR-1 Component library
-[Fluent UI React](https://developer.microsoft.com/en-us/fluentui) from Microsoft.
+[Installing Fluent UI React v9](https://fluent2.microsoft.design/get-started/develop) from Microsoft.
 - designed for mobiles
 - data grids available in core library
 

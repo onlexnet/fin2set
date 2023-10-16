@@ -1,26 +1,34 @@
-import React from 'react';
+import { FluentProvider, webLightTheme } from '@fluentui/react-components';
 import './App.css';
+import { Stack } from '@fluentui/react';
 import { ChatFrame } from './Chat';
+import { Default as Example } from './example';
+import { useState } from 'react';
 
 function App() {
+  const [hidden, setVisibleStack] = useState(false);
+
   return (
-    <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      <ChatFrame />
-    </div>
+    <FluentProvider theme={webLightTheme}>
+      <div className="App">
+
+        <Stack horizontal styles={{ root: { height: "100%" } }}>
+
+          <Stack.Item id='chatFrame' align='center'>
+            <ChatFrame />
+          </Stack.Item>
+          
+          <Stack.Item id='view1' align='center' hidden={hidden} styles={{ root: { width: "150%", padding: "10" } }}>
+            <Example hide={() => {
+              setVisibleStack(true);
+             }} />
+          </Stack.Item>
+
+        </Stack>
+
+
+      </div>
+    </FluentProvider>
   );
 }
 

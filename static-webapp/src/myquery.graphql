@@ -1,0 +1,7 @@
+# import * from ../uservice-webapi/host/src/main/resources/graphql/main.graphqls
+
+query myquery {
+    view {
+        name
+    }
+}

@@ -21,17 +21,17 @@ terraform {
   }
 }
 
-resource "github_actions_secret" "DOCKER_USERNAME" {
-  repository      = data.github_repository.current.name
-  secret_name     = "DOCKER_USERNAME"
-  plaintext_value = var.acr_admin_name
-}
+# resource "github_actions_secret" "DOCKER_USERNAME" {
+#   repository      = data.github_repository.current.name
+#   secret_name     = "DOCKER_USERNAME"
+#   # plaintext_value = var.acr_admin_name
+# }
 
-resource "github_actions_secret" "DOCKER_PASSWORD" {
-  repository      = data.github_repository.current.name
-  secret_name     = "DOCKER_PASSWORD"
-  plaintext_value = var.acr_admin_secret
-}
+# resource "github_actions_secret" "DOCKER_PASSWORD" {
+#   repository      = data.github_repository.current.name
+#   secret_name     = "DOCKER_PASSWORD"
+#   plaintext_value = var.acr_admin_secret
+# }
 
 # resource "github_repository_environment" "dev01" {
 #   environment = "example"
@@ -69,9 +69,9 @@ resource "github_actions_secret" "AZURE_TENANT_ID" {
   plaintext_value = data.azurerm_client_config.current.tenant_id
 }
 
-resource "github_actions_variable" "DOCKER_REGISTRY_URL" {
-  repository    = "fin2set"
-  variable_name = "DOCKER_REGISTRY_URL"
-  value         = var.acr_registry_url
-}
+# resource "github_actions_variable" "DOCKER_REGISTRY_URL" {
+#   repository    = "fin2set"
+#   variable_name = "DOCKER_REGISTRY_URL"
+#   value         = var.acr_registry_url
+# }
 

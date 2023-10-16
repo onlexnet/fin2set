@@ -1,0 +1,14 @@
+# inspired by https://the-guild.dev/graphql/config/docs
+
+schema: ../uservice-webapi/**/*.graphqls
+documents: 'src/**/*.graphql'
+generates:
+  src/Components/.generated/components.tsx:
+    plugins:
+      - typescript
+      # - typescript-operations
+      # - typescript-react-apollo
+    config:
+      withHooks: true
+      withComponent: false
+      withHOC: false
