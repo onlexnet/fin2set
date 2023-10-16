@@ -2,6 +2,11 @@ type Query {
   view: [ViewEdge!]!
 }
 
+type Subscription {
+  greetings: String!
+}
+
+
 type ViewEdge {
     name: String!
 }

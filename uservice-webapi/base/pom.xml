@@ -1,33 +1,95 @@
 <project>
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
   <packaging>pom</packaging>
   <groupId>onlexnet</groupId>
   <artifactId>webapi-base</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
-	<properties>
-		<java.version>21</java.version>
-	</properties>
+  <properties>
+    <!-- Remove warning:
+         Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+    -->
+    <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
+    <java.version>21</java.version>
+  </properties>
 
-	<dependencyManagement>
-		<dependencies>
 
-			<dependency>
-				<groupId>org.springframework.modulith</groupId>
-				<artifactId>spring-modulith-bom</artifactId>
-				<version>1.0.0</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
+  <dependencyManagement>
+
+    <dependencies>
 
       <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-dependencies</artifactId>
-          <version>3.1.4</version>
-          <type>pom</type>
-          <scope>import</scope>
+        <groupId>onlexnet</groupId>
+        <artifactId>webapi-gql-model</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
       </dependency>
 
-      </dependencies>
-	</dependencyManagement>
+      <dependency>
+        <groupId>org.springframework.modulith</groupId>
+        <artifactId>spring-modulith-bom</artifactId>
+        <version>1.0.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>3.1.4</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+    </plugins>
+
+
+    <pluginManagement>
+      <plugins>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.11.0</version>
+          <configuration>
+            <release>${java.version}</release>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>3.1.4</version>
+          <configuration>
+            <excludes>
+              <exclude>
+                <!-- Exclud as it is used just co autogenerate code at compilation time. -->
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+              </exclude>
+            </excludes>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.10</version>
+        </plugin>
+
+      </plugins>
+
+    </pluginManagement>
+  </build>
+
+
 </project>

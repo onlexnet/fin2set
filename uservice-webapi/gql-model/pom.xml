@@ -1,0 +1,11 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+  	<groupId>onlexnet</groupId>
+  	<artifactId>webapi-base</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../base/pom.xml</relativePath>
+	</parent>
+	<artifactId>webapi-gql-model</artifactId>
+
+</project>
