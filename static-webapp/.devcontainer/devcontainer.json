@@ -3,7 +3,6 @@
 {
 	"name": "Node.js & TypeScript with dind",
 
-	//"image": "mcr.microsoft.com/devcontainers/typescript-node:1-16-bullseye",
 	"build": { "dockerfile": "Dockerfile" },
 
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
@@ -24,9 +23,9 @@
 	},
 
 	// https://stackoverflow.com/a/75644266
-	"mounts": [
-		"type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/node/.ssh"
-	],
+	// "mounts": [
+	// 	"type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/node/.ssh"
+	// ],
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -39,8 +38,8 @@
 		"vscode": {"extensions": [
 			"graphql.vscode-graphql"
 		]}
-	}
+	},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	"remoteUser": "root"
 }
