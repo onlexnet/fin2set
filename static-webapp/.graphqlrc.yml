@@ -6,7 +6,7 @@ generates:
   src/Components/.generated/components.tsx:
     plugins:
       - typescript
-      # - typescript-operations
+      - typescript-operations
       # - typescript-react-apollo
     config:
       withHooks: true

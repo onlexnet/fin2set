@@ -23,3 +23,8 @@ export type ViewEdge = {
   __typename?: 'ViewEdge';
   name: Scalars['String']['output'];
 };
+
+export type MyqueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyqueryQuery = { __typename?: 'Query', view: Array<{ __typename?: 'ViewEdge', name: string }> };
