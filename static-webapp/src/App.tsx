@@ -5,6 +5,7 @@ import { ChatFrame } from './Chat';
 import { Default as Example } from './example';
 import { useState } from 'react';
 import { useMyqueryQuery } from './api/generated/graphql';
+import { ChatScope } from './ChatScope';
 
 function App() {
   const [hidden, setVisibleStack] = useState(false);
@@ -36,7 +37,7 @@ function App() {
   return view;
 }
 
-const chatView = () => <ChatFrame />
+const chatView = () => <ChatScope />
 
 export default App;
 

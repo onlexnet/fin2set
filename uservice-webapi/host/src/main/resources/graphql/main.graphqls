@@ -2,6 +2,20 @@ type Query {
   view: [ViewEdge!]!
 }
 
+
+type Mutation {
+  newMessage(message: MessageInput!): Message!
+}
+
+
+type Message {
+  text: String!
+}
+
+input MessageInput {
+  text: String!
+}
+
 type Subscription {
   view: View!
 }

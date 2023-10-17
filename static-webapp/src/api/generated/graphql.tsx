@@ -17,6 +17,25 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Message = {
+  __typename?: 'Message';
+  text: Scalars['String']['output'];
+};
+
+export type MessageInput = {
+  text: Scalars['String']['input'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  newMessage: Message;
+};
+
+
+export type MutationNewMessageArgs = {
+  message: MessageInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   view: Array<ViewEdge>;
@@ -37,12 +56,52 @@ export type ViewEdge = {
   name: Scalars['String']['output'];
 };
 
+export type NewMessageMutationVariables = Exact<{
+  text: Scalars['String']['input'];
+}>;
+
+
+export type NewMessageMutation = { __typename?: 'Mutation', newMessage: { __typename?: 'Message', text: string } };
+
 export type MyqueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type MyqueryQuery = { __typename?: 'Query', view: Array<{ __typename?: 'ViewEdge', name: string }> };
 
 
+export const NewMessageDocument = gql`
+    mutation newMessage($text: String!) {
+  newMessage(message: {text: $text}) {
+    text
+  }
+}
+    `;
+export type NewMessageMutationFn = Apollo.MutationFunction<NewMessageMutation, NewMessageMutationVariables>;
+
+/**
+ * __useNewMessageMutation__
+ *
+ * To run a mutation, you first call `useNewMessageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useNewMessageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [newMessageMutation, { data, loading, error }] = useNewMessageMutation({
+ *   variables: {
+ *      text: // value for 'text'
+ *   },
+ * });
+ */
+export function useNewMessageMutation(baseOptions?: Apollo.MutationHookOptions<NewMessageMutation, NewMessageMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<NewMessageMutation, NewMessageMutationVariables>(NewMessageDocument, options);
+      }
+export type NewMessageMutationHookResult = ReturnType<typeof useNewMessageMutation>;
+export type NewMessageMutationResult = Apollo.MutationResult<NewMessageMutation>;
+export type NewMessageMutationOptions = Apollo.BaseMutationOptions<NewMessageMutation, NewMessageMutationVariables>;
 export const MyqueryDocument = gql`
     query myquery {
   view {
