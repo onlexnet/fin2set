@@ -19,11 +19,17 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "java -version",
 
-	// Configure tool-specific properties.
+	// https://stackoverflow.com/a/75644266
+	"mounts": [
+		"type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/vscode/.ssh"
+	],
+		
+	
 	"customizations": {
 		"vscode": {
+			// Set of my favourite extensions
 			"extensions": [
-				"vscjava.vscode-java-pack",
+				"vscjava.vscode-java-pack", // everything I need to support java
 				"zxh404.vscode-proto3",
 				"shengchen.vscode-checkstyle",
 				"editorconfig.editorconfig",

@@ -3,9 +3,13 @@ type Query {
 }
 
 type Subscription {
-  greetings: String!
+  view: View!
 }
 
+enum View {
+  CHAT,
+  VIEW1
+}
 
 type ViewEdge {
     name: String!

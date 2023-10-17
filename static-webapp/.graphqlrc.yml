@@ -3,11 +3,11 @@
 schema: ../uservice-webapi/**/*.graphqls
 documents: 'src/**/*.graphql'
 generates:
-  src/Components/.generated/components.tsx:
+  src/api/generated/graphql.tsx:
     plugins:
       - typescript
       - typescript-operations
-      # - typescript-react-apollo
+      - typescript-react-apollo
     config:
       withHooks: true
       withComponent: false

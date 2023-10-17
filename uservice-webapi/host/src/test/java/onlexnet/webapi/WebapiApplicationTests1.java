@@ -2,10 +2,13 @@ package onlexnet.webapi;
 
 import java.time.Duration;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.graphql.ExecutionGraphQlService;
+
+import onlex.webapi.ViewGql;
 
 @SpringBootTest
 class WebapiApplicationTests1 {
@@ -18,7 +21,10 @@ class WebapiApplicationTests1 {
 
     var api = new AppApi("graphiql", "slawomir@siudek.net", executionGraphQlService);
 
-    var data = api.greetings().blockFirst(Duration.ofSeconds(1));
+    var data = api.view().blockFirst(Duration.ofSeconds(1));
+
+    Assertions.assertThat(data).isEqualTo(ViewGql.CHAT);
+
     // WebGraphQlHandler handler = null;
     
     // WebGraphQlTester tester = WebGraphQlTester.builder(handler)

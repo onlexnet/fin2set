@@ -11,6 +11,11 @@ class ModularityTests {
 
 	@Test
 	void verifyModularity() {
+
+    // -> Module model
+    System.out.print(modules.toString());
+    
+    // Trigger verification
     modules.verify();
 	}
 

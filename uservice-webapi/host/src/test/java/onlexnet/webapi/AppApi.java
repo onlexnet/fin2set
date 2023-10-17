@@ -1,19 +1,12 @@
 package onlexnet.webapi;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
-
-import org.springframework.graphql.test.tester.GraphQlTester.EntityList;
-import org.springframework.graphql.test.tester.GraphQlTester.Subscription;
 import org.springframework.graphql.ExecutionGraphQlService;
 import org.springframework.graphql.server.WebGraphQlHandler;
-import org.springframework.graphql.test.tester.HttpGraphQlTester;
+import org.springframework.graphql.test.tester.GraphQlTester.Subscription;
 import org.springframework.graphql.test.tester.WebGraphQlTester;
-import org.springframework.test.web.reactive.server.WebTestClient;
 
 import lombok.SneakyThrows;
+import onlex.webapi.ViewGql;
 import reactor.core.publisher.Flux;
 
 /** Set of methods used to test application functionlity. */
@@ -37,12 +30,12 @@ public class AppApi {
 
     tester = WebGraphQlTester.create(client2.build());
 
-    greetings = tester.document("subscription { greetings }")
+    greetings = tester.document("subscription { view }")
         .executeSubscription();
   }
 
-  Flux<String> greetings() {
-    return greetings.toFlux("greetings", String.class);
+  Flux<ViewGql> view() {
+    return greetings.toFlux("view", ViewGql.class);
   }
 
 }
