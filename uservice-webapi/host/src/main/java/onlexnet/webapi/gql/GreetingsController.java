@@ -1,4 +1,4 @@
-package onlexnet.webapi.a;
+package onlexnet.webapi.gql;
 
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping;
 import org.springframework.stereotype.Controller;

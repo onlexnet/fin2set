@@ -1,7 +1,7 @@
 # import * from ../uservice-webapi/host/src/main/resources/graphql/main.graphqls
 
-mutation newMessage($text: String!) {
-    newMessage(message: { text: $text }) {
-        text
-    }
+mutation newMessage($messages: [MessageInput!]!) {
+  newMessage(messages: $messages) {
+    text
+  }
 }

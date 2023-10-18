@@ -1,7 +1,7 @@
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { ChatContainer, MainContainer, Message, MessageInput, MessageList, MessageModel, TypingIndicator } from "@chatscope/chat-ui-kit-react";
 import { useState } from "react";
-import { useNewMessageMutation } from "./api/generated/graphql";
+import { Role, useNewMessageMutation } from "./api/generated/graphql";
 
 interface ChatScopeProps {
 
@@ -27,11 +27,13 @@ export const ChatScope = (props: ChatScopeProps) => {
     });
 
     const handleSend = (text: string) => {
-        const message: MessageModel = { message: text, direction: "outgoing", sender: "user", position: "last" }
+        const message: MessageModel = { message: text, direction: 'outgoing', sender: "user", position: "last" }
         const newMessages = [...messages, message];
         setMessages(newMessages);
+
+        const dtoMessages = newMessages.map((message, i) => ({ text: message.message || '', role: message.direction === 'incoming' ? Role.Assistant : Role.User }));
         newMessageMutation({
-            variables: { text: text }
+            variables: { messages: dtoMessages }
         })
     }
 

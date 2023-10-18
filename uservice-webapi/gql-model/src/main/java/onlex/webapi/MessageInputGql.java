@@ -1,5 +1,4 @@
 package onlex.webapi;
 
-public record MessageInputGql(String text) {
-  
+public record MessageInputGql(String text, RoleGql role) {  
 }

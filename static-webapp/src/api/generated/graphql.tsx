@@ -23,6 +23,7 @@ export type Message = {
 };
 
 export type MessageInput = {
+  role: Role;
   text: Scalars['String']['input'];
 };
 
@@ -33,13 +34,18 @@ export type Mutation = {
 
 
 export type MutationNewMessageArgs = {
-  message: MessageInput;
+  messages: Array<MessageInput>;
 };
 
 export type Query = {
   __typename?: 'Query';
   view: Array<ViewEdge>;
 };
+
+export enum Role {
+  Assistant = 'ASSISTANT',
+  User = 'USER'
+}
 
 export type Subscription = {
   __typename?: 'Subscription';
@@ -57,7 +63,7 @@ export type ViewEdge = {
 };
 
 export type NewMessageMutationVariables = Exact<{
-  text: Scalars['String']['input'];
+  messages: Array<MessageInput> | MessageInput;
 }>;
 
 
@@ -70,8 +76,8 @@ export type MyqueryQuery = { __typename?: 'Query', view: Array<{ __typename?: 'V
 
 
 export const NewMessageDocument = gql`
-    mutation newMessage($text: String!) {
-  newMessage(message: {text: $text}) {
+    mutation newMessage($messages: [MessageInput!]!) {
+  newMessage(messages: $messages) {
     text
   }
 }
@@ -91,7 +97,7 @@ export type NewMessageMutationFn = Apollo.MutationFunction<NewMessageMutation, N
  * @example
  * const [newMessageMutation, { data, loading, error }] = useNewMessageMutation({
  *   variables: {
- *      text: // value for 'text'
+ *      messages: // value for 'messages'
  *   },
  * });
  */
