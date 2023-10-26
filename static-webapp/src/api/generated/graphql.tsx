@@ -49,6 +49,7 @@ export enum Role {
 
 export type Subscription = {
   __typename?: 'Subscription';
+  ticks: Scalars['Int']['output'];
   view: View;
 };
 
@@ -61,6 +62,11 @@ export type ViewEdge = {
   __typename?: 'ViewEdge';
   name: Scalars['String']['output'];
 };
+
+export type CounterSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CounterSubscription = { __typename?: 'Subscription', ticks: number };
 
 export type NewMessageMutationVariables = Exact<{
   messages: Array<MessageInput> | MessageInput;
@@ -75,6 +81,33 @@ export type MyqueryQueryVariables = Exact<{ [key: string]: never; }>;
 export type MyqueryQuery = { __typename?: 'Query', view: Array<{ __typename?: 'ViewEdge', name: string }> };
 
 
+export const CounterDocument = gql`
+    subscription counter {
+  ticks
+}
+    `;
+
+/**
+ * __useCounterSubscription__
+ *
+ * To run a query within a React component, call `useCounterSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useCounterSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCounterSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCounterSubscription(baseOptions?: Apollo.SubscriptionHookOptions<CounterSubscription, CounterSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<CounterSubscription, CounterSubscriptionVariables>(CounterDocument, options);
+      }
+export type CounterSubscriptionHookResult = ReturnType<typeof useCounterSubscription>;
+export type CounterSubscriptionResult = Apollo.SubscriptionResult<CounterSubscription>;
 export const NewMessageDocument = gql`
     mutation newMessage($messages: [MessageInput!]!) {
   newMessage(messages: $messages) {

@@ -3,7 +3,7 @@
   <parent>
     <groupId>onlexnet</groupId>
     <artifactId>webapi-base</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <relativePath>../base/pom.xml</relativePath>
   </parent>
   <artifactId>webapi-host</artifactId>
@@ -23,6 +23,16 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <!--
+        The GraphQL WebSocket endpoint is off by default. To enable it:
+        For a Servlet application, add the WebSocket starter spring-boot-starter-websocket
+        For a WebFlux application, no additional dependency is required
+        As we use non-reactive web dep, we have to add websocket starter
+      -->
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-websocket</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.modulith</groupId>
@@ -49,11 +59,13 @@
       <artifactId>spring-graphql-test</artifactId>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.modulith</groupId>
       <artifactId>spring-modulith-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -93,6 +105,16 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <skip>false</skip>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

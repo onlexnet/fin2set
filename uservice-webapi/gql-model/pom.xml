@@ -3,7 +3,7 @@
 	<parent>
   	<groupId>onlexnet</groupId>
   	<artifactId>webapi-base</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
+  	<version>${revision}</version>
 		<relativePath>../base/pom.xml</relativePath>
 	</parent>
 	<artifactId>webapi-gql-model</artifactId>

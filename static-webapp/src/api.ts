@@ -1,22 +1,21 @@
-import { ApolloClient, ApolloLink, createHttpLink, DefaultOptions, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloLink, createHttpLink, DefaultOptions, InMemoryCache, split } from "@apollo/client";
 import { GraphQLClient } from 'graphql-request';
-import { addressProvider } from "./addressProvider";
+import { addressProvider, Protocol } from "./addressProvider";
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { getMainDefinition } from "@apollo/client/utilities";
+import { OperationDefinitionNode } from 'graphql';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { createClient } from 'graphql-ws';
 
-const graphqlUrl = `${addressProvider().host}/graphql`;
+const graphqlHttpUrl = `${addressProvider(Protocol.HTTP).host}/graphql`;
+const graphqlWsUrl = `${addressProvider(Protocol.WS).host}/graphql`;
 
 export const apolloClientFactory = (jwtToken: string) => {
   // configuration below is focused on Authentication
   // https://www.apollographql.com/docs/react/networking/authentication/
 
   const httpLink = createHttpLink({
-    uri: graphqlUrl,
-
-    // Cookie
-    // If your app is browser based and you are using cookies for login and session management with a backend,
-    // it's very easy to tell your network interface to send the cookie along with every request.
-    // You just need to pass the credentials option. e.g. credentials: 'same-origin' as shown below,
-    // if your backend server is the same domain or else credentials: 'include' if your backend is a different domain.
-    // credentials: "",
+    uri: graphqlHttpUrl,
   });
 
   const middlewareAuthLink = new ApolloLink((operation, forward) => {
@@ -40,14 +39,36 @@ export const apolloClientFactory = (jwtToken: string) => {
       fetchPolicy: 'network-only',
       errorPolicy: 'all',
     },
-  }
+  };
+
+  // const wsLink = new GraphQLWsLink({
+  //   uri: graphqlUrl,
+  //   options: {
+  //     reconnect: true, // Opcja reconnect dla subskrypcji
+  //   },
+  // });
+
+  const client = createClient({ url: graphqlWsUrl });
+  const wsLink = new GraphQLWsLink(client);
+
+  const unifiedHttpLink = middlewareAuthLink.concat(httpLink)
+  const splitLink = split(
+    ({ query }) => {
+      const { kind, operation } = getMainDefinition(query) as OperationDefinitionNode;
+      // alert(`kind: ${kind}, operation: ${operation}`);
+      return kind === 'OperationDefinition' && operation === 'subscription';
+    },
+    wsLink,
+    unifiedHttpLink
+  );
+
   return new ApolloClient({
     cache: new InMemoryCache({}),
-    link: middlewareAuthLink.concat(httpLink),
+    link: splitLink,
     connectToDevTools: true,
     defaultOptions
   });
 };
 
-export const graphQlClient = new GraphQLClient(graphqlUrl);
+export const graphQlClient = new GraphQLClient(graphqlHttpUrl);
 export const apolloClient = apolloClientFactory("");

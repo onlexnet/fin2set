@@ -1,19 +1,19 @@
-import { FluentProvider, Label, webLightTheme } from '@fluentui/react-components';
+import { Button, FluentProvider, Label, webLightTheme } from '@fluentui/react-components';
 import './App.css';
 import { Stack } from '@fluentui/react';
 import { ChatFrame } from './Chat';
 import { Default as Example } from './example';
 import { useState } from 'react';
-import { useMyqueryQuery } from './api/generated/graphql';
+import { useCounterSubscription, useMyqueryQuery } from './api/generated/graphql';
 import { ChatScope } from './ChatScope';
 
 function App() {
   const [hidden, setVisibleStack] = useState(false);
 
   const { data, loading, error } = useMyqueryQuery({
-    variables: {
-    },
   });
+
+  const { data: data1, loading: loading1 } = useCounterSubscription({});
 
   if (loading) return (<Label>Loading ....</Label>);
 
@@ -21,14 +21,18 @@ function App() {
 
   const view = <FluentProvider theme={webLightTheme}>
     <div className="App">
-      <Stack horizontal styles={{ root: { height: "100%" } }}>
-        <Stack.Item id='chatFrame' align='center'>
-          {chatView()}
+      <Stack horizontal styles={{ root: { background: 'green' } }}>
+        <Stack.Item id='chatFrame' grow styles={{ root: { background: 'red' } }}>
+          <Stack horizontal horizontalAlign='center'>
+            <Stack.Item>
+              <ChatScope />
+            </Stack.Item>
+          </Stack>
         </Stack.Item>
-        <Stack.Item id='view1' align='center' hidden={hidden} styles={{ root: { width: "150%", padding: "10" } }}>
-          <Example hide={() => {
-            setVisibleStack(true);
-          }} />
+        <Stack.Item id='view1' styles={{ root: { background: 'yellow' } }} hidden={false}>
+          ticks: {data1?.ticks}
+          <p></p>
+          loading:{loading1}
         </Stack.Item>
       </Stack>
     </div>
@@ -36,8 +40,6 @@ function App() {
 
   return view;
 }
-
-const chatView = () => <ChatScope />
 
 export default App;
 

@@ -24,6 +24,7 @@ enum Role {
 
 type Subscription {
   view: View!
+  ticks: Int!
 }
 
 enum View {

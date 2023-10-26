@@ -10,6 +10,7 @@ import com.azure.ai.openai.OpenAIClientBuilder;
 import com.azure.ai.openai.models.ChatCompletionsOptions;
 import com.azure.ai.openai.models.ChatMessage;
 import com.azure.ai.openai.models.ChatRole;
+import com.azure.ai.openai.models.FunctionCallConfig;
 import com.azure.core.credential.AzureKeyCredential;
 
 import jakarta.annotation.PostConstruct;
@@ -39,6 +40,10 @@ public class OpenAi {
       })
       .toList();
     var options = new ChatCompletionsOptions(dtoMessages);
+
+    // FunctionCallConfig functionCallConfig = new FunctionCallConfig("calc");
+    // options.setFunctionCall(functionCallConfig);
+
     var cc = client.getChatCompletions("text-turbo", options);
     var choice = cc.getChoices().getFirst();
     return choice.getMessage().getContent();
