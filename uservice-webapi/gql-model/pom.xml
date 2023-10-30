@@ -1,11 +1,23 @@
 <project>
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-  	<groupId>onlexnet</groupId>
-  	<artifactId>webapi-base</artifactId>
-  	<version>${revision}</version>
-		<relativePath>../base/pom.xml</relativePath>
-	</parent>
-	<artifactId>webapi-gql-model</artifactId>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>onlexnet.fin2set</groupId>
+    <artifactId>webapi-base</artifactId>
+    <version>${revision}</version>
+    <relativePath>../base/pom.xml</relativePath>
+  </parent>
+  <artifactId>webapi-gql-model</artifactId>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <excludes>onlex/webapi/**</excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

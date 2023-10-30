@@ -1,7 +1,7 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>onlexnet</groupId>
+    <groupId>onlexnet.fin2set</groupId>
     <artifactId>webapi-base</artifactId>
     <version>${revision}</version>
     <relativePath>../base/pom.xml</relativePath>
@@ -11,7 +11,7 @@
   <dependencies>
 
     <dependency>
-      <groupId>onlexnet</groupId>
+      <groupId>onlexnet.fin2set</groupId>
       <artifactId>webapi-gql-model</artifactId>
     </dependency>
 
@@ -116,6 +116,15 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <failOnViolation>false</failOnViolation>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 

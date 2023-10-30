@@ -1,6 +1,6 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>onlexnet</groupId>
+  <groupId>onlexnet.fin2set</groupId>
   <artifactId>webapi-build</artifactId>
   <version>${revision}</version>
   <packaging>pom</packaging>
@@ -9,6 +9,7 @@
   </properties>
 
   <modules>
+    <module>build-tools</module>
     <module>base</module>
     <module>host</module>
     <module>gql-model</module> <!-- Shared GraphQL models between gql-test and host modules -->

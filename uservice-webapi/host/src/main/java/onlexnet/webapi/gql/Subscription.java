@@ -2,7 +2,6 @@ package onlexnet.webapi.gql;
 
 import java.time.Duration;
 
-import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping;
 import org.springframework.stereotype.Controller;
 

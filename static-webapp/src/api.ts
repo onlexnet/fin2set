@@ -1,11 +1,10 @@
 import { ApolloClient, ApolloLink, createHttpLink, DefaultOptions, InMemoryCache, split } from "@apollo/client";
 import { GraphQLClient } from 'graphql-request';
 import { addressProvider, Protocol } from "./addressProvider";
-import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from "@apollo/client/utilities";
 import { OperationDefinitionNode } from 'graphql';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
-import { createClient } from 'graphql-ws';
+import { ClientOptions, createClient } from 'graphql-ws';
 
 const graphqlHttpUrl = `${addressProvider(Protocol.HTTP).host}/graphql`;
 const graphqlWsUrl = `${addressProvider(Protocol.WS).host}/graphql`;
@@ -48,7 +47,34 @@ export const apolloClientFactory = (jwtToken: string) => {
   //   },
   // });
 
-  const client = createClient({ url: graphqlWsUrl });
+  const options: ClientOptions = {
+    url: graphqlWsUrl,
+    
+    connectionParams: () => {  
+      return {
+        authToken: 'your-auth-token',
+      } // if you have an auth token  
+    },  
+    retryAttempts: 5, // This will enable auto-reconnect with 5 attempts.  
+    shouldRetry: () => true, // as we have cloud application, backend should be available 24/7
+
+    retryWait: (retries) => { 
+      console.log(`Sparta. Retries: ${retries}`);
+      // return immediatelly so that reconnection may started asap
+      // for some reason, it does not reconnect immediately (checked by stopping and starting server)
+      return Promise.resolve();
+    },
+    // retryWait: 3 * 1000, // Retry every 3 seconds  
+    on: {  
+      opened: () => console.log('Connection opened!'),  
+      closed: () => console.log('Connection closed!'),  
+      error: (error) => console.log('Error:', error),  
+      connected: (socket) => console.log('Connected!'),
+      connecting: () => console.log('Connecting ...'),      
+    },  
+  };
+
+  const client = createClient(options);
   const wsLink = new GraphQLWsLink(client);
 
   const unifiedHttpLink = middlewareAuthLink.concat(httpLink)
