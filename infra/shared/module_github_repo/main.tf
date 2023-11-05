@@ -21,6 +21,13 @@ terraform {
   }
 }
 
+
+resource "github_actions_secret" "WEBAPP_KEY_API" {
+  repository      = data.github_repository.current.name
+  secret_name     = "WEBAPP_KEY_API"
+  plaintext_value = var.static_app_api_key
+}
+
 # resource "github_actions_secret" "DOCKER_USERNAME" {
 #   repository      = data.github_repository.current.name
 #   secret_name     = "DOCKER_USERNAME"
