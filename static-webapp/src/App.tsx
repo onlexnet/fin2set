@@ -1,16 +1,11 @@
-import { Button, FluentProvider, Label, webLightTheme } from '@fluentui/react-components';
+import { FluentProvider, Label, webLightTheme } from '@fluentui/react-components';
 import './App.css';
 import { Stack } from '@fluentui/react';
-import { ChatFrame } from './Chat';
-import { Default as Example } from './example';
-import { useState } from 'react';
 import { useCounterSubscription, useMyqueryQuery } from './api/generated/graphql';
 import { ChatScope } from './ChatScope';
 
 function App() {
-  const [hidden, setVisibleStack] = useState(false);
-
-  const { data, loading, error } = useMyqueryQuery({
+  const { loading, error } = useMyqueryQuery({
   });
 
   const { data: data1, loading: loading1 } = useCounterSubscription({});

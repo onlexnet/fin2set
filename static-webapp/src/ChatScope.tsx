@@ -17,7 +17,7 @@ export const ChatScope = (props: ChatScopeProps) => {
     };
     const [messages, setMessages] = useState([firstMessage]);
 
-    const [newMessageMutation, { data, loading, error }] = useNewMessageMutation({
+    const [newMessageMutation, { loading }] = useNewMessageMutation({
         onCompleted(data, clientOptions) {
             const text = data.newMessage.text;
             const message: MessageModel = { message: text, direction: 'incoming', sender: "chat", position: "last" }
