@@ -9,7 +9,7 @@ import onlex.webapi.ViewGql;
 import reactor.core.publisher.Flux;
 
 @Controller
-public class Subscription {
+class Subscription {
 
   @SubscriptionMapping
   public Flux<ViewGql> view() {

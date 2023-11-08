@@ -1,9 +1,11 @@
 package onlexnet.webapi;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(properties = { "DAPR_GRPC_PORT=0" })
+@SpringBootTest
+@ExtendWith(DaprExtension.class)
 class WebapiApplicationTests {
 
   

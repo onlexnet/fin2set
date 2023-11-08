@@ -1,5 +1,8 @@
 package onlexnet.webapi.gql;
 
-public class Query {
+import org.springframework.stereotype.Controller;
+
+@Controller
+class Query {
   
 }

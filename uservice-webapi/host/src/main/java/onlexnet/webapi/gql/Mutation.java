@@ -17,7 +17,7 @@ import onlexnet.webapi.openai.OpenAi;
 
 @Controller
 @RequiredArgsConstructor
-public class Mutation {
+class Mutation {
 
   private final OpenAi openai;
 
@@ -26,8 +26,8 @@ public class Mutation {
   MessageGql newMessage(@Argument List<MessageInputGql> messages) {
 
     var asDomain = messages.stream()
-      .map(it -> new Message(it.text(), it.role() ==  RoleGql.USER ? MessageRole.USER : MessageRole.ASSISTANT))
-      .toList();
+        .map(it -> new Message(it.text(), it.role() ==  RoleGql.USER ? MessageRole.USER : MessageRole.ASSISTANT))
+        .toList();
 
     var response = openai.getContinuation(asDomain);
     return new MessageGql(response);

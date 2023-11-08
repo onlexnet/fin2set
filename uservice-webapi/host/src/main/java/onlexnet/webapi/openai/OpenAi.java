@@ -10,17 +10,17 @@ import com.azure.ai.openai.OpenAIClientBuilder;
 import com.azure.ai.openai.models.ChatCompletionsOptions;
 import com.azure.ai.openai.models.ChatMessage;
 import com.azure.ai.openai.models.ChatRole;
-import com.azure.ai.openai.models.FunctionCallConfig;
 import com.azure.core.credential.AzureKeyCredential;
 
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import onlexnet.webapi.config.Secrets;
 
 @Component
+@RequiredArgsConstructor
 public class OpenAi {
 
-  @Autowired
-  Secrets secrets;
+  private final Secrets secrets;
 
   OpenAIClient client;
 
@@ -34,15 +34,12 @@ public class OpenAi {
 
   public String getContinuation(List<Message> messages) {
     var dtoMessages = messages.stream()
-      .map(it -> {
-        var dtoRole = it.role() == MessageRole.ASSISTANT ? ChatRole.ASSISTANT : ChatRole.USER;
-        return new ChatMessage(dtoRole, it.text());
-      })
-      .toList();
+        .map(it -> {
+          var dtoRole = it.role() == MessageRole.ASSISTANT ? ChatRole.ASSISTANT : ChatRole.USER;
+          return new ChatMessage(dtoRole, it.text());
+        })
+        .toList();
     var options = new ChatCompletionsOptions(dtoMessages);
-
-    // FunctionCallConfig functionCallConfig = new FunctionCallConfig("calc");
-    // options.setFunctionCall(functionCallConfig);
 
     var cc = client.getChatCompletions("text-turbo", options);
     var choice = cc.getChoices().getFirst();

@@ -1,8 +1,5 @@
 package onlexnet.webapi.config;
 
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +7,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.dapr.client.DaprClientBuilder;
 import jakarta.annotation.PostConstruct;
 
+/**
+ * In 'standard' approach to configure nowadays applications, all values are available as environment variables.
+ * In DAPR we have to ask all variables / secrets in interactive way as it is not able to inject such variables to the application
+ */
 @Component
 public class Secrets {
   
@@ -22,16 +23,17 @@ public class Secrets {
   public String openaiKey;
   public String openaiEndpoint;
 
-  @Value("${DAPR_GRPC_PORT}")
   int daprAgentPort;
 
   @PostConstruct
   void init() {
     var client = new DaprClientBuilder()
-      .build();
+        .build();
+    client.waitForSidecar(3_000).block();
+      
     //Using Dapr SDK to get a secret
-    Map<String, String> openaiKeyMap = client.getSecret(SECRET_STORE_NAME, OPENAI_KEY_NAME).block();
-    Map<String, String> openaiEndpointMap = client.getSecret(SECRET_STORE_NAME, OPENAI_ENDPOINT_NAME).block();
+    var openaiKeyMap = client.getSecret(SECRET_STORE_NAME, OPENAI_KEY_NAME).block();
+    var openaiEndpointMap = client.getSecret(SECRET_STORE_NAME, OPENAI_ENDPOINT_NAME).block();
 
     openaiKey = openaiKeyMap.get(OPENAI_KEY_NAME);
     openaiEndpoint = openaiEndpointMap.get(OPENAI_ENDPOINT_NAME);

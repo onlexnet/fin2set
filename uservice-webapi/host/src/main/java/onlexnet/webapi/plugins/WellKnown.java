@@ -12,20 +12,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
 
 @RestController
-public class WellKnown {
+class WellKnown {
   
   @GetMapping(path = ".well-known/ai-plugin.json", produces = "text/json")
   @SneakyThrows
   String pluginMetadata(HttpServletRequest request) {
-     var resource = new ClassPathResource("ai-plugin.json");
+    var resource = new ClassPathResource("ai-plugin.json");
 
-     // Ustalenie nagłówków dla Content-Disposition i Content-Type
-      String contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-      HttpHeaders headers = new HttpHeaders();
-      headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
-      headers.add(HttpHeaders.CONTENT_TYPE, contentType);
+    // Ustalenie nagłówków dla Content-Disposition i Content-Type
+    var contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+    var headers = new HttpHeaders();
+    headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
+    headers.add(HttpHeaders.CONTENT_TYPE, contentType);
     
-      var content = IOUtils.toString(resource.getInputStream(), StandardCharsets.UTF_8);
-      return content;
+    var content = IOUtils.toString(resource.getInputStream(), StandardCharsets.UTF_8);
+    return content;
   }
 }
