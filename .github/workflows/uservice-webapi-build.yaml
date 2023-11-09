@@ -7,13 +7,16 @@ on:
   push:
     branches:
       - siudeks/issue49
-    paths: [ .github/workflows/uservice-webapi-build.yaml ]
+    paths: 
+      - .github/workflows/uservice-webapi-build.yaml
+      - uservice-webapi
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - siudeks/issue49
     paths:
       - .github/workflows/uservice-webapi-build.yaml
+      - uservice-webapi
 
 jobs:
   build:
