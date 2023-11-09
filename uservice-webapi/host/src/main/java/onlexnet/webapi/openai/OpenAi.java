@@ -42,7 +42,7 @@ public class OpenAi {
     var options = new ChatCompletionsOptions(dtoMessages);
 
     var cc = client.getChatCompletions("text-turbo", options);
-    var choice = cc.getChoices().getFirst();
+    var choice = cc.getChoices().get(0);
     return choice.getMessage().getContent();
   }
 
