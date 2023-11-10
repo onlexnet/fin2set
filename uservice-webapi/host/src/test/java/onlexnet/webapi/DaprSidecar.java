@@ -26,17 +26,14 @@ public final class DaprSidecar {
    */
   @SneakyThrows
   public SafeAutoCloseable start(Path componentPath) {
-    var file = componentPath.resolve("local-secret-store.yaml");
-    var b = file.toFile().exists();
-    log.info(Boolean.toString(b));
+    var componentsDir = componentPath.resolve("components");
     daprContainer = new DaprContainer("daprio/daprd")
         .withAppName("test-app")
         // .withAccessToHost(true)
         // .withClasspathResourceMapping(componentParh.toAbsolutePath().toString(), , BindMode.READ_ONLY, SelinuxContext.SHARED)
         // .withCopyToContainer(null, null)
         // .withCopyFileToContainer(MountableFile.forHostPath(componentPath.resolve("local-secret-store.yaml") ), "/components")
-        .withCopyFileToContainer(MountableFile.forHostPath(componentPath.resolve("local-secret-store.yaml")), "/components/local-secret-store.yaml")
-        .withCopyFileToContainer(MountableFile.forHostPath(componentPath.getParent().resolve("dapr-local-secrets.json")), "/dapr-local-secrets.json")
+        .withFileSystemBind(componentsDir.toAbsolutePath().toString(), "/components" )
         .withAppPort(8081);
     
     daprContainer.start();

@@ -1,0 +1,8 @@
+metadata:
+  name: local
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+spec:
+  route: /events
+  pubsubname: pubsub
+  topic: topic
