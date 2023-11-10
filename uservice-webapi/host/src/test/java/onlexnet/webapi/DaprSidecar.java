@@ -27,6 +27,9 @@ public final class DaprSidecar {
   @SneakyThrows
   public SafeAutoCloseable start(Path componentPath) {
     var componentsDir = componentPath.resolve("components");
+
+    log.warn("sparta path:{}", componentsDir.toAbsolutePath());
+
     daprContainer = new DaprContainer("daprio/daprd")
         .withAppName("test-app")
         // .withAccessToHost(true)
