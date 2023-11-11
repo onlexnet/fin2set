@@ -57,6 +57,18 @@ resource "azurerm_key_vault_secret" "NORDIGEN-SECRET-KEY" {
   key_vault_id = azurerm_key_vault.example.id
 }
 
+resource "azurerm_key_vault_secret" "OPENAI-KEY" {
+  name         = "OPENAI-KEY"
+  value        = data.external.env.result["OPENAI_KEY"]
+  key_vault_id = azurerm_key_vault.example.id
+}
+
+resource "azurerm_key_vault_secret" "OPENAI-ENDPOINT" {
+  name         = "OPENAI-ENDPOINT"
+  value        = data.external.env.result["OPENAI_ENDPOINT"]
+  key_vault_id = azurerm_key_vault.example.id
+}
+
 resource "azurerm_key_vault_secret" "SQL-ADMIN-PASSWORD" {
   name         = "SQL-ADMIN-PASSWORD"
   value        = random_string.password.result
