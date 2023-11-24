@@ -9,3 +9,11 @@
 ## REST
 - to expose extensions for OpenAI
 
+## Test secrets locally
+- run DAPR with secrets
+- view in browser loaded secrets
+```
+dapr run --components-path=components --dapr-http-port 3601
+curl http://localhost:3601/v1.0/secrets/localsecretstore/
+```
+
