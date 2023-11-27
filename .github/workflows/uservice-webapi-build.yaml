@@ -30,12 +30,12 @@ jobs:
         run: echo "SEMVERSION=$(cat .semversion)" >> $GITHUB_ENV
         working-directory: uservice-webapi
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: 21
           # https://github.com/actions/setup-java#supported-distributions
-          distribution: zulu
+          distribution: temurin
           cache: maven
 
       - name: Build with Maven
