@@ -7,28 +7,24 @@ import org.testcontainers.utility.MountableFile;
 
 import io.diagrid.dapr.DaprContainer;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Designed to be used to run single instance for all tests in single module.
  */
-@Slf4j
-public final class DaprSidecar {
+public final class DaprSidecarController {
 
   public static DaprContainer daprContainer;
 
   /**
-   * tarts database and sets all exopected environments variables, used to
-   * construct propoer jdbc connection.
+   * Starts DAPR sidecar and sets all exopected environments variables
    *
    * @return AutoCloseable that will stop the server and restore all environment
    *         variables to their original values.
+   * @param projectPath pthh where build pom.xml is located
    */
   @SneakyThrows
-  public SafeAutoCloseable start(Path componentPath) {
-    var componentsDir = componentPath.resolve("components");
-
-    log.warn("sparta path:{}", componentsDir.toAbsolutePath());
+  public SafeAutoCloseable start(Path projectPath) {
+    var componentsDir = projectPath.resolve("components");
 
     daprContainer = new DaprContainer("daprio/daprd")
         .withAppName("test-app")
