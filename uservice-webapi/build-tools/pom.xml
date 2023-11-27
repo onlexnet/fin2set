@@ -4,4 +4,12 @@
   <version>${revision}</version>
   <artifactId>build-tools</artifactId>
   <name>Build Tools</name>
+
+  <properties>
+    <!-- Remove warning:
+         Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+    -->
+    <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
+  </properties>
+
 </project>
