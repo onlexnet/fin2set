@@ -1,5 +1,6 @@
 package onlexnet.webapi.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,10 +16,10 @@ import jakarta.annotation.PostConstruct;
 public class Secrets {
   
   private static final ObjectMapper JSON_SERIALIZER = new ObjectMapper();
-  private static final String SECRET_STORE_NAME = "localsecretstore";
+  private static final String SECRET_STORE_NAME = "azurekeyvault";
 
-  private static final String OPENAI_KEY_NAME = "OPENAI_KEY";
-  private static final String OPENAI_ENDPOINT_NAME = "OPENAI_ENDPOINT";
+  private static final String OPENAI_KEY_NAME = "OPENAI-KEY";
+  private static final String OPENAI_ENDPOINT_NAME = "OPENAI-ENDPOINT";
 
   public String openaiKey;
   public String openaiEndpoint;

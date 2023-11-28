@@ -2,6 +2,7 @@ package onlexnet.webapi;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
 import org.testcontainers.utility.MountableFile;
 
@@ -23,11 +24,12 @@ public final class DaprSidecarController {
    * @param projectPath pthh where build pom.xml is located
    */
   @SneakyThrows
-  public SafeAutoCloseable start(Path projectPath) {
+  public SafeAutoCloseable start(Path projectPath, String clientId, String clientSecret) {
     var componentsDir = projectPath.resolve("components");
 
     daprContainer = new DaprContainer("daprio/daprd")
         .withAppName("test-app")
+        .withEnv(Map.of("FIN2SET_CLIENT_ID", clientId, "FIN2SET_CLIENT_SECRET", clientSecret))
         // .withAccessToHost(true)
         // .withClasspathResourceMapping(componentParh.toAbsolutePath().toString(), , BindMode.READ_ONLY, SelinuxContext.SHARED)
         // .withCopyToContainer(null, null)

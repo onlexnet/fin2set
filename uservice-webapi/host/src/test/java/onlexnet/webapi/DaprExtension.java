@@ -19,7 +19,12 @@ public final class DaprExtension implements BeforeAllCallback,
   public void beforeAll(ExtensionContext context) throws Exception {
     var projectRootPath = Paths.get("..").toAbsolutePath().normalize();
     var dbRunner = new DaprSidecarController();
-    disposer = dbRunner.start(projectRootPath);
+
+    var clientId = System.getenv("FIN2SET_CLIENT_ID");
+    var clientSecret = System.getenv("FIN2SET_CLIENT_SECRET");
+
+
+    disposer = dbRunner.start(projectRootPath, clientId, clientSecret);
   }
 
   @Override

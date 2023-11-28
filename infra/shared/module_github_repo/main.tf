@@ -52,17 +52,17 @@ resource "github_repository_environment" "main" {
   # }
 }
 
-resource "github_actions_environment_secret" "azure_client_id" {
+resource "github_actions_environment_secret" "fin2set_client_id" {
   environment     = github_repository_environment.main.environment
   repository      = data.github_repository.current.name
-  secret_name     = "AZURE_CLIENT_ID"
+  secret_name     = "FIN2SET_CLIENT_ID"
   plaintext_value = data.azurerm_client_config.current.client_id
 }
 
-resource "github_actions_environment_secret" "azure_secret_id" {
+resource "github_actions_environment_secret" "fin2set_secret_id" {
   environment     = github_repository_environment.main.environment
   repository      = data.github_repository.current.name
-  secret_name     = "AZURE_CLIENT_SECRET"
+  secret_name     = "FIN2SET_CLIENT_SECRET"
   plaintext_value = resource.azuread_service_principal_password.current.value
 }
 
