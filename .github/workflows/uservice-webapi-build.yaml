@@ -21,7 +21,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-      
+    environment: dev01
     steps:
 
       - uses: actions/checkout@v3
