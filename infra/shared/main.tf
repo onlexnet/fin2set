@@ -62,6 +62,7 @@ module "static_app" {
 module "github_repo" {
   source = "./module_github_repo"
   static_app_api_key = module.static_app.static_app_api_key
+  environment_name = var.environment_name
   # acr_admin_name = data.azurerm_container_registry.alldev.admin_username
   # acr_admin_secret = data.azurerm_container_registry.alldev.admin_password
   # acr_registry_url = data.azurerm_container_registry.alldev.login_server
