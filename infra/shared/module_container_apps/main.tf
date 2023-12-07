@@ -33,8 +33,8 @@ resource "azurerm_container_app" "default" {
   name                         = "uservice-openapi"
   container_app_environment_id = azurerm_container_app_environment.default.id
   resource_group_name          = var.resource_group.name
-  revision_mode = "Single"
-  
+  revision_mode                = "Single"
+
   identity {
     type         = "UserAssigned"
     identity_ids = [azurerm_user_assigned_identity.containerapp.id]
@@ -57,54 +57,53 @@ resource "azurerm_container_app" "default" {
   }
 
   secret {
-    name = "nordigen-secret-id"
+    name  = "nordigen-secret-id"
     value = var.env.NORDIGEN_SECRET_ID
   }
   secret {
-    name = "nordigen-secret-key"
+    name  = "nordigen-secret-key"
     value = var.env.NORDIGEN_SECRET_KEY
   }
 
   secret {
-    name = "database-host"
+    name  = "database-host"
     value = var.env.DATABASE_HOST
   }
 
   secret {
-    name = "database-port"
+    name  = "database-port"
     value = var.env.DATABASE_PORT
   }
 
   secret {
-    name = "database-name"
+    name  = "database-name"
     value = var.env.DATABASE_NAME
   }
 
   secret {
-    name = "database-password"
+    name  = "database-password"
     value = var.env.DATABASE_PASSWORD
   }
 
   secret {
-    name = "database-username"
+    name  = "database-username"
     value = var.env.DATABASE_USERNAME
   }
 
   dapr {
-    app_id = "uservice-openapi"
-    app_port = "8080"
+    app_id       = "uservice-openapi"
+    app_port     = "8080"
     app_protocol = "http"
   }
 
   template {
-    
+
+    min_replicas = 1
+    max_replicas = 1
+
     container {
-      name = "uservice-openapi"
-      # step 1
-      # image = "busybox:latest"
-      # step 2
-      # image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
-      image = "busybox"
+      name   = "uservice-openapi"
+      image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
       cpu    = 0.5
       memory = "1Gi"
 
@@ -113,41 +112,41 @@ resource "azurerm_container_app" "default" {
       # please manage manually using portal or az tools
 
       env {
-        name = "NORDIGEN_SECRET_ID"
+        name        = "NORDIGEN_SECRET_ID"
         secret_name = "nordigen-secret-id"
       }
       env {
-        name = "NORDIGEN_SECRET_KEY"
+        name        = "NORDIGEN_SECRET_KEY"
         secret_name = "nordigen-secret-key"
       }
 
       env {
-        name = "DATABASE_HOST"
+        name        = "DATABASE_HOST"
         secret_name = "database-host"
       }
 
       env {
-        name = "DATABASE_PORT"
+        name        = "DATABASE_PORT"
         secret_name = "database-port"
       }
 
       env {
-        name = "DATABASE_NAME"
+        name        = "DATABASE_NAME"
         secret_name = "database-name"
       }
 
       env {
-        name = "DATABASE_USERNAME"
+        name        = "DATABASE_USERNAME"
         secret_name = "database-username"
       }
 
       env {
-        name = "DATABASE_PASSWORD"
+        name        = "DATABASE_PASSWORD"
         secret_name = "database-password"
       }
 
       env {
-        name = "SPRING_PROFILES_ACTIVE"
+        name  = "SPRING_PROFILES_ACTIVE"
         value = "prod"
       }
 
@@ -175,8 +174,8 @@ resource "azurerm_container_app" "default" {
 #   name      = "uservice-openapi-native"
 #   parent_id = var.resource_group.id
 #   location  = var.resource_group.location
- 
- 
+
+
 #   identity {
 #     type         = "UserAssigned"
 #     identity_ids = [azurerm_user_assigned_identity.containerapp.id]
@@ -249,7 +248,7 @@ resource "azurerm_container_app" "default" {
 #         }
 #       }
 #     }
- 
+
 #   })
 #   ignore_missing_property = true
 #   depends_on = [
