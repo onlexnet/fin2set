@@ -105,8 +105,8 @@ resource "azurerm_container_app" "default" {
       # step 2
       # image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
       image = "busybox"
-      cpu    = 0.25
-      memory = "0.5Gi"
+      cpu    = 0.5
+      memory = "1Gi"
 
       # scale - currently not supported
       # https://github.com/hashicorp/terraform-provider-azurerm/issues/20629
