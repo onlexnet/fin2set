@@ -22,12 +22,12 @@ describe('resolve backend address', () => {
 
   it('resolve https', () => {
     const actual = addressProvider(Protocol.HTTPS);
-    expect(actual).toStrictEqual({ host: "https://localhost:8080"})
+    expect(actual).toStrictEqual({ host: "https://localhost"})
   });
   
   it('resolve ws', () => {
     const actual = addressProvider(Protocol.WS);
-    expect(actual).toStrictEqual({ host: "ws://localhost:8080"})
+    expect(actual).toStrictEqual({ host: "ws://localhost"})
   });
 
 });

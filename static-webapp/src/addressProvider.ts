@@ -14,11 +14,10 @@ export enum Protocol {
 }
 
 const asBackendHost = (appHost: string, protocol: Protocol): string => {
-  const { backendUrl } = env;
-  var baseUrl = new URL(backendUrl);
+  const { backendFQDN } = env;
   const protocolAsString = protocol === Protocol.HTTPS
     ? "https"
     : "ws";
-  return `${protocolAsString}://${baseUrl.hostname}:${baseUrl.port}`
+  return `${protocolAsString}://${backendFQDN}`
 }
 
