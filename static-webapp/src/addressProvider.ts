@@ -1,6 +1,4 @@
-import { url } from 'inspector';
 import env from './env.json';
-import { URL } from 'url';
 
 export const addressProvider = (protocol: Protocol): { host: string } => {
   const origin = window.location.origin;
