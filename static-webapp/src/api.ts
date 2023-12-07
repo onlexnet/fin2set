@@ -6,7 +6,7 @@ import { OperationDefinitionNode } from 'graphql';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { ClientOptions, createClient } from 'graphql-ws';
 
-const graphqlHttpUrl = `${addressProvider(Protocol.HTTP).host}/graphql`;
+const graphqlHttpUrl = `${addressProvider(Protocol.HTTPS).host}/graphql`;
 const graphqlWsUrl = `${addressProvider(Protocol.WS).host}/graphql`;
 
 export const apolloClientFactory = (jwtToken: string) => {
