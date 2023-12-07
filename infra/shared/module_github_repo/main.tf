@@ -52,6 +52,14 @@ resource "github_repository_environment" "main" {
   # }
 }
 
+resource "github_actions_environment_variable" "webapi_fqdn" {
+  value = var.webapi_fqdn
+  variable_name = "webapi_fqdn"
+  environment     = github_repository_environment.main.environment
+  repository      = data.github_repository.current.name
+}
+
+
 resource "github_actions_environment_secret" "fin2set_client_id" {
   environment     = github_repository_environment.main.environment
   repository      = data.github_repository.current.name
