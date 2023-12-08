@@ -75,12 +75,12 @@ jobs:
         name: Build Docker Image
         working-directory: uservice-webapi
         run: |
-          export IMAGE_NAME_BASE=ghcr.io/onlexnet/fin2set-uservice-webapi
+          export IMAGE_NAME_BASE=ghcr.io/onlexnet/fin2set-webapi
 
           export IMAGE_NAME_HOST=$IMAGE_NAME_BASE
 
-          # build 'latest' image. 'latest' tag is added automatically by build-image plugin
-          mvn spring-boot:build-image -ntp -pl host -Dspring-boot.build-image.imageName=$IMAGE_NAME_HOST -DskipTests
+          # build 'latest' image. 'latest' tag is added automatically by used here 'spring-boot:build-image' plugin
+          mvn spring-boot:build-image -ntp -pl host -Dspring-boot.build-image.imageName=$IMAGE_NAME_HOST -Drevision=$SEMVERSION
 
           # add proper ID to distinguish image from other images built in this workflow
           docker tag $IMAGE_NAME_HOST $IMAGE_NAME_HOST:$GITHUB_RUN_ID
