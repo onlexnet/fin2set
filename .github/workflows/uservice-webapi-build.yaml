@@ -80,7 +80,9 @@ jobs:
           export IMAGE_NAME_HOST=$IMAGE_NAME_BASE
 
           # build 'latest' image. 'latest' tag is added automatically by used here 'spring-boot:build-image' plugin
-          mvn spring-boot:build-image -ntp -pl host -Dspring-boot.build-image.imageName=$IMAGE_NAME_HOST -Drevision=$SEMVERSION
+          # as 'build-image' invokes 'package' phase, lets disable tests with -DskipTest as the build has been already done, packaged and of course tested
+          # more about double packaging: https://github.com/spring-projects/spring-boot/issues/26455#issuecomment-845397236
+          mvn spring-boot:build-image -ntp -pl host -Dspring-boot.build-image.imageName=$IMAGE_NAME_HOST -Drevision=$SEMVERSION -DskipTests
 
           # add proper ID to distinguish image from other images built in this workflow
           docker tag $IMAGE_NAME_HOST $IMAGE_NAME_HOST:$GITHUB_RUN_ID
