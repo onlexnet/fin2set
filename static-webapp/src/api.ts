@@ -2,7 +2,6 @@ import { ApolloClient, ApolloLink, createHttpLink, DefaultOptions, InMemoryCache
 import { GraphQLClient } from 'graphql-request';
 import { addressProvider, Protocol } from "./addressProvider";
 import { getMainDefinition } from "@apollo/client/utilities";
-import { OperationDefinitionNode } from 'graphql';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { ClientOptions, createClient } from 'graphql-ws';
 
