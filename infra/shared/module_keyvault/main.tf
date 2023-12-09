@@ -10,8 +10,6 @@ resource "random_pet" "pet" {
   length = 2
 }
 
-data "azurerm_client_config" "current" {}
-
 resource "azurerm_key_vault" "main" {
   name                       = "${var.application_name}-${random_pet.pet.id}"
   location                   = var.resourcegroup.location
@@ -22,6 +20,30 @@ resource "azurerm_key_vault" "main" {
   soft_delete_retention_days = 7
 
 }
+
+# Interesting case:
+# if we skip such roles, current principal can't re-plan as it has lack of permission
+# on key vault. I tried to add reader capabilities at key vault level, but id still fails.
+# The solution was to add more roles dynamically as you can see below
+data "azurerm_client_config" "current" {}
+# to get secrets values
+# resource azurerm_role_assignment rbac_assignment_secrets_user {
+#   scope                 = var.resourcegroup.id
+#   role_definition_name  = "Key Vault Secrets User"
+#   principal_id          = data.azurerm_client_config.current.object_id
+# }
+# to list secrets ...
+resource azurerm_role_assignment rbac_assignment {
+  scope                 = var.resourcegroup.id
+  role_definition_name  = "Key Vault Secrets Officer"
+  principal_id          = data.azurerm_client_config.current.object_id
+}
+# resource azurerm_role_assignment rbac_assignment3 {
+#   scope                 = var.resourcegroup.id
+#   role_definition_name  = "Key Vault Administrator"
+#   principal_id          = data.azurerm_client_config.current.object_id
+# }
+
 
 # resource "azurerm_key_vault_secret" "NORDIGEN-SECRET-ID" {
 #   name         = "NORDIGEN-SECRET-ID"
@@ -51,6 +73,8 @@ resource "azurerm_key_vault_secret" "SQL-ADMIN-PASSWORD" {
   name         = "SQL-ADMIN-PASSWORD"
   value        = random_string.password.result
   key_vault_id = azurerm_key_vault.main.id
+
+  depends_on = [ azurerm_role_assignment.rbac_assignment ]
 }
 
 # Run the script to get the environment variables of interest.
