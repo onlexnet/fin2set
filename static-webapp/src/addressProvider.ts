@@ -8,14 +8,14 @@ export const addressProvider = (protocol: Protocol): { host: string } => {
 
 export enum Protocol {
   HTTPS,
-  WS
+  WSS
 }
 
 const asBackendHost = (appHost: string, protocol: Protocol): string => {
   const { backendFQDN } = env;
   const protocolAsString = protocol === Protocol.HTTPS
     ? "https"
-    : "ws";
+    : "wss";
   return `${protocolAsString}://${backendFQDN}`
 }
 

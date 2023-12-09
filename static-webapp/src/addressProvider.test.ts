@@ -26,8 +26,8 @@ describe('resolve backend address', () => {
   });
   
   it('resolve ws', () => {
-    const actual = addressProvider(Protocol.WS);
-    expect(actual).toStrictEqual({ host: "ws://localhost"})
+    const actual = addressProvider(Protocol.WSS);
+    expect(actual).toStrictEqual({ host: "wss://localhost"})
   });
 
 });

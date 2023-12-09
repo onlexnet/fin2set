@@ -7,7 +7,7 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { ClientOptions, createClient } from 'graphql-ws';
 
 const graphqlHttpUrl = `${addressProvider(Protocol.HTTPS).host}/graphql`;
-const graphqlWsUrl = `${addressProvider(Protocol.WS).host}/graphql`;
+const graphqlWsUrl = `${addressProvider(Protocol.WSS).host}/graphql`;
 
 export const apolloClientFactory = (jwtToken: string) => {
   // configuration below is focused on Authentication
@@ -16,7 +16,7 @@ export const apolloClientFactory = (jwtToken: string) => {
   const httpLink = createHttpLink({
     uri: graphqlHttpUrl,
   });
-
+  
   const middlewareAuthLink = new ApolloLink((operation, forward) => {
     operation.setContext({
       headers: {
@@ -80,9 +80,11 @@ export const apolloClientFactory = (jwtToken: string) => {
   const unifiedHttpLink = middlewareAuthLink.concat(httpLink)
   const splitLink = split(
     ({ query }) => {
-      const { kind, operation } = getMainDefinition(query) as OperationDefinitionNode;
-      // alert(`kind: ${kind}, operation: ${operation}`);
-      return kind === 'OperationDefinition' && operation === 'subscription';
+      const definition = getMainDefinition(query);
+      return (
+        definition.kind === 'OperationDefinition' &&
+        definition.operation === 'subscription'
+      );
     },
     wsLink,
     unifiedHttpLink
