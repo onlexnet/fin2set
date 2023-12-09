@@ -30,7 +30,7 @@ resource "azurerm_container_app_environment" "default" {
 # Known issues:f
 # https://github.com/hashicorp/terraform-provider-azurerm/issues/20435
 resource "azurerm_container_app" "default" {
-  name                         = "uservice-openapi"
+  name                         = "uservice-webapi"
   container_app_environment_id = azurerm_container_app_environment.default.id
   resource_group_name          = var.resource_group.name
   revision_mode                = "Single"
@@ -96,7 +96,7 @@ resource "azurerm_container_app" "default" {
   }
 
   dapr {
-    app_id       = "uservice-openapi"
+    app_id       = "uservice-webapi"
     app_port     = "8080"
     app_protocol = "http"
   }
@@ -176,7 +176,7 @@ resource "azurerm_container_app" "default" {
 
 # resource "azapi_resource" "containerapp" {
 #   type      = "Microsoft.App/containerapps@2022-03-01"
-#   name      = "uservice-openapi-native"
+#   name      = "uservice-webapi-native"
 #   parent_id = var.resource_group.id
 #   location  = var.resource_group.location
 
