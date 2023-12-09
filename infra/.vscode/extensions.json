@@ -1,6 +1,4 @@
 {
     "recommendations": [
-        "hashicorp.terraform",
-        "azapi-vscode.azapi"
     ]
 }

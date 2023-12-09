@@ -6,12 +6,7 @@ resource "azurerm_mssql_server" "default" {
   administrator_login          = "fin2set"
   administrator_login_password = var.admin_password
   minimum_tls_version          = "1.2"
-
-  # azuread_administrator {
-  #   login_username = "AzureAD Admin"
-  #   object_id      = "00000000-0000-0000-0000-000000000000"
-  # }
-
+  
   tags = {
     environment = "dev01"
   }

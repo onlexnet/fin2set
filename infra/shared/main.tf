@@ -1,9 +1,5 @@
 data "azurerm_client_config" "current" {}
 
-data "azurerm_resource_group" "alldev" {
-  name = "fin2set-env-alldev"
-}
-
 module "resourcegroup" {
   source               = "./module_resourcegroup"
   application_name     = var.application_name
@@ -11,15 +7,6 @@ module "resourcegroup" {
   environment_location = var.environment_location
   subscription_id      = data.azurerm_client_config.current.subscription_id
 }
-
-module "applications" {
-  source = "./module_applications"
-}
-
-# module "appinsights" {
-#   source        = "./module_appinsights"
-#   resourcegroup = module.resourcegroup.main
-# }
 
 module "keyvault" {
   source           = "./module_keyvault"
@@ -36,12 +23,6 @@ module "storage_account" {
   environment_name = var.environment_name
   resource_group   = module.resourcegroup.main
   application_name = var.application_name
-}
-
-module "b2c" {
-  source           = "./module_b2c"
-  application_name = var.application_name
-  resource_group   = module.resourcegroup.main
 }
 
 module "cloudflare" {

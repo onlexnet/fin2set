@@ -103,7 +103,8 @@ resource "azurerm_container_app" "default" {
 
     container {
       name   = "uservice-openapi"
-      image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
+      # image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
+      image = "busybox"
       cpu    = 0.5
       memory = "1Gi"
 

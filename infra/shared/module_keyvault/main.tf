@@ -10,8 +10,8 @@ resource "random_id" "id" {
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "example" {
-  // name                       = "${var.application_name}_${var.environment_name}_${random_id.id.hex}"
-  name                       = "${var.application_name}-${var.environment_name}"
+  # random part in names is required to avoid conflict after create / destroy and create again (previous version stil exists)
+  name                       = "${var.application_name}_${var.environment_name}_${random_id.id.hex}"
   location                   = var.resourcegroup.location
   resource_group_name        = var.resourcegroup.name
   tenant_id                  = data.azurerm_client_config.current.tenant_id
