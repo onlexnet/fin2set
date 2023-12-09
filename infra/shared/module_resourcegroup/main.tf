@@ -6,13 +6,21 @@ resource "azurerm_resource_group" "default" {
 data "azurerm_client_config" "current" {}
 
 # Interesting case:
-# if we skip such role, current principal can't re-plan as it has lack of permission
-# on key vaule. I tried to add reader capabilities at key vault level, but id still fails.
-# The solution was to add 'infra' as reader so oit can plan terraform changes, havinf whole knowledge about resources.
-# So, to avoid limitation based on problem with planning because of lack of permission to get whole picture
-# 'Reader' role seems to solve soch problems.
+# if we skip such roles, current principal can't re-plan as it has lack of permission
+# on key vault. I tried to add reader capabilities at key vault level, but id still fails.
+# The solution was to add more roles dynamically as you can see below
 resource azurerm_role_assignment rbac_assignment {
   scope                 = azurerm_resource_group.default.id
+  role_definition_name  = "Key Vault Secrets User"
+  principal_id          = data.azurerm_client_config.current.object_id
+}
+resource azurerm_role_assignment rbac_assignment2 {
+  scope                 = azurerm_resource_group.default.id
   role_definition_name  = "Key Vault Secrets Officer"
+  principal_id          = data.azurerm_client_config.current.object_id
+}
+resource azurerm_role_assignment rbac_assignment3 {
+  scope                 = azurerm_resource_group.default.id
+  role_definition_name  = "Key Vault Administrator"
   principal_id          = data.azurerm_client_config.current.object_id
 }
