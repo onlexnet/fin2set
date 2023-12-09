@@ -4,6 +4,8 @@
 name: uservice-webapi build and test
 
 on:
+  workflow_dispatch:
+    # section to define manual start of CI pipeline
   push:
     branches:
       - siudeks/issue49
