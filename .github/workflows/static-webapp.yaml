@@ -1,6 +1,8 @@
 name: Azure Static Web Apps CI/CD
 
 on:
+  workflow_dispatch:
+    # section to define manual start of CI pipeline
   push:
     branches:
       - siudeks/issue49
