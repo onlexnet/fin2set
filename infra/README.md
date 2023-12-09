@@ -34,3 +34,10 @@ To run Terraform providers, some pre-configuration is required:
 - it uses the same variables as above ...
 - ... plus one more variable: [ARM_SUBSCRIPTION_ID](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret#configuring-the-service-principal-in-terraform)
 
+## Hints
+
+### Refresh providers
+```bash
+rm -fr .terraform
+terraform init -upgrade
+```
