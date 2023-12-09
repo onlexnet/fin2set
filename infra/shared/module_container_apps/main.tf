@@ -56,14 +56,14 @@ resource "azurerm_container_app" "default" {
     }
   }
 
-  secret {
-    name  = "nordigen-secret-id"
-    value = var.env.NORDIGEN_SECRET_ID
-  }
-  secret {
-    name  = "nordigen-secret-key"
-    value = var.env.NORDIGEN_SECRET_KEY
-  }
+  # secret {
+  #   name  = "nordigen-secret-id"
+  #   value = var.env.NORDIGEN_SECRET_ID
+  # }
+  # secret {
+  #   name  = "nordigen-secret-key"
+  #   value = var.env.NORDIGEN_SECRET_KEY
+  # }
 
   secret {
     name  = "database-host"
@@ -112,14 +112,14 @@ resource "azurerm_container_app" "default" {
       # https://github.com/hashicorp/terraform-provider-azurerm/issues/20629
       # please manage manually using portal or az tools
 
-      env {
-        name        = "NORDIGEN_SECRET_ID"
-        secret_name = "nordigen-secret-id"
-      }
-      env {
-        name        = "NORDIGEN_SECRET_KEY"
-        secret_name = "nordigen-secret-key"
-      }
+      # env {
+      #   name        = "NORDIGEN_SECRET_ID"
+      #   secret_name = "nordigen-secret-id"
+      # }
+      # env {
+      #   name        = "NORDIGEN_SECRET_KEY"
+      #   secret_name = "nordigen-secret-key"
+      # }
 
       env {
         name        = "DATABASE_HOST"

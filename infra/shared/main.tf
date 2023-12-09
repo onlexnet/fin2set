@@ -55,8 +55,8 @@ module "container_apps" {
   resource_group          = module.resourcegroup.main
   log_analytics_workspace = module.log_analytics_workspace.main
   env = {
-    NORDIGEN_SECRET_ID  = module.keyvault.env.NORDIGEN_SECRET_ID
-    NORDIGEN_SECRET_KEY = module.keyvault.env.NORDIGEN_SECRET_KEY
+    # NORDIGEN_SECRET_ID  = module.keyvault.env.NORDIGEN_SECRET_ID
+    # NORDIGEN_SECRET_KEY = module.keyvault.env.NORDIGEN_SECRET_KEY
     DATABASE_HOST       = module.database.database_host
     DATABASE_PORT       = module.database.database_port
     DATABASE_NAME       = module.database.database_name

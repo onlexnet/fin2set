@@ -3,15 +3,17 @@ data "azuread_group" "support" {
   security_enabled = true
 }
 
-resource "random_id" "id" {
-  byte_length = 8
+resource "random_pet" "pet" {
+  keepers = {
+    some_id = "100"
+  }
+  length = 2
 }
 
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "example" {
-  # random part in names is required to avoid conflict after create / destroy and create again (previous version stil exists)
-  name                       = "${var.application_name}_${var.environment_name}_${random_id.id.hex}"
+  name                       = "${var.application_name}-${random_pet.pet.id}"
   location                   = var.resourcegroup.location
   resource_group_name        = var.resourcegroup.name
   tenant_id                  = data.azurerm_client_config.current.tenant_id
@@ -45,29 +47,37 @@ resource "azurerm_key_vault_access_policy" "infra" {
   ]
 }
 
-resource "azurerm_key_vault_secret" "NORDIGEN-SECRET-ID" {
-  name         = "NORDIGEN-SECRET-ID"
-  value        = data.external.env.result["TF_VAR_NORDIGEN_SECRET_ID"]
-  key_vault_id = azurerm_key_vault.example.id
-}
+# current principal for some reason can't read secrets, so lets allow him to read as required to decide if secrets should be aded
+# resource azurerm_role_assignment rbac_assignment {
+#   scope                 = azurerm_key_vault.example.id
+#   role_definition_name  = "Reader"
+#   principal_id          = data.azurerm_client_config.current.id
+# }
 
-resource "azurerm_key_vault_secret" "NORDIGEN-SECRET-KEY" {
-  name         = "NORDIGEN-SECRET-KEY"
-  value        = data.external.env.result["TF_VAR_NORDIGEN_SECRET_KEY"]
-  key_vault_id = azurerm_key_vault.example.id
-}
 
-resource "azurerm_key_vault_secret" "OPENAI-KEY" {
-  name         = "OPENAI-KEY"
-  value        = data.external.env.result["OPENAI_KEY"]
-  key_vault_id = azurerm_key_vault.example.id
-}
+# resource "azurerm_key_vault_secret" "NORDIGEN-SECRET-ID" {
+#   name         = "NORDIGEN-SECRET-ID"
+#   value        = data.external.env.result["TF_VAR_NORDIGEN_SECRET_ID"]
+#   key_vault_id = azurerm_key_vault.example.id
+# }
 
-resource "azurerm_key_vault_secret" "OPENAI-ENDPOINT" {
-  name         = "OPENAI-ENDPOINT"
-  value        = data.external.env.result["OPENAI_ENDPOINT"]
-  key_vault_id = azurerm_key_vault.example.id
-}
+# resource "azurerm_key_vault_secret" "NORDIGEN-SECRET-KEY" {
+#   name         = "NORDIGEN-SECRET-KEY"
+#   value        = data.external.env.result["TF_VAR_NORDIGEN_SECRET_KEY"]
+#   key_vault_id = azurerm_key_vault.example.id
+# }
+
+# resource "azurerm_key_vault_secret" "OPENAI-KEY" {
+#   name         = "OPENAI-KEY"
+#   value        = data.external.env.result["OPENAI_KEY"]
+#   key_vault_id = azurerm_key_vault.example.id
+# }
+
+# resource "azurerm_key_vault_secret" "OPENAI-ENDPOINT" {
+#   name         = "OPENAI-ENDPOINT"
+#   value        = data.external.env.result["OPENAI_ENDPOINT"]
+#   key_vault_id = azurerm_key_vault.example.id
+# }
 
 resource "azurerm_key_vault_secret" "SQL-ADMIN-PASSWORD" {
   name         = "SQL-ADMIN-PASSWORD"
