@@ -2,11 +2,11 @@ package onlexnet.webapi.openai;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.azure.ai.openai.OpenAIClient;
 import com.azure.ai.openai.OpenAIClientBuilder;
+import com.azure.ai.openai.OpenAIServiceVersion;
 import com.azure.ai.openai.models.ChatCompletionsOptions;
 import com.azure.ai.openai.models.ChatMessage;
 import com.azure.ai.openai.models.ChatRole;
@@ -21,6 +21,7 @@ import onlexnet.webapi.config.Secrets;
 public class OpenAi {
 
   private final Secrets secrets;
+  private final String deploymentName = "gpt-4-plugins";
 
   OpenAIClient client;
 
@@ -41,7 +42,7 @@ public class OpenAi {
         .toList();
     var options = new ChatCompletionsOptions(dtoMessages);
 
-    var cc = client.getChatCompletions("text-turbo", options);
+    var cc = client.getChatCompletions(deploymentName, options);
     var choice = cc.getChoices().get(0);
     return choice.getMessage().getContent();
   }
