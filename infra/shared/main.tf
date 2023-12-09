@@ -45,9 +45,7 @@ module "github_repo" {
   webapi_fqdn        = module.container_apps.webapi_fqdn
   static_app_api_key = module.static_app.static_app_api_key
   environment_name   = var.environment_name
-  # acr_admin_name = data.azurerm_container_registry.alldev.admin_username
-  # acr_admin_secret = data.azurerm_container_registry.alldev.admin_password
-  # acr_registry_url = data.azurerm_container_registry.alldev.login_server
+  CONTAINERAPP_NAME_WEBAPI = module.container_apps.containerapp_name
 }
 
 module "container_apps" {

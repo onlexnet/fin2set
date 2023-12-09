@@ -53,10 +53,10 @@ resource "github_repository_environment" "main" {
 }
 
 resource "github_actions_environment_variable" "webapi_fqdn" {
-  value = var.webapi_fqdn
+  value         = var.webapi_fqdn
   variable_name = "webapi_fqdn"
-  environment     = github_repository_environment.main.environment
-  repository      = data.github_repository.current.name
+  environment   = github_repository_environment.main.environment
+  repository    = data.github_repository.current.name
 }
 
 
@@ -99,9 +99,9 @@ resource "github_actions_secret" "AZURE_TENANT_ID" {
   plaintext_value = data.azurerm_client_config.current.tenant_id
 }
 
-# resource "github_actions_variable" "DOCKER_REGISTRY_URL" {
-#   repository    = "fin2set"
-#   variable_name = "DOCKER_REGISTRY_URL"
-#   value         = var.acr_registry_url
-# }
-
+resource "github_actions_environment_variable" "CONTAINERAPP_NAME_WEBAPI" {
+  environment   = github_repository_environment.main.environment
+  repository    = data.github_repository.current.name
+  variable_name = "CONTAINERAPP_NAME_WEBAPI"
+  value         = var.CONTAINERAPP_NAME_WEBAPI
+}

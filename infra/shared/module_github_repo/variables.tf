@@ -6,3 +6,6 @@ variable "environment_name" {
 
 variable webapi_fqdn {
 }
+
+variable "CONTAINERAPP_NAME_WEBAPI" {
+}
