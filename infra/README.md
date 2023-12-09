@@ -18,13 +18,13 @@ To run Terraform providers, some pre-configuration is required:
 - created token named fin2set-secrets, scoped to fin2set repo, with permissions: Administration (read/write), Environments (read/write), Secrets (read/write), Variables (read/write)
 - the token value is used as sensitive variable Terraform Cloud, named [GITHUB_TOKEN](https://registry.terraform.io/providers/integrations/github/latest/docs#oauth--personal-access-token)
 - for some reason I had to set also variable GITHUB_OWNER=onlexnet as (without that) github tried to construct invalid path mixed with organization and my username
-- also, to read github images, we use additional token (named CR_PAT as *Container Registry Personal Access Token*) to pull docker images
+- also, to read github images, we use additional token (named CR_PAT with permission read:packages, BTW CR_PAT is my abbrevation of  *Container Registry Personal Access Token*) to pull docker images
 
 #### Azure AD
 - created service principal named **onlexnet-infra-fin2set** (single tenant application) has been created with permissions:
   - 'Contributor' role (to be able create resources) on each app subscription
   - 'Application administrator' to create service principals used in environments
-  - 'Azure B2C Contributor' custom role with permissions required to manager B2C directories: Microsoft.AzureActiveDirectory/b2cDirectories/* where * is read,write and delete 
+  - ~~'Azure B2C Contributor' custom role with permissions required to manager B2C directories: Microsoft.AzureActiveDirectory/b2cDirectories/* where * is read,write and delete~~ (Azure B2C is not used atm)
   - 'User Access Administrator' (on selected, used subscription) to add RBAC roles to objects
   - with a secret named e.g. 'terraform-cli' (used to support CLI tool)
 - sensitive environment variables named ARM_CLIENT_ID, ARM_CLIENT_SECRET and ARM_TENANT_ID are set properly [as required](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/service_principal_client_secret#environment-variables)
