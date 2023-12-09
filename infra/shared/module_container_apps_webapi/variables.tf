@@ -16,6 +16,8 @@ variable env {
   type = object({
     # NORDIGEN_SECRET_ID = string
     # NORDIGEN_SECRET_KEY = string
+    CR_PAT = string
+    GITHUB_USERNAME = string
     DATABASE_HOST = string
     DATABASE_NAME = string
     DATABASE_PORT = string

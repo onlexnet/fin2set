@@ -40,11 +40,11 @@ resource "azurerm_container_app" "default" {
     identity_ids = [azurerm_user_assigned_identity.containerapp.id]
   }
 
-  # registry {
-  #   server               = "ghcr.io"
-  #   username             = var.env.GITHUB_USERNAME
-  #   password_secret_name = "cr-pat"
-  # }
+  registry {
+    server               = "ghcr.io"
+    username             = var.env.GITHUB_USERNAME
+    password_secret_name = "cr-pat"
+  }
 
   # step 2
   ingress {
@@ -64,6 +64,11 @@ resource "azurerm_container_app" "default" {
   #   name  = "nordigen-secret-key"
   #   value = var.env.NORDIGEN_SECRET_KEY
   # }
+
+  secret {
+    name  = "cr-pat"
+    value = var.env.CR_PAT
+  }
 
   secret {
     name  = "database-host"
@@ -102,9 +107,8 @@ resource "azurerm_container_app" "default" {
     max_replicas = 1
 
     container {
-      name   = "uservice-openapi"
-      # image  = "${data.azurerm_container_registry.alldev.login_server}/fin2set:latest"
-      image = "busybox"
+      name   = "uservice-webapi"
+      image  = "ghcr.io/onlexnet/fin2set-webapi:latest"
       cpu    = 0.5
       memory = "1Gi"
 

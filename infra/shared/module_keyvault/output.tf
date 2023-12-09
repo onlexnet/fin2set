@@ -4,6 +4,8 @@ output "env" {
   value = {
     # NORDIGEN_SECRET_ID = azurerm_key_vault_secret.NORDIGEN-SECRET-ID.value
     # NORDIGEN_SECRET_KEY = azurerm_key_vault_secret.NORDIGEN-SECRET-KEY.value
+    GITHUB_USERNAME    = "siudeks"
+    CR_PAT             = data.external.env.result["CR_PAT"],
     SQL_ADMIN_PASSWORD = random_string.password.result
   }
   sensitive = true
