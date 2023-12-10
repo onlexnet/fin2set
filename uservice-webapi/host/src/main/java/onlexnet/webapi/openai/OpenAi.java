@@ -42,6 +42,7 @@ public class OpenAi {
   private final String chatModel = "gpt-4-plugins";
   private final String embeddingsModel = "text-embedding-ada-002";
 
+  private static final String wheatherFunctionName = "getCurrentWeather";
   OpenAIClient client;
 
   @PostConstruct
@@ -62,7 +63,7 @@ public class OpenAi {
         .collect(Collectors.toList());
 
     var functions = Arrays.asList(
-        new FunctionDefinition("getCurrentWeather")
+        new FunctionDefinition(wheatherFunctionName)
             .setDescription("Get the current weather")
             .setParameters(BinaryData.fromObject(getFunctionDefinition())));
 
@@ -135,8 +136,16 @@ public class OpenAi {
             .toObject(WeatherLocation.class);
 
         int currentWeather = getCurrentWeather(weatherLocation);
-        chatMessages.add(new ChatMessage(ChatRole.USER, String.format("The weather in %s is %d degrees %s.",
-            weatherLocation.getLocation(), currentWeather, weatherLocation.getUnit())));
+        
+
+
+        var msg1 = new ChatMessage(ChatRole.ASSISTANT, "").setFunctionCall(functionCall);
+        chatMessages.add(msg1);
+
+        var msg2 = new ChatMessage(ChatRole.FUNCTION, String.format("The weather in %s is %d degrees %s.",
+            weatherLocation.getLocation(), currentWeather, weatherLocation.getUnit()))
+            .setName(wheatherFunctionName);
+        chatMessages.add(msg2);
       } else {
         var messageHistory = new ChatMessage(ChatRole.ASSISTANT, choiceMessage.getContent());
         messageHistory.setFunctionCall(choiceMessage.getFunctionCall());
@@ -178,7 +187,10 @@ public class OpenAi {
   // examples
   // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/openai/azure-ai-openai/src/samples/java/com/azure/ai/openai/FunctionCallSample.java
   // https://learn.microsoft.com/en-us/java/api/com.azure.ai.openai.models.functiondefinition?view=azure-java-preview
-  // :https://cobusgreyling.medium.com/practical-examples-of-openai-function-calling-a6419dc38775
+  // https://cobusgreyling.medium.com/practical-examples-of-openai-function-calling-a6419dc38775
+  // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/openai/azure-ai-openai/src/samples/java/com/azure/ai/openai/usage/GetChatCompletionsToolCallSample.java
+  // https://openai.com/blog/function-calling-and-other-api-updates
+  // https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/openai/Azure.AI.OpenAI/README.md
   // "name": "order_detail",
   // "description": "template to capture an order.",
   // "parameters": {

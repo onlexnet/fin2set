@@ -42,6 +42,20 @@ public class OpenAiTest {
   }
 
 
+  @Test
+  void shouldUseApi2() {
+    var query = "What’s the weather like in Boston?";
+    var initial = new Message(query, MessageRole.USER);
+
+    var response = openAi.getContinuation(List.of(initial));
+
+    var a = openAi.getEmbedings(response);
+    var b = openAi.getEmbedings("The weather in Boston is currently 35 degrees Celsius.");
+
+    var similarity = cosineSimilarity(a, b);
+    Assertions.assertThat(similarity).isGreaterThan(0.9);
+  }
+
   // https://stackoverflow.com/questions/520241/how-do-i-calculate-the-cosine-similarity-of-two-vectors
   public static double cosineSimilarity(List<Double> vectorA, List<Double> vectorB) {
     return cosineSimilarity(vectorA.stream().mapToDouble(it -> it).toArray(), vectorB.stream().mapToDouble(it -> it).toArray());
