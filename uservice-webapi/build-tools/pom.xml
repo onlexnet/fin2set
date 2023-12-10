@@ -10,6 +10,11 @@
          Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
     -->
     <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
+
+    <!--
+      The compiler compliance specified is 1.8 but a JRE 21 is used
+    -->
+    <java.version>21</java.version>
   </properties>
 
 </project>
