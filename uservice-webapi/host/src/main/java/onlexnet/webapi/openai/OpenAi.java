@@ -190,6 +190,7 @@ public class OpenAi {
   // https://cobusgreyling.medium.com/practical-examples-of-openai-function-calling-a6419dc38775
   // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/openai/azure-ai-openai/src/samples/java/com/azure/ai/openai/usage/GetChatCompletionsToolCallSample.java
   // https://openai.com/blog/function-calling-and-other-api-updates
+  // https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/openai/azure-ai-openai
   // https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/openai/Azure.AI.OpenAI/README.md
   // "name": "order_detail",
   // "description": "template to capture an order.",
