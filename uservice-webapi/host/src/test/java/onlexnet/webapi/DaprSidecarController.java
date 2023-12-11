@@ -57,13 +57,4 @@ public final class DaprSidecarController {
         : () -> System.setProperty(propertyName, actual);
   }
 
-  /**
-   * AutoCloseable which doesn't be to close with handling exception from close
-   * method.
-   */
-  @FunctionalInterface
-  public interface SafeAutoCloseable extends AutoCloseable {
-    void close();
-  }
-
 }
