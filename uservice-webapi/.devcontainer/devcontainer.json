@@ -41,7 +41,7 @@
 				"ms-azuretools.vscode-dapr",
 				"vscjava.vscode-java-dependency",
 				"visualstudioexptteam.vscodeintellicode",
-				"cucumberopen.cucumber-official",
+				"cucumberopen.cucumber-official", // to support gherkin semantic and navigate to glue code
 				"vmware.vscode-boot-dev-pack",
 				"github.vscode-pull-request-github",
         		"redhat.vscode-xml" // to format pom.xml

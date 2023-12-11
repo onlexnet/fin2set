@@ -133,6 +133,13 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>onlexnet.fin2set</groupId>
+      <artifactId>webapi-gql-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+
 </dependencies>
 
   <build>

@@ -1,8 +1,11 @@
 package onlexnet.webapi;
 
+import java.time.Duration;
+
 import org.springframework.graphql.ExecutionGraphQlService;
 import org.springframework.graphql.server.WebGraphQlHandler;
 import org.springframework.graphql.test.tester.GraphQlTester.Subscription;
+import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.graphql.test.tester.WebGraphQlTester;
 
 import lombok.SneakyThrows;
@@ -20,21 +23,21 @@ public class AppApi {
   public AppApi(String rootUri, String email, ExecutionGraphQlService executionGraphQlService) {
     var principalNameHeaderName = "X-MS-CLIENT-PRINCIPAL-NAME";
     var principalNameHeaderId = "X-MS-CLIENT-PRINCIPAL-ID";
-    // var client = WebTestClient.bindToServer()
-    //     .responseTimeout(Duration.ofMinutes(10))
-    //     .baseUrl(rootUri + "/graphql")
-    //     .defaultHeader(principalNameHeaderName, email)
-    //     .defaultHeader(principalNameHeaderId, "principal-id")
-    //     .build();
+    var client = WebTestClient.bindToServer()
+        .responseTimeout(Duration.ofMinutes(10))
+        .baseUrl(rootUri + "/graphql")
+        .defaultHeader(principalNameHeaderName, email)
+        .defaultHeader(principalNameHeaderId, "principal-id")
+        .build();
     var client2 = WebGraphQlHandler.builder(executionGraphQlService);
 
     tester = WebGraphQlTester.create(client2.build());
 
-    greetings = tester.document("subscription { view }")
+    greetings = tester.documentName("ViewSubscription")
         .executeSubscription();
   }
 
-  Flux<ViewGql> view() {
+  public Flux<ViewGql> view() {
     return greetings.toFlux("view", ViewGql.class);
   }
 

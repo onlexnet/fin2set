@@ -1,30 +1,32 @@
 package onlexnet.webapi.bdd;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.graphql.ExecutionGraphQlService;
 
-import io.cucumber.java.en.*;
-import onlexnet.webapi.AppApi;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import onlex.webapi.ViewGql;
+import onlexnet.webapi.domain.ValName;
 
 public class ExampleSteps {
 
   @Autowired
-  ExecutionGraphQlService executionGraphQlService;
+  Facts facts;
 
-  //   var api = new AppApi("graphiql", "slawomir@siudek.net", executionGraphQlService);
-  @Given("an example scenario")
-  public void anExampleScenario() {
-    Assertions.assertThat(executionGraphQlService).isNotNull();
+  @Autowired
+  Api api;
+
+  @When("user {userAlias} said {string}")
+  public void user_said(ValName userAlias, String text) {
+    Assertions.assertThat(userAlias).isEqualTo(ValName.of("user1"));
+    
+    var view = api.getTick(facts);
+    Assertions.assertThat(view).isEqualTo(ViewGql.CHAT);
   }
 
-  @When("all step definitions are implemented")
-  public void allStepDefinitionsAreImplemented() {
+  @Then("webapi sends logout event")
+  public void webapi_sends_logout_event() {
+      // Write code here that turns the phrase above into concrete actions
+      // throw new io.cucumber.java.PendingException();
   }
-
-  @Then("the scenario passes")
-  public void theScenarioPasses() {
-  }
-
 }

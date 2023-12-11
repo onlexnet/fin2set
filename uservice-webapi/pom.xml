@@ -13,6 +13,7 @@
     <module>base</module>
     <module>host</module>
     <module>gql-model</module> <!-- Shared GraphQL models between gql-test and host modules -->
+    <module>gql-test</module>
   </modules>
 
 

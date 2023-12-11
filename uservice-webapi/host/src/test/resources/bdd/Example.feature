@@ -1,6 +1,5 @@
-Feature: An example
+Feature: Change view
 
   Scenario: The example
-    Given an example scenario
-    When all step definitions are implemented
-    Then the scenario passes
+    When user user1 said "logout me"
+    Then webapi sends logout event

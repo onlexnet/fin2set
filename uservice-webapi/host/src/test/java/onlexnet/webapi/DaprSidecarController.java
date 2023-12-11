@@ -4,10 +4,9 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
-import org.testcontainers.utility.MountableFile;
-
 import io.diagrid.dapr.DaprContainer;
 import lombok.SneakyThrows;
+import onlexnet.webapi.infra.StringProperty;
 
 /**
  * Designed to be used to run single instance for all tests in single module.
@@ -24,16 +23,12 @@ public final class DaprSidecarController {
    * @param projectPath pthh where build pom.xml is located
    */
   @SneakyThrows
-  public SafeAutoCloseable start(Path projectPath, String clientId, String clientSecret) {
+  public SafeAutoCloseable start(Path projectPath, StringProperty clientId, StringProperty clientSecret) {
     var componentsDir = projectPath.resolve("components");
 
     daprContainer = new DaprContainer("daprio/daprd")
         .withAppName("test-app")
-        .withEnv(Map.of("FIN2SET_CLIENT_ID", clientId, "FIN2SET_CLIENT_SECRET", clientSecret))
-        // .withAccessToHost(true)
-        // .withClasspathResourceMapping(componentParh.toAbsolutePath().toString(), , BindMode.READ_ONLY, SelinuxContext.SHARED)
-        // .withCopyToContainer(null, null)
-        // .withCopyFileToContainer(MountableFile.forHostPath(componentPath.resolve("local-secret-store.yaml") ), "/components")
+        .withEnv(Map.of(clientId.getEnvName(), clientId.get(), clientSecret.getEnvName(), clientSecret.get()))
         .withFileSystemBind(componentsDir.toAbsolutePath().toString(), "/components" )
         .withAppPort(8081);
     
