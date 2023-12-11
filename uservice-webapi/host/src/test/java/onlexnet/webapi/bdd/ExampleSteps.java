@@ -11,16 +11,11 @@ import onlexnet.webapi.domain.ValName;
 public class ExampleSteps {
 
   @Autowired
-  Facts facts;
-
-  @Autowired
   Api api;
 
   @When("user {userAlias} said {string}")
   public void user_said(ValName userAlias, String text) {
-    Assertions.assertThat(userAlias).isEqualTo(ValName.of("user1"));
-    
-    var view = api.getTick(facts);
+    var view = api.getTick(userAlias);
     Assertions.assertThat(view).isEqualTo(ViewGql.CHAT);
   }
 
