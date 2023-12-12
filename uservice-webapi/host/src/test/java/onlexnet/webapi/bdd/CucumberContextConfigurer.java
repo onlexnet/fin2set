@@ -1,12 +1,10 @@
 package onlexnet.webapi.bdd;
 
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.BootstrapWith;
 
 import io.cucumber.spring.CucumberContextConfiguration;
 import onlexnet.webapi.Application;
-import onlexnet.webapi.DaprExtension;
 
 @CucumberContextConfiguration
 // @ActiveProfiles({Profiles.App.TEST})

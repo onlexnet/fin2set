@@ -1,6 +1,5 @@
 package onlexnet.webapi.bdd;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,7 +8,6 @@ import org.springframework.graphql.ExecutionGraphQlService;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
-import onlex.webapi.ViewGql;
 import onlexnet.webapi.AppApi;
 import onlexnet.webapi.domain.ValName;
 import reactor.core.Disposable;
@@ -38,16 +36,24 @@ public class Api {
 
   private Context getOrCreate(ValName userAlias) {
     return facts.computeIfAbsent(userAlias, key -> {
-      var result = new Facts();
-      var session = new AppApi("graphiql", "slawomir@siudek.net", executionGraphQlService);
-      var disposable = Disposables.composite();
+      var facts = new Facts();
+
+      var callbacks = new AppApi.ApiCallbacks() {
+        @Override
+        public void afterSay(String result) {
+          facts.on(new Facts.On.ChatLastResult(result));
+        }
+      };
       
+      var session = new AppApi("graphiql", "slawomir@siudek.net", executionGraphQlService, callbacks);
+      var disposable = Disposables.composite();
+
       disposable.addAll(List.of(
         session.view().subscribe(it -> {
-          result.on(new Facts.On.OnViewEvent(it));
+          facts.on(new Facts.On.ViewEvent(it));
         })));
 
-      return new Context(result, session, disposable);
+      return new Context(facts, session, disposable);
     });
   }
 

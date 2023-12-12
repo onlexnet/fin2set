@@ -8,7 +8,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.azure.ai.openai.models.ChatRole;
+
 import onlexnet.webapi.DaprExtension;
+import onlexnet.webapi.bdd.Similarity;
 
 @SpringBootTest
 @ExtendWith(DaprExtension.class)
@@ -37,7 +40,7 @@ public class OpenAiTest {
     var a = openAi.getEmbedings(response);
     var b = openAi.getEmbedings("Light clothing, sunglasses, and sunscreen.");
 
-    var similarity = cosineSimilarity(a, b);
+    var similarity = Similarity.cosine(a, b);
     Assertions.assertThat(similarity).isGreaterThan(0.9);
   }
 
@@ -52,26 +55,8 @@ public class OpenAiTest {
     var a = openAi.getEmbedings(response);
     var b = openAi.getEmbedings("The weather in Boston is currently 35 degrees Celsius.");
 
-    var similarity = cosineSimilarity(a, b);
+    var similarity = Similarity.cosine(a, b);
     Assertions.assertThat(similarity).isGreaterThan(0.9);
   }
-
-  // https://stackoverflow.com/questions/520241/how-do-i-calculate-the-cosine-similarity-of-two-vectors
-  public static double cosineSimilarity(List<Double> vectorA, List<Double> vectorB) {
-    return cosineSimilarity(vectorA.stream().mapToDouble(it -> it).toArray(), vectorB.stream().mapToDouble(it -> it).toArray());
-  }
-
-  public static double cosineSimilarity(double[] vectorA, double[] vectorB) {
-    var dotProduct = 0.0;
-    var normA = 0.0;
-    var normB = 0.0;
-    for (int i = 0; i < vectorA.length; i++) {
-        dotProduct += vectorA[i] * vectorB[i];
-        normA += Math.pow(vectorA[i], 2);
-        normB += Math.pow(vectorB[i], 2);
-    }   
-    return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
-}
-
 
 }

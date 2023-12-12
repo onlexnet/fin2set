@@ -5,8 +5,6 @@ import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.test.context.TestContext;
 
-import lombok.extern.slf4j.Slf4j;
-import onlexnet.webapi.DaprExtension;
 import onlexnet.webapi.DaprRunner;
 
 /**
@@ -18,7 +16,6 @@ import onlexnet.webapi.DaprRunner;
  * Spring in one piece here.
  * the issue we trying solve: https://stackoverflow.com/questions/74431287/junit-5-how-to-use-extensions-with-a-test-suite
  */
-@Slf4j
 public final class DaprExtensionBootstrapper extends SpringBootTestContextBootstrapper {
 
   @Override

@@ -1,7 +1,6 @@
 package onlexnet.webapi.openai;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,26 +22,26 @@ import com.azure.ai.openai.models.EmbeddingsUsage;
 import com.azure.ai.openai.models.FunctionCallConfig;
 import com.azure.ai.openai.models.FunctionDefinition;
 import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.util.BinaryData;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import onlexnet.webapi.config.Secrets;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class OpenAi {
 
   private final Secrets secrets;
   private final String chatModel = "gpt-4-plugins";
   private final String embeddingsModel = "text-embedding-ada-002";
 
-  private static final String wheatherFunctionName = "getCurrentWeather";
+  private final List<Func> functions;
 
-  private final ShowMyUsers functionShowMyUsers;
+  private List<FunctionDefinition> functionDefs;
+  private Map<String, Func> functionsByNames;
 
   OpenAIClient client;
 
@@ -53,25 +52,27 @@ public class OpenAi {
         .endpoint(secrets.openaiEndpoint)
         .buildClient();
 
+    functionDefs = functions.stream().map(it -> it.definition()).toList();
+    functionsByNames = functions.stream().collect(Collectors.toMap(it -> it.functionName(), it -> it));
+
   }
 
   public String getContinuation(List<Message> messages) {
     var dtoMessages = messages.stream()
         .map(it -> {
-          var dtoRole = it.role() == MessageRole.ASSISTANT ? ChatRole.ASSISTANT : ChatRole.USER;
-          return new ChatMessage(dtoRole, it.text());
+          if (it.role() == MessageRole.ASSISTANT) {
+            return new ChatMessage(ChatRole.ASSISTANT, it.text());
+          }
+          if (it.role() == MessageRole.USER) {
+            return new ChatMessage(ChatRole.USER, it.text());
+          }
+          throw new IllegalArgumentException();
         })
         .collect(Collectors.toList());
 
-    var functions = Arrays.asList(
-        new FunctionDefinition(wheatherFunctionName)
-            .setDescription("Get the current weather")
-            .setParameters(BinaryData.fromObject(getFunctionDefinition())),
-        functionShowMyUsers.functionDefinition);
-
     var options = new ChatCompletionsOptions(dtoMessages)
-        .setFunctionCall(FunctionCallConfig.AUTO)
-        .setFunctions(functions);
+        .setFunctions(functionDefs)
+        .setFunctionCall(FunctionCallConfig.AUTO);
 
     var chatCompletions = client.getChatCompletions(chatModel, options);
 
@@ -79,7 +80,10 @@ public class OpenAi {
 
     // Take your function_call result as the input prompt to make another request to
     // service.
-    ChatCompletionsOptions chatCompletionOptions2 = new ChatCompletionsOptions(chatMessages2);
+    var chatCompletionOptions2 = new ChatCompletionsOptions(chatMessages2)
+        .setFunctions(functionDefs)
+        .setFunctionCall(FunctionCallConfig.AUTO);
+
     ChatCompletions chatCompletions2 = client.getChatCompletions(chatModel, chatCompletionOptions2);
     List<ChatChoice> choices = chatCompletions2.getChoices();
     var message = choices.get(0).getMessage();
@@ -104,100 +108,35 @@ public class OpenAi {
     return embedding;
   }
 
-  private static Map<String, Object> getFunctionDefinition() {
-    // Construct JSON in Map, or you can use create your own customized model.
-    Map<String, Object> location = new HashMap<>();
-    location.put("type", "string");
-    location.put("description", "The city and state, e.g. San Francisco, CA");
-    Map<String, Object> unit = new HashMap<>();
-    unit.put("type", "string");
-    unit.put("enum", Arrays.asList("celsius", "fahrenheit"));
-    Map<String, Object> prop1 = new HashMap<>();
-    prop1.put("location", location);
-    prop1.put("unit", unit);
-    Map<String, Object> functionDefinition = new HashMap<>();
-    functionDefinition.put("type", "object");
-    functionDefinition.put("required", Arrays.asList("location", "unit"));
-    functionDefinition.put("properties", prop1);
-    return functionDefinition;
-  }
-
   @SneakyThrows
   private List<ChatMessage> handleFunctionCallResponse(List<ChatChoice> choices, List<ChatMessage> chatMessages) {
     for (ChatChoice choice : choices) {
-      ChatMessage choiceMessage = choice.getMessage();
+      var choiceMessage = choice.getMessage();
       // We are looking for finish_reason = "function call".
       if (CompletionsFinishReason.FUNCTION_CALL.equals(choice.getFinishReason())) {
 
         var functionCall = choiceMessage.getFunctionCall();
-        System.out.printf("Function name: %s, arguments: %s.%n", functionCall.getName(), functionCall.getArguments());
+        var functionName = functionCall.getName();
+        var function = functionsByNames.get(functionName);
 
-        if (functionCall.getName().equals(functionShowMyUsers.internalFunctionName)) {
+        log.info("Function name: {}, arguments: {}", functionCall.getName(), functionCall.getArguments());
 
-          functionShowMyUsers.invoke();
-          
-          // invoke notification about show all users
-          var msg1 = new ChatMessage(ChatRole.ASSISTANT, "").setFunctionCall(functionCall);
-          chatMessages.add(msg1);
+        var msg1 = new ChatMessage(ChatRole.ASSISTANT, "").setFunctionCall(functionCall);
+        chatMessages.add(msg1);
 
-          // test if it is required
-          var msg2 = new ChatMessage(ChatRole.FUNCTION, String.format("Clients report location: http://fin2set/193024u0dfjalkjda"))
-              .setName(wheatherFunctionName);
-          chatMessages.add(msg2);
-        } else if (functionCall.getName().equals(wheatherFunctionName)) {
+        var functionInvocationArgs = functionCall.getArguments();
+        var result = function.invoke(functionInvocationArgs);
+        var msg2 = new ChatMessage(ChatRole.FUNCTION, result).setName(functionName);
+        chatMessages.add(msg2);
 
-          // We call getCurrentWeather() and pass the result to the service.
-          // WeatherLocation is our class that represents the parameters to use in our
-          // function call.
-          // We deserialize and pass it to our function.
-          var weatherLocation = BinaryData.fromString(functionCall.getArguments()).toObject(WeatherLocation.class);
+      } else {
+        var messageHistory = new ChatMessage(ChatRole.ASSISTANT, choiceMessage.getContent());
+        messageHistory.setFunctionCall(choiceMessage.getFunctionCall());
+        chatMessages.add(messageHistory);
 
-          var currentWeather = getCurrentWeather(weatherLocation);
-
-          var msg1 = new ChatMessage(ChatRole.ASSISTANT, "").setFunctionCall(functionCall);
-          chatMessages.add(msg1);
-
-          var msg2 = new ChatMessage(ChatRole.FUNCTION, String.format("The weather in %s is %d degrees %s.",
-              weatherLocation.getLocation(), currentWeather, weatherLocation.getUnit()))
-              .setName(wheatherFunctionName);
-          chatMessages.add(msg2);
-        } else {
-          var messageHistory = new ChatMessage(ChatRole.ASSISTANT, choiceMessage.getContent());
-          messageHistory.setFunctionCall(choiceMessage.getFunctionCall());
-          chatMessages.add(messageHistory);
-        }
       }
     }
     return chatMessages;
-  }
-
-  // This is the method we offer to OpenAI to be used as a function_call.
-  // For this example, we ignore the input parameter and return a simple value.
-  private static int getCurrentWeather(WeatherLocation weatherLocation) {
-    return 35;
-  }
-
-  // WeatherLocation is used for this sample. This describes the parameter of the
-  // function you want to use.
-  private static class WeatherLocation {
-    @JsonProperty(value = "unit")
-    String unit;
-    @JsonProperty(value = "location")
-    String location;
-
-    @JsonCreator
-    WeatherLocation(@JsonProperty(value = "unit") String unit, @JsonProperty(value = "location") String location) {
-      this.unit = unit;
-      this.location = location;
-    }
-
-    public String getUnit() {
-      return unit;
-    }
-
-    public String getLocation() {
-      return location;
-    }
   }
 
   // examples

@@ -1,10 +1,8 @@
 package onlexnet.webapi.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import io.dapr.client.DaprClient;
 import io.dapr.client.DaprClientBuilder;
 import jakarta.annotation.PostConstruct;
 
@@ -13,9 +11,8 @@ import jakarta.annotation.PostConstruct;
  * In DAPR we have to ask all variables / secrets in interactive way as it is not able to inject such variables to the application
  */
 @Component
-public class Secrets {
+public class Secrets implements AutoCloseable {
   
-  private static final ObjectMapper JSON_SERIALIZER = new ObjectMapper();
   private static final String SECRET_STORE_NAME = "azurekeyvault";
 
   private static final String OPENAI_KEY_NAME = "OPENAI-KEY";
@@ -24,11 +21,13 @@ public class Secrets {
   public String openaiKey;
   public String openaiEndpoint;
 
+  private DaprClient client;
+
   int daprAgentPort;
 
   @PostConstruct
   void init() {
-    var client = new DaprClientBuilder()
+    client = new DaprClientBuilder()
         .build();
     client.waitForSidecar(3_000).block();
       
@@ -38,5 +37,10 @@ public class Secrets {
 
     openaiKey = openaiKeyMap.get(OPENAI_KEY_NAME);
     openaiEndpoint = openaiEndpointMap.get(OPENAI_ENDPOINT_NAME);
+  }
+
+  @Override
+  public void close() throws Exception {
+    client.close();
   }
 }

@@ -14,6 +14,7 @@ public class Facts {
   private final Lock instanceLock = new ReentrantLock();
 
   public ViewGql currentView;
+  public String lastResponse;
 
   public void on(On event) {
 
@@ -22,9 +23,12 @@ public class Facts {
     try (SafeAutoCloseable unlock = () -> instanceLock.unlock()) {
 
       switch (event) {
-        case On.OnViewEvent it: {
+        case On.ViewEvent it: {
           currentView = it.value;
           break;
+        }
+        case On.ChatLastResult it: {
+          lastResponse = it.value();
         }
         default: {
           // noop
@@ -36,8 +40,9 @@ public class Facts {
 
   sealed interface On {
 
-    record OnViewEvent(ViewGql value) implements On {
-    }
+    record ViewEvent(ViewGql value) implements On { }
+
+    record ChatLastResult(String value) implements On { }
 
   }
 }

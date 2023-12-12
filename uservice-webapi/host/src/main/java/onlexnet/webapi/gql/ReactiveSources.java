@@ -17,7 +17,7 @@ public class ReactiveSources {
   }
 
   public void publish(ViewGql view) {
-    var result = sink.tryEmitNext(view);
+    sink.tryEmitNext(view);
   }
 
   public Flux<ViewGql> observed() {
