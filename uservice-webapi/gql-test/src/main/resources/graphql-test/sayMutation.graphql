@@ -1,0 +1,5 @@
+mutation say($text: String!) {
+  newMessage(messages: [{ text: $text, role: USER}]) {
+    text
+  }
+}

@@ -1,6 +1,5 @@
 package onlexnet.webapi.openai;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import com.azure.ai.openai.OpenAIClient;
 import com.azure.ai.openai.OpenAIClientBuilder;
-import com.azure.ai.openai.OpenAIServiceVersion;
 import com.azure.ai.openai.models.ChatChoice;
 import com.azure.ai.openai.models.ChatCompletions;
 import com.azure.ai.openai.models.ChatCompletionsOptions;
@@ -22,7 +20,6 @@ import com.azure.ai.openai.models.EmbeddingItem;
 import com.azure.ai.openai.models.Embeddings;
 import com.azure.ai.openai.models.EmbeddingsOptions;
 import com.azure.ai.openai.models.EmbeddingsUsage;
-import com.azure.ai.openai.models.FunctionCall;
 import com.azure.ai.openai.models.FunctionCallConfig;
 import com.azure.ai.openai.models.FunctionDefinition;
 import com.azure.core.credential.AzureKeyCredential;
@@ -32,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import onlexnet.webapi.config.Secrets;
 
 @Component
@@ -43,6 +41,9 @@ public class OpenAi {
   private final String embeddingsModel = "text-embedding-ada-002";
 
   private static final String wheatherFunctionName = "getCurrentWeather";
+
+  private final ShowMyUsers functionShowMyUsers;
+
   OpenAIClient client;
 
   @PostConstruct
@@ -65,7 +66,8 @@ public class OpenAi {
     var functions = Arrays.asList(
         new FunctionDefinition(wheatherFunctionName)
             .setDescription("Get the current weather")
-            .setParameters(BinaryData.fromObject(getFunctionDefinition())));
+            .setParameters(BinaryData.fromObject(getFunctionDefinition())),
+        functionShowMyUsers.functionDefinition);
 
     var options = new ChatCompletionsOptions(dtoMessages)
         .setFunctionCall(FunctionCallConfig.AUTO)
@@ -120,36 +122,50 @@ public class OpenAi {
     return functionDefinition;
   }
 
-  private static List<ChatMessage> handleFunctionCallResponse(List<ChatChoice> choices,
-      List<ChatMessage> chatMessages) {
+  @SneakyThrows
+  private List<ChatMessage> handleFunctionCallResponse(List<ChatChoice> choices, List<ChatMessage> chatMessages) {
     for (ChatChoice choice : choices) {
       ChatMessage choiceMessage = choice.getMessage();
-      FunctionCall functionCall = choiceMessage.getFunctionCall();
       // We are looking for finish_reason = "function call".
       if (CompletionsFinishReason.FUNCTION_CALL.equals(choice.getFinishReason())) {
-        // We call getCurrentWeather() and pass the result to the service.
+
+        var functionCall = choiceMessage.getFunctionCall();
         System.out.printf("Function name: %s, arguments: %s.%n", functionCall.getName(), functionCall.getArguments());
-        // WeatherLocation is our class that represents the parameters to use in our
-        // function call.
-        // We deserialize and pass it to our function.
-        WeatherLocation weatherLocation = BinaryData.fromString(functionCall.getArguments())
-            .toObject(WeatherLocation.class);
 
-        int currentWeather = getCurrentWeather(weatherLocation);
-        
+        if (functionCall.getName().equals(functionShowMyUsers.internalFunctionName)) {
 
+          functionShowMyUsers.invoke();
+          
+          // invoke notification about show all users
+          var msg1 = new ChatMessage(ChatRole.ASSISTANT, "").setFunctionCall(functionCall);
+          chatMessages.add(msg1);
 
-        var msg1 = new ChatMessage(ChatRole.ASSISTANT, "").setFunctionCall(functionCall);
-        chatMessages.add(msg1);
+          // test if it is required
+          var msg2 = new ChatMessage(ChatRole.FUNCTION, String.format("Clients report location: http://fin2set/193024u0dfjalkjda"))
+              .setName(wheatherFunctionName);
+          chatMessages.add(msg2);
+        } else if (functionCall.getName().equals(wheatherFunctionName)) {
 
-        var msg2 = new ChatMessage(ChatRole.FUNCTION, String.format("The weather in %s is %d degrees %s.",
-            weatherLocation.getLocation(), currentWeather, weatherLocation.getUnit()))
-            .setName(wheatherFunctionName);
-        chatMessages.add(msg2);
-      } else {
-        var messageHistory = new ChatMessage(ChatRole.ASSISTANT, choiceMessage.getContent());
-        messageHistory.setFunctionCall(choiceMessage.getFunctionCall());
-        chatMessages.add(messageHistory);
+          // We call getCurrentWeather() and pass the result to the service.
+          // WeatherLocation is our class that represents the parameters to use in our
+          // function call.
+          // We deserialize and pass it to our function.
+          var weatherLocation = BinaryData.fromString(functionCall.getArguments()).toObject(WeatherLocation.class);
+
+          var currentWeather = getCurrentWeather(weatherLocation);
+
+          var msg1 = new ChatMessage(ChatRole.ASSISTANT, "").setFunctionCall(functionCall);
+          chatMessages.add(msg1);
+
+          var msg2 = new ChatMessage(ChatRole.FUNCTION, String.format("The weather in %s is %d degrees %s.",
+              weatherLocation.getLocation(), currentWeather, weatherLocation.getUnit()))
+              .setName(wheatherFunctionName);
+          chatMessages.add(msg2);
+        } else {
+          var messageHistory = new ChatMessage(ChatRole.ASSISTANT, choiceMessage.getContent());
+          messageHistory.setFunctionCall(choiceMessage.getFunctionCall());
+          chatMessages.add(messageHistory);
+        }
       }
     }
     return chatMessages;

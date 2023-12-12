@@ -23,7 +23,8 @@ class WebapiApplicationTests1 {
 
     var api = new AppApi("graphiql", "slawomir@siudek.net", executionGraphQlService);
 
-    var data = api.view().blockFirst(Duration.ofSeconds(1));
+    var view = api.view();
+    var data = view.blockFirst(Duration.ofSeconds(1));
 
     Assertions.assertThat(data).isEqualTo(ViewGql.CHAT);
 

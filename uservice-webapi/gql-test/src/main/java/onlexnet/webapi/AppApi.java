@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.springframework.graphql.ExecutionGraphQlService;
 import org.springframework.graphql.server.WebGraphQlHandler;
 import org.springframework.graphql.test.tester.GraphQlTester.Subscription;
+import org.springframework.graphql.test.tester.HttpGraphQlTester;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.graphql.test.tester.WebGraphQlTester;
 
@@ -15,30 +16,42 @@ import reactor.core.publisher.Flux;
 /** Set of methods used to test application functionlity. */
 public class AppApi {
 
-  private final WebGraphQlTester tester;
-  private Subscription greetings;
+  private final WebGraphQlTester wsTester;
+  private final WebGraphQlTester httpTester;
+  private Subscription viewSubscription;
 
   /** TBD. */
   @SneakyThrows
   public AppApi(String rootUri, String email, ExecutionGraphQlService executionGraphQlService) {
     var principalNameHeaderName = "X-MS-CLIENT-PRINCIPAL-NAME";
     var principalNameHeaderId = "X-MS-CLIENT-PRINCIPAL-ID";
-    var client = WebTestClient.bindToServer()
+    var httpClient = WebTestClient.bindToServer()
         .responseTimeout(Duration.ofMinutes(10))
         .baseUrl(rootUri + "/graphql")
         .defaultHeader(principalNameHeaderName, email)
         .defaultHeader(principalNameHeaderId, "principal-id")
         .build();
-    var client2 = WebGraphQlHandler.builder(executionGraphQlService);
+    var wsClient = WebGraphQlHandler.builder(executionGraphQlService);
 
-    tester = WebGraphQlTester.create(client2.build());
+    wsTester = WebGraphQlTester.create(wsClient.build());
+    httpTester = HttpGraphQlTester.create(httpClient);
 
-    greetings = tester.documentName("ViewSubscription")
+    viewSubscription = wsTester.documentName("ViewSubscription")
         .executeSubscription();
   }
 
   public Flux<ViewGql> view() {
-    return greetings.toFlux("view", ViewGql.class);
+    return viewSubscription.toFlux("view", ViewGql.class);
+  }
+
+  /** TBD. */
+  public String say(String text) {
+    return wsTester.documentName("sayMutation")
+        .variable("text", text)
+        .execute()
+        .path("newMessage.text")
+        .entity(String.class)
+        .get();
   }
 
 }
