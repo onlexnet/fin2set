@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import onlex.webapi.ViewGql;
-import onlexnet.webapi.domain.ValName;
+import onlexnet.webapi.domain.models.ValName;
 import onlexnet.webapi.openai.OpenAi;
 
 public class ExampleSteps {

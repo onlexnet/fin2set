@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import onlexnet.webapi.AppApi;
-import onlexnet.webapi.domain.ValName;
+import onlexnet.webapi.domain.models.ValName;
 import reactor.core.Disposable;
 import reactor.core.Disposables;
 

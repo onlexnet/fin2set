@@ -1,4 +1,4 @@
-package onlexnet.webapi.domain;
+package onlexnet.webapi.domain.models;
 
 import org.apache.commons.lang3.StringUtils;
 

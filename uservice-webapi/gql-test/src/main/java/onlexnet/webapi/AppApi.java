@@ -65,4 +65,13 @@ public class AppApi {
 
   }
 
+  /** TBD. */
+  public static class NoOpApiCallbacks implements ApiCallbacks {
+
+    @Override
+    public void afterSay(String result) {
+    }
+    
+  }
+
 }
