@@ -5,14 +5,14 @@ on:
     # section to define manual start of CI pipeline
   push:
     branches:
-      - siudeks/issue49
+      - main
     paths:
       - static-webapp/**
       - .github/workflows/static-webapp.yaml
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - siudeks/issue49
+      - main
     paths:
       - static-webapp/**
       - .github/workflows/static-webapp.yaml
