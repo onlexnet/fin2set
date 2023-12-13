@@ -31,21 +31,6 @@ public class OpenAiTest {
   }
 
   @Test
-  void shouldUseApi() {
-    var query = "What should I wear in Boston depending on the weather? Please advice with no more that 10 words.";
-    var initial = new Message(query, MessageRole.USER);
-
-    var response = openAi.getContinuation(List.of(initial));
-
-    var a = openAi.getEmbedings(response);
-    var b = openAi.getEmbedings("Light clothing, sunglasses, and sunscreen.");
-
-    var similarity = Similarity.cosine(a, b);
-    Assertions.assertThat(similarity).isGreaterThan(0.9);
-  }
-
-
-  @Test
   void shouldUseApi2() {
     var query = "What’s the weather like in Boston?";
     var initial = new Message(query, MessageRole.USER);

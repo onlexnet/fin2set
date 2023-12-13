@@ -1,14 +1,14 @@
 import { FluentProvider, Label, webLightTheme } from '@fluentui/react-components';
 import './App.css';
 import { Stack } from '@fluentui/react';
-import { useCounterSubscription, useMyqueryQuery } from './api/generated/graphql';
+import { useMyqueryQuery, useViewSubscription } from './api/generated/graphql';
 import { ChatScope } from './ChatScope';
 
 function App() {
   const { loading, error } = useMyqueryQuery({
   });
 
-  const { data: data1, loading: loading1 } = useCounterSubscription({});
+  const { data: currentView  } = useViewSubscription({})
 
   if (loading) return (<Label>Loading ....</Label>);
 
@@ -25,9 +25,7 @@ function App() {
           </Stack>
         </Stack.Item>
         <Stack.Item id='view1' styles={{ root: { background: 'yellow' } }} hidden={false}>
-          ticks: {data1?.ticks}
-          <p></p>
-          loading:{loading1}
+          current view name:{currentView?.view}
         </Stack.Item>
       </Stack>
     </div>
