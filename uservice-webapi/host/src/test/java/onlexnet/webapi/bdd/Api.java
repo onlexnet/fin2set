@@ -7,7 +7,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.graphql.ExecutionGraphQlService;
 import org.springframework.stereotype.Component;
 
+import kotlin.jvm.Synchronized;
 import lombok.RequiredArgsConstructor;
+import onlex.webapi.ViewGql;
 import onlexnet.webapi.AppApi;
 import onlexnet.webapi.domain.models.ValName;
 import reactor.core.Disposable;
@@ -39,19 +41,23 @@ public class Api {
       var facts = new Facts();
 
       var callbacks = new AppApi.ApiCallbacks() {
+        
+        @Synchronized
         @Override
         public void afterSay(String result) {
           facts.on(new Facts.On.ChatLastResult(result));
+        }
+
+        @Synchronized
+        @Override
+        public void viewChanged(ViewGql newValue) {
+          facts.on(new Facts.On.ViewEvent(newValue));
         }
       };
       
       var session = new AppApi("graphiql", "slawomir@siudek.net", executionGraphQlService, callbacks);
       var disposable = Disposables.composite();
-
-      disposable.addAll(List.of(
-        session.view().subscribe(it -> {
-          facts.on(new Facts.On.ViewEvent(it));
-        })));
+      disposable.add(() -> session.close());
 
       return new Context(facts, session, disposable);
     });
