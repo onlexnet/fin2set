@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import com.azure.ai.openai.models.FunctionDefinition;
@@ -12,15 +13,15 @@ import com.azure.core.util.BinaryData;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
-import onlex.webapi.ViewGql;
-import onlexnet.webapi.gql.ReactiveSources;
+import onlexnet.webapi.domain.ViewChange;
+import onlexnet.webapi.domain.ViewChange.Type;
 
 @Component
 @RequiredArgsConstructor
 @Accessors(fluent = true)
 public class FuncListMyCustomers implements Func {
 
-  private final ReactiveSources reactiveSources;
+  private final ApplicationEventPublisher publisher;
 
   @Getter
   private String functionName = "ListMyCustomers";
@@ -45,8 +46,8 @@ public class FuncListMyCustomers implements Func {
   @Override
   public String invoke(String args) {
     // the message should be postponed when whole operation succedeed
-    // hence Applicatio ntransactional events need to be used.
-    reactiveSources.publish(ViewGql.VIEW1);
+    // hence Application transactional events need to be used.
+    publisher.publishEvent(new ViewChange.Notification(Type.VIEW1));
 
     return """
       The list of customers consists of:

@@ -2,7 +2,7 @@ package onlexnet.webapi.bdd;
 
 import io.cucumber.java.ParameterType;
 import onlex.webapi.ViewGql;
-import onlexnet.webapi.domain.ValName;
+import onlexnet.webapi.domain.models.ValName;
 
 public class ParameterTypes {
 

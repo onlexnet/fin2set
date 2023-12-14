@@ -11,15 +11,17 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import lombok.SneakyThrows;
 import onlex.webapi.ViewGql;
-import reactor.core.publisher.Flux;
+import reactor.core.Disposable;
+import reactor.core.Disposables;
 
 /** Set of methods used to test application functionlity. */
-public class AppApi {
+public class AppApi implements AutoCloseable {
 
   private final WebGraphQlTester wsTester;
   private final WebGraphQlTester httpTester;
   private Subscription viewSubscription;
   private final ApiCallbacks callbacks;
+  private final Disposable.Composite instanceDisposer = Disposables.composite();
 
   /** TBD. */
   @SneakyThrows
@@ -40,11 +42,13 @@ public class AppApi {
 
     viewSubscription = wsTester.documentName("ViewSubscription")
         .executeSubscription();
+    var disposed = viewSubscription
+        .toFlux("view", ViewGql.class)
+        .subscribe(it -> callbacks.viewChanged(it));
+    instanceDisposer.add(disposed);
+    
   }
 
-  public Flux<ViewGql> view() {
-    return viewSubscription.toFlux("view", ViewGql.class);
-  }
 
   /** TBD. */
   public String say(String text) {
@@ -63,6 +67,26 @@ public class AppApi {
 
     void afterSay(String result);
 
+    void viewChanged(ViewGql newValue);
+
+  }
+
+  /** TBD. */
+  public static class NoOpApiCallbacks implements ApiCallbacks {
+
+    @Override
+    public void afterSay(String result) {
+    }
+
+    @Override
+    public void viewChanged(ViewGql newValue) {
+    }
+
+  }
+
+  @Override
+  public void close() {
+    instanceDisposer.dispose();
   }
 
 }
