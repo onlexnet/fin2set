@@ -2,13 +2,11 @@ import { FluentProvider, Label, webLightTheme } from '@fluentui/react-components
 import './App.css';
 import { Stack } from '@fluentui/react';
 import { useMyqueryQuery, useViewSubscription } from './api/generated/graphql';
-import { ChatScope } from './ChatScope';
+import { MainView } from './views/main/Main.View';
 
 function App() {
   const { loading, error } = useMyqueryQuery({
   });
-
-  const { data: currentView  } = useViewSubscription({})
 
   if (loading) return (<Label>Loading ....</Label>);
 
@@ -16,18 +14,7 @@ function App() {
 
   const view = <FluentProvider theme={webLightTheme}>
     <div className="App">
-      <Stack horizontal styles={{ root: { background: 'green' } }}>
-        <Stack.Item id='chatFrame' grow styles={{ root: { background: 'red' } }}>
-          <Stack horizontal horizontalAlign='center'>
-            <Stack.Item>
-              <ChatScope />
-            </Stack.Item>
-          </Stack>
-        </Stack.Item>
-        <Stack.Item id='view1' styles={{ root: { background: 'yellow' } }} hidden={false}>
-          current view name:{currentView?.view}
-        </Stack.Item>
-      </Stack>
+      <MainView />
     </div>
   </FluentProvider>;
 
