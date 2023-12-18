@@ -49,7 +49,6 @@ export enum Role {
 
 export type Subscription = {
   __typename?: 'Subscription';
-  ticks: Scalars['Int']['output'];
   view: View;
 };
 

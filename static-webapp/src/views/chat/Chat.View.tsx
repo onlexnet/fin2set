@@ -1,13 +1,12 @@
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { ChatContainer, MainContainer, Message, MessageInput, MessageList, MessageModel, TypingIndicator } from "@chatscope/chat-ui-kit-react";
 import { useState } from "react";
-import { Role, useNewMessageMutation } from "./api/generated/graphql";
+import { Role, useNewMessageMutation } from "../../api/generated/graphql";
 
-interface ChatScopeProps {
-
+interface ChatViewProps {
 }
 
-export const ChatScope = (props: ChatScopeProps) => {
+export const ChatView = (props: ChatViewProps) => {
 
     const firstMessage: MessageModel = {
         message: "Hello, I am ChatGPT",
