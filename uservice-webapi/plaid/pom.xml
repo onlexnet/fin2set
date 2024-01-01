@@ -1,0 +1,76 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>onlexnet.fin2set</groupId>
+    <artifactId>webapi-base</artifactId>
+    <version>${revision}</version>
+    <relativePath>../base/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>plaid-openapi</artifactId>
+
+  <properties>
+    <!-- Remove warning:
+         Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform
+    dependent!
+    -->
+    <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
+
+    <!--
+      The compiler compliance specified is 1.8 but a JRE 21 is used
+    -->
+    <java.version>21</java.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-graphql</artifactId>
+    </dependency>
+
+    <!-- Required as code generation has default openApiNullable=true -->
+    <dependency>
+	    <groupId>org.openapitools</groupId>
+	    <artifactId>jackson-databind-nullable</artifactId>
+	    <version>0.2.6</version>
+	  </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>7.2.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>https://raw.githubusercontent.com/plaid/plaid-openapi/master/2020-09-14.yml</inputSpec>
+              <generatorName>java</generatorName>
+              <configOptions>
+                <sourceFolder>src/gen/java/main</sourceFolder>
+                <useJakartaEe>true</useJakartaEe>
+                <serializationLibrary>jackson</serializationLibrary>
+                <library>resttemplate</library>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+</project>
