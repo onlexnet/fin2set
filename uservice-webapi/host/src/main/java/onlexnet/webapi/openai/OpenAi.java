@@ -57,6 +57,14 @@ public class OpenAi {
 
   }
 
+  private ChatCompletionsOptions newChatCompletionsOptions(List<ChatMessage> messages) {
+    return new ChatCompletionsOptions(messages)
+        .setFunctions(functionDefs)
+        .setFunctionCall(FunctionCallConfig.AUTO)
+        // more: https://aipromptskit.com/openai-temperature-parameter/
+        .setTemperature(0.);
+  }
+
   public String getContinuation(List<Message> messages) {
     var dtoMessages = messages.stream()
         .map(it -> {
@@ -70,19 +78,14 @@ public class OpenAi {
         })
         .collect(Collectors.toList());
 
-    var options = new ChatCompletionsOptions(dtoMessages)
-        .setFunctions(functionDefs)
-        .setFunctionCall(FunctionCallConfig.AUTO);
+    var options = newChatCompletionsOptions(dtoMessages);
 
     var chatCompletions = client.getChatCompletions(chatModel, options);
 
     var chatMessages2 = handleFunctionCallResponse(chatCompletions.getChoices(), dtoMessages);
 
-    // Take your function_call result as the input prompt to make another request to
-    // service.
-    var chatCompletionOptions2 = new ChatCompletionsOptions(chatMessages2)
-        .setFunctions(functionDefs)
-        .setFunctionCall(FunctionCallConfig.AUTO);
+    // Take your function_call result as the input prompt to make another request to service.
+    var chatCompletionOptions2 = newChatCompletionsOptions(chatMessages2);
 
     ChatCompletions chatCompletions2 = client.getChatCompletions(chatModel, chatCompletionOptions2);
     List<ChatChoice> choices = chatCompletions2.getChoices();

@@ -1,0 +1,61 @@
+# Inspired by https://docs.dapr.io/operations/hosting/self-hosted/self-hosted-with-docker/
+services:
+  # sqlserver:
+  #   image: mcr.microsoft.com/mssql/server
+  #   restart: always
+  #   ports:
+  #     - 1433
+  #   # volumes:
+  #   #  - ./data-sql:/var/opt/mssql/data
+  #   environment:
+  #     SA_PASSWORD: "password123!"
+  #     ACCEPT_EULA: "Y"
+
+  # daprd:
+  #   build: .service-dapr
+  #   ports:
+  #     - "50001:50001" # Dapr instances communicate over gRPC so we need to expose the gRPC port
+  #   # depends_on:
+  #   #   - redis
+  #   #   - placement
+  #   # networks:
+  #   #   - hello-dapr
+  #   volumes:
+  #     - "./components/:/components" # Mount our components folder for the runtime to use. The mounted location must match the --resources-path argument.
+  #   network_mode: host
+
+  echo-server:
+    image: ealen/echo-server:0.8.12
+    network_mode: host
+
+  nodeapp-dapr:
+    image: "daprio/daprd:1.12.3-mariner"
+    restart: always
+    command: [
+      # https://v1-7.docs.dapr.io/reference/arguments-annotations-overview/
+      "./daprd",
+      "--app-id", "nodeapp",
+      "--app-port", "3000",
+      "--dapr-grpc-port", "50002",
+      "--dapr-http-port", "3601",
+      "--placement-host-address", "placement:50006", # Dapr's placement service can be reach via the docker DNS entry
+      "--components-path", "./components"
+     ]
+    ports:
+      - 3601:3601
+    volumes:
+      - "./components/:/components" # Mount our components folder for the runtime to use. The mounted location must match the --resources-path argument.
+    network_mode: host
+
+  # ... Deploy other daprized services and components (i.e. Redis)
+
+  # placement:
+  #   image: daprio/dapr:1.12.3-mariner
+  #   command: ["./placement", "--port", "50006"]
+  #   ports:
+  #     - "50006:50006"
+  #   volumes:
+  #     - /home/vscode/.azure:/home/vscode/.azure:rw
+  
+networks:
+    hello-dapr: null

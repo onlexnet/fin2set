@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.graphql.ExecutionGraphQlService;
 
 @SpringBootTest
-@ExtendWith(DaprExtension.class)
+@LocalTest
 class WebapiApplicationTests1 {
 
   @Autowired

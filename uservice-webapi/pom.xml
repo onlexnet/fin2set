@@ -9,7 +9,6 @@
   </properties>
 
   <modules>
-    <module>plaid</module>
     <module>build-tools</module>
     <module>base</module>
     <module>host</module>
