@@ -7,10 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import onlexnet.webapi.Application;
 import onlexnet.webapi.LocalTest;
 import onlexnet.webapi.bdd.Similarity;
 
-@SpringBootTest
+@SpringBootTest(classes = { Application.class })
 @LocalTest
 public class OpenAiTest {
 

@@ -8,7 +8,6 @@ import org.springframework.modulith.docs.Documenter;
 import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
-@ExtendWith(DaprExtension.class)
 @ActiveProfiles("test")
 class ModularityTests {
 
