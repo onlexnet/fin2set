@@ -25,6 +25,9 @@ export TENANT_ID=$(az login --use-device-code | jq -r '.[] | select(.isDefault =
 
 # read APP_ID based on application display name
 export APP_ID=$(az ad app list --display-name=onlexnet-infra-fin2set | jq -r '.[] | .appId')
+
+# save the values for future share with DAP container
+echo "{\"APP_ID\":\"$APP_ID\", \"TENANT_ID\":\"$TENANT_ID\"}" > .secrets/tenant_and_app.json
 ```
 
 ### Create certificate to sign on as Service Principal

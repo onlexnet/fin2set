@@ -24,10 +24,6 @@ services:
   #     - "./components/:/components" # Mount our components folder for the runtime to use. The mounted location must match the --resources-path argument.
   #   network_mode: host
 
-  echo-server:
-    image: ealen/echo-server:0.8.12
-    network_mode: host
-
   nodeapp-dapr:
     image: "daprio/daprd:1.12.3-mariner"
     restart: always
@@ -45,6 +41,7 @@ services:
       - 3601:3601
     volumes:
       - "./components/:/components" # Mount our components folder for the runtime to use. The mounted location must match the --resources-path argument.
+      - "./.secrets/:/.secrets:ro"
     network_mode: host
 
   # ... Deploy other daprized services and components (i.e. Redis)
