@@ -19,7 +19,7 @@ RUN
 # ENTRYPOINT ["dapr"]
 # CMD ["run", "--app-id", "nodeapp",\
 #     "--app-port", "3000",\
-#     "--dapr-grpc-port", "50002",\
+#     "--dapr-grpc-port", "50001",\
 #     "--dapr-http-port", "3502",\
 #     "--placement-host-address", "placement:50006",\
 #     "--resources-path", "./components"]

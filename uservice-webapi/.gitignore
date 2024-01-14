@@ -12,14 +12,10 @@ target/
 .springBeans
 .sts4-cache
 
-
-### VS Code ###
-.vscode/
-
 ### secrets
-dapr-local-secrets.json
+.secrets/
+
 
 .flattened-pom.xml
 
 
-.secrets/

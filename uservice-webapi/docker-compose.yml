@@ -1,15 +1,15 @@
 # Inspired by https://docs.dapr.io/operations/hosting/self-hosted/self-hosted-with-docker/
 services:
-  # sqlserver:
-  #   image: mcr.microsoft.com/mssql/server
-  #   restart: always
-  #   ports:
-  #     - 1433
-  #   # volumes:
-  #   #  - ./data-sql:/var/opt/mssql/data
-  #   environment:
-  #     SA_PASSWORD: "password123!"
-  #     ACCEPT_EULA: "Y"
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server
+    restart: always
+    ports:
+      - 1433
+    # volumes:
+    #  - ./data-sql:/var/opt/mssql/data
+    environment:
+      SA_PASSWORD: "password123!"
+      ACCEPT_EULA: "Y"
 
   # daprd:
   #   build: .service-dapr
@@ -32,7 +32,7 @@ services:
       "./daprd",
       "--app-id", "nodeapp",
       "--app-port", "3000",
-      "--dapr-grpc-port", "50002",
+      "--dapr-grpc-port", "50001",
       "--dapr-http-port", "3601",
       "--placement-host-address", "placement:50006", # Dapr's placement service can be reach via the docker DNS entry
       "--components-path", "./components"
