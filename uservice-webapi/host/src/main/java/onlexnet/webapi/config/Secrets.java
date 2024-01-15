@@ -34,7 +34,7 @@ public class Secrets implements AutoCloseable {
 
     log.info("DAPR_GRPC_PORT={}", daprGrpcPort);
 
-    var maxTimeWaitingForDaprInMilis = 7_000;
+    var maxTimeWaitingForDaprInMilis = 3_000;
     client = new DaprClientBuilder()
         .build();
     client.waitForSidecar(maxTimeWaitingForDaprInMilis).block();
