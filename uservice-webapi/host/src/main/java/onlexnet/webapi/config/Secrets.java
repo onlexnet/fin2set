@@ -26,7 +26,7 @@ public class Secrets implements AutoCloseable {
 
   private DaprClient client;
 
-  @Value("${DAPR_GRPC_PORT}")
+  @Value("${DAPR_GRPC_PORT:0}")
   int daprGrpcPort;
 
   @PostConstruct
