@@ -34,9 +34,10 @@ public class Secrets implements AutoCloseable {
 
     log.info("DAPR_GRPC_PORT={}", daprGrpcPort);
 
+    var maxTimeWaitingForDaprInMilis = 7_000;
     client = new DaprClientBuilder()
         .build();
-    client.waitForSidecar(3_000).block();
+    client.waitForSidecar(maxTimeWaitingForDaprInMilis).block();
       
     //Using Dapr SDK to get a secret
     var openaiKeyMap = client.getSecret(SECRET_STORE_NAME, OPENAI_KEY_NAME).block();
