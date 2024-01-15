@@ -101,9 +101,13 @@ resource "azurerm_container_app" "default" {
     app_protocol = "http"
   }
 
+  lifecycle {
+    ignore_changes = [template[0].container[0].image]
+  }
+
   template {
 
-    min_replicas = 1
+    min_replicas = 0
     max_replicas = 1
 
     container {

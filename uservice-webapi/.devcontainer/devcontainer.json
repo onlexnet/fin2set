@@ -17,8 +17,14 @@
 		"ghcr.io/dapr/cli/dapr-cli:0": { }
 	},
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // This can be used to network with other containers or with the host.
+	// https://www.heissenberger.at/en/blog/devcontainer-forward-ports-composer/
+    "forwardPorts": [
+		// dapr http
+		3601,
+	],
+
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "java -version",

@@ -4,17 +4,15 @@ import java.util.List;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.azure.ai.openai.models.ChatRole;
-
-import onlexnet.webapi.DaprExtension;
+import onlexnet.webapi.Application;
+import onlexnet.webapi.LocalTest;
 import onlexnet.webapi.bdd.Similarity;
 
-@SpringBootTest
-@ExtendWith(DaprExtension.class)
+@SpringBootTest(classes = { Application.class })
+@LocalTest
 public class OpenAiTest {
 
   @Autowired

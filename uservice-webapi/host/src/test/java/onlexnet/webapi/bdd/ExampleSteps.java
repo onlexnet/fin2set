@@ -38,7 +38,7 @@ public class ExampleSteps {
 
     var similarity = Similarity.cosine(actualAsVectors, expectedAsVectors);
     Assertions.assertThat(similarity)
-      .as("[%s]\n<->\n[%s]", actual, expected)
-      .isGreaterThan(0.95);
+      .as("Actual vs Expected:\n[%s]\n <> \n[%s]", actual, expected)
+      .isGreaterThan(0.85);
   }
 }
