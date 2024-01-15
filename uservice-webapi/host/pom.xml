@@ -8,6 +8,11 @@
   </parent>
   <artifactId>webapi-host</artifactId>
 
+  <properties>
+    <azure.openai.version>1.0.0-beta.5</azure.openai.version>
+    <dapr.sdk.version>1.10.0</dapr.sdk.version>
+  </properties>
+
   <dependencies>
 
     <dependency>
@@ -81,26 +86,26 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-ai-openai</artifactId>
-      <version>1.0.0-beta.5</version>
+      <version>${azure.openai.version}</version>
     </dependency>
 
     <!-- Dapr's core SDK with all features, except Actors. -->
     <dependency>
       <groupId>io.dapr</groupId>
       <artifactId>dapr-sdk</artifactId>
-      <version>1.10.0</version>
+      <version>${dapr.sdk.version}</version>
     </dependency>
     <!-- Dapr's SDK for Actors (optional). -->
     <dependency>
       <groupId>io.dapr</groupId>
       <artifactId>dapr-sdk-actors</artifactId>
-      <version>1.10.0</version>
+      <version>${dapr.sdk.version}</version>
     </dependency>
     <!-- Dapr's SDK integration with SpringBoot (optional). -->
     <dependency>
       <groupId>io.dapr</groupId>
       <artifactId>dapr-sdk-springboot</artifactId>
-      <version>1.10.0</version>
+      <version>${dapr.sdk.version}</version>
     </dependency>
 
     <dependency>

@@ -55,6 +55,12 @@ instead of creation of your certificate, Azure may create certificate for you, j
 az ad app credential reset --id -u $APP_ID --append --create-cert --display-name cert-auto
 ```
 
+### Random notes/hints
+- check available updates:
+  ```
+  mvn versions:display-property-updates -ntp -pl host
+  ```
+
 ### Used articles
 - https://www.youtube.com/watch?v=We0ISk2jGCw
 - https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-3

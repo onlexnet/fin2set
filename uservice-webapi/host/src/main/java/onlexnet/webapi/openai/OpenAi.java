@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Component;
 
@@ -58,7 +59,9 @@ public class OpenAi {
   }
 
   private ChatCompletionsOptions newChatCompletionsOptions(List<ChatMessage> messages) {
-    return new ChatCompletionsOptions(messages)
+    var systemMessage = "You are limited to use provided functions and tools, and helping construct proper prompts to use available functions and tools";
+    var asMessage = new ChatMessage(ChatRole.SYSTEM, systemMessage);
+    return new ChatCompletionsOptions(Stream.concat(Stream.of(asMessage), messages.stream()).toList())
         .setFunctions(functionDefs)
         .setFunctionCall(FunctionCallConfig.AUTO)
         // more: https://aipromptskit.com/openai-temperature-parameter/
