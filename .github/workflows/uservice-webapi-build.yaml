@@ -75,7 +75,7 @@ jobs:
       - name: Build with Maven Webapi
         run: |
           # create locl file with App credentials used by DAPR secret reader
-          echo "{\"APP_ID\":\"${{ secrets.FIN2SET_CLIENT_ID }}"\", \"TENANT_ID\":\"${{ secrets.AZURE_TENANT_ID }}\", \"APP_SECRET\":\"${{ secrets.FIN2SET_CLIENT_SECRET }}\"}" > .secrets/tenant_and_app.json
+          echo "{\"APP_ID\":\"${{ secrets.FIN2SET_CLIENT_ID }}\", \"TENANT_ID\":\"${{ secrets.AZURE_TENANT_ID }}\", \"APP_SECRET\":\"${{ secrets.FIN2SET_CLIENT_SECRET }}\"}" > .secrets/tenant_and_app.json
           # run maven build with integrated docker-comse where DAPR is started as well
           mvn -ntp install -Drevision=$SEMVERSION
         working-directory: uservice-webapi
