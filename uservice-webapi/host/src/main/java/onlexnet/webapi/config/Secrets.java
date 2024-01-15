@@ -1,16 +1,19 @@
 package onlexnet.webapi.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import io.dapr.client.DaprClient;
 import io.dapr.client.DaprClientBuilder;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * In 'standard' approach to configure nowadays applications, all values are available as environment variables.
  * In DAPR we have to ask all variables / secrets in interactive way as it is not able to inject such variables to the application
  */
 @Component
+@Slf4j
 public class Secrets implements AutoCloseable {
   
   private static final String SECRET_STORE_NAME = "azurekeyvault";
@@ -23,10 +26,14 @@ public class Secrets implements AutoCloseable {
 
   private DaprClient client;
 
-  int daprAgentPort;
+  @Value("${DAPR_GRPC_PORT}")
+  int daprGrpcPort;
 
   @PostConstruct
   void init() {
+
+    log.info("DAPR_GRPC_PORT={}", daprGrpcPort);
+
     client = new DaprClientBuilder()
         .build();
     client.waitForSidecar(3_000).block();
