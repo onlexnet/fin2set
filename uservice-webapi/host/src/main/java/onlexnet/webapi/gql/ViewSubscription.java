@@ -15,9 +15,9 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;
 import reactor.core.publisher.Sinks.Many;
 
+/** Implementation of subscriptions defined in view.graphql file. */
 @Controller
 @RequiredArgsConstructor
-/** Implementation of subscriptions defined in view.graphql file. */
 class ViewSubscription implements AutoCloseable {
 
   private static final int BUFFERRING_TIMEOUT = 100;
