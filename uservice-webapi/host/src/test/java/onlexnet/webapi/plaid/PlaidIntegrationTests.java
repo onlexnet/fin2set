@@ -7,7 +7,6 @@ import org.springframework.modulith.test.Scenario;
 
 import lombok.RequiredArgsConstructor;
 import onlexnet.webapi.LocalTest;
-import onlexnet.webapi.plaid.PlaidConnection;
 
 @ApplicationModuleTest
 @LocalTest
