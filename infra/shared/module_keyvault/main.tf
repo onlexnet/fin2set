@@ -45,17 +45,23 @@ resource azurerm_role_assignment rbac_assignment {
 # }
 
 
-# resource "azurerm_key_vault_secret" "NORDIGEN-SECRET-ID" {
-#   name         = "NORDIGEN-SECRET-ID"
-#   value        = data.external.env.result["TF_VAR_NORDIGEN_SECRET_ID"]
-#   key_vault_id = azurerm_key_vault.main.id
-# }
+resource "azurerm_key_vault_secret" "PLAID-CLIENT-ID" {
+  name         = "PLAID-CLIENT-ID"
+  value        = data.external.env.result["PLAID_CLIENT_ID"]
+  key_vault_id = azurerm_key_vault.main.id
+}
 
-# resource "azurerm_key_vault_secret" "NORDIGEN-SECRET-KEY" {
-#   name         = "NORDIGEN-SECRET-KEY"
-#   value        = data.external.env.result["TF_VAR_NORDIGEN_SECRET_KEY"]
-#   key_vault_id = azurerm_key_vault.main.id
-# }
+resource "azurerm_key_vault_secret" "PLAID-SECRET-DEVELOPMENT" {
+  name         = "PLAID-SECRET-DEVELOPMENT"
+  value        = data.external.env.result["PLAID_SECRET_DEVELOPMENT"]
+  key_vault_id = azurerm_key_vault.main.id
+}
+
+resource "azurerm_key_vault_secret" "PLAID-SECRET-SANDBOX" {
+  name         = "PLAID-SECRET-SANDBOX"
+  value        = data.external.env.result["PLAID_SECRET_SANDBOX"]
+  key_vault_id = azurerm_key_vault.main.id
+}
 
 resource "azurerm_key_vault_secret" "OPENAI-KEY" {
   name         = "OPENAI-KEY"
