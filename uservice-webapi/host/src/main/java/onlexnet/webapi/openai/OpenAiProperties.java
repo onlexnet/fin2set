@@ -1,7 +1,13 @@
 package onlexnet.webapi.openai;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
+
+import jakarta.annotation.Nonnull;
 
 @ConfigurationProperties("fin2set.openai")
-record OpenAiProperties(String key, String endpoint) {
+@Validated
+record OpenAiProperties(
+  @Nonnull String key, 
+  @Nonnull String endpoint) {
 }

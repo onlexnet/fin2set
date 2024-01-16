@@ -50,6 +50,7 @@ class LocalEnvironment implements EnvironmentPostProcessor {
 
   }
 
+  // secret store named hardcoded in DAPR components
   private static final String SECRET_STORE_NAME = "azurekeyvault";
 
   @SneakyThrows
