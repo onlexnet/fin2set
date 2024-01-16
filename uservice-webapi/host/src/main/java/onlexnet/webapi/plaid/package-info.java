@@ -1,4 +1,4 @@
 @org.springframework.modulith.ApplicationModule(
   allowedDependencies = {}
 )
-package onlexnet.webapi.ports.plaid;
+package onlexnet.webapi.plaid;

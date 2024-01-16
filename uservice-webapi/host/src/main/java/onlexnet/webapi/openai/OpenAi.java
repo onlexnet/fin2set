@@ -28,14 +28,13 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import onlexnet.webapi.config.Secrets;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class OpenAi {
 
-  private final Secrets secrets;
+  private final OpenAiProperties props;
   private final String chatModel = "gpt-4-plugins";
   private final String embeddingsModel = "text-embedding-ada-002";
 
@@ -49,8 +48,8 @@ public class OpenAi {
   @PostConstruct
   public void init() {
     client = new OpenAIClientBuilder()
-        .credential(new AzureKeyCredential(secrets.openaiKey))
-        .endpoint(secrets.openaiEndpoint)
+        .credential(new AzureKeyCredential(props.key()))
+        .endpoint(props.endpoint())
         .buildClient();
 
     functionDefs = functions.stream().map(it -> it.definition()).toList();

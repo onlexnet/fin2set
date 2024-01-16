@@ -1,4 +1,4 @@
-package onlexnet.webapi.ports;
+package onlexnet.webapi.plaid;
 
 /** Prototype of readiness indicator, not yet implemented. */
 public interface PlaidConnection {
