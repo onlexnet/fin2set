@@ -14,6 +14,8 @@ import org.springframework.core.env.MapPropertySource;
 
 import io.dapr.client.DaprClientBuilder;
 import io.github.cdimascio.dotenv.Dotenv;
+import lombok.Cleanup;
+import lombok.SneakyThrows;
 
 @Order(Ordered.LOWEST_PRECEDENCE)
 class LocalEnvironment implements EnvironmentPostProcessor {
@@ -50,12 +52,15 @@ class LocalEnvironment implements EnvironmentPostProcessor {
 
   private static final String SECRET_STORE_NAME = "azurekeyvault";
 
+  @SneakyThrows
   private void loadDaprSecrets(ConfigurableEnvironment env) {
     var maxTimeWaitingForDaprInMilis = 3_000;
+    @Cleanup
     var client = new DaprClientBuilder()
         .build();
     client.waitForSidecar(maxTimeWaitingForDaprInMilis).block();
       
+    // load all secrets from azure keyvault and inject them as environment variables
     var secretsAsStrangeMap = client.getBulkSecret(SECRET_STORE_NAME, Map.of()).block();
     var secrets = secretsAsStrangeMap.entrySet().stream()
         .map(it -> it.getValue())
@@ -64,5 +69,6 @@ class LocalEnvironment implements EnvironmentPostProcessor {
     var propertySource = new MapPropertySource("dapr-" + SECRET_STORE_NAME, secrets);
     var propertySources = env.getPropertySources();
     propertySources.addLast(propertySource);
+    
   }
 }
