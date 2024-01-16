@@ -80,7 +80,7 @@ public class OpenAi {
         // mass adds up to a certain threshold (top_p).
         // For example, if top_p is set to 0.1, GPT-3 will consider only the tokens that make up the top 10% of the probability mass
         // for the next token. This allows for dynamic vocabulary selection based on context.        
-        .setTopP(0.1)
+        .setTopP(0.1);
   }
 
   public String getContinuation(List<Message> messages) {
