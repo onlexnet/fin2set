@@ -21,7 +21,7 @@ public class OpenAiTest {
   @Test
   void openAiCanAnswer() {
 
-    var initial = new Message("Respond only: 'Hello'", MessageRole.USER);
+    var initial = new Message("Respond only 'Hello'", MessageRole.USER);
 
     var response = openAi.getContinuation(List.of(initial));
 
