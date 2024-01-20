@@ -5,4 +5,6 @@ public interface PlaidConnection {
 
   boolean isWorking();
 
+  void doSomething();
+
 }

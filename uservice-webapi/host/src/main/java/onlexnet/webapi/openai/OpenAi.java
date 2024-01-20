@@ -2,6 +2,7 @@ package onlexnet.webapi.openai;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -57,12 +58,11 @@ public class OpenAi {
 
   }
 
-  private ChatCompletionsOptions newChatCompletionsOptions(List<ChatMessage> messages) {
+  private ChatCompletionsOptions newChatCompletionsOptions(List<ChatMessage> messages, Locale locale) {
     var systemMessage = """
       You are limited to use only provided functions and tools
       and helping the user construct proper prompts to use available functions and tools.
-      Use his nativa language in conversation.
-      """;
+      """ + "Keep conversation using language:" + locale.getLanguage();
     var asMessage = new ChatMessage(ChatRole.SYSTEM, systemMessage);
     return new ChatCompletionsOptions(Stream.concat(Stream.of(asMessage), messages.stream()).toList())
         .setFunctions(functionDefs)
@@ -82,7 +82,7 @@ public class OpenAi {
         .setTopP(0.1);
   }
 
-  public String getContinuation(List<Message> messages) {
+  public String getContinuation(List<Message> messages, Locale locale) {
     var dtoMessages = messages.stream()
         .map(it -> {
           if (it.role() == MessageRole.ASSISTANT) {
@@ -95,14 +95,14 @@ public class OpenAi {
         })
         .collect(Collectors.toList());
 
-    var options = newChatCompletionsOptions(dtoMessages);
+    var options = newChatCompletionsOptions(dtoMessages, locale);
 
     var chatCompletions = client.getChatCompletions(chatModel, options);
 
     var chatMessages2 = handleFunctionCallResponse(chatCompletions.getChoices(), dtoMessages);
 
     // Take your function_call result as the input prompt to make another request to service.
-    var chatCompletionOptions2 = newChatCompletionsOptions(chatMessages2);
+    var chatCompletionOptions2 = newChatCompletionsOptions(chatMessages2, locale);
 
     ChatCompletions chatCompletions2 = client.getChatCompletions(chatModel, chatCompletionOptions2);
     List<ChatChoice> choices = chatCompletions2.getChoices();
