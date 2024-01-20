@@ -1,6 +1,7 @@
 package onlexnet.webapi.openai;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,9 +22,9 @@ public class OpenAiTest {
   @Test
   void openAiCanAnswer() {
 
-    var initial = new Message("Respond only: 'Hello'", MessageRole.USER);
+    var initial = new Message("Respond only 'Hello'", MessageRole.USER);
 
-    var response = openAi.getContinuation(List.of(initial));
+    var response = openAi.getContinuation(List.of(initial), Locale.US);
 
     Assertions.assertThat(response).isEqualTo("Hello");
   }
@@ -33,7 +34,7 @@ public class OpenAiTest {
     var query = "What’s the weather like in Boston?";
     var initial = new Message(query, MessageRole.USER);
 
-    var response = openAi.getContinuation(List.of(initial));
+    var response = openAi.getContinuation(List.of(initial), Locale.US);
 
     var a = openAi.getEmbedings(response);
     var b = openAi.getEmbedings("The weather in Boston is currently 35 degrees Celsius.");

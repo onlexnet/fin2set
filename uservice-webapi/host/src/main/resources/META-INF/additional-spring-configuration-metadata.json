@@ -1,0 +1,21 @@
+{"properties": [
+  {
+    "name": "fin2set.plaid.plaid_client_id",
+    "type": "java.lang.String",
+    "description": "A description for 'fin2set.plaid.plaid_client_id'"
+  },
+  {
+    "name": "fin2set.plaid.plaid_secret",
+    "type": "java.lang.String",
+    "description": "A description for 'fin2set.plaid.plaid_secret'"
+  },
+  {
+    "name": "fin2set.openai.endpoint",
+    "type": "java.lang.String",
+    "description": "A description for 'fin2set.openai.endpoint'"
+  },
+  { "name": "fin2set.openai.key",
+    "type": "java.lang.String",
+    "description": "A description for 'fin2set.openai.key'"
+  }
+]}

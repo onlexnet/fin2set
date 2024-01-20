@@ -62,6 +62,7 @@ az ad app credential reset --id -u $APP_ID --append --create-cert --display-name
   ```
 
 ### Used articles
+- https://www.baeldung.com/spring-boot-environmentpostprocessor
 - https://www.youtube.com/watch?v=We0ISk2jGCw
 - https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-3
 - https://docs.spring.io/spring-ai/reference/concepts.html

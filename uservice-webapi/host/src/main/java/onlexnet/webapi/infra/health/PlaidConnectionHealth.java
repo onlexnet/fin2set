@@ -2,12 +2,11 @@ package onlexnet.webapi.infra.health;
 
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
-import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
-import onlexnet.webapi.ports.PlaidConnection;
+import onlexnet.webapi.plaid.PlaidConnection;
 
-@Component
+// @Component
 @RequiredArgsConstructor
 class PlaidConnectionHealth implements HealthIndicator {
   

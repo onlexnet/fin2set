@@ -11,22 +11,18 @@
             "mainClass": "onlexnet.webapi.Application",
             "projectName": "webapi-host",
             "env": {
-                "DAPR_HTTP_PORT": "3502",
-                "DAPR_GRPC_PORT": "50001",
                 "SPRING_PROFILES_ACTIVE": "local"
             }
         },
         {
             "type": "java",
-            "name": "Application with Dapr with Dapr",
+            "name": "Application with Dapr",
             "request": "launch",
             "mainClass": "onlexnet.webapi.Application",
             "projectName": "webapi-host",
             "preLaunchTask": "dapr-debug",
             "postDebugTask": "daprd-down",
             "env": {
-                "DAPR_HTTP_PORT": "3502",
-                "DAPR_GRPC_PORT": "50001",
                 "SPRING_PROFILES_ACTIVE": "local"
             }
         }
