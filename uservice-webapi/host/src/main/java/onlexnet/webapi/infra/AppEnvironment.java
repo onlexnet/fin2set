@@ -2,6 +2,7 @@ package onlexnet.webapi.infra;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,8 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 
 import io.dapr.client.DaprClientBuilder;
+import io.dapr.config.Properties;
+import io.dapr.config.Property;
 import io.github.cdimascio.dotenv.Dotenv;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
@@ -50,7 +53,17 @@ class AppEnvironment implements EnvironmentPostProcessor {
 
   @SneakyThrows
   private void loadDaprSecrets(ConfigurableEnvironment env) {
-    var maxTimeWaitingForDaprInMilis = 3_000;
+    var propertySources = env.getPropertySources();
+
+
+    var daprConfig = new HashMap<String, Object>();
+    registerAsSystemProperty(Properties.GRPC_PORT, env, daprConfig);
+    registerAsSystemProperty(Properties.HTTP_PORT, env, daprConfig);
+    var daprConfigPropertySource = new MapPropertySource("dapr-config-" + SECRET_STORE_NAME, daprConfig);
+    propertySources.addLast(daprConfigPropertySource);
+
+
+    var maxTimeWaitingForDaprInMilis = 10_000;
     @Cleanup
     var client = new DaprClientBuilder()
         .build();
@@ -63,7 +76,6 @@ class AppEnvironment implements EnvironmentPostProcessor {
         .flatMap(it -> it.entrySet().stream())
         .collect(Collectors.toMap(it -> it.getKey(), it -> (Object) it.getValue(), (v1, v2) -> v1));
     var propertySource = new MapPropertySource("dapr-" + SECRET_STORE_NAME, secrets);
-    var propertySources = env.getPropertySources();
     propertySources.addLast(propertySource);
   }
 
@@ -83,5 +95,14 @@ class AppEnvironment implements EnvironmentPostProcessor {
     var propertySource = new MapPropertySource(".env", envMap);
     var propertySources = env.getPropertySources();
     propertySources.addLast(propertySource);
+  }
+
+  private void registerAsSystemProperty(Property<?> prop, ConfigurableEnvironment readFrom, HashMap<String, Object> systemProperties) {
+    var propEnvName = prop.getEnvName();
+    var propName = prop.getName();
+    var envValue = readFrom.getProperty(propEnvName);
+    if (envValue == null) return;
+    systemProperties.put(propName, envValue);
+    System.setProperty(propName, envValue);
   }
 }

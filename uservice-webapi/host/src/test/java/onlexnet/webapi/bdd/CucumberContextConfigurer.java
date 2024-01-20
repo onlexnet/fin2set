@@ -9,7 +9,6 @@ import onlexnet.webapi.Application;
 @CucumberContextConfiguration
 @SpringBootTest(
   webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-  properties = { "DAPR_GRPC_PORT=0" },
   classes = { Application.class, PortsConfigurer.class })
 @ActiveProfiles("test")
 public class CucumberContextConfigurer {
