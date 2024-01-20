@@ -4,11 +4,9 @@ services:
     image: mcr.microsoft.com/mssql/server
     restart: always
     ports:
-      - 1433
-    # volumes:
-    #  - ./data-sql:/var/opt/mssql/data
+      - ${DATABASE_PORT}:${DATABASE_PORT}
     environment:
-      SA_PASSWORD: "password123!"
+      SA_PASSWORD: "${DATABASE_PASSWORD}"
       ACCEPT_EULA: "Y"
 
   daprd:

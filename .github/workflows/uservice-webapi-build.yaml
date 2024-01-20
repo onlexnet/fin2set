@@ -44,6 +44,9 @@ jobs:
           distribution: temurin
           cache: maven
 
+      - name: run local services using docker compose
+        run: docker-compose -f "docker-compose.yml" up -d --build
+
       - name: Login to Docker 
         # required as we host docker images on github
         run: |
@@ -103,6 +106,11 @@ jobs:
 
           # export just published image name so that it can be used by next steps
           echo "image_name=$IMAGE_NAME_HOST:$GITHUB_RUN_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f "docker-compose.yml" down  
+
 
   DeployPrd:
     # https://learn.microsoft.com/en-us/azure/container-apps/github-actions#deploy-an-existing-container-image-to-container-apps

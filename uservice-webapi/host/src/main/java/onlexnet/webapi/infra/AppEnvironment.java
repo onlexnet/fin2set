@@ -31,17 +31,18 @@ class AppEnvironment implements EnvironmentPostProcessor {
   @Override
   public void postProcessEnvironment(ConfigurableEnvironment env, SpringApplication app) {
 
-    loadDaprSecrets(env);
+    var activeProfiles = Set.of(env.getActiveProfiles());
 
-    var activeProsiles = Set.of(env.getActiveProfiles());
-
-    if (activeProsiles.contains("test")) {
+    if (activeProfiles.contains("test")) {
       loadEnvValues(env, "../");
     }
 
-    if (activeProsiles.contains("local")) {
+    if (activeProfiles.contains("local")) {
       loadEnvValues(env, "./");
     }
+
+    loadDaprSecrets(env);
+
   }
 
   // secret store named hardcoded in DAPR components
