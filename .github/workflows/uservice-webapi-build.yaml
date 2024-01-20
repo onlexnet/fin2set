@@ -45,6 +45,7 @@ jobs:
           cache: maven
 
       - name: run local services using docker compose
+        working-directory: uservice-webapi
         run: docker-compose -f "docker-compose.yml" up -d --build
 
       - name: Login to Docker 
@@ -109,6 +110,7 @@ jobs:
 
       - name: Stop containers
         if: always()
+        working-directory: uservice-webapi
         run: docker-compose -f "docker-compose.yml" down  
 
 
