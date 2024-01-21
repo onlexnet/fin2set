@@ -21,7 +21,7 @@ const router = createBrowserRouter([
   { path: "/view1", element: <View1 /> },
 ]);
 
-const root = ReactDOM.createRoot(
+ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 ).render(
   <React.StrictMode>
