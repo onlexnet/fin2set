@@ -3,7 +3,7 @@
 schema: ../uservice-webapi/**/*.graphqls
 documents: 'src/**/*.graphql'
 generates:
-  src/api/generated/graphql.tsx:
+  src/api/gql/graphql.tsx:
     plugins:
       - typescript
       - typescript-operations

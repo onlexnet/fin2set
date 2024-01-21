@@ -1,6 +1,6 @@
 import { FluentProvider, Label, webLightTheme } from '@fluentui/react-components';
 import './App.css';
-import { useMyqueryQuery } from './api/generated/graphql';
+import { useMyqueryQuery } from './api/gql/graphql';
 import { MainView } from './views/main/Main.View';
 
 function App() {

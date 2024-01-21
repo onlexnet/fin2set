@@ -1,7 +1,7 @@
 import { Stack } from "@fluentui/react";
 import React from "react";
 import { ChatView } from "../chat/Chat.View";
-import { View, useViewSubscription } from "../../api/generated/graphql";
+import { View, useViewSubscription } from "../../api/gql/graphql";
 import { useNavigate } from "react-router-dom";
 
 interface MainViewProps {
@@ -25,7 +25,7 @@ export const MainView: React.FC<MainViewProps> = props => {
         </Stack>
       </Stack.Item>
       <Stack.Item id='view1' styles={{ root: { background: 'yellow' } }} hidden={false}>
-        current view name:{currentView?.view}
+        current view name:{currentView?.view} (v1)
       </Stack.Item>
     </Stack>);
 
