@@ -39,23 +39,23 @@ jobs:
           echo $ENV > env.json
 
 
-      - name: Build and run dev container task
-        uses: devcontainers/ci@v0.3
-        with:
-          subFolder: static-webapp
-          runCmd: |
-              export MY_VERSION=$(cat .version)
-              npm config set allow-same-version true
-              npm version $MY_VERSION
-              npm install
-              npm run gen-oas
-              npm run gen-gql
-              npm run build
-      - name: Store build react binaries
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ github.run_id }}-webapp-binaries
-          path: static-webapp/build
+      # - name: Build and run dev container task
+      #   uses: devcontainers/ci@v0.3
+      #   with:
+      #     subFolder: static-webapp
+      #     runCmd: |
+      #         export MY_VERSION=$(cat .version)
+      #         npm config set allow-same-version true
+      #         npm version $MY_VERSION
+      #         npm install
+      #         npm run gen-oas
+      #         npm run gen-gql
+      #         npm run build
+      # - name: Store build react binaries
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ${{ github.run_id }}-webapp-binaries
+      #     path: static-webapp/build
 
       - name: Build And Deploy
         id: builddeploy
@@ -64,6 +64,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.WEBAPP_KEY_API }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
+          api_build_command: npm run ci-build
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/static-webapp" # App source code path
