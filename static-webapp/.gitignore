@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# folder below should be created using 
+# npm run gen-gql
+# npm run gen-oas
+src/api/gql
+src/api/oas

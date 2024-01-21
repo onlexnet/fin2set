@@ -39,6 +39,24 @@ jobs:
           echo $ENV > env.json
 
 
+      - name: Build and run dev container task
+        uses: devcontainers/ci@v0.3
+        with:
+          subFolder: static-webapp
+          runCmd: |
+              export MY_VERSION=$(cat .version)
+              npm config set allow-same-version true
+              npm version $MY_VERSION
+              npm install
+              npm run gen-oas
+              npm run gen-gql
+              npm run build
+      - name: Store build react binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.run_id }}-webapp-binaries
+          path: static-webapp/build
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
