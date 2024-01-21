@@ -24,14 +24,13 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "ci-build": "npm run gen-oas && npm run gen-gql && npm run build",
+    "ci-build": "CI=true && npm run gen-oas && npm run gen-gql && npm run build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "gen-gql": "graphql-codegen --config .graphqlrc.yml",
     "gen-oas": "openapi --input ../uservice-webapi/schema/openapi.yaml --output ./src/api/oas",
-    "cibuild": "CI=false && graphql-codegen --config ./graphql-codegen-config.yml && react-scripts build"
   },
   "eslintConfig": {
     "extends": [
