@@ -19,6 +19,16 @@ paths:
         '200':    # status code
           description: Plaid Link Token
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
+                type: plaidToken
+components:
+  schemas:
+    plaidToken:
+      type: object
+      required:  
+        - value
+      properties:
+        value:
+          type: string
+          example: 4
