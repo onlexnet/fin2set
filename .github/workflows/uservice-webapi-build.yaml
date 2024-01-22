@@ -57,13 +57,13 @@ jobs:
         run: echo "SEMVERSION=$(cat .semversion)" >> $GITHUB_ENV
         working-directory: uservice-webapi
 
-      # - name: cache maven
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: ~/.m2/repository
-      #     key: ${{ runner.os }}-maven-${{ hashFiles('uservice-webapi/**/pom.xml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-maven-
+      - name: cache maven
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('uservice-webapi/**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       
 
       - name: Add Application Insights agent

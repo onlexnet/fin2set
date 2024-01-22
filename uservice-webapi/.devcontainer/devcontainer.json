@@ -39,18 +39,20 @@
 		"vscode": {
 			// Set of my favourite extensions
 			"extensions": [
-				"vscjava.vscode-java-pack", // everything I need to support java
-				"zxh404.vscode-proto3", // we use proto3 to create interprocess brokerless communication
-				"ms-azuretools.vscode-dapr", // DAPR is used for uservices
+				"vscjava.vscode-java-pack",
+				"zxh404.vscode-proto3",
+				"ms-azuretools.vscode-dapr",
 				"shengchen.vscode-checkstyle",
 				"editorconfig.editorconfig",
 				"ms-azuretools.vscode-dapr",
 				"vscjava.vscode-java-dependency",
 				"visualstudioexptteam.vscodeintellicode",
-				"cucumberopen.cucumber-official", // to support gherkin semantic and navigate to glue code
+				"cucumberopen.cucumber-official",
 				"vmware.vscode-boot-dev-pack",
 				"github.vscode-pull-request-github",
-        		"redhat.vscode-xml" // to format pom.xml
+				"redhat.vscode-xml",
+				// live preview of local html files
+				"ms-vscode.live-server"
 			]
 		}
 	}

@@ -18,7 +18,9 @@
     -->
     <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
     <java.version>21</java.version>
-    <spring.modulith.version>1.1.1</spring.modulith.version>
+    <spring.modulith.version>1.1.2</spring.modulith.version>
+    <jacoco.version>0.8.11</jacoco.version>
+    <springdoc.version>2.3.0</springdoc.version>
   </properties>
 
 
@@ -178,7 +180,17 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.10</version>
+          <version>${jacoco.version}</version>
+          <configuration>
+            <includes>
+              <!--
+                I had some issues with jacoco when it tries to analyse clases from my dependencies,
+                unrelated to appl logic.
+                The solution is to include only our core tested package.
+               -->
+              <include>onlexnet/**</include>
+            </includes>
+          </configuration>
         </plugin>
 
       </plugins>

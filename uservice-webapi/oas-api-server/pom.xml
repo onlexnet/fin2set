@@ -8,10 +8,6 @@
   </parent>
   <artifactId>webapi-oas-api</artifactId>
 
-  <properties>
-    <springdoc.version>2.3.0</springdoc.version>
-  </properties>
-
   <dependencies>
 
     <dependency>
