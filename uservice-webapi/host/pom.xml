@@ -29,6 +29,11 @@
       <artifactId>webapi-gql-model</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>onlexnet.fin2set</groupId>
+      <artifactId>webapi-oas-api</artifactId>
+    </dependency>
+
 
     <dependency>
       <groupId>com.plaid</groupId>

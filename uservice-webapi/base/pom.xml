@@ -37,7 +37,11 @@
         <artifactId>webapi-gql-model</artifactId>
         <version>${project.version}</version>
       </dependency>
-
+      <dependency>
+        <groupId>onlexnet.fin2set</groupId>
+        <artifactId>webapi-oas-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
       <dependency>
         <groupId>onlexnet.fin2set</groupId>
         <artifactId>webapi-gql-test</artifactId>

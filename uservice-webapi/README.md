@@ -4,10 +4,10 @@
 - mvn spring-boot:run -pl -am host
 
 ## GraphQL
-- to communicate with React UI
+- to communicate with React UI. Console available http://localhost:8080/graphiql
 
 ## REST
-- to expose extensions for OpenAI
+- to expose extensions for OpenAI. Console available http://localhost:8080/ (or http://localhost:8080/swagger-ui/index.html)
 
 ## Test secrets locally
 - run DAPR with secrets
