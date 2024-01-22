@@ -14,7 +14,8 @@
     <module>host</module>
     <module>gql-model</module> <!-- Shared GraphQL models between gql-test and host modules -->
     <module>gql-test</module>
-    <module>oas-api</module>
+    <module>oas-api-server</module>
+    <module>oas-api-client</module>
   </modules>
 
 

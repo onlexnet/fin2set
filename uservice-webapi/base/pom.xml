@@ -44,7 +44,14 @@
       </dependency>
       <dependency>
         <groupId>onlexnet.fin2set</groupId>
+        <artifactId>webapi-oas-api-client</artifactId>
+        <scope>test</scope>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>onlexnet.fin2set</groupId>
         <artifactId>webapi-gql-test</artifactId>
+        <scope>test</scope>
         <version>${project.version}</version>
       </dependency>
 
