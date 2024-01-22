@@ -12,6 +12,8 @@
     <azure.openai.version>1.0.0-beta.5</azure.openai.version>
     <dapr.sdk.version>1.10.0</dapr.sdk.version>
     <plaid.version>19.2.0</plaid.version>
+    <jacoco.coverage.instructions>0.80</jacoco.coverage.instructions>
+    <jacoco.coverage.branch>0.58</jacoco.coverage.branch>
   </properties>
 
   <dependencies>
@@ -194,48 +196,48 @@
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <configuration>
-            <!-- More: https://www.jacoco.org/jacoco/trunk/doc/check-mojo.html -->
-            <haltOnFailure>true</haltOnFailure>
-            <rules>
-                <rule>
-                    <element>BUNDLE</element>
-                    <limits>
-                        <limit>
-                            <counter>INSTRUCTION</counter>
-                            <value>COVEREDRATIO</value>
-                            <minimum>0.80</minimum>
-                        </limit>
-                        <limit>
-                          <counter>BRANCH</counter>
-                          <value>COVEREDRATIO</value>
-                          <minimum>0.50</minimum>
-                      </limit>
-                  </limits>
-                </rule>
-            </rules>
+          <!-- More: https://www.jacoco.org/jacoco/trunk/doc/check-mojo.html -->
+          <haltOnFailure>true</haltOnFailure>
+          <rules>
+            <rule>
+              <element>BUNDLE</element>
+              <limits>
+                <limit>
+                  <counter>INSTRUCTION</counter>
+                  <value>COVEREDRATIO</value>
+                  <minimum>${jacoco.coverage.instructions}</minimum>
+                </limit>
+                <limit>
+                  <counter>BRANCH</counter>
+                  <value>COVEREDRATIO</value>
+                  <minimum>${jacoco.coverage.branch}</minimum>
+                </limit>
+              </limits>
+            </rule>
+          </rules>
         </configuration>
         <executions>
-            <execution>
-                <id>pre-unit-test</id>
-                <goals>
-                    <goal>prepare-agent</goal>
-                </goals>
-            </execution>
-            <execution>
-                <id>post-unit-test</id>
-                <phase>test</phase>
-                <goals>
-                    <goal>report</goal>
-                </goals>
-            </execution>
-            <execution>
-                <id>jacoco-check</id>
-                <goals>
-                    <goal>check</goal>
-                </goals>
-            </execution>
+          <execution>
+            <id>pre-unit-test</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>post-unit-test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>jacoco-check</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
         </executions>
-    </plugin>
+      </plugin>
 
       <plugin>
         <groupId>org.springframework.boot</groupId>

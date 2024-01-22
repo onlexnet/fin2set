@@ -94,6 +94,13 @@
                 <!-- use tags for creating interface and controller classnames -->
                 <useTags>true</useTags>
 
+                <apiPackage>onlex.webapi.ws.api</apiPackage>
+                <modelPackage>onlex.webapi.ws.model</modelPackage>
+                <configPackage>onlex.webapi.ws.config</configPackage>
+                <invokerPackage>onlex.webapi.ws.client</invokerPackage>
+                <basePackage>onlex.webapi.ws</basePackage>
+
+                <delegatePattern>true</delegatePattern>
               </configOptions>
             </configuration>
           </execution>
