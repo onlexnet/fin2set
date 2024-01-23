@@ -5,7 +5,7 @@ import {
   } from "react-router-dom";
 import { ChatRoute} from "../../views/chat/Chat.Route";
 import { MainView } from "../../views/main/Main.View";
-import { View1 } from "../../View1";
+import { View1 } from "../../components/view1/View1";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(

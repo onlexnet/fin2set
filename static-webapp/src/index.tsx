@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client';
 import { apolloClientFactory } from './api';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { View1 } from './View1';
+import { View1 } from './components/view1/View1';
 
 const client = apolloClientFactory("ignored token");
 const mainView =

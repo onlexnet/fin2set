@@ -29,32 +29,7 @@ const BankView: React.FC<{}> = props => {
 //   console.log(JSON.stringify(linkTokenData));
 // };
 
-// const startLink = function () {
-//   if (linkTokenData === undefined) {
-//     return;
-//   }
-//   const handler = Plaid.create({
-//     token: linkTokenData.link_token,
-//     onSuccess: async (publicToken, metadata) => {
-//       console.log(
-//         `I have a public token: ${publicToken} I should exchange this`
-//       );
-//       alert(`I have a public token: ${publicToken} I should exchange this`)
-//       await exchangeToken(publicToken);
-//     },
-//     onExit: (err, metadata) => {
-//       console.log(
-//         `I'm all done. Error: ${JSON.stringify(err)} Metadata: ${JSON.stringify(
-//           metadata
-//         )}`
-//       );
-//     },
-//     onEvent: (eventName, metadata) => {
-//       console.log(`Event ${eventName}`);
-//     },
-//   });
-//   handler.open();
-// };
+
 
 // async function exchangeToken(publicToken) {
 //   const tokenExchangeResponse = await fetch(`/api/exchange_public_token`, {
