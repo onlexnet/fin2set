@@ -21,14 +21,14 @@ paths:
           content:
             application/json:
               schema:
-                type: plaidToken
+                type: PlaidToken
 components:
   schemas:
-    plaidToken:
+    PlaidToken:
       type: object
       required:  
         - value
       properties:
         value:
           type: string
-          example: 4
+          example: 

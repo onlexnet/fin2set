@@ -10,11 +10,9 @@ import { View1 } from './View1';
 
 const client = apolloClientFactory("ignored token");
 const mainView =
-  <React.StrictMode>
     <ApolloProvider client={client}>
       <App />
-    </ApolloProvider>
-  </React.StrictMode>;
+    </ApolloProvider>;
 
 const router = createBrowserRouter([
   { path: "/", element: mainView },
@@ -24,9 +22,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 ).render(
-  <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
 );
 
 

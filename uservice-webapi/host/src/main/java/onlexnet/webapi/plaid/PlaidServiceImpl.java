@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-class PlaidConnectionImpl implements PlaidConnection {
+class PlaidServiceImpl implements PlaidConnection, PlaidService {
 
   private final PlaidProperties plaidProperties;
 
@@ -44,8 +44,12 @@ class PlaidConnectionImpl implements PlaidConnection {
   }
 
   @Override
-  @SneakyThrows
   public void doSomething() {
+  }
+
+  @Override
+  @SneakyThrows
+  public String createLinkToken() {
     var clientUserId = UUID.randomUUID().toString();
 
     var user = new LinkTokenCreateRequestUser()
@@ -72,32 +76,20 @@ class PlaidConnectionImpl implements PlaidConnection {
     log.info(h.toString());    
     var linkToken = response1.body().getLinkToken();
 
+    return linkToken;
 
-    // Synchronously exchange a Link public_token for an API access_token
-    // Required request parameters are always Request object constructor arguments
-    var request1 = new ItemPublicTokenExchangeRequest()
-        .publicToken(linkToken);
-    var response = plaidClient.itemPublicTokenExchange(request1).execute();
-    String accessToken;
-    if (response.isSuccessful()) {
-      accessToken = response.body().getAccessToken();
-    } else {
-      var err = response.errorBody().string();
-      throw new IllegalArgumentException(err);
-    }
-
-    // // Decoding an unsuccessful response
-    // try {
-    // Gson gson = new Gson();
-    // PlaidError error = gson.fromJson(response.errorBody().string(),
-    // PlaidError.class);
-    // } catch (Exception e) {
-    // throw new Exception(
-    // String.format(
-    // "Failed converting from API Response Error Body to Error %f",
-    // response.errorBody().string()
-    // )
-    // );
+    // // Synchronously exchange a Link public_token for an API access_token
+    // // Required request parameters are always Request object constructor arguments
+    // var request1 = new ItemPublicTokenExchangeRequest()
+    //     .publicToken(linkToken);
+    // var response = plaidClient.itemPublicTokenExchange(request1).execute();
+    // String accessToken;
+    // if (response.isSuccessful()) {
+    //   accessToken = response.body().getAccessToken();
+    // } else {
+    //   var err = response.errorBody().string();
+    //   throw new IllegalArgumentException(err);
+    // }
   }
 
 }
