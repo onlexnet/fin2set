@@ -12,7 +12,6 @@ import env from './env.json';
 
 const { auth0Domain, auth0ClientId } = env;
 
-
 const client = apolloClientFactory("ignored token");
 const redirect_uri = window.location.origin;
 const mainView =
