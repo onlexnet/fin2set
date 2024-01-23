@@ -8,9 +8,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { View1 } from './components/view1/View1';
 import { App } from './App';
 import { Auth0Provider } from '@auth0/auth0-react';
-import env from './env.json';
+import config from './config.json';
 
-const { auth0Domain, auth0ClientId } = env;
+const { auth0Domain, auth0ClientId } = config;
 
 const client = apolloClientFactory("ignored token");
 const redirect_uri = window.location.origin;
