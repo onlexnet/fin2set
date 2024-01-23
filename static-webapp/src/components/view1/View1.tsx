@@ -17,27 +17,35 @@ export const View1: React.FC<View1Props> = (props: View1Props) => {
         // send public_token to your server
         // https://plaid.com/docs/api/tokens/#token-exchange-flow
         console.log(publicToken, metadata);
-      }, []);
-    
-      const { open, ready } = usePlaidLink({
+    }, []);
+
+    const { open, ready } = usePlaidLink({
         token,
         onSuccess,
         // onEvent
         // onExit
-      });
-    
-  
+    });
+
+
     // get link_token from your server when component mounts
     React.useEffect(() => {
         const createLinkToken = async () => {
-          const response = await fetch('/api/create_link_token', { method: 'POST' });
-          const { link_token } = await response.json();
-          setToken(link_token);
+            const response = await fetch('/api/create_link_token', { method: 'POST' });
+            const { link_token } = await response.json();
+            setToken(link_token);
         };
         createLinkToken();
-      }, []);
+    }, []);
 
-  if (data && !loading) {
+    if (open) {
+        alert("open");
+    }
+
+    if (ready) {
+        alert("ready");
+    }
+
+    if (data && !loading) {
         const link = data.value;
         startLink(link)
     }
