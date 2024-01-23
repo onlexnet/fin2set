@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Protocol, addressProvider } from '../../addressProvider';
-import { AppClient, plaidToken } from '../../api/oas';
+import { AppClient, PlaidToken } from '../../api/oas';
 
 const httpUrl = `${addressProvider(Protocol.HTTPS).host}/v1`;
 
@@ -11,7 +11,7 @@ const appClient = new AppClient({
 const createLinkToken = appClient.createLinkToken;
 
 function useDataFetching() {
-  const [data, setData] = useState<plaidToken>();
+  const [data, setData] = useState<PlaidToken>();
   const [error, setError] = useState<Error>();
   const [loading, setLoading] = useState(true);
 
