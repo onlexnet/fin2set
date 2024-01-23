@@ -29,8 +29,6 @@ export const App: React.FC<{}> = props => {
 
   if (queryError) return (<Label>Error!</Label>);
 
-  alert(`isLoading: ${isLoading}, isAuthenticated: ${isAuthenticated}`);
-
   if (isLoading) {
     return (<Label>Loading ....</Label>);
   }
