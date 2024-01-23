@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { Protocol, addressProvider } from "./addressProvider";
 import { AppClient, CreateLinkTokenService } from "./api/oas";
 import { useAppState } from "./components/AppStateContext";
+import useDataFetching from "./components/view1/useDataFetching";
 
 interface View1Props {
 }
@@ -8,19 +10,16 @@ interface View1Props {
 export const View1: React.FC<View1Props> = (props: View1Props) => {
     const { state, dispatch } = useAppState();
 
-    const httpUrl = `${addressProvider(Protocol.HTTPS).host}/v1`;
+    const { data, error, loading } = useDataFetching();
 
-    const appClient = new AppClient({
-        BASE: httpUrl
-    });
-
-    const a = appClient.createLinkToken.getApiCreateLinkToken().then(it => {
-        alert(it);
-    })
-
+    if (!loading) {
+      alert(data);
+    }
+      
     return (
         <>
             Hello!
+            response: { JSON.stringify(data) }
             state: { JSON.stringify(state) }
             dispatch: { JSON.stringify(dispatch)}
         </>);
