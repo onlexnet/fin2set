@@ -38,11 +38,11 @@ export const View1: React.FC<View1Props> = (props: View1Props) => {
     }, []);
 
     if (open) {
-        alert("open");
+        console.log("open");
     }
 
     if (ready) {
-        alert("ready");
+        console.log("ready");
     }
 
     if (data && !loading) {
