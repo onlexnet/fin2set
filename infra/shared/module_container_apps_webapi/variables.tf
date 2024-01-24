@@ -14,8 +14,6 @@ variable "log_analytics_workspace" {
 
 variable env {
   type = object({
-    # NORDIGEN_SECRET_ID = string
-    # NORDIGEN_SECRET_KEY = string
     CR_PAT = string
     GITHUB_USERNAME = string
     DATABASE_HOST = string
@@ -23,5 +21,6 @@ variable env {
     DATABASE_PORT = string
     DATABASE_USERNAME = string
     DATABASE_PASSWORD = string
+    AUTH0_CLIENT_SECRET = string
   })
 }

@@ -41,10 +41,10 @@ module "static_app" {
 }
 
 module "github_repo" {
-  source             = "./module_github_repo"
-  webapi_fqdn        = module.container_apps.webapi_fqdn
-  static_app_api_key = module.static_app.static_app_api_key
-  environment_name   = var.environment_name
+  source                   = "./module_github_repo"
+  webapi_fqdn              = module.container_apps.webapi_fqdn
+  static_app_api_key       = module.static_app.static_app_api_key
+  environment_name         = var.environment_name
   CONTAINERAPP_NAME_WEBAPI = module.container_apps.containerapp_name
 }
 
@@ -53,15 +53,14 @@ module "container_apps" {
   resource_group          = module.resourcegroup.main
   log_analytics_workspace = module.log_analytics_workspace.main
   env = {
-    # NORDIGEN_SECRET_ID  = module.keyvault.env.NORDIGEN_SECRET_ID
-    # NORDIGEN_SECRET_KEY = module.keyvault.env.NORDIGEN_SECRET_KEY
-    CR_PAT            = module.keyvault.env.CR_PAT
-    GITHUB_USERNAME   = module.keyvault.env.GITHUB_USERNAME
-    DATABASE_HOST     = module.database.database_host
-    DATABASE_PORT     = module.database.database_port
-    DATABASE_NAME     = module.database.database_name
-    DATABASE_USERNAME = module.database.database_username
-    DATABASE_PASSWORD = module.database.database_password
+    CR_PAT              = module.keyvault.env.CR_PAT
+    GITHUB_USERNAME     = module.keyvault.env.GITHUB_USERNAME
+    AUTH0_CLIENT_SECRET = module.keyvault.env.AUTH0_CLIENT_SECRET
+    DATABASE_HOST       = module.database.database_host
+    DATABASE_PORT       = module.database.database_port
+    DATABASE_NAME       = module.database.database_name
+    DATABASE_USERNAME   = module.database.database_username
+    DATABASE_PASSWORD   = module.database.database_password
   }
 
 }

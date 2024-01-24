@@ -61,6 +61,12 @@ resource "azurerm_container_app" "default" {
     value = var.env.CR_PAT
   }
 
+  #  the secret has been aded automatuically by manual integration of container app with oauth provider
+  secret {
+    name = "auth0-authentication-secret"
+    value = var.env.AUTH0_CLIENT_SECRET
+  }
+
   secret {
     name  = "database-host"
     value = var.env.DATABASE_HOST
