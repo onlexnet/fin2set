@@ -19,7 +19,7 @@ const WithApollo: React.FC<{}> = props => {
   const { data: token, error, loading } = useAuth();
 
   if (loading) return (<Label>Loading ....</Label>);
-  if (error) return (<Label>Error!</Label>);
+  if (error) return (<Label>Login Error!: { JSON.stringify(error)}</Label>);
 
   const client = apolloClientFactory(token ?? "should be a token ...");
   return (
@@ -29,9 +29,9 @@ const WithApollo: React.FC<{}> = props => {
   );
 }
 
-
 const mainView =
-  <Auth0Provider domain={auth0Domain} clientId={auth0ClientId} authorizationParams={{ redirect_uri }}>
+  <Auth0Provider domain={auth0Domain} clientId={auth0ClientId} authorizationParams={
+    { redirect_uri, display: 'page' }}>
     <WithApollo />
   </Auth0Provider>;
 

@@ -21,13 +21,12 @@ export const App: React.FC<{}> = props => {
   }, [loginWithRedirect, isAuthenticated, isLoading]);
   
   if (error) {
-    alert('Error:' + JSON.stringify(error));
-    return (<Label>Loading ....</Label>);
+    return (<Label>'Error:' + JSON.stringify(error)</Label>);
   }
 
   if (loading) return (<Label>Loading ....</Label>);
 
-  if (queryError) return (<Label>Error!</Label>);
+  if (queryError) return (<Label>Query Error! { JSON.stringify(queryError)}</Label>);
 
   if (isLoading) {
     return (<Label>Loading ....</Label>);
