@@ -12,13 +12,19 @@ const appClient = new AppClient({
 
 const apiCall = appClient.exchangeLinkToken;
 
-function useAccessTokenFetch(request: PublicToken) {
+function useAccessTokenFetch(maybeToken?: PublicToken) {
   const { data: idToken, loading: authLoading, error: authError } = useAuth();
-  const [data, setData] = useState<AccessToken>();
+  const [accessToken, setData] = useState<AccessToken>();
   const [error, setError] = useState<Error>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!maybeToken) {
+      return;
+    }
+
+    const token = maybeToken;
+
     if (authLoading) {
       setLoading(true);
       return;
@@ -34,7 +40,7 @@ function useAccessTokenFetch(request: PublicToken) {
         // TODO change static assignment to invocation-related assignment
         OpenAPI.TOKEN = idToken;
         OpenAPI.BASE = httpUrl;
-        const response = await apiCall.exchangeLinkToken(request);
+        const response = await apiCall.exchangeLinkToken(token);
         fetchData();
 
         setData(response);
@@ -46,9 +52,9 @@ function useAccessTokenFetch(request: PublicToken) {
     }
     fetchData();
 
-  }, [authLoading, authError, idToken, request]);
+  }, [authLoading, authError, idToken, maybeToken]);
 
-  return { data, error, loading };
+  return { accessToken, error, loading };
 }
 
 export default useAccessTokenFetch;

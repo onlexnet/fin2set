@@ -15,7 +15,6 @@ export const startLink = async (linkToken: string): Promise<PublicToken> => {
         console.log(
           `I have a public token: ${publicToken} I should exchange this`
         );
-        alert(`I have a public token: ${publicToken} I should exchange this`)
         onComplete({ publicToken });
       },
       onExit: (err: any, metadata: any) => {

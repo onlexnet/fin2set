@@ -1,9 +1,10 @@
 import { PlaidLinkOnSuccess, usePlaidLink } from "react-plaid-link";
 import { useAppState } from "../AppStateContext";
 import useLinkTokenFetch from "../../api/useLinkTokenFetch";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import React from "react";
 import { usePlaidLogin } from "./usePlaidLogin";
+import useAccessTokenFetch from "../../api/useAccessTokenFetch";
 
 
 interface PlaidLoginViewProps {
@@ -18,7 +19,6 @@ export const PlaidLoginView: React.FC<PlaidLoginViewProps> = (props: PlaidLoginV
         // https://plaid.com/docs/api/tokens/#token-exchange-flow
         console.log(publicToken, metadata);
     }, []);
-
     usePlaidLink({
         token: data?.linkToken ?? null,
         onSuccess,
@@ -26,12 +26,15 @@ export const PlaidLoginView: React.FC<PlaidLoginViewProps> = (props: PlaidLoginV
         // onExit
     });
 
-    usePlaidLogin(data);
+    const { publicToken } = usePlaidLogin(data);
+
+    const { accessToken } = useAccessTokenFetch(publicToken);
 
     return (
         <>
             <p> Hello! </p>
             <p>response: {JSON.stringify(data)}</p>
+            <p>accessToken: {JSON.stringify(accessToken)}</p>
             <p>state: {JSON.stringify(state)}</p>
             <p>dispatch: {JSON.stringify(dispatch)}</p>
         </>);
