@@ -11,7 +11,7 @@ const appClient = new AppClient({
 
 const createLinkToken = appClient.transactions;
 
-const useTransactions = (accessToken?: AccessToken) => {
+const useTransactions = (maybeAccessToken?: AccessToken) => {
   const { data: idToken, loading: authLoading, error: authError } = useAuth();
   const [transactions, setData] = useState<TransactionDTO[]>();
   const [error, setError] = useState<Error>();
@@ -28,9 +28,10 @@ const useTransactions = (accessToken?: AccessToken) => {
       return;
     }
 
-    if (!accessToken) {
+    if (!maybeAccessToken) {
       return;
     }
+    const accessToken = maybeAccessToken;
 
     async function fetchData() {
       try {
@@ -48,7 +49,7 @@ const useTransactions = (accessToken?: AccessToken) => {
     }
     fetchData();
 
-  }, [authLoading, authError, idToken, accessToken]);
+  }, [authLoading, authError, idToken, maybeAccessToken]);
 
   return { transactions, error, loading };
 }
