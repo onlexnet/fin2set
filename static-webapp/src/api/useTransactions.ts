@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Protocol, addressProvider } from '../addressProvider';
-import { AccessToken, AppClient, LinkToken, OpenAPI, TransactionDTO } from './oas';
+import { AccessToken, AppClient, OpenAPI, TransactionDTO } from './oas';
 import useAuth from './auth/useAuth';
 
 const httpUrl = `${addressProvider(Protocol.HTTPS).host}/v1`;
