@@ -11,8 +11,7 @@ interface PlaidLoginViewProps {
 
 export const PlaidLoginView: React.FC<PlaidLoginViewProps> = (props: PlaidLoginViewProps) => {
     const { state, dispatch } = useAppState();
-    const { data, loading, error } = useLinkTokenFetch();
-    const [token, setToken] = useState<string | null>(null);
+    const { data } = useLinkTokenFetch();
 
     const onSuccess = useCallback<PlaidLinkOnSuccess>((publicToken, metadata) => {
         // send public_token to your server
@@ -20,7 +19,7 @@ export const PlaidLoginView: React.FC<PlaidLoginViewProps> = (props: PlaidLoginV
         console.log(publicToken, metadata);
     }, []);
 
-    const { open, ready } = usePlaidLink({
+    usePlaidLink({
         token: data?.linkToken ?? null,
         onSuccess,
         // onEvent
