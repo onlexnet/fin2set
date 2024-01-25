@@ -62,7 +62,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: TransactionsDTO
+                type: array
+                items:
+                  type: TransactionDTO
 
 
 components:
@@ -94,11 +96,6 @@ components:
         accessToken:
           type: string
           example: 
-
-    TransactionsDTO:
-      type: array
-      items:
-        $ref: TransactionDTO
 
     TransactionDTO:
       type: object

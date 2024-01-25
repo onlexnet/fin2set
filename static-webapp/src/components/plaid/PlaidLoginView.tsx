@@ -5,6 +5,7 @@ import { useCallback } from "react";
 import React from "react";
 import { usePlaidLogin } from "./usePlaidLogin";
 import useAccessTokenFetch from "../../api/useAccessTokenFetch";
+import useTransactions from "../../api/useTransactions";
 
 
 interface PlaidLoginViewProps {
@@ -30,6 +31,8 @@ export const PlaidLoginView: React.FC<PlaidLoginViewProps> = (props: PlaidLoginV
 
     const { accessToken } = useAccessTokenFetch(publicToken);
 
+    const { transactions } = useTransactions(accessToken);
+
     return (
         <>
             <p> Hello! </p>
@@ -37,5 +40,6 @@ export const PlaidLoginView: React.FC<PlaidLoginViewProps> = (props: PlaidLoginV
             <p>accessToken: {JSON.stringify(accessToken)}</p>
             <p>state: {JSON.stringify(state)}</p>
             <p>dispatch: {JSON.stringify(dispatch)}</p>
+            <p>transactions: {JSON.stringify(transactions)}</p>
         </>);
 }
