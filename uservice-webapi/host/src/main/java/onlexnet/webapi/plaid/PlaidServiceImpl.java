@@ -78,18 +78,22 @@ class PlaidServiceImpl implements PlaidConnection, PlaidService {
 
     return linkToken;
 
-    // // Synchronously exchange a Link public_token for an API access_token
-    // // Required request parameters are always Request object constructor arguments
-    // var request1 = new ItemPublicTokenExchangeRequest()
-    //     .publicToken(linkToken);
-    // var response = plaidClient.itemPublicTokenExchange(request1).execute();
-    // String accessToken;
-    // if (response.isSuccessful()) {
-    //   accessToken = response.body().getAccessToken();
-    // } else {
-    //   var err = response.errorBody().string();
-    //   throw new IllegalArgumentException(err);
-    // }
+  }
+
+  // Synchronously exchange a Link public_token for an API access_token
+  @Override
+  @SneakyThrows
+  public String exchangeLinkToken(String linkToken) {
+    var request = new ItemPublicTokenExchangeRequest().publicToken(linkToken);
+    var response = plaidClient.itemPublicTokenExchange(request).execute();
+    String accessToken;
+    if (response.isSuccessful()) {
+      accessToken = response.body().getAccessToken();
+      return accessToken;
+    } else {
+      var err = response.errorBody().string();
+      throw new IllegalArgumentException(err);
+    }
   }
 
 }

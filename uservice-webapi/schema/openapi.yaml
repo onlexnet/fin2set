@@ -15,20 +15,61 @@ paths:
       description: Optional extended description in CommonMark or HTML.
       tags:
         - createLinkToken
+      operationId: createLinkToken
       responses:
         '200':    # status code
           description: Plaid Link Token
           content:
             application/json:
               schema:
-                type: PlaidToken
+                type: LinkToken
+
+  /api/exchange_public_token:
+    post:
+      description: converts public token -> access token
+      tags:
+        - exchangeLinkToken
+      operationId: exchangeLinkToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: PublicToken
+      responses:
+        '200':
+          description: public token to be used to get bank data
+          content:
+            application/json:
+              schema:
+                type: AccessToken
+
 components:
   schemas:
-    PlaidToken:
+
+    LinkToken:
       type: object
       required:  
-        - value
+        - linkToken
       properties:
-        value:
+        linkToken:
+          type: string
+          example: 
+
+    PublicToken:
+      type: object
+      required:  
+        - publicToken
+      properties:
+        publicToken:
+          type: string
+          example: 
+
+    AccessToken:
+      type: object
+      required:  
+        - acecssToken
+      properties:
+        accessToken:
           type: string
           example: 
