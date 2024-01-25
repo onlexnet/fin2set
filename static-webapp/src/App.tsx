@@ -7,6 +7,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import React, { useEffect } from 'react';
 
 
+
 export const App: React.FC<{}> = props => {
   
   const { loading, error: queryError } = useMyqueryQuery({

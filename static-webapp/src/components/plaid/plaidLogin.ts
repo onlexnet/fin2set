@@ -1,13 +1,22 @@
+import { PublicToken } from "../../api/oas";
+
 declare var Plaid: any;
 
-export const startLink = function (linkTokenData: string) {
+export const startLink = async (linkToken: string): Promise<PublicToken> => {
+    let onComplete: (value: PublicToken) => void;
+    let onError: (reason?: any) => void;
+    const result = new Promise<PublicToken>((onFulfilled, onRejected) => {
+        onComplete = onFulfilled; onError = onRejected;
+    });
+      
     const handler = Plaid.create({
-      token: linkTokenData,
-      onSuccess: async (publicToken: any, metadata: any) => {
+      token: linkToken,
+      onSuccess: async (publicToken: string, metadata: any) => {
         console.log(
           `I have a public token: ${publicToken} I should exchange this`
         );
         alert(`I have a public token: ${publicToken} I should exchange this`)
+        onComplete({ publicToken });
       },
       onExit: (err: any, metadata: any) => {
         console.log(
@@ -15,11 +24,14 @@ export const startLink = function (linkTokenData: string) {
             metadata
           )}`
         );
+        onError(err);
       },
       onEvent: (eventName: any, metadata: any) => {
         console.log(`Event ${eventName}`);
       },
     });
     handler.open();
+
+    return result;
   };
   

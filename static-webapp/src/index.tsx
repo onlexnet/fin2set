@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client';
 import { apolloClientFactory } from './api/gql';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { View1 } from './components/view1/View1';
+import { PlaidLoginView } from './components/plaid/PlaidLoginView';
 import { App } from './App';
 import { Auth0Provider } from '@auth0/auth0-react';
 import config from './config.json';
@@ -29,21 +29,23 @@ const WithApollo: React.FC<{}> = props => {
   );
 }
 
-const mainView =
-  <Auth0Provider domain={auth0Domain} clientId={auth0ClientId} authorizationParams={
-    { redirect_uri, display: 'page' }}>
-    <WithApollo />
-  </Auth0Provider>;
+const mainView = <WithApollo />;
+const plaidView = <PlaidLoginView />;
 
 const router = createBrowserRouter([
   { path: "/", element: mainView },
-  { path: "/view1", element: <View1 /> },
+  { path: "/view1", element: plaidView },
   // profile https://auth0.com/docs/quickstart/spa/react/02-calling-an-api
 ]);
 
+const routerProvider = <Auth0Provider domain={auth0Domain} clientId={auth0ClientId} authorizationParams={
+  { redirect_uri, display: 'page' }}>
+  <RouterProvider router={router} />
+</Auth0Provider>;
+
 ReactDOM
   .createRoot(document.getElementById('root') as HTMLElement)
-  .render(<RouterProvider router={router} />);
+  .render(routerProvider);
 
 
 

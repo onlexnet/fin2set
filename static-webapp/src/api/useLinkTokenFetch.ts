@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Protocol, addressProvider } from '../addressProvider';
-import { AppClient, OpenAPI, PlaidToken } from './oas';
+import { AppClient, LinkToken, OpenAPI } from './oas';
 import useAuth from './auth/useAuth';
 
 const httpUrl = `${addressProvider(Protocol.HTTPS).host}/v1`;
@@ -11,9 +11,9 @@ const appClient = new AppClient({
 
 const createLinkToken = appClient.createLinkToken;
 
-function useDataFetching() {
+const useLinkTokenFetch = () => {
   const { data: idToken, loading: authLoading, error: authError } = useAuth();
-  const [data, setData] = useState<PlaidToken>();
+  const [data, setData] = useState<LinkToken>();
   const [error, setError] = useState<Error>();
   const [loading, setLoading] = useState(true);
 
@@ -30,9 +30,10 @@ function useDataFetching() {
 
     async function fetchData() {
       try {
+        // TODO change static assignment to invocation-related assignment
         OpenAPI.TOKEN = idToken;
-        const response = await createLinkToken.getApiCreateLinkToken();
-        fetchData();
+        OpenAPI.BASE = httpUrl;
+        const response = await createLinkToken.createLinkToken();
 
         setData(response);
       } catch (error) {
@@ -48,4 +49,4 @@ function useDataFetching() {
   return { data, error, loading };
 }
 
-export default useDataFetching;
+export default useLinkTokenFetch;
