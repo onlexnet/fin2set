@@ -8,7 +8,6 @@ export const startLink = function (linkTokenData: string) {
           `I have a public token: ${publicToken} I should exchange this`
         );
         alert(`I have a public token: ${publicToken} I should exchange this`)
-        // await exchangeToken(publicToken);
       },
       onExit: (err: any, metadata: any) => {
         console.log(

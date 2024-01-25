@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client';
-import { apolloClientFactory } from './api';
+import { apolloClientFactory } from './api/gql';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { View1 } from './components/view1/View1';
 import { App } from './App';

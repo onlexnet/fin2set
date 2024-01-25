@@ -1,7 +1,7 @@
 import { PlaidLinkOnSuccess, usePlaidLink } from "react-plaid-link";
 import { useAppState } from "../AppStateContext";
 import { startLink } from "./plaid";
-import useDataFetching from "./useDataFetching";
+import useDataFetching from "../../api/useDataFetching";
 import { useCallback, useState } from "react";
 import React from "react";
 
