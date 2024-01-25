@@ -1,7 +1,9 @@
 package onlexnet.webapi.plaid;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Component;
@@ -12,6 +14,7 @@ import com.plaid.client.model.ItemPublicTokenExchangeRequest;
 import com.plaid.client.model.LinkTokenCreateRequest;
 import com.plaid.client.model.LinkTokenCreateRequestUser;
 import com.plaid.client.model.Products;
+import com.plaid.client.model.TransactionsGetRequest;
 import com.plaid.client.request.PlaidApi;
 
 import jakarta.annotation.PostConstruct;
@@ -94,6 +97,21 @@ class PlaidServiceImpl implements PlaidConnection, PlaidService {
       var err = response.errorBody().string();
       throw new IllegalArgumentException(err);
     }
+  }
+
+  @Override
+  @SneakyThrows
+  public List<Transaction> transactions(String accessToken, LocalDate startDate, LocalDate endDate) {
+    var request = new TransactionsGetRequest()
+        .accessToken(accessToken)
+        .startDate(startDate)
+        .endDate(endDate);
+    var response = plaidClient.transactionsGet(request).execute();
+    var result = response.body();
+    return result.getTransactions()
+        .stream()
+        .map(it ->new Transaction(it.getTransactionId(), it.getAmount()))
+        .toList();
   }
 
 }

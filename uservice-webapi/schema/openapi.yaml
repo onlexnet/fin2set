@@ -14,7 +14,7 @@ paths:
       summary: Returns curent version of backend
       description: Optional extended description in CommonMark or HTML.
       tags:
-        - createLinkToken
+        - CreateLinkToken
       operationId: createLinkToken
       responses:
         '200':    # status code
@@ -28,7 +28,7 @@ paths:
     post:
       description: converts public token -> access token
       tags:
-        - exchangeLinkToken
+        - ExchangeLinkToken
       operationId: exchangeLinkToken
       requestBody:
         required: true
@@ -43,6 +43,27 @@ paths:
             application/json:
               schema:
                 type: AccessToken
+
+  /api/transactions:
+    post:
+      description: list of transactions
+      tags:
+        - Transactions
+      operationId: transactions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: AccessToken
+      responses:
+        '200':
+          description: List of transactions
+          content:
+            application/json:
+              schema:
+                $ref: TransactionsDTO
+
 
 components:
   schemas:
@@ -73,3 +94,17 @@ components:
         accessToken:
           type: string
           example: 
+
+    TransactionsDTO:
+      type: array
+      items:
+        $ref: TransactionDTO
+
+    TransactionDTO:
+      type: object
+      required: [id, amount]
+      properties:
+        id:
+          type: string 
+        amount:
+          type: double
