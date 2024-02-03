@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 interface Choice {
 
   interface Handler {
+
     /**
      * @return true when can handle the case, otherwisee false.
      */

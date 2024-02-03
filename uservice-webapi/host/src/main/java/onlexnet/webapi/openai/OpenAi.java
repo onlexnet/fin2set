@@ -3,8 +3,6 @@ package onlexnet.webapi.openai;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -14,25 +12,16 @@ import org.springframework.stereotype.Component;
 
 import com.azure.ai.openai.OpenAIClient;
 import com.azure.ai.openai.OpenAIClientBuilder;
-import com.azure.ai.openai.models.ChatChoice;
 import com.azure.ai.openai.models.ChatCompletions;
 import com.azure.ai.openai.models.ChatCompletionsOptions;
-import com.azure.ai.openai.models.ChatRequestAssistantMessage;
-import com.azure.ai.openai.models.ChatRequestFunctionMessage;
 import com.azure.ai.openai.models.ChatRequestMessage;
 import com.azure.ai.openai.models.ChatRequestSystemMessage;
-import com.azure.ai.openai.models.ChatResponseMessage;
-import com.azure.ai.openai.models.ChatRole;
-import com.azure.ai.openai.models.CompletionsFinishReason;
-import com.azure.ai.openai.models.EmbeddingItem;
-import com.azure.ai.openai.models.Embeddings;
 import com.azure.ai.openai.models.EmbeddingsOptions;
 import com.azure.ai.openai.models.EmbeddingsUsage;
 import com.azure.ai.openai.models.FunctionCallConfig;
 import com.azure.ai.openai.models.FunctionDefinition;
 import com.azure.core.credential.AzureKeyCredential;
 
-import io.vavr.control.Either;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -41,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @ParametersAreNonnullByDefault
+@Slf4j
 public class OpenAi {
 
   private final OpenAiProperties props;
@@ -128,14 +118,13 @@ public class OpenAi {
   // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/openai/azure-ai-openai/src/samples/java/com/azure/ai/openai/usage/GetEmbeddingsSample.java
   public List<Double> getEmbedings(String text) {
     var embeddingsOptions = new EmbeddingsOptions(Arrays.asList(text));
-    Embeddings embeddings = client.getEmbeddings(embeddingsModel, embeddingsOptions);
+    var embeddings = client.getEmbeddings(embeddingsModel, embeddingsOptions);
 
-    EmbeddingItem item = embeddings.getData().get(0);
-    // System.out.printf("Index: %d.%n", item.getPromptIndex());
+    var item = embeddings.getData().get(0);
     var embedding = item.getEmbedding();
 
-    EmbeddingsUsage usage = embeddings.getUsage();
-    System.out.printf("Usage: number of prompt token is %d and number of total tokens in request and response is %d.%n", usage.getPromptTokens(), usage.getTotalTokens());
+    var usage = embeddings.getUsage();
+    log.info("Usage: number of prompt token is {} and number of total tokens in request and response is {}", usage.getPromptTokens(), usage.getTotalTokens());
     return embedding;
   }
 
