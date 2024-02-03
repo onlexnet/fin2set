@@ -30,7 +30,7 @@ interface Choice {
     record ForUser(ChatResponseMessage message) implements ProcessResult {
     }
 
-    record ForAssistant(Iterable<ChatRequestMessage> message) implements ProcessResult {
+    record ForAssistant(List<ChatRequestMessage> message) implements ProcessResult {
     }
 
   }
