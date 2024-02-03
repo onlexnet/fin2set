@@ -9,8 +9,9 @@
   <artifactId>webapi-host</artifactId>
 
   <properties>
-    <azure.openai.version>1.0.0-beta.5</azure.openai.version>
+    <azure.openai.version>1.0.0-beta.6</azure.openai.version>
     <dapr.sdk.version>1.10.0</dapr.sdk.version>
+    <dotnet-java.version>3.0.0</dotnet-java.version>
     <plaid.version>19.3.0</plaid.version>
     <jacoco.coverage.instructions>0.80</jacoco.coverage.instructions>
     <jacoco.coverage.branch>0.58</jacoco.coverage.branch>
@@ -21,7 +22,7 @@
     <dependency>
       <groupId>io.github.cdimascio</groupId>
       <artifactId>dotenv-java</artifactId>
-      <version>3.0.0</version>
+      <version>${dotnet-java.version}</version>
     </dependency>
 
     <dependency>
@@ -32,6 +33,10 @@
     <dependency>
       <groupId>onlexnet.fin2set</groupId>
       <artifactId>webapi-oas-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vavr</groupId>
+      <artifactId>vavr</artifactId>
     </dependency>
 
 

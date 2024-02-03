@@ -12,6 +12,8 @@
   <version>${revision}</version>
 
   <properties>
+    <findbugs.version>3.0.2</findbugs.version>
+    <vavr.version>0.10.4</vavr.version>
     <!-- Remove warning:
          Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform
     dependent!
@@ -31,7 +33,12 @@
       <dependency>
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>jsr305</artifactId>
-        <version>3.0.2</version>
+        <version>${findbugs.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.vavr</groupId>
+        <artifactId>vavr</artifactId>
+        <version>${vavr.version}</version>
       </dependency>
 
       <dependency>

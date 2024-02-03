@@ -58,7 +58,7 @@ az ad app credential reset --id -u $APP_ID --append --create-cert --display-name
 ### Random notes/hints
 - check available updates:
   ```
-  mvn versions:display-property-updates -ntp -pl host
+  mvn versions:display-property-updates -ntp
   ```
 
 ### Used articles

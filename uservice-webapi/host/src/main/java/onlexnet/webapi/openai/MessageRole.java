@@ -5,8 +5,7 @@ import lombok.Getter;
 public enum MessageRole {
   
   ASSISTANT("assistant"),
-  USER("user"),
-  SYSTEM("system");
+  USER("user");
 
   @Getter
   private String text;
