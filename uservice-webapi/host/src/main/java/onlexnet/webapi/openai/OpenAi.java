@@ -150,6 +150,7 @@ public class OpenAi {
   private Choice.ProcessResult responseOptions(ChatCompletions completions) {
     // prompt result may return 1+ choices, but as I don't know how to use more
     // choices lets use only the first one
+    // TODO: analyze cases when AI returns more than one option
     var choices = completions.getChoices();
     var choice = choices.get(0);
 
