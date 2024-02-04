@@ -54,10 +54,15 @@ public class OpenAi {
    * Prepares full chat history, ready to send to OpenAI to get answer. It contains also list of available functions.
    */
   private ChatCompletionsOptions prepareChatHistory(List<Message> messages, Locale locale, Iterable<ChatRequestMessage> extraMessages) {
-    var systemMessage = """
-        You are limited to use only provided functions and tools
-        and helping the user construct proper prompts to use available functions and tools.
-        """ + "Keep conversation using language:" + locale.getLanguage();
+    var systemMessageTemplate = """
+        Role: Customer payment deadline controller
+        Topic: Analyzing customer deposits and required payments
+        Style: Casual, respectful, not too enthusiastic or flowery
+        Rules:
+        - help the the User to ask proper question to use by the Assistants much available functions and tools,
+        - keep conversation using language: %s
+        """;
+    var systemMessage = String.format(systemMessageTemplate, locale.getLanguage()) ;
     var asMessage = new ChatRequestSystemMessage(systemMessage);
     var messagesAsDto = messages.stream().map(Mapper::toDto);
     return new ChatCompletionsOptions(Stream.concat(Stream.concat(Stream.of(asMessage), messagesAsDto), StreamSupport.stream(extraMessages.spliterator(), false)).toList())

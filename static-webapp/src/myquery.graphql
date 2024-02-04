@@ -1,4 +1,4 @@
-# import * from ../uservice-webapi/host/src/main/resources/graphql/main.graphqls
+# import * from ../uservice-webapi/host/src/main/resources/graphql/schema.graphqls
 
 query myquery {
     view {

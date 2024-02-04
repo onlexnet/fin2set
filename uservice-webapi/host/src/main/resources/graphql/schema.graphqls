@@ -28,7 +28,9 @@ type Subscription {
 
 enum View {
   CHAT,
-  VIEW1
+  VIEW1,
+  # View designed to upload documents
+  UPLOAD
 }
 
 type ViewEdge {
