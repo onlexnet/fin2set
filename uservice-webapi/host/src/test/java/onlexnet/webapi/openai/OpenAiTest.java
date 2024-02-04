@@ -31,16 +31,19 @@ public class OpenAiTest {
 
   @Test
   void shouldUseApi2() {
-    var query = "What’s the weather like in Boston?";
+    var query = "What's the weather like in Boston in Celcius?";
     var initial = new Message(query, MessageRole.USER);
 
-    var response = openAi.getContinuation(List.of(initial), Locale.US);
+    var actual = openAi.getContinuation(List.of(initial), Locale.US);
 
-    var a = openAi.getEmbedings(response);
-    var b = openAi.getEmbedings("The weather in Boston is currently 35 degrees Celsius.");
+    var actualAsVectors = openAi.getEmbedings(actual);
+    var expected = "The weather in Boston is currently 35 degrees Celsius.";
+    var expectedAsVectors = openAi.getEmbedings(expected);
 
-    var similarity = Similarity.cosine(a, b);
-    Assertions.assertThat(similarity).isGreaterThan(0.9);
+    var similarity = Similarity.cosine(actualAsVectors, expectedAsVectors);
+    Assertions.assertThat(similarity)
+      .as("Actual vs Expected:\n[%s]\n <> \n[%s]", actual, expected)
+      .isGreaterThan(0.9);
   }
 
 }
