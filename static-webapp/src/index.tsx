@@ -11,6 +11,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import config from './config.json';
 import useAuth from './api/auth/useAuth';
 import { Label } from '@fluentui/react-components';
+import { UploadView } from './components/upload/PlaidLoginView';
 
 const { auth0Domain, auth0ClientId } = config;
 const redirect_uri = window.location.origin;
@@ -31,10 +32,12 @@ const WithApollo: React.FC<{}> = props => {
 
 const mainView = <WithApollo />;
 const plaidView = <PlaidLoginView />;
+const uploadView = <UploadView />
 
 const router = createBrowserRouter([
   { path: "/", element: mainView },
   { path: "/view1", element: plaidView },
+  { path: "/upload", element: uploadView },
   // profile https://auth0.com/docs/quickstart/spa/react/02-calling-an-api
 ]);
 
