@@ -18,7 +18,7 @@ export const MainView: React.FC<MainViewProps> = props => {
   }
 
   return (
-    <Stack horizontal styles={{ root: { background: 'green' } }}>
+    <Stack key="stack1" horizontal styles={{ root: { background: 'green', height: "100vh" } }}>
       <Stack.Item id='chatFrame' grow styles={{ root: { background: 'red' } }}>
         <Stack horizontal horizontalAlign='center'>
           <Stack.Item>

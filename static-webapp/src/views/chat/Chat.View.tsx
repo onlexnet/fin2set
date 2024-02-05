@@ -2,6 +2,7 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { ChatContainer, MainContainer, Message, MessageInput, MessageList, MessageModel, TypingIndicator } from "@chatscope/chat-ui-kit-react";
 import { useState } from "react";
 import { Role, useNewMessageMutation } from "../../api/gql/graphql";
+import { Stack } from '@fluentui/react';
 
 interface ChatViewProps {
 }
@@ -36,8 +37,8 @@ export const ChatView = (props: ChatViewProps) => {
         })
     }
 
-    const result =
-        <div style={{ position: "relative", height: "100vh", width: "700px" }}>
+    const result = <Stack horizontal styles={{ root: { background: 'green', position: "relative", height: "100vh", width: "700px" } }}>
+        <Stack.Item id='chatFrame' grow styles={{ root: { background: 'red' } }}>
             <MainContainer>
                 <ChatContainer>
                     <MessageList
@@ -49,6 +50,7 @@ export const ChatView = (props: ChatViewProps) => {
                     <MessageInput placeholder='Put message here' onSend={handleSend} />
                 </ChatContainer>
             </MainContainer>
-        </div>;
+        </Stack.Item>
+    </Stack>;
     return result;
 }
