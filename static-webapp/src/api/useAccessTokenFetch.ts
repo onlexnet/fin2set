@@ -13,7 +13,7 @@ const appClient = new AppClient({
 const apiCall = appClient.exchangeLinkToken;
 
 function useAccessTokenFetch(maybeToken?: PublicToken) {
-  const { data: idToken, loading: authLoading, error: authError } = useAuth();
+  const { result: idToken, loading: authLoading, error: authError } = useAuth();
   const [accessToken, setData] = useState<AccessToken>();
   const [error, setError] = useState<Error>();
   const [loading, setLoading] = useState(true);

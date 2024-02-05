@@ -2,40 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { ApolloProvider } from '@apollo/client';
-import { apolloClientFactory } from './api/gql';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { PlaidLoginView } from './components/plaid/PlaidLoginView';
 import { App } from './App';
 import { Auth0Provider } from '@auth0/auth0-react';
 import config from './config.json';
-import useAuth from './api/auth/useAuth';
-import { Label } from '@fluentui/react-components';
 import { UploadView } from './components/upload/PlaidLoginView';
+import { withApollo } from './components/withApollo/withApollo';
 
 const { auth0Domain, auth0ClientId } = config;
 const redirect_uri = window.location.origin;
 
-const WithApollo: React.FC<{}> = props => {
-  const { data: token, error, loading } = useAuth();
 
-  if (loading) return (<Label>Loading ....</Label>);
-  if (error) return (<Label>Login Error!: { JSON.stringify(error)}</Label>);
-
-  const client = apolloClientFactory(token ?? "should be a token ...");
-  return (
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  );
-}
-
-const mainView = <WithApollo />;
+const MainView = withApollo(App)
 const plaidView = <PlaidLoginView />;
 const uploadView = <UploadView />
 
 const router = createBrowserRouter([
-  { path: "/", element: mainView },
+  { path: "/", element: <MainView /> },
   { path: "/view1", element: plaidView },
   { path: "/upload", element: uploadView },
   // profile https://auth0.com/docs/quickstart/spa/react/02-calling-an-api

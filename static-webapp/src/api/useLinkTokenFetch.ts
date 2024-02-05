@@ -12,7 +12,7 @@ const appClient = new AppClient({
 const createLinkToken = appClient.createLinkToken;
 
 const useLinkTokenFetch = () => {
-  const { data: idToken, loading: authLoading, error: authError } = useAuth();
+  const { result: idToken, loading: authLoading, error: authError } = useAuth();
   const [data, setData] = useState<LinkToken>();
   const [error, setError] = useState<Error>();
   const [loading, setLoading] = useState(true);

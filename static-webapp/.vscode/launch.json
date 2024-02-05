@@ -9,7 +9,6 @@
             "request": "launch",
             // "port": 9222,
             "name": "Launch Chrome",
-            "url": "http://localhost:3002",
             "webRoot": "${workspaceFolder}/src"
         }
 

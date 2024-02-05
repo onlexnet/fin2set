@@ -5,11 +5,14 @@ import { MainView } from './views/main/Main.View';
 
 import { useAuth0 } from '@auth0/auth0-react';
 import React, { useEffect } from 'react';
+import { Spinner, SpinnerSize } from '@fluentui/react';
 
+interface AppProps {
+  unused: boolean
+}
 
+export const App: React.FC<AppProps> = props => {
 
-export const App: React.FC<{}> = props => {
-  
   const { loading, error: queryError } = useMyqueryQuery({
   });
   const { loginWithRedirect, isAuthenticated, isLoading, error } = useAuth0();
@@ -20,17 +23,17 @@ export const App: React.FC<{}> = props => {
 
     loginWithRedirect()
   }, [loginWithRedirect, isAuthenticated, isLoading]);
-  
+
   if (error) {
     return (<Label>'Error:' + JSON.stringify(error)</Label>);
   }
 
-  if (loading) return (<Label>Loading ....</Label>);
+  if (loading) return (<Spinner size={SpinnerSize.large} />);
 
-  if (queryError) return (<Label>Query Error! { JSON.stringify(queryError)}</Label>);
+  if (queryError) return (<Label>Query Error! {JSON.stringify(queryError)}</Label>);
 
   if (isLoading) {
-    return (<Label>Loading ....</Label>);
+    return (<Spinner size={SpinnerSize.large} />);
   }
 
   if (!isAuthenticated) {
@@ -39,11 +42,11 @@ export const App: React.FC<{}> = props => {
 
 
   const view =
-      <FluentProvider theme={webLightTheme}>
-        <div className="App">
-          <MainView />
-        </div>
-      </FluentProvider>;
+    <FluentProvider theme={webLightTheme}>
+      <div className="App">
+        <MainView />
+      </div>
+    </FluentProvider>;
 
   return view;
 }

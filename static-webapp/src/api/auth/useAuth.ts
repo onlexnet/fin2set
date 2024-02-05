@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 
 const useAuth = () => {
-    const [data, setData] = useState<string>();
+    const [result, setData] = useState<string>();
     const [error, setError] = useState<Error>();
     const [loading, setLoading] = useState(true);
     const { isLoading, getIdTokenClaims } = useAuth0();
@@ -25,9 +25,9 @@ const useAuth = () => {
         // call the function
         fetchData();
 
-    }, [getIdTokenClaims, isLoading, data, error, loading]);
+    }, [getIdTokenClaims, isLoading, result, error, loading]);
 
-    return { data, error, loading };
+    return { loading, result, error, };
 }
 
 export default useAuth;

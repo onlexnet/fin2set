@@ -12,7 +12,7 @@ const appClient = new AppClient({
 const createLinkToken = appClient.transactions;
 
 const useTransactions = (maybeAccessToken?: AccessToken) => {
-  const { data: idToken, loading: authLoading, error: authError } = useAuth();
+  const { result: idToken, loading: authLoading, error: authError } = useAuth();
   const [transactions, setData] = useState<TransactionDTO[]>();
   const [error, setError] = useState<Error>();
   const [loading, setLoading] = useState(true);
