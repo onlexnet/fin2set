@@ -19,6 +19,15 @@
 
   <dependencies>
 
+    <!-- http://localhost:8080/startup-report -->
+    <!-- https://github.com/maciejwalkowiak/spring-boot-startup-report?tab=readme-ov-file -->
+    <!-- do not include on prod code as it depends on testing libs -->
+    <!-- <dependency>
+      <groupId>com.maciejwalkowiak.spring</groupId>
+      <artifactId>spring-boot-startup-report</artifactId>
+      <version>0.2.0</version>
+    </dependency> -->
+
     <dependency>
       <groupId>io.github.cdimascio</groupId>
       <artifactId>dotenv-java</artifactId>
