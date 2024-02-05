@@ -3,13 +3,11 @@ import React from "react";
 import { ChatView } from "../chat/Chat.View";
 import { View, useViewSubscription } from "../../api/gql/graphql";
 import { useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 
 interface MainViewProps {
 }
 
 export const MainView: React.FC<MainViewProps> = props => {
-  const { user } = useAuth0();
   const { data: currentView } = useViewSubscription({})
   const navigate = useNavigate();
 
