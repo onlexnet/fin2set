@@ -56,7 +56,6 @@ export const apolloClientFactory = (idToken: string) => {
     shouldRetry: () => true, // as we have cloud application, backend should be available 24/7
 
     retryWait: (retries) => {
-      console.log(`Sparta. Retries: ${retries}`);
       // return immediatelly so that reconnection may started asap
       // for some reason, it does not reconnect immediately (checked by stopping and starting server)
       return Promise.resolve();

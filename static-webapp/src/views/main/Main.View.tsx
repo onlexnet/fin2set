@@ -26,14 +26,6 @@ export const MainView: React.FC<MainViewProps> = props => {
           </Stack.Item>
         </Stack>
       </Stack.Item>
-      <Stack.Item id='view1' styles={{ root: { background: 'yellow' } }} hidden={false}>
-        <Stack.Item>
-          current view name:{currentView?.view ?? '???'}
-        </Stack.Item>
-        <Stack.Item>
-          user: {JSON.stringify(user?.email)}
-        </Stack.Item>
-      </Stack.Item>
     </Stack>);
 
 }
