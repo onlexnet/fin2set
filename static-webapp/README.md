@@ -19,3 +19,4 @@ As the application is currently available on [dev01 environment](dev01.fin2set.n
 
 ## Used articles
 - [Azure/static-web-apps-deploy@v1](https://learn.microsoft.com/en-us/azure/developer/javascript/how-to/with-authentication/static-web-app-with-api/deploy-static-web-app-to-azure#add-react-client-environment-variables-to-workflow-configuration-file)
+- [Azure Static App configuration](https://learn.microsoft.com/en-us/azure/static-web-apps/configuration)
