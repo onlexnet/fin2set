@@ -9,12 +9,14 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import config from './config.json';
 import { UploadView } from './components/upload/PlaidLoginView';
 import { withApollo } from './components/withApollo/withApollo';
+import { withAuth } from './components/withAuth/withAuth';
 
 const { auth0Domain, auth0ClientId } = config;
 const redirect_uri = window.location.origin;
 
 
-const MainView = withApollo(App)
+const MainViewWithApollo = withApollo(App)
+const MainView = withAuth(MainViewWithApollo);
 const plaidView = <PlaidLoginView />;
 const uploadView = <UploadView />
 
