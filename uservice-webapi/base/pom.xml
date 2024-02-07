@@ -82,12 +82,6 @@
         <artifactId>webapi-common</artifactId>
         <version>${project.version}</version>
       </dependency>
-      <dependency>
-        <groupId>onlexnet.fin2set</groupId>
-        <artifactId>webapi-gql-test</artifactId>
-        <scope>test</scope>
-        <version>${project.version}</version>
-      </dependency>
 
       <dependency>
         <groupId>org.springframework.modulith</groupId>

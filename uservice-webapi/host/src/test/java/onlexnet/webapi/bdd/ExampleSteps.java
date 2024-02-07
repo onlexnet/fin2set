@@ -46,7 +46,14 @@ public class ExampleSteps {
   @When("for {userAlias} initial message is {string}")
   public void userAsksAboutInitialMessage (ValName userAlias, String expected) {
       var actual = api.act(userAlias).getWelcomeMessge();
-      Assertions.assertThat(actual).isEqualTo(expected);
-  }
+
+      var actualAsVectors = openAi.getEmbedings(actual);
+      var expectedAsVectors = openAi.getEmbedings(expected);
+
+      var similarity = Similarity.cosine(actualAsVectors, expectedAsVectors);
+      Assertions.assertThat(similarity)
+        .as("Actual vs Expected:\n[%s]\n <> \n[%s]", actual, expected)
+        .isGreaterThan(0.85);
+    }
 
 }

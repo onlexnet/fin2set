@@ -7,12 +7,13 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import onlexnet.webapi.Application;
 import onlexnet.webapi.LocalTest;
 import onlexnet.webapi.test.Similarity;
 
-@SpringBootTest(classes = { Application.class })
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { Application.class })
 @LocalTest
 public class OpenAiTest {
 
@@ -41,9 +42,7 @@ public class OpenAiTest {
     var expectedAsVectors = openAi.getEmbedings(expected);
 
     var similarity = Similarity.cosine(actualAsVectors, expectedAsVectors);
-    Assertions.assertThat(similarity)
-      .as("Actual vs Expected:\n[%s]\n <> \n[%s]", actual, expected)
-      .isGreaterThan(0.9);
+    Assertions.assertThat(similarity).as("Actual vs Expected:\n[%s]\n <> \n[%s]", actual, expected).isGreaterThan(0.9);
   }
 
 }
