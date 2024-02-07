@@ -35,7 +35,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "gen-gql": "graphql-codegen --config .graphqlrc.yml",
-    "gen-oas": "openapi --input ../uservice-webapi/schema/openapi.yaml --output ./src/api/oas --name AppClient"
+    "gen-oas": "openapi --input ../uservice-webapi/schema/openapi/main.yaml --output ./src/api/oas --name AppClient"
   },
   "eslintConfig": {
     "extends": [
