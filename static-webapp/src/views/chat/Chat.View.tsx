@@ -15,18 +15,6 @@ export const ChatView = (props: ChatViewProps) => {
 
     const [messages, setMessages] = useState<MessageModel[]>([]);
 
-    let messageContent = "...";
-    if (welcomeMessage.loading) {
-        console.log(111111111111);
-        messageContent = "...";
-    } else if (welcomeMessage.error) {
-        console.log(222222222222222);
-        messageContent = JSON.stringify(welcomeMessage.error);
-    } else {
-        console.log(3333333333333);
-        messageContent = welcomeMessage.welcomeMessage;
-    }
-
     const [newMessageMutation, { loading }] = useNewMessageMutation({
         onCompleted(data, clientOptions) {
             const text = data.newMessage.text;
@@ -36,7 +24,20 @@ export const ChatView = (props: ChatViewProps) => {
         },
     });
 
+    let messageContent = "...";
+    if (welcomeMessage.loading) {
+        messageContent = "...";
+    } else if (welcomeMessage.error) {
+        messageContent = JSON.stringify(welcomeMessage.error);
+    } else {
+        messageContent = welcomeMessage.welcomeMessage;
+    }
+    const welcomeMessageModel: MessageModel = {
+        message: messageContent, direction: 'incoming', sender: "chat", position: 'first'
+    }
+    const welcomeMessageContainer = <Message key={-1} model={welcomeMessageModel} />
 
+    
     const handleSend = (text: string) => {
         const message: MessageModel = { message: text, direction: 'outgoing', sender: "user", position: "last" }
         const newMessages = [...messages, message];
@@ -48,10 +49,6 @@ export const ChatView = (props: ChatViewProps) => {
         })
     }
 
-    const welcomeMessageModel: MessageModel = {
-        message: messageContent, direction: 'incoming', sender: "chat", position: 'first'
-    }
-    const welcomeMessageContainer = <Message key={-1} model={welcomeMessageModel} />
 
     const realMessages = messages.map((message, i) => {
         return <Message key={i} model={message} />
