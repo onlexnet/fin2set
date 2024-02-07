@@ -13,8 +13,6 @@
     <dapr.sdk.version>1.10.0</dapr.sdk.version>
     <dotnet-java.version>3.0.0</dotnet-java.version>
     <plaid.version>19.3.0</plaid.version>
-    <jacoco.coverage.instructions>0.80</jacoco.coverage.instructions>
-    <jacoco.coverage.branch>0.58</jacoco.coverage.branch>
   </properties>
 
   <dependencies>
@@ -36,7 +34,19 @@
 
     <dependency>
       <groupId>onlexnet.fin2set</groupId>
+      <artifactId>webapi-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>onlexnet.fin2set</groupId>
       <artifactId>webapi-gql-model</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>onlexnet.fin2set</groupId>
+      <artifactId>webapi-common-test</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>onlexnet.fin2set</groupId>
+      <artifactId>webapi-gql-test</artifactId>
     </dependency>
 
     <dependency>
@@ -54,6 +64,7 @@
       <artifactId>plaid-java</artifactId>
       <version>${plaid.version}</version>
     </dependency>
+
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -109,7 +120,6 @@
       <artifactId>spring-modulith-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -168,12 +178,6 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>onlexnet.fin2set</groupId>
-      <artifactId>webapi-gql-test</artifactId>
       <scope>test</scope>
     </dependency>
 

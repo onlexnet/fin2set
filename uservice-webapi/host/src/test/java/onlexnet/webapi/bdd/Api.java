@@ -1,16 +1,16 @@
 package onlexnet.webapi.bdd;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.graphql.ExecutionGraphQlService;
 import org.springframework.stereotype.Component;
 
 import kotlin.jvm.Synchronized;
 import lombok.RequiredArgsConstructor;
 import onlex.webapi.ViewGql;
-import onlexnet.webapi.AppApi;
+import onlexnet.webapi.client.SessionApi;
 import onlexnet.webapi.domain.models.ValName;
 import reactor.core.Disposable;
 import reactor.core.Disposables;
@@ -20,9 +20,11 @@ import reactor.core.Disposables;
 public class Api {
 
   private final ExecutionGraphQlService executionGraphQlService;
+  private final TestRestTemplate restTemplate;
 
-  record Context(Facts facts, AppApi session, Disposable.Composite disposed) {
+  record Context(Facts facts, SessionApi session, Disposable.Composite disposed) {
   }
+
 
   private final Map<ValName, Context> facts = new ConcurrentHashMap<ValName, Context>();
 
@@ -31,7 +33,7 @@ public class Api {
     return ctx.facts();
   }
 
-  public AppApi act(ValName userAlias) {
+  public SessionApi act(ValName userAlias) {
     var ctx = getOrCreate(userAlias);
     return ctx.session();
   }
@@ -40,7 +42,7 @@ public class Api {
     return facts.computeIfAbsent(userAlias, key -> {
       var facts = new Facts();
 
-      var callbacks = new AppApi.ApiCallbacks() {
+      var callbacks = new SessionApi.ApiMutationCallbacks() {
         
         @Synchronized
         @Override
@@ -55,7 +57,8 @@ public class Api {
         }
       };
       
-      var session = new AppApi("graphiql", "slawomir@siudek.net", executionGraphQlService, callbacks);
+      var serverAddress = restTemplate.getRootUri();
+      var session = new SessionApi(serverAddress,  "graphiql", "slawomir@siudek.net", executionGraphQlService, callbacks);
       var disposable = Disposables.composite();
       disposable.add(() -> session.close());
 

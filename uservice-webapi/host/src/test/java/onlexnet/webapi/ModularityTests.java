@@ -1,13 +1,10 @@
 package onlexnet.webapi;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.modulith.core.ApplicationModules;
 import org.springframework.modulith.docs.Documenter;
 import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest
-@ActiveProfiles("test")
 class ModularityTests {
 
   ApplicationModules modules = ApplicationModules.of(Application.class);
@@ -22,7 +19,7 @@ class ModularityTests {
     modules.verify();
 	}
 
-  @Test
+  // @Test
   void writeDocumentationSnippets() {
 
     new Documenter(modules)

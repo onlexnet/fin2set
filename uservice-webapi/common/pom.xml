@@ -1,0 +1,31 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>onlexnet.fin2set</groupId>
+    <artifactId>webapi-base</artifactId>
+    <version>${revision}</version>
+    <relativePath>../base/pom.xml</relativePath>
+  </parent>
+  <artifactId>webapi-common</artifactId>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>onlexnet.fin2set</groupId>
+      <artifactId>webapi-common-test</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>

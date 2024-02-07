@@ -9,3 +9,7 @@ Feature: Change view
   Scenario: Initial hints
     When user user1 said "What you can do for me"
     And last user1 response is "I can perform for you: 1. Analyze missing payments of your customers, 2. Manage your customer list"
+
+  Scenario: Welcome hint
+    Then for user1 initial message is "I can perform for you: 1. Analyze missing payments of your customers, 2. Manage your customer list"
+

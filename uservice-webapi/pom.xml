@@ -10,12 +10,14 @@
 
   <modules>
     <module>build-tools</module>
+    <module>common</module>
+    <module>common-test</module>
     <module>base</module>
     <module>host</module>
     <module>gql-model</module> <!-- Shared GraphQL models between gql-test and host modules -->
-    <module>gql-test</module>
     <module>gen-oas</module>
-    <module>oas-api-client</module>
+    <module>gen-oas-client</module>
+    <module>webapi-test</module>
   </modules>
 
 

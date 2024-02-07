@@ -1,0 +1,24 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>onlexnet.fin2set</groupId>
+    <artifactId>webapi-base</artifactId>
+    <version>${revision}</version>
+    <relativePath>../base/pom.xml</relativePath>
+  </parent>
+  <artifactId>webapi-common-test</artifactId>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+    </dependency>
+
+  </dependencies>
+</project>

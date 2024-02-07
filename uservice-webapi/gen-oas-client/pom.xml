@@ -67,7 +67,7 @@
             </goals>
             <configuration>
               <!-- specify the swagger yaml -->
-              <inputSpec>${project.basedir}/../schema/openapi.yaml</inputSpec>
+              <inputSpec>${project.basedir}/../schema/openapi/main.yaml</inputSpec>
 
               <!-- target to generate java server code -->
               <generatorName>java</generatorName>
@@ -81,14 +81,10 @@
                 <!-- use Jakarta EE namespace instead of javax -->
                 <useJakartaEe>true</useJakartaEe>
 
-                <!-- use tags for creating interface and controller classnames -->
-                <useTags>true</useTags>
-
                 <library>resttemplate</library>
-                <apiPackage>onlexnet.webapi.ws.api</apiPackage>
-                <modelPackage>onlexnet.webapi.ws.model</modelPackage>
-                <configPackage>onlexnet.webapi.ws.config</configPackage>
-                <invokerPackage>onlexnet.webapi.ws.client</invokerPackage>
+                <apiPackage>onlexnet.webapi.client.api</apiPackage>
+                <modelPackage>onlexnet.webapi.client.model</modelPackage>
+                <configPackage>onlexnet.webapi.client.config</configPackage>
 
                 <basePackage>ignored</basePackage>
 

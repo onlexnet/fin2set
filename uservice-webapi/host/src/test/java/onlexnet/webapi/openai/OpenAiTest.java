@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import onlexnet.webapi.Application;
 import onlexnet.webapi.LocalTest;
-import onlexnet.webapi.bdd.Similarity;
+import onlexnet.webapi.test.Similarity;
 
 @SpringBootTest(classes = { Application.class })
 @LocalTest

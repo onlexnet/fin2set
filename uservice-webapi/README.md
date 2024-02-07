@@ -60,6 +60,10 @@ az ad app credential reset --id -u $APP_ID --append --create-cert --display-name
   ```
   mvn versions:display-property-updates -ntp
   ```
+- regenerate openapi
+  ```
+  mvn clean install -pl gen-oas
+  ```
 
 ### Used articles
 - https://www.baeldung.com/spring-boot-environmentpostprocessor

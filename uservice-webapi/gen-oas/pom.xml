@@ -73,7 +73,7 @@
             </goals>
             <configuration>
               <!-- specify the swagger yaml -->
-              <inputSpec>${project.basedir}/../schema/openapi.yaml</inputSpec>
+              <inputSpec>${project.basedir}/../schema/openapi/main.yaml</inputSpec>
 
               <!-- target to generate java server code -->
               <generatorName>spring</generatorName>
@@ -93,7 +93,7 @@
                 <apiPackage>onlexnet.webapi.ws.api</apiPackage>
                 <modelPackage>onlexnet.webapi.ws.model</modelPackage>
                 <configPackage>onlexnet.webapi.ws.config</configPackage>
-                <invokerPackage>onlexnet.webapi.ws.client</invokerPackage>
+                <invokerPackage>onlexnet.webapi.ws.invoker</invokerPackage>
 
                 <basePackage>ignored</basePackage>
 

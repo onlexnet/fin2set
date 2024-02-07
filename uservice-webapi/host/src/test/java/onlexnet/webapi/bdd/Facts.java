@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.springframework.stereotype.Component;
 
 import onlex.webapi.ViewGql;
-import onlexnet.webapi.SafeAutoCloseable;
+import onlexnet.webapi.common.SafeAutoCloseable;
 
 @Component
 public class Facts {

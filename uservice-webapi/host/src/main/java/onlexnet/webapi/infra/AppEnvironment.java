@@ -17,7 +17,6 @@ import io.dapr.client.DaprClientBuilder;
 import io.dapr.config.Properties;
 import io.dapr.config.Property;
 import io.github.cdimascio.dotenv.Dotenv;
-import lombok.Cleanup;
 import lombok.SneakyThrows;
 
 /**

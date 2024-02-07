@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import onlex.webapi.ViewGql;
 import onlexnet.webapi.domain.models.ValName;
 import onlexnet.webapi.openai.OpenAi;
+import onlexnet.webapi.test.Similarity;
 
 public class ExampleSteps {
 
@@ -41,4 +42,11 @@ public class ExampleSteps {
       .as("Actual vs Expected:\n[%s]\n <> \n[%s]", actual, expected)
       .isGreaterThan(0.85);
   }
+
+  @When("for {userAlias} initial message is {string}")
+  public void userAsksAboutInitialMessage (ValName userAlias, String expected) {
+      var actual = api.act(userAlias).getWelcomeMessge();
+      Assertions.assertThat(actual).isEqualTo(expected);
+  }
+
 }
