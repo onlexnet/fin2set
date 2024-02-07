@@ -22,7 +22,8 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                type: TextDTO
+
   /api/create_link_token:
     get:
       summary: Returns curent version of backend
@@ -119,3 +120,13 @@ components:
           type: string 
         amount:
           type: double
+
+    # Instead of returnin simple text/plain I use TextDTO as
+    # using string as returned value I had issue with java tests and javascript client
+    # TODO refactor remove and replace with plain/text
+    TextDTO:
+      type: object
+      required: [value]
+      properties:
+        value:
+          type: string 

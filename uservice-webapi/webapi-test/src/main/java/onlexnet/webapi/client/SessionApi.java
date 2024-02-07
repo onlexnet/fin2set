@@ -1,5 +1,7 @@
 package onlexnet.webapi.client;
 
+import static java.util.Optional.ofNullable;
+
 import java.time.Duration;
 
 import org.springframework.graphql.ExecutionGraphQlService;
@@ -75,8 +77,7 @@ public class SessionApi implements AutoCloseable {
   }
 
   public String getWelcomeMessge() {
-    var a = chatApi.welcomeMessageWithHttpInfo();
-    return a.getBody();
+    return ofNullable(chatApi.welcomeMessage().getValue()).orElse(null);
   }
 
   /**
