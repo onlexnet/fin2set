@@ -46,7 +46,6 @@ const useAssistantWelcomeMessage = () => {
 
   }, [authLoading, authError, idToken]);
 
-  console.log(`loading: ${loading}, error: ${error}, welcomeMessage: ${welcomeMessage}`)
   return { loading, error, welcomeMessage };
 }
 
