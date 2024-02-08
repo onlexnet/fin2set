@@ -24,104 +24,10 @@ paths:
               schema:
                 type: TextDTO
 
-  /api/create_link_token:
-    get:
-      summary: Returns curent version of backend
-      description: Optional extended description in CommonMark or HTML.
-      tags:
-        - CreateLinkToken
-      operationId: createLinkToken
-      responses:
-        '200':    # status code
-          description: Plaid Link Token
-          content:
-            application/json:
-              schema:
-                type: LinkToken
-
-  /api/exchange_public_token:
-    post:
-      description: converts public token -> access token
-      tags:
-        - ExchangeLinkToken
-      operationId: exchangeLinkToken
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: PublicToken
-      responses:
-        '200':
-          description: public token to be used to get bank data
-          content:
-            application/json:
-              schema:
-                type: AccessToken
-
-  /api/transactions:
-    post:
-      description: list of transactions
-      tags:
-        - Transactions
-      operationId: transactions
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: AccessToken
-      responses:
-        '200':
-          description: List of transactions
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: TransactionDTO
-
-
 components:
   schemas:
 
-    LinkToken:
-      type: object
-      required:  
-        - linkToken
-      properties:
-        linkToken:
-          type: string
-          example: 
-
-    PublicToken:
-      type: object
-      required:  
-        - publicToken
-      properties:
-        publicToken:
-          type: string
-          example: 
-
-    AccessToken:
-      type: object
-      required:  
-        - acecssToken
-      properties:
-        accessToken:
-          type: string
-          example: 
-
-    TransactionDTO:
-      type: object
-      required: [id, amount]
-      properties:
-        id:
-          type: string 
-        amount:
-          type: double
-
-    # Instead of returnin simple text/plain I use TextDTO as
+    # Instead of returning simple text/plain I use TextDTO as
     # using string as returned value I had issue with java tests and javascript client
     # TODO refactor remove and replace with plain/text
     TextDTO:

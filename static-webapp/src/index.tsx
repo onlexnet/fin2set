@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { PlaidLoginView } from './components/plaid/PlaidLoginView';
 import { App } from './App';
 import { Auth0Provider } from '@auth0/auth0-react';
 import config from './config.json';
-import { UploadView } from './components/upload/PlaidLoginView';
+import { UploadView } from './components/upload/UploadView';
 import { withApollo } from './components/withApollo/withApollo';
 import { withAuth } from './components/withAuth/withAuth';
 
@@ -17,13 +16,11 @@ const redirect_uri = window.location.origin;
 
 const MainViewWithApollo = withApollo(App)
 const MainView = withAuth(MainViewWithApollo);
-const plaidView = <PlaidLoginView />;
 const uploadView = <UploadView />
 
 const router = createBrowserRouter([
   { path: "/", element: <MainView /> },
-  { path: "/view1", element: plaidView },
-  { path: "/upload", element: uploadView },
+  { path: "/view1", element: uploadView },
   // profile https://auth0.com/docs/quickstart/spa/react/02-calling-an-api
 ]);
 
